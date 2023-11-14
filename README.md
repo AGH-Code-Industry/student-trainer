@@ -14,29 +14,40 @@ Turowy system walki daje możliwość decydowania o ruchu każdej z postaci grac
 Zbierz 6 ludzi, który będą towarzyszyć ci podczas twojej podróży.
 Każdy z studentów posiada specjalne umiejętności związane z kierunkiem ich kształcenia.
 Studenci:
-  - Wiertnictwa - ataki oparte na ziemi
-  - Energetyka - ataki oparte na ogniu
-  - Metalurgii - ataki oparte na materiałach
-  - Fizyki - ataki oparte na siłach fizycznych
-  - Automatyka - ataki oparte na robotach
-  - Informatyka - ataki oparte na programowaniu
-  - ...
+
+- Informatyka - Dystans
+  - Rzut Laptopem
+- Metalurgia - Atak
+  - Pałka teleskopowa
+- Automatyka i Robotyka - Atak
+  - dron wybuchowy
+- Inżynieria Akustyczna - Support(Bard)
+  - Lament
+- Energetyka - Dystans
+  - Zwarcie
+- Budownictwo - Tank
+  - Cegłówka
+- Inżynieria Bezpieczeństwa (ILiGZ) - Tank
+  - Wyrzucanie śmieci
+  - Inspekcja BHP
+
+![city](GDD/Grafika/umiejętności.png)
+kierunek strałki czerwonej sugeruje który kierunek jest bardziej podatny na inny kierunek
 
 Każdy z kierunków studentów jest odporny na odkreślone typy ataków oraz podatny na inne.
 
-Walka odbywa się turowo poprzez wybór 1 z 4 ruchów postaci (Podobna do walki w Pokemonach). 
-Po utraceniu paska życia postać przestaje być zdolna do walki. 
+Walka odbywa się turowo poprzez wybór 1 z 4 ruchów postaci (Podobna do walki w Pokemonach).
+Po utraceniu paska życia postać przestaje być zdolna do walki.
 Bez żadnej postaci mogącej kontynuować rozgrywkę gracz przegrywa by następnie rozpocząć rozgrywkę od początku.
 
 Postać może zapatrzeć się lub własnoręcznie stworzyć ekwipunek, który zwiększy efektywność postaci w czasie walki
 Każda wygraną walkę zdobywamy punkty doświadczenia oraz pieniądze od poległych wrogów, które można wykorzystać do ulepszenia drużyny.
 
-
 ---
 
 ## Główny Bohater
 
-Trzecioroczny student Adam, który musi wykonać zlecone mu zadanie by nie zostać wydalonym z uczelni. 
+Trzecioroczny student Adam, który musi wykonać zlecone mu zadanie by nie zostać wydalonym z uczelni.
 
 ---
 
@@ -44,15 +55,16 @@ Trzecioroczny student Adam, który musi wykonać zlecone mu zadanie by nie zosta
 
 ### Styl Gry
 
-![city](GDD/Grafika/city.png)
+![city](GDD/Grafika/kapitol.png)
 
 ### Obszar AGH na którym odbywa się gra
 
 ![agh image](GDD/Grafika/agh_image.png)
+![agh image](GDD/Grafika/mapa.png)
 
 ### Walka
 
-![fight](GDD/Grafika/fight.png)
+![fight](GDD/Grafika/walka.png)
 
 ---
 
@@ -66,7 +78,7 @@ Trzecioroczny student Adam, który musi wykonać zlecone mu zadanie by nie zosta
 
 ## Mechanika wyróżniająca grę
 
-7 różnych typów umiejętności specjalnych, które dają aż 49 możliwych kombinacji walk z których każda z nich ma określone podatności oraz odporności. 
+7 różnych typów umiejętności specjalnych, które dają aż 49 możliwych kombinacji walk z których każda z nich ma określone podatności oraz odporności.
 Możemy nawiązać dialog praktycznie z każdą postacią, która występuje w grze, niektóre dialogi wpływają na przebieg dalszej rozgrywki.
 
 ---
