@@ -1,0 +1,181 @@
+{
+  "main": {
+    "id": "416ce349a1e3d832",
+    "type": "split",
+    "children": [
+      {
+        "id": "a86f6ccf3103c215",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "61269c62d103d953",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "README.md",
+                "mode": "source",
+                "source": true
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "d595a6a2f5e45e88",
+    "type": "split",
+    "children": [
+      {
+        "id": "d13f2486c39513bd",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "60d4dcc801803e94",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "924f14343074353e",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "8c8a4367b018056a",
+            "type": "leaf",
+            "state": {
+              "type": "starred",
+              "state": {}
+            }
+          },
+          {
+            "id": "4fc4cc186866e080",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "7c5590ac047359ab",
+    "type": "split",
+    "children": [
+      {
+        "id": "e0509f127a57a6b6",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "f0e05e4d4e8d72bb",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "README.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "54a7e522605593ae",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "README.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "5d75af6bf90e9dfb",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              }
+            }
+          },
+          {
+            "id": "63a39a873e2b335a",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "README.md"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "61269c62d103d953",
+  "lastOpenFiles": [
+    "GDD/Fabuła/Fabuła.md",
+    "README.md",
+    "GDD/GDD.md",
+    "GDD/Nowe_Pomysły/Nowe_Pomysły.md",
+    "GDD/Muzyka/Muzyka.md",
+    "GDD/Marketing_i_Monetyzacja/Marketing_i_Monetyzacja.md",
+    "GDD/Opis_Techniczny/Opis_Techniczny.md",
+    "GDD/Interfejs_Użytkownika/Interfejs_Użytkownika.md",
+    "GDD/Poziomy/Poziomy.md",
+    "GDD/Postacie_i_Obiekty/Postacie_i_Obiekty.md",
+    "GDD/Rozgrywka/Rozgrywka.md",
+    "GDD/Grafika/agh_image.png",
+    "coverage",
+    "GDD/Grafika/Grafika.md",
+    "agh image.png",
+    "Pasted image 20230902223922.png",
+    "GDD/Grafika/city.png",
+    "zo44KU.png",
+    "GDD/Grafika/fight.png",
+    "Nowy Dokument tekstowy.txt",
+    "GDD/Rozgrywka/ReadMe 1.md"
+  ]
+}
