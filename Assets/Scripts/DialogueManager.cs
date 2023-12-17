@@ -20,30 +20,38 @@ public class DialogueManager : MonoBehaviour
         sentences = new Queue<string>();
     }
 
-    private void NameChange(Dialogue dialogue)
+    private void NameChange(DialogueList dialogueList) //Dialogue dialogue
     {
-        foreach (string name in dialogue.name)
+        for (int i = 0; i < dialogueList.dialogues.Length; i++)
+        {
+            names.Enqueue(dialogueList.dialogues[i].name);
+        }
+        /*foreach (string name in dialogueList.dialogues[].name) //string name in dialogue.name
         {
             names.Enqueue(name);
-        }
+        }*/
     }
-    private void TextChange(Dialogue dialogue)
+    private void TextChange(DialogueList dialogueList)
     {
-        foreach (string sentence in dialogue.sentences)
+        for (int i = 0; i < dialogueList.dialogues.Length; i++)
+        {
+            names.Enqueue(dialogueList.dialogues[i].sentences);
+        }
+        /*foreach (string sentence in dialogue.sentences) //string sentence in dialogue.sentences
         {
             sentences.Enqueue(sentence);
-        }
+        }*/
     }
-    public void StartDialogue(Dialogue dialogue)
+    public void StartDialogue(DialogueList dialogueList) //Dialogue dialogue
     {
         animator.SetBool("IsOpen", true);
         
-        Debug.Log("Starting convo with " + dialogue.name);
+        Debug.Log("Starting convo with " + dialogueList.dialogues[0].name);
         //nameText.text = dialogue.name;
         names.Clear();
         sentences.Clear();
-        NameChange(dialogue);
-        TextChange(dialogue);
+        NameChange(dialogueList);
+        TextChange(dialogueList);
         
         DisplayNextSentence();
     }
