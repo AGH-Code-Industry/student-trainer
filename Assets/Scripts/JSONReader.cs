@@ -5,16 +5,18 @@ using System.IO;
 using UnityEngine;
 using System.Text.Json;
 
-public class JSONDeserializer : MonoBehaviour
+public class JSONReader : MonoBehaviour
 {
     private const string filePath = "Assets/Data/JSON/";
     public TextAsset textJSON;
-    public Dialogue myDialogue = new Dialogue();
+    public DialogueList myDialogue = new DialogueList();
+    public MyTestClass myClass = new MyTestClass();
     private void Start()
     {
         Debug.Log("start");
-        Debug.Log("wr "+JsonUtility.FromJson<Dialogue>(textJSON.text).sentences);
-        myDialogue = JsonUtility.FromJson<Dialogue>(textJSON.text);
+        Debug.Log("wr "+ JsonUtility.FromJson<Dialogue>(textJSON.text).sentences);
+        myDialogue = JsonUtility.FromJson<DialogueList>(textJSON.text);
+        myClass = JsonUtility.FromJson<MyTestClass>(textJSON.text);
     }
 
     void DeserializeJSON(string name)

@@ -5,9 +5,24 @@ using UnityEngine;
 [System.Serializable]
 public class Dialogue
 {
-    [SerializeField]
-    public List<string> name;
+    //[SerializeField]
+    public string name;
     
-    [SerializeField]
-    public List<string> sentences;
+    //[SerializeField]
+    public string sentences;
+}
+
+
+[System.Serializable]
+public class DialogueList
+{
+    public Dialogue[] dialogues;
+}
+
+
+[System.Serializable]
+public class MyTestClass
+{
+    [SerializeField] 
+    public string name = "dziala";
 }
