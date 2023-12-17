@@ -13,26 +13,25 @@ public class JSONReader : MonoBehaviour
     public MyTestClass myClass = new MyTestClass();
     private void Start()
     {
-        Debug.Log("start");
-        Debug.Log("wr "+ JsonUtility.FromJson<Dialogue>(textJSON.text).sentences);
+        
         myDialogue = JsonUtility.FromJson<DialogueList>(textJSON.text);
         myClass = JsonUtility.FromJson<MyTestClass>(textJSON.text);
     }
 
-    void DeserializeJSON(string name)
+    public DialogueList DeserializeJSON(string name)
     {
-            
+        myDialogue = JsonUtility.FromJson<DialogueList>(textJSON.text);
+        return myDialogue;
         
-        
-            /*string fileName = name + ".json";
-            TextAsset textJSON = UnityEngine.Windows.File(fileName);
-            using FileStream openStream = File.OpenRead(fileName);
-            Dialogue? dialogue = 
-                await JsonSerializer.DeserializeAsync<Dialogue>(openStream);
+        /*string fileName = name + ".json";
+        TextAsset textJSON = UnityEngine.Windows.File(fileName);
+        using FileStream openStream = File.OpenRead(fileName);
+        Dialogue? dialogue = 
+            await JsonSerializer.DeserializeAsync<Dialogue>(openStream);
 
-            Debug.Log($"Date: {dialogue?.name[0]}");
-            Debug.Log($"TemperatureCelsius: {dialogue?.sentences[0]}");*/
-            //Debug.Log($"Summary: {dialogue?.name}");
-        
+        Debug.Log($"Date: {dialogue?.name[0]}");
+        Debug.Log($"TemperatureCelsius: {dialogue?.sentences[0]}");*/
+        //Debug.Log($"Summary: {dialogue?.name}");
+
     }
 }
