@@ -46,7 +46,7 @@ public class DialogueManager : MonoBehaviour
     {
         animator.SetBool("IsOpen", true);
         
-        Debug.Log("Starting convo with " + dialogueList.dialogues[0].name);
+        //Debug.Log("Starting convo with " + dialogueList.dialogues[0].name);
         //nameText.text = dialogue.name;
         names.Clear();
         sentences.Clear();
