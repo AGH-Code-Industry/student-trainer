@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour {
 
-	public Text nameText;
-	public Text dialogueText;
+	public TextMeshProUGUI nameText;
+	public TextMeshProUGUI dialogueText;
 
 	public Animator animator;
 

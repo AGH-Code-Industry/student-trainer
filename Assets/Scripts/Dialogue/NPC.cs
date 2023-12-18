@@ -6,12 +6,17 @@ using UnityEngine;
 public class NPC : MonoBehaviour
 {
 
+    private DialogueTrigger dialogue;
+
+    private void Start() {
+        dialogue = GetComponent<DialogueTrigger>();
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Trigger!");
         if (other.CompareTag("Player"))
         {
-            GetComponent<DialogueTrigger>().TriggerDialogue();
+            dialogue.TriggerDialogue();
         }
     }
 }
