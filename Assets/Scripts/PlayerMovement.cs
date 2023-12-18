@@ -1,45 +1,73 @@
-    using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float speed = 1;
+    enum PlayerAnimation { Idle, Run }
 
-    private Rigidbody rb;
-    private Animator animator;
+    CustomActions input;
 
-    void Start()
+    NavMeshAgent agent;
+    Animator animator;
+    Vector3 destination;
+
+    [Header("Movement")]
+    [SerializeField] ParticleSystem clickEffect;
+    [SerializeField] LayerMask clickableLayers;
+
+    float lookRotationSpeed = 8f;
+    
+    void Awake() 
     {
-        rb = GetComponent<Rigidbody>();
+        agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+
+        input = new CustomActions();
+        AssignInputs();
     }
 
-    void FixedUpdate()
+    void AssignInputs()
     {
-        Move();
+        input.Main.Move.performed += ctx => ClickToMove();
     }
 
-    private void Move()
+    void ClickToMove()
     {
-        float horizontal = Input.GetAxisRaw("Horizontal"); // rotation of character
-        float vertical = Input.GetAxisRaw("Vertical"); // force of movement
-        transform.Rotate(Vector3.up * horizontal);
-
-        if(vertical != 0)
+        RaycastHit hit;
+        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, clickableLayers)) 
         {
-            Vector3 moveDirection = transform.forward * vertical;
-            rb.AddForce(moveDirection.normalized * speed, ForceMode.Force);
-            animator.Play("Run");
+            agent.destination = hit.point;
+            if(clickEffect != null)
+                Instantiate(clickEffect, hit.point + new Vector3(0, 0.1f, 0), clickEffect.transform.rotation); 
         }
+    }
+
+    void OnEnable() => input.Enable();
+
+    void OnDisable() => input.Disable();
+
+    void Update() 
+    {
+        if (destination != agent.destination)
+        {
+            destination = agent.destination;
+            FaceTarget();
+        }
+        SetAnimations();
+    }
+
+    void FaceTarget()
+	{
+        Vector3 direction = (agent.destination - transform.position).normalized;
+        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+        transform.rotation = lookRotation;
+	}
+
+    void SetAnimations()
+    {
+        if(agent.velocity == Vector3.zero)
+            animator.Play(PlayerAnimation.Idle.ToString());
         else
-        {
-            animator.Play("Idle");
-            rb.velocity = Vector3.zero;
-        }
-
-
-       
+            animator.Play(PlayerAnimation.Run.ToString());
     }
 }
