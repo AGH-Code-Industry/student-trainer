@@ -30,39 +30,31 @@ public class PlayerArrowsMovement : MonoBehaviour
         if (Mathf.Abs(input.y) > 0.01f || Mathf.Abs(input.x) > 0.01f)
         {
             Move(input);
-        }
-        else
-        {
-            ///FaceTarget();
             Rotate(input);
         }
-        
-        
     }
 
     void Move(Vector2 input)
     {
-        Vector3 destination = transform.position + /*transform.right * input.x +*/ transform.forward * input.y;
+        Vector3 destination = transform.position + /*transform.right * input.x * Time.deltaTime +*/ transform.forward * input.y;
+        /*Rotate(input);*/
         agent.destination = destination;
         FaceTarget(destination);
     }
 
     void Rotate(Vector2 input)
     {
-        agent.destination = transform.position;
-        FaceTarget(agent.destination);
-        transform.Rotate(0,  Time.deltaTime * rotationSpeed, 0);
+        Quaternion toRotation = Quaternion.LookRotation(input, Vector3.up);
+        /*agent.destination = transform.position;*/
+        //FaceTarget(agent.destination);
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeed);
+        //transform.Rotate(0,  rotationSpeed * input.x, 0);
+        
     }
 
     void Update() 
     {
         ArrowsMove();
-        /*if (destination != agent.destination)
-        {
-            destination = agent.destination;
-            FaceTarget();
-        }*/
-        
         SetAnimations();
     }
 
@@ -70,7 +62,7 @@ public class PlayerArrowsMovement : MonoBehaviour
     {
         Vector3 direction = (position - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
-        transform.rotation = lookRotation;
+        //transform.rotation = lookRotation;
     }
 
     void SetAnimations()
