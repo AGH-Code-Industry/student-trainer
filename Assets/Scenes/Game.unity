@@ -146,6 +146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
+  rotationSpeed: 0.5
 --- !u!1001 &2026767912
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -262,6 +263,10 @@ PrefabInstance:
     - target: {fileID: 6712574410702645979, guid: 24e09f716025b854680732d134757e60, type: 3}
       propertyPath: m_Name
       value: Interactable Objects
+      objectReference: {fileID: 0}
+    - target: {fileID: 8048742253767125477, guid: 24e09f716025b854680732d134757e60, type: 3}
+      propertyPath: m_Constraints
+      value: 112
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

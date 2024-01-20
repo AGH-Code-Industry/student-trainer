@@ -15,24 +15,15 @@ public class PlayerArrowsMovement : MonoBehaviour
     Rigidbody rb;
 
     [Header("Movement")] [SerializeField] private float speed;
-
-    float lookRotationSpeed = 8f;
+    [SerializeField] private float rotationSpeed = 0.5f;
     
     void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
-
-        
-        
     }
-
-    /*void AssignInputs()
-    {
-        input.Main.Move.performed += ctx => ArrowsMove();
-    }*/
-
+    
     void ArrowsMove()
     {
         Vector2 input = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
@@ -42,7 +33,7 @@ public class PlayerArrowsMovement : MonoBehaviour
         }
         else
         {
-            //FaceTarget();
+            ///FaceTarget();
             Rotate(input);
         }
         
@@ -51,14 +42,16 @@ public class PlayerArrowsMovement : MonoBehaviour
 
     void Move(Vector2 input)
     {
-        Vector3 destination = transform.position + transform.right * input.x + transform.forward * input.y;
+        Vector3 destination = transform.position + /*transform.right * input.x +*/ transform.forward * input.y;
         agent.destination = destination;
+        FaceTarget(destination);
     }
 
     void Rotate(Vector2 input)
     {
         agent.destination = transform.position;
-        transform.Rotate(0, input.x * agent.angularSpeed*Time.deltaTime, 0);
+        FaceTarget(agent.destination);
+        transform.Rotate(0,  Time.deltaTime * rotationSpeed, 0);
     }
 
     void Update() 
@@ -73,9 +66,9 @@ public class PlayerArrowsMovement : MonoBehaviour
         SetAnimations();
     }
 
-    void FaceTarget()
+    void FaceTarget(Vector3 position)
     {
-        Vector3 direction = (agent.destination - transform.position).normalized;
+        Vector3 direction = (position - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
         transform.rotation = lookRotation;
     }
