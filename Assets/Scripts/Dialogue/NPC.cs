@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Ink.Parsed;
 using UnityEngine;
 
 public class NPC : MonoBehaviour
@@ -10,7 +11,9 @@ public class NPC : MonoBehaviour
 
     private void Start() {
         dialogue = GetComponent<DialogueTrigger>();
+
     }
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -19,4 +22,5 @@ public class NPC : MonoBehaviour
             dialogue.TriggerDialogue();
         }
     }
+
 }

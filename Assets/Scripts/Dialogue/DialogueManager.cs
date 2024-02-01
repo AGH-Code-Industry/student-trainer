@@ -1,64 +1,33 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
-using UnityEngine;
-using UnityEngine.UI;
+using Chapter.Singleton;
+using System;
+using Ink.Runtime;
 
-public class DialogueManager : MonoBehaviour {
+public class DialogueManager : Singleton<DialogueManager> {
 
-	public TextMeshProUGUI nameText;
-	public TextMeshProUGUI dialogueText;
+	public bool IsOpenDialog { get; private set; } = false;
 
-	public Animator animator;
-
-	private Queue<string> sentences;
-
-	void Start () {
-		sentences = new Queue<string>();
-	}
-
-	public void StartDialogue (Dialogue dialogue)
+	public void Start() 
 	{
-		animator.SetBool("IsOpen", true);
-
-		nameText.text = dialogue.characterName;
-
-		sentences.Clear();
-
-		foreach (string sentence in dialogue.sentences)
-		{
-			sentences.Enqueue(sentence);
-		}
-
-		DisplayNextSentence();
+		UIEvents.CloseDialogue += OnCloseDialogue;
 	}
 
-	public void DisplayNextSentence ()
+	public void StartDialogue (Story dialogue)
 	{
-		if (sentences.Count == 0)
-		{
-			EndDialogue();
-			return;
-		}
+		if(IsOpenDialog) return;
 
-		string sentence = sentences.Dequeue();
-		StopAllCoroutines();
-		StartCoroutine(TypeSentence(sentence));
+		IsOpenDialog = true;
+		Events.DialogTrigger.Invoke(dialogue);
+		//Game.Pause();
 	}
 
-	IEnumerator TypeSentence (string sentence)
+	private void OnCloseDialogue()
 	{
-		dialogueText.text = "";
-		foreach (char letter in sentence.ToCharArray())
-		{
-			dialogueText.text += letter;
-			yield return null;
-		}
+		IsOpenDialog = false;
 	}
 
-	void EndDialogue()
-	{
-		animator.SetBool("IsOpen", false);
-	}
+	private void OnDestroy()
+    {
+        UIEvents.CloseDialogue -= OnCloseDialogue;
+    }
 
 }
