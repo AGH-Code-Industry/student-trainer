@@ -1,7 +1,7 @@
 using System;
-using Ink.Runtime;
+using UnityEngine;
 
 public static class Events
 {
-    public static Action<Story> DialogTrigger; 
+    public static Action<TextAsset> DialogTrigger; 
 }

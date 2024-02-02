@@ -1,5 +1,6 @@
-# Student Debil
+# speaker: Student Debil
 Siema mordo, Właśnie zdałęm kolosa z Analizy. Mam nadzieję, że więcej tych hieroglifów nie zobaczę na oczy. Mam tak dobry dzień, że muszę się wypić za te wszytskie nieprzespane nocki. Idziesz ze mną?
+to jak.
 
 -> Wybor
 

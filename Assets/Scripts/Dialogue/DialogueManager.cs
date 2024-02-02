@@ -1,6 +1,7 @@
 using Chapter.Singleton;
 using System;
 using Ink.Runtime;
+using UnityEngine;
 
 public class DialogueManager : Singleton<DialogueManager> {
 
@@ -11,7 +12,7 @@ public class DialogueManager : Singleton<DialogueManager> {
 		UIEvents.CloseDialogue += OnCloseDialogue;
 	}
 
-	public void StartDialogue (Story dialogue)
+	public void StartDialogue (TextAsset dialogue)
 	{
 		if(IsOpenDialog) return;
 

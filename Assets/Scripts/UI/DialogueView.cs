@@ -4,74 +4,92 @@ using TMPro;
 using System.Collections.Generic;
 using Ink.Runtime;
 using System.Linq;
+using Unity.Mathematics;
+using UnityEngine.UI;
 
 public class DialogueView : MonoBehaviour 
 {
-    public TextMeshProUGUI nameText;
-	public TextMeshProUGUI dialogueText;
+    public ScrollRect scrollRect;
+    public RectTransform viewContent;
+	public GameObject dialogueBox;
 
-	public Animator animator;
-
-	private Queue<string> sentences;
+	public Animator scrollViewAnimator;
 	private Story dialogue;
+	private int StoryChunkCount;
+	
 
 	void Start () {
 		Events.DialogTrigger += OnDisplayDialogue;
-
-		sentences = new Queue<string>();
+		UIEvents.SelectedDialogueChoice += OnSelectDialogueChoice;
 	}
 
-    public void OnDisplayDialogue (Story dialogue)
+    public void OnDisplayDialogue (TextAsset dialogueText)
 	{
-		this.dialogue = dialogue;
-		this.dialogue.ResetState();
+		dialogue = new Story(dialogueText.text);
 
-		animator.SetBool("IsOpen", true);
-		DisplayNextSentence();
+		var storyChunk = LoadStoryChunk();
+		StoryChunkCount = 1;
+
+		var box = Instantiate(dialogueBox,viewContent.pivot, quaternion.identity,  viewContent.transform);
+		box.GetComponent<DialogueBoxView>().SetDialogue(storyChunk);
+		box.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, DialogueBoxView.FIRST_ELEMENT_OFFSET);
+		
+		viewContent.sizeDelta = new Vector2(viewContent.sizeDelta.x, DialogueBoxView.HEIGHT * StoryChunkCount);
+		scrollRect.verticalNormalizedPosition = 0;
+		scrollViewAnimator.SetBool("IsOpen", true);
 	}
 
-	public void DisplayNextSentence ()
+
+	DialogueBoxData LoadStoryChunk()
+    {
+        string text = "";
+		List<string> tags = new List<string>();
+
+        while (dialogue.canContinue)
+        {
+            text += dialogue.Continue();
+			tags.AddRange(dialogue.currentTags);
+        }
+		string targetName = tags.Find(t => t.Contains("speaker:"))?.Split("speaker:").Last() ?? "";
+		string targetImage = tags.Find(t => t.Contains("image:"))?.Split("image:").Last() ?? "";
+
+		string[] currentChoices = dialogue.currentChoices.Select(c => c.text).ToArray();
+
+        return new DialogueBoxData(){targetName = targetName, targetDialogue = text, targetImage = targetImage, yourChoices = currentChoices};
+    }
+
+	private void OnSelectDialogueChoice(int choiceIndex)
 	{
-		StopAllCoroutines();
-		if (dialogue.canContinue) {
-			string story = LoadStoryChunk(dialogue);
-			nameText.text = dialogue.currentTags.FirstOrDefault();
-			StartCoroutine(TypeSentence(story));
+		if(dialogue.currentChoices.Count == 0 && dialogue.canContinue == false)
+		{
+			EndDialogue();
 			return;
 		}
 
-		EndDialogue();
+		dialogue.ChooseChoiceIndex(choiceIndex);
+
+		var storyChunk = LoadStoryChunk();
+		StoryChunkCount++;
+		
+		var box = Instantiate(dialogueBox,viewContent.pivot, quaternion.identity,  viewContent.transform);
+		box.GetComponent<DialogueBoxView>().SetDialogue(storyChunk);
+		box.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, DialogueBoxView.FIRST_ELEMENT_OFFSET - ((StoryChunkCount-1) * DialogueBoxView.HEIGHT));
+		
+		viewContent.sizeDelta = new Vector2(viewContent.sizeDelta.x, DialogueBoxView.HEIGHT * StoryChunkCount);
+		scrollRect.verticalNormalizedPosition = 0;
 	}
-
-	IEnumerator TypeSentence (string sentence)
-	{
-		dialogueText.text = "";
-		foreach (char letter in sentence.ToCharArray())
-		{
-			dialogueText.text += letter;
-			yield return null;
-		}
-	}
-
-	string LoadStoryChunk(Story dialogue)
-    {
-        string text = "";
-
-        if (dialogue.canContinue)
-        {
-            text += dialogue.Continue();
-        }
-
-        return text;
-    }
 
 	void EndDialogue()
 	{
-		animator.SetBool("IsOpen", false);
+		scrollViewAnimator.SetBool("IsOpen", false);
         UIEvents.CloseDialogue.Invoke();
+
+		foreach(Transform child in viewContent.transform)
+			Destroy(child.gameObject);
 	}
 
 	private void OnDestroy() {
 		Events.DialogTrigger -= OnDisplayDialogue;
+		UIEvents.SelectedDialogueChoice -= OnSelectDialogueChoice;
 	}
 }

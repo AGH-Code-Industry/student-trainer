@@ -34,18 +34,6 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    private void Start() {
-        Events.DialogTrigger += zdarzenie;
-        
-    }
-
-    private void zdarzenie (Ink.Runtime.Story  dialogue)
-	{
-		Debug.Log("PlayerMovement");
-        return;
-	}
-
-
     void AssignInputs()
     {
         input.Main.Move.performed += ctx => ClickToMove();
