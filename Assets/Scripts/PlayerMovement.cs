@@ -1,5 +1,12 @@
+using Ink.Parsed;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine;
+using System.Collections;
+using TMPro;
+using System.Collections.Generic;
+using Ink.Runtime;
+using System.Linq;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -24,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
 
         input = new CustomActions();
         AssignInputs();
+
     }
 
     void AssignInputs()

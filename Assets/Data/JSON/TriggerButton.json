@@ -1,0 +1,16 @@
+﻿{
+  "dialogues": [
+    {
+      "name": "Spy",
+      "sentences": "ccccccccc"
+    },
+    {
+      "name": "Guy",
+      "sentences": "ddddd"
+    },
+    {
+      "name": "Spy",
+      "sentences": "eeeeee"
+    }
+  ]
+}
