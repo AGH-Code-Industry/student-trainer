@@ -42,8 +42,15 @@ public class DialogueBoxView : MonoBehaviour
 
     public void OnSelectDialogueChoice(int choiceIndex) 
     {
-        yourChoices.Select(c => c.GetComponent<Button>().enabled = false);
-        yourChoices[choiceIndex].GetComponent<Button>().Select();
+        foreach(var choice in yourChoices)
+        {
+            choice.GetComponent<Button>().enabled = false;
+            choice.GetComponent<Image>().enabled = false;
+        }
+
+        yourChoices[choiceIndex].GetComponent<Button>().interactable = false;
+        yourChoices[choiceIndex].GetComponent<Button>().enabled = true;
+        yourChoices[choiceIndex].GetComponent<Image>().enabled = true;
 
         UIEvents.SelectedDialogueChoice.Invoke(choiceIndex);
     }
