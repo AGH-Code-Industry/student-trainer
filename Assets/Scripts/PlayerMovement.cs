@@ -1,18 +1,11 @@
-using Ink.Parsed;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine;
-using System.Collections;
-using TMPro;
-using System.Collections.Generic;
-using Ink.Runtime;
-using System.Linq;
 
 public class PlayerMovement : MonoBehaviour
 {
     enum PlayerAnimation { Idle, Run }
 
-    CustomActions input;
+
 
     NavMeshAgent agent;
     Animator animator;
@@ -26,17 +19,12 @@ public class PlayerMovement : MonoBehaviour
     
     void Awake() 
     {
-        agent = GetComponent<NavMeshAgent>();
-        animator = GetComponent<Animator>();
-
-        input = new CustomActions();
-        AssignInputs();
-
+        InputManager.Instance.GetInput().Main.Move.performed += input => ClickToMove();
     }
 
-    void AssignInputs()
-    {
-        input.Main.Move.performed += ctx => ClickToMove();
+    private void Start() {
+        agent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
     }
 
     void ClickToMove()
@@ -49,10 +37,6 @@ public class PlayerMovement : MonoBehaviour
                 Instantiate(clickEffect, hit.point + new Vector3(0, 0.1f, 0), clickEffect.transform.rotation); 
         }
     }
-
-    void OnEnable() => input.Enable();
-
-    void OnDisable() => input.Disable();
 
     void Update() 
     {
@@ -77,5 +61,9 @@ public class PlayerMovement : MonoBehaviour
             animator.Play(PlayerAnimation.Idle.ToString());
         else
             animator.Play(PlayerAnimation.Run.ToString());
+    }
+
+    private void OnDestroy() {
+        InputManager.Instance.GetInput().Main.Move.performed -= input => ClickToMove();
     }
 }
