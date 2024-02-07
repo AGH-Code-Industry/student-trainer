@@ -17,13 +17,14 @@ public class DialogueManager : Singleton<DialogueManager> {
 		if(IsOpenDialog) return;
 
 		IsOpenDialog = true;
+		InputManager.Instance.GetInput().Disable();
 		Events.DialogTrigger.Invoke(dialogue);
-		//Game.Pause();
 	}
 
 	private void OnCloseDialogue()
 	{
 		IsOpenDialog = false;
+		InputManager.Instance.GetInput().Enable();
 	}
 
 	private void OnDestroy()

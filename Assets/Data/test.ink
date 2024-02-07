@@ -1,11 +1,14 @@
-# speaker: Student Debil
-Siema mordo, Właśnie zdałęm kolosa z Analizy. Mam nadzieję, że więcej tych hieroglifów nie zobaczę na oczy. Mam tak dobry dzień, że muszę się wypić za te wszytskie nieprzespane nocki. Idziesz ze mną?
-to jak.
+
+Student Debil: Siema mordo, Właśnie zdałęm kolosa z Analizy. Mam nadzieję, że więcej tych hieroglifów nie zobaczę na oczy. Mam tak dobry dzień, że muszę się wypić za te wszytskie nieprzespane nocki. Idziesz ze mną?
+Student Debil:to jak.
+
+hero: Muszę się zastanowić 
 
 -> Wybor
 
 === Wybor ===
     #Ty
+    Student Debil:Co wybierasz
     + Jasne.
         -> Alkoholizacja
     + [Nie dam rady.]
@@ -17,14 +20,14 @@ to jak.
 
 === Alkoholizacja ===
     # Student Debil
-    Chodź do Studenciaka. Muszę dziś pobić rekord w zerowaniu kuflowego mocnego.
+    Student Debil:Chodź do Studenciaka. Muszę dziś pobić rekord w zerowaniu kuflowego mocnego.
     # Ty
-    O ile dasz radę wyzerować szybciej ode mnie
+    hero:O ile dasz radę wyzerować szybciej ode mnie
     -> DONE
 
 === Odpowiedzialnosc ===
     # Ty
-    Musze się nauczyć na jutrzejszego kolosa. Innym razem.
+    hero:Musze się nauczyć na jutrzejszego kolosa. Innym razem.
     -> DONE
     
 END
