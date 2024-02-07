@@ -6,83 +6,105 @@ using Ink.Runtime;
 using System.Linq;
 using Unity.Mathematics;
 using UnityEngine.UI;
+using System;
 
 public class DialogueView : MonoBehaviour 
 {
     public ScrollRect scrollRect;
     public RectTransform viewContent;
 	public GameObject dialogueBox;
-
 	public Animator scrollViewAnimator;
-	private Story dialogue;
+	
+	private Story story;
 	private int StoryChunkCount;
+	private readonly Queue<DialogueBoxData> dialogueBoxes = new();
 	
 
-	void Start () {
+	void Awake () 
+	{
 		Events.DialogTrigger += OnDisplayDialogue;
 		UIEvents.SelectedDialogueChoice += OnSelectDialogueChoice;
+		UIEvents.NextDialogue += OnNextDialogue;
+		UIEvents.CloseDialogue += OnCloseDialogue;
 	}
 
     public void OnDisplayDialogue (TextAsset dialogueText)
 	{
-		dialogue = new Story(dialogueText.text);
-
-		var storyChunk = LoadStoryChunk();
-		StoryChunkCount = 1;
-
-		var box = Instantiate(dialogueBox,viewContent.pivot, quaternion.identity,  viewContent.transform);
-		box.GetComponent<DialogueBoxView>().SetDialogue(storyChunk);
-		box.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, DialogueBoxView.FIRST_ELEMENT_OFFSET);
+		story = new Story(dialogueText.text);
 		
-		viewContent.sizeDelta = new Vector2(viewContent.sizeDelta.x, DialogueBoxView.HEIGHT * StoryChunkCount);
-		scrollRect.verticalNormalizedPosition = 0;
+		LoadStoryChunk();
+		if(dialogueBoxes.Count == 0)
+			return;
+
+		StoryChunkCount = 0;
+		CreateDialogueBox(dialogueBoxes.Dequeue());
+		
 		scrollViewAnimator.SetBool("IsOpen", true);
 	}
 
+	void CreateDialogueBox(DialogueBoxData data)
+	{
+		var box = Instantiate(dialogueBox,viewContent.pivot, quaternion.identity,  viewContent.transform);
+		box.GetComponent<DialogueBoxView>().SetDialogue(data);
+		box.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -DialogueBoxView.HEIGHT * StoryChunkCount);
+		
+		viewContent.sizeDelta = new Vector2(viewContent.sizeDelta.x, DialogueBoxView.HEIGHT * (StoryChunkCount + 1));
+		scrollRect.verticalNormalizedPosition = 0;
 
-	DialogueBoxData LoadStoryChunk()
-    {
-        string text = "";
-		List<string> tags = new List<string>();
+		StoryChunkCount++;
+	}
 
-        while (dialogue.canContinue)
+	DialogueBoxData? GetStoryLine()
+	{
+        if (story.canContinue)
         {
-            text += dialogue.Continue();
-			tags.AddRange(dialogue.currentTags);
+            var line = story.Continue();
+
+			var name = line.Contains(":") ? line.Split(":").First() : "";
+			var dialogue = line.Split(":").Last();
+			var choices = story.currentChoices.Select(c => c.text).ToArray();
+			var image = story.currentTags.Find(t => t.Contains("image:"))?.Split("image:").Last() ?? "";
+			var type = name == "hero" ? DialogueType.Hero_Dialogue : DialogueType.Npc;
+
+			return new DialogueBoxData(){type = type, name = name, dialogue = dialogue, image = image, choices = choices };
         }
-		string targetName = tags.Find(t => t.Contains("speaker:"))?.Split("speaker:").Last() ?? "";
-		string targetImage = tags.Find(t => t.Contains("image:"))?.Split("image:").Last() ?? "";
+		return null;
+	}
 
-		string[] currentChoices = dialogue.currentChoices.Select(c => c.text).ToArray();
+	void LoadStoryChunk()
+    {
+		DialogueBoxData? dialogueBox;
+        while ((dialogueBox = GetStoryLine()) != null)
+        {
+			var box = dialogueBox.Value;
+			dialogueBoxes.Enqueue(box);
 
-        return new DialogueBoxData(){targetName = targetName, targetDialogue = text, targetImage = targetImage, yourChoices = currentChoices};
+			if(dialogueBox.Value.choices.Length > 0){
+				box.type = DialogueType.Hero_Choices;
+				dialogueBoxes.Enqueue(box);
+			}
+        }
+		if(story.currentChoices.Count == 0)
+			dialogueBoxes.Enqueue(new (){type = DialogueType.End });
     }
+
+	private void OnCloseDialogue() => EndDialogue();
+
+	private void OnNextDialogue() => CreateDialogueBox(dialogueBoxes.Dequeue());
 
 	private void OnSelectDialogueChoice(int choiceIndex)
 	{
-		if(dialogue.currentChoices.Count == 0 && dialogue.canContinue == false)
-		{
-			EndDialogue();
-			return;
-		}
-
-		dialogue.ChooseChoiceIndex(choiceIndex);
-
-		var storyChunk = LoadStoryChunk();
-		StoryChunkCount++;
+		if (choiceIndex < story.currentChoices.Count)
+			story.ChooseChoiceIndex(choiceIndex);
 		
-		var box = Instantiate(dialogueBox,viewContent.pivot, quaternion.identity,  viewContent.transform);
-		box.GetComponent<DialogueBoxView>().SetDialogue(storyChunk);
-		box.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, DialogueBoxView.FIRST_ELEMENT_OFFSET - ((StoryChunkCount-1) * DialogueBoxView.HEIGHT));
-		
-		viewContent.sizeDelta = new Vector2(viewContent.sizeDelta.x, DialogueBoxView.HEIGHT * StoryChunkCount);
-		scrollRect.verticalNormalizedPosition = 0;
+		LoadStoryChunk();
+		OnNextDialogue();
 	}
 
 	void EndDialogue()
 	{
 		scrollViewAnimator.SetBool("IsOpen", false);
-        UIEvents.CloseDialogue.Invoke();
+		dialogueBoxes.Clear();
 
 		foreach(Transform child in viewContent.transform)
 			Destroy(child.gameObject);
@@ -91,5 +113,7 @@ public class DialogueView : MonoBehaviour
 	private void OnDestroy() {
 		Events.DialogTrigger -= OnDisplayDialogue;
 		UIEvents.SelectedDialogueChoice -= OnSelectDialogueChoice;
+		UIEvents.NextDialogue -= OnNextDialogue;
+		UIEvents.CloseDialogue -= OnCloseDialogue;
 	}
 }

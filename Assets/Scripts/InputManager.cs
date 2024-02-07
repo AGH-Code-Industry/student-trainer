@@ -14,4 +14,8 @@ public class InputManager : Singleton<InputManager>
         return input;
     }
 
+    private void OnDestroy() {
+        input?.Dispose();
+    }
+
 }

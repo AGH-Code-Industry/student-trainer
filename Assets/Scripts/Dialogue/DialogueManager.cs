@@ -17,8 +17,8 @@ public class DialogueManager : Singleton<DialogueManager> {
 		if(IsOpenDialog) return;
 
 		IsOpenDialog = true;
-		Events.DialogTrigger.Invoke(dialogue);
 		InputManager.Instance.GetInput().Disable();
+		Events.DialogTrigger.Invoke(dialogue);
 	}
 
 	private void OnCloseDialogue()

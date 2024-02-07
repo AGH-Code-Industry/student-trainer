@@ -1,9 +1,8 @@
 public struct DialogueBoxData
 {
-    public string targetName;
-    public string targetDialogue;
-    public string targetImage;
-
-    public string yourImage;
-    public string[] yourChoices;
+    public DialogueType type; 
+    public string name;
+    public string dialogue;
+    public string image;
+    public string[] choices;
 }

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8383224278938421522}
-  - component: {fileID: 3678851634957669209}
+  - component: {fileID: 963098528436201815}
   m_Layer: 0
   m_Name: Input Manager
   m_TagString: Untagged
@@ -32,7 +32,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2985567774701113214}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3678851634957669209
+--- !u!114 &963098528436201815
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

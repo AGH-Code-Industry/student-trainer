@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Linq;
 using TMPro;
 using Unity.Mathematics;
@@ -6,53 +7,90 @@ using UnityEngine.UI;
 
 public class DialogueBoxView : MonoBehaviour 
 {
-    public static readonly int HEIGHT = 500;
-    public static readonly int FIRST_ELEMENT_OFFSET = -250;
+    public static readonly int HEIGHT = 250;
 
-    [Header("Target")]
-    public TextMeshProUGUI targetName;
-    public TextMeshProUGUI targetDialogue;
-    public Image targetImage;
+    [Header("Npc")]
+    public GameObject npc;
+    public TextMeshProUGUI npcName;
+    public TextMeshProUGUI npcDialogue;
+    public Image npcImage;
 
-    [Header("You")]
-    public Image yourImage;
-    public GameObject[] yourChoices;
-    private TextMeshProUGUI[] yourChoicesText;
+    [Header("Hero")]
+    public GameObject hero;
+    public TextMeshProUGUI heroName;
+    public TextMeshProUGUI heroDialogue;
+    public Image heroImage;
+    public GameObject[] heroChoices;
+    public GameObject end;
+
+    private TextMeshProUGUI[] heroChoicesText;
 
     public void SetDialogue(DialogueBoxData data)
     {
-        yourChoicesText = yourChoices.Select(c => c.GetComponentInChildren<TextMeshProUGUI>()).ToArray();
+        npc.SetActive(false);
+        hero.SetActive(false);
 
-        targetName.text = data.targetName;
-        targetDialogue.text = data.targetDialogue;
-
-        // targetImage = Resources.Load
-        // yourImage = Resources.Load
-
-        if(data.yourChoices.Length == 0)
-            data.yourChoices = new string[]{"( Kontynuuj )"};
-
-        yourChoices.Select(c => {c.SetActive(false); return c;}).ToArray();
-        for(int i = 0; i < math.clamp(data.yourChoices.Length, 0, 4); i++)
+        if(data.type == DialogueType.Npc)
         {
-            yourChoices[i].SetActive(true);
-            yourChoicesText[i].text = data.yourChoices[i];
+            npc.SetActive(true);
+            npcName.text = data.name;
+            npcDialogue.text = data.dialogue;
+            StartCoroutine("WaitAndPrint");
+        }
+        else if(data.type == DialogueType.Hero_Dialogue || data.type == DialogueType.Hero_Choices)
+        {
+            hero.SetActive(true);
+
+            heroName.text = data.name;
+
+            if (data.type == DialogueType.Hero_Dialogue)
+            {
+                heroDialogue.enabled = true;
+                heroDialogue.text = data.dialogue;
+                StartCoroutine("WaitAndPrint");
+            }
+            else if(data.type == DialogueType.Hero_Choices)
+            {
+                heroChoicesText = heroChoices.Select(c => c.GetComponentInChildren<TextMeshProUGUI>()).ToArray();
+                for(int i = 0; i < math.clamp(data.choices.Length, 0, 4); i++)
+                {
+                    heroChoices[i].SetActive(true);
+                    heroChoicesText[i].text = data.choices[i];
+                }
+            }
+        }
+        else if(data.type == DialogueType.End)
+        {
+            hero.SetActive(true);
+            end.SetActive(true);
         }
     }
 
-    public void OnSelectDialogueChoice(int choiceIndex) 
+    private IEnumerator WaitAndPrint()
     {
-        foreach(var choice in yourChoices)
+        yield return new WaitForSeconds(1);
+        print("Coroutine ended: " + Time.time + " seconds");
+        UIEvents.NextDialogue.Invoke();
+    }
+
+    public void OnSelectDialogueChoice(int choiceIndex) 
+    {   
+        foreach(var choice in heroChoices)
         {
             choice.GetComponent<Button>().enabled = false;
             choice.GetComponent<Image>().enabled = false;
         }
 
-        yourChoices[choiceIndex].GetComponent<Button>().interactable = false;
-        yourChoices[choiceIndex].GetComponent<Button>().enabled = true;
-        yourChoices[choiceIndex].GetComponent<Image>().enabled = true;
+        heroChoices[choiceIndex].GetComponent<Button>().interactable = false;
+        heroChoices[choiceIndex].GetComponent<Button>().enabled = true;
+        heroChoices[choiceIndex].GetComponent<Image>().enabled = true;
 
         UIEvents.SelectedDialogueChoice.Invoke(choiceIndex);
+    }
+
+    public void OnSelectEnd()
+    {
+        UIEvents.CloseDialogue.Invoke();
     }
     
 }

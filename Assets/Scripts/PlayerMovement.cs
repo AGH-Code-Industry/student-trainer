@@ -5,8 +5,6 @@ public class PlayerMovement : MonoBehaviour
 {
     enum PlayerAnimation { Idle, Run }
 
-
-
     NavMeshAgent agent;
     Animator animator;
     Vector3 destination;
@@ -63,7 +61,8 @@ public class PlayerMovement : MonoBehaviour
             animator.Play(PlayerAnimation.Run.ToString());
     }
 
-    private void OnDestroy() {
-        InputManager.Instance.GetInput().Main.Move.performed -= input => ClickToMove();
-    }
+    // private void OnDestroy() 
+    // {
+    //     InputManager.Instance.GetInput().Main.Move.performed -= input => ClickToMove();
+    // }
 }
