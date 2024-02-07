@@ -17,6 +17,7 @@ public class DialogueView : MonoBehaviour
 	
 	private Story story;
 	private int StoryChunkCount;
+	private string lastChoice = "";
 	private readonly Queue<DialogueBoxData> dialogueBoxes = new();
 	
 
@@ -77,7 +78,8 @@ public class DialogueView : MonoBehaviour
         while ((dialogueBox = GetStoryLine()) != null)
         {
 			var box = dialogueBox.Value;
-			dialogueBoxes.Enqueue(box);
+			if(box.dialogue.Trim().Equals(lastChoice) == false)
+				dialogueBoxes.Enqueue(box);
 
 			if(dialogueBox.Value.choices.Length > 0){
 				box.type = DialogueType.Hero_Choices;
@@ -95,7 +97,10 @@ public class DialogueView : MonoBehaviour
 	private void OnSelectDialogueChoice(int choiceIndex)
 	{
 		if (choiceIndex < story.currentChoices.Count)
+		{
+			lastChoice = story.currentChoices[choiceIndex].text;
 			story.ChooseChoiceIndex(choiceIndex);
+		}
 		
 		LoadStoryChunk();
 		OnNextDialogue();

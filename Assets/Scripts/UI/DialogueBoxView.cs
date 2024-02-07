@@ -34,8 +34,7 @@ public class DialogueBoxView : MonoBehaviour
         {
             npc.SetActive(true);
             npcName.text = data.name;
-            npcDialogue.text = data.dialogue;
-            StartCoroutine("WaitAndPrint");
+            StartCoroutine(TypeSentence(data.dialogue, npcDialogue));
         }
         else if(data.type == DialogueType.Hero_Dialogue || data.type == DialogueType.Hero_Choices)
         {
@@ -46,8 +45,7 @@ public class DialogueBoxView : MonoBehaviour
             if (data.type == DialogueType.Hero_Dialogue)
             {
                 heroDialogue.enabled = true;
-                heroDialogue.text = data.dialogue;
-                StartCoroutine("WaitAndPrint");
+                StartCoroutine(TypeSentence(data.dialogue, heroDialogue));
             }
             else if(data.type == DialogueType.Hero_Choices)
             {
@@ -66,12 +64,17 @@ public class DialogueBoxView : MonoBehaviour
         }
     }
 
-    private IEnumerator WaitAndPrint()
-    {
+    IEnumerator TypeSentence (string sentence, TextMeshProUGUI t)
+	{
+		t.text = "";
+		foreach (char letter in sentence.ToCharArray())
+		{
+			t.text += letter;
+			yield return new WaitForFixedUpdate();
+		}
         yield return new WaitForSeconds(1);
-        print("Coroutine ended: " + Time.time + " seconds");
         UIEvents.NextDialogue.Invoke();
-    }
+	}
 
     public void OnSelectDialogueChoice(int choiceIndex) 
     {   
