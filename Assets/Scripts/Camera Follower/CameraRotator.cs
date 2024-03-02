@@ -1,0 +1,38 @@
+using System.Collections;
+using System.Collections.Generic;
+using Unity.Mathematics;
+using Unity.VisualScripting;
+using UnityEngine;
+
+public class CameraRotator : MonoBehaviour
+{
+    public float rotationSpeed = 100.0f; // Adjust the speed of rotationpublic float rotationSpeed = 100.0f;
+
+    private float verticalRotation = 0.0f; // Track vertical rotation separately
+
+    public GameObject camera_follower;
+    
+    
+   
+    void Update()
+    {
+        //rotation
+       
+            float mouseX = Input.GetAxis("Mouse X") * rotationSpeed * Time.deltaTime;
+            float mouseY = Input.GetAxis("Mouse Y") * rotationSpeed * Time.deltaTime;
+
+            // Apply horizontal rotation around the Y axis
+            transform.Rotate(Vector3.up, mouseX, Space.World);
+
+            // Adjust and clamp the vertical rotation to prevent flipping
+            verticalRotation -= mouseY;
+            verticalRotation = Mathf.Clamp(verticalRotation, -90f, 90f);
+
+            // Apply the vertical rotation around the X axis independently
+            transform.localEulerAngles = new Vector3(verticalRotation, transform.localEulerAngles.y, 0);
+            
+            
+    }
+
+   
+}
