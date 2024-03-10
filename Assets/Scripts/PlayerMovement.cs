@@ -3,6 +3,11 @@ using UnityEngine.AI;
 
 public class PlayerMovement : MonoBehaviour
 {
+
+    public int maxHealth = 20;
+    public int currentHealth;
+
+    public healthBar healthBar;
     enum PlayerAnimation { Idle, Run }
 
     NavMeshAgent agent;
@@ -23,6 +28,8 @@ public class PlayerMovement : MonoBehaviour
     private void Start() {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+        currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
     }
 
     void ClickToMove()
@@ -44,6 +51,10 @@ public class PlayerMovement : MonoBehaviour
             FaceTarget();
         }
         SetAnimations();
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            TakeDamage(5);
+        }
     }
 
     void FaceTarget()
@@ -59,6 +70,13 @@ public class PlayerMovement : MonoBehaviour
             animator.Play(PlayerAnimation.Idle.ToString());
         else
             animator.Play(PlayerAnimation.Run.ToString());
+    }
+
+    void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+
+        healthBar.SetHealth(currentHealth);
     }
 
     // private void OnDestroy() 
