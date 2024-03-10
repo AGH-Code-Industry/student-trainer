@@ -700,11 +700,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3af912e7fc8394a4d832c6f70d5da1ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slider: {fileID: 0}
+  slider: {fileID: 2076568109}
   gradient:
     serializedVersion: 2
-    key0: {r: 1, g: 1, b: 1, a: 1}
-    key1: {r: 1, g: 1, b: 1, a: 1}
+    key0: {r: 1, g: 0, b: 0, a: 1}
+    key1: {r: 0, g: 0.073735714, b: 1, a: 1}
     key2: {r: 0, g: 0, b: 0, a: 0}
     key3: {r: 0, g: 0, b: 0, a: 0}
     key4: {r: 0, g: 0, b: 0, a: 0}
@@ -731,7 +731,7 @@ MonoBehaviour:
     m_ColorSpace: -1
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
-  fill: {fileID: 0}
+  fill: {fileID: 818279051}
 --- !u!1 &2106834681 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4468920231854628432, guid: 3099e2d2c6c0dcd4799a4efb2bb17d7a, type: 3}
