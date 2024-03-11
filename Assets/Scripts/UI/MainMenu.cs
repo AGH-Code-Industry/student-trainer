@@ -21,7 +21,7 @@ public class MainMenu : MonoBehaviour
         settingsPanel.SetActive(false);
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         UIEvents.ClickPlay -= PlayGame;
         UIEvents.ClickSettings -= Settings;

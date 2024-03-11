@@ -222,34 +222,6 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3536320961247665867, guid: 362471ed183263d409e685791811401f, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -25.46
-      objectReference: {fileID: 0}
-    - target: {fileID: 3536320961247665867, guid: 362471ed183263d409e685791811401f, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 3.31
-      objectReference: {fileID: 0}
-    - target: {fileID: 3536320961247665867, guid: 362471ed183263d409e685791811401f, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 6.37
-      objectReference: {fileID: 0}
-    - target: {fileID: 3536320961247665867, guid: 362471ed183263d409e685791811401f, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.31306413
-      objectReference: {fileID: 0}
-    - target: {fileID: 3536320961247665867, guid: 362471ed183263d409e685791811401f, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3536320961247665867, guid: 362471ed183263d409e685791811401f, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.949732
-      objectReference: {fileID: 0}
-    - target: {fileID: 3536320961247665867, guid: 362471ed183263d409e685791811401f, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3536320961247665867, guid: 362471ed183263d409e685791811401f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 143.512
       objectReference: {fileID: 0}
@@ -263,6 +235,10 @@ PrefabInstance:
       objectReference: {fileID: 180689390}
     - target: {fileID: 7847215708505428365, guid: 362471ed183263d409e685791811401f, type: 3}
       propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8776273015187707049, guid: 362471ed183263d409e685791811401f, type: 3}
+      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1627,10 +1603,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1918590422841953547, guid: 9db856b2dce2ba94d977e71a1115841b, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2637394834231672067, guid: 9db856b2dce2ba94d977e71a1115841b, type: 3}
       propertyPath: mainCam
       value: 
@@ -1667,14 +1639,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: MenuPanel
       objectReference: {fileID: 0}
-    - target: {fileID: 4099736285876983903, guid: 9db856b2dce2ba94d977e71a1115841b, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4145385927038259728, guid: 9db856b2dce2ba94d977e71a1115841b, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4264563017202357923, guid: 9db856b2dce2ba94d977e71a1115841b, type: 3}
       propertyPath: m_Name
       value: MainMenu
@@ -1682,10 +1646,6 @@ PrefabInstance:
     - target: {fileID: 4264563017202357923, guid: 9db856b2dce2ba94d977e71a1115841b, type: 3}
       propertyPath: m_IsActive
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4600439934129424805, guid: 9db856b2dce2ba94d977e71a1115841b, type: 3}
-      propertyPath: m_Enabled
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4968894544102213901, guid: 9db856b2dce2ba94d977e71a1115841b, type: 3}
       propertyPath: m_Name
@@ -1723,13 +1683,13 @@ PrefabInstance:
       propertyPath: m_fontColor32.rgba
       value: 4294967295
       objectReference: {fileID: 0}
-    - target: {fileID: 7340247247885441227, guid: 9db856b2dce2ba94d977e71a1115841b, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7358446656676699768, guid: 9db856b2dce2ba94d977e71a1115841b, type: 3}
       propertyPath: m_Name
       value: Canvases
+      objectReference: {fileID: 0}
+    - target: {fileID: 7358446656676699768, guid: 9db856b2dce2ba94d977e71a1115841b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8840334345992624129, guid: 9db856b2dce2ba94d977e71a1115841b, type: 3}
       propertyPath: m_LocalPosition.x
