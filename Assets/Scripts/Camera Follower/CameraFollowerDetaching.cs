@@ -6,10 +6,12 @@ using Cinemachine;
 
 public class CameraSwitcher : MonoBehaviour
 {
-    public CinemachineVirtualCamera camera1;
+    public CinemachineFreeLook camera1;
     public CinemachineVirtualCamera camera2;
     
     public GameObject Casual_2;
+    public GameObject FreeCameraCin;
+   
 
     private bool inheriting_transform = false;
 
@@ -57,6 +59,8 @@ public class CameraSwitcher : MonoBehaviour
            
         }
 
+        
+        
        
 
             

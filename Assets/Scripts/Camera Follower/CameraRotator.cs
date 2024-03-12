@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
@@ -11,9 +12,13 @@ public class CameraRotator : MonoBehaviour
     private float verticalRotation = 0.0f; // Track vertical rotation separately
 
     public GameObject camera_follower;
-    
-    
-   
+
+    private void OnEnable()
+    {
+        Cursor.visible = false; // Make cursor invisible
+        Cursor.lockState = CursorLockMode.Locked; // Optionally lock the cursor to the center of the screen
+    }
+
     void Update()
     {
         //rotation
