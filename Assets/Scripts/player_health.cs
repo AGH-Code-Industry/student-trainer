@@ -18,13 +18,16 @@ public class player_health : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            TakeDamage(5);
+            TakeDamage(1);
         }
     }
 
     void TakeDamage(int damage)
     {
-        currentHealth -= damage;
+        if(currentHealth>0)
+        {
+            currentHealth -= damage;
+        }
 
         healthbar.SetHealth(currentHealth);
     }
