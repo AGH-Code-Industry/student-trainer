@@ -17,15 +17,59 @@
             ],
             "bindings": [
                 {
-                    "name": "",
-                    "id": "dd7e90b8-bd0e-41a9-bcab-9415ec36e24c",
-                    "path": "<Mouse>/delta",
+                    "name": "2D Vector",
+                    "id": "46d6c15c-c481-496d-89be-2a8a5d764996",
+                    "path": "2DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MouseLook",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "793daabd-d910-4775-b0b4-5d49af444fa7",
+                    "path": "<Mouse>/scroll/up",
+                    "interactions": "",
+                    "processors": "Scale(factor=9999)",
+                    "groups": "",
+                    "action": "MouseLook",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "bab3de08-a63f-4653-b445-c965bac51395",
+                    "path": "<Mouse>/scroll/down",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "MouseLook",
                     "isComposite": false,
-                    "isPartOfComposite": false
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "276f72d8-c30f-4a31-a512-af8ede4ae9a9",
+                    "path": "<Mouse>/delta/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MouseLook",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "f9e5508b-bb1d-47f0-b016-85f9a534af8a",
+                    "path": "<Mouse>/delta/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MouseLook",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         }
