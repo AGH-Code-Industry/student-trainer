@@ -4,7 +4,7 @@ using Cinemachine;
 public class CameraController : MonoBehaviour
 {
 
-    public GameObject freeCamera;
+    public GameObject freelookCamera;
     public GameObject virtualCamera;
    
 
@@ -13,24 +13,25 @@ public class CameraController : MonoBehaviour
 
     private void Start()
     {
-        
-    freeCamera = GameObject.FindGameObjectWithTag("3rdPersonCamera");
+    
+            
+    freelookCamera = GameObject.FindGameObjectWithTag("3rdPersonCamera");
     virtualCamera = GameObject.FindGameObjectWithTag("FreeCamera");
     
-    SetState(new FreeCameraState(this));
+    SetState(new Person3Camera(this));
     }
 
     private void Update()
     {
         if (Input.GetMouseButtonDown(2)) // Middle mouse button
         {
-            if (currentState is FreeCameraState)
+            if (currentState is Person3Camera)
             {
                 SetState(new VirtualCameraState(this));
             }
             else
             {
-                SetState(new FreeCameraState(this));
+                SetState(new Person3Camera(this));
             }
         }
 

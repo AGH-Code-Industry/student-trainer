@@ -22,11 +22,11 @@ public class VirtualCameraState : CameraState
         // Set the position to player position
      
         startingPosition = player.transform.position;
-        camera_follower.transform.position = new Vector3(startingPosition.x, startingPosition.y + 10f, startingPosition.z - 3.5f);
-        
+        camera_follower.transform.position = new Vector3(startingPosition.x, startingPosition.y + 50f, startingPosition.z - 3.5f);
+
         
         controller.virtualCamera.gameObject.SetActive(true);
-        controller.freeCamera.SetActive(false);
+        controller.freelookCamera.SetActive(false);
         // Initialize anything specific to the Virtual Camera state
       
         camera_rotator.GetComponent<CameraRotator>().enabled = true;
