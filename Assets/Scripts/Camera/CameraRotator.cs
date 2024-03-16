@@ -9,8 +9,7 @@ public class CameraRotator : MonoBehaviour
 {
     public float rotationSpeed = 100.0f; // Adjust the speed of rotationpublic float rotationSpeed = 100.0f;
     
-    public float scroll_speed = 1.0f;
-    private float scroll;
+
     private float verticalRotation = 0.0f; // Track vertical rotation separately
 
 
@@ -19,8 +18,7 @@ public class CameraRotator : MonoBehaviour
     void Update()
     {
         
-        scroll = Input.GetAxis("Mouse ScrollWheel");
-        transform.position += new Vector3(0, scroll * scroll_speed, 0);
+        
         
         if(Input.GetMouseButton(1))
         {

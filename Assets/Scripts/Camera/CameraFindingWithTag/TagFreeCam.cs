@@ -4,7 +4,7 @@ using Cinemachine;
 public class TagFreeCam : MonoBehaviour
 {
     
-    public string CameraFollowerTag = "CameraFollower"; // The tag of your target object
+    public string CameraFollowerTag = "CameraRotation"; // The tag of your target object
     
     
 

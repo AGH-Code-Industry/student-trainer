@@ -10,6 +10,7 @@ public class VirtualCameraState : CameraState
     public VirtualCameraState(CameraController controller) : base(controller) {}
        
     public GameObject camera_follower= GameObject.FindGameObjectWithTag("CameraFollower");
+    public GameObject camera_rotator= GameObject.FindGameObjectWithTag("CameraRotation");
     
     public GameObject player = GameObject.FindGameObjectWithTag("Player");
     
@@ -28,14 +29,14 @@ public class VirtualCameraState : CameraState
         controller.freeCamera.SetActive(false);
         // Initialize anything specific to the Virtual Camera state
       
-       camera_follower.GetComponent<CameraRotator>().enabled = true;
+        camera_rotator.GetComponent<CameraRotator>().enabled = true;
        camera_follower.GetComponent<FreeCameraController>().enabled = true;
     }
 
     public override void Exit()
     {
         // Clean up the state as needed
-        camera_follower.GetComponent<CameraRotator>().enabled = false;
+        camera_rotator.GetComponent<CameraRotator>().enabled = false;
         camera_follower.GetComponent<FreeCameraController>().enabled = false;
     }
 
