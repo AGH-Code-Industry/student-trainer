@@ -1,12 +1,7 @@
 fileFormatVersion: 2
 guid: 3da99abe71770bb46b0eab93e174001a
-labels:
-- lowpoly
-- vehicle
-- car
-timeCreated: 1513013837
-licenseType: Store
-NativeFormatImporter:
+PrefabImporter:
+  externalObjects: {}
   userData: 
   assetBundleName: 
   assetBundleVariant: 

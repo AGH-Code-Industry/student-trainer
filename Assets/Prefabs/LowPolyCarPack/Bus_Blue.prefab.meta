@@ -1,12 +1,7 @@
 fileFormatVersion: 2
 guid: 772c7f5ec5e1e5941a8d1cfd0e24b7d4
-labels:
-- lowpoly
-- vehicle
-- bus
-timeCreated: 1513010882
-licenseType: Store
-NativeFormatImporter:
+PrefabImporter:
+  externalObjects: {}
   userData: 
   assetBundleName: 
   assetBundleVariant: 
