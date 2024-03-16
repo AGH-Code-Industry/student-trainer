@@ -1,4 +1,5 @@
 
+using Cinemachine;
 using UnityEditor.SceneManagement;
 using UnityEditor.TextCore.Text;
 using UnityEngine;
@@ -13,13 +14,15 @@ public class VirtualCameraState : CameraState
     public GameObject player = GameObject.FindGameObjectWithTag("Player");
     
     private Vector3 startingPosition;
+    private Quaternion rotation_eangle;
     
     public override void Enter()
     {
         // Set the position to player position
+     
         startingPosition = player.transform.position;
         camera_follower.transform.position = new Vector3(startingPosition.x, startingPosition.y + 10f, startingPosition.z - 3.5f);
-        camera_follower.transform.rotation = player.transform.rotation;
+        
         
         controller.virtualCamera.gameObject.SetActive(true);
         controller.freeCamera.SetActive(false);
