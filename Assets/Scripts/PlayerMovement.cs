@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] ParticleSystem clickEffect;
     [SerializeField] LayerMask clickableLayers;
 
-    float lookRotationSpeed = 8f;
+
 
     void Awake()
     {
