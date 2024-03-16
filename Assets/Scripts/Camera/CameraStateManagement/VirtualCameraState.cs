@@ -29,12 +29,14 @@ public class VirtualCameraState : CameraState
         // Initialize anything specific to the Virtual Camera state
       
        camera_follower.GetComponent<CameraRotator>().enabled = true;
+       camera_follower.GetComponent<FreeCameraController>().enabled = true;
     }
 
     public override void Exit()
     {
         // Clean up the state as needed
         camera_follower.GetComponent<CameraRotator>().enabled = false;
+        camera_follower.GetComponent<FreeCameraController>().enabled = false;
     }
 
     
