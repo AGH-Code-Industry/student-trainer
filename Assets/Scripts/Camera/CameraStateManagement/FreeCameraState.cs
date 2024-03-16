@@ -1,4 +1,4 @@
-
+using UnityEngine;
 public class FreeCameraState : CameraState
 {
     public FreeCameraState(CameraController controller) : base(controller) {}
@@ -10,6 +10,8 @@ public class FreeCameraState : CameraState
         controller.freeCamera.SetActive(true);
         controller.virtualCamera.gameObject.SetActive(false);
         // Initialize anything specific to the Free Camera state
+        
+
     }
 
     public override void Exit()

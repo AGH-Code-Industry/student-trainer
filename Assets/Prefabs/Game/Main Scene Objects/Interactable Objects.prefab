@@ -519,18 +519,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Casual_2
       objectReference: {fileID: 0}
-    - target: {fileID: 6324139682931230547, guid: 7e672d805d81e684c902518c7e9d6c20, type: 3}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 6373882374882301647, guid: 7e672d805d81e684c902518c7e9d6c20, type: 3}
-      propertyPath: m_Drag
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6373882374882301647, guid: 7e672d805d81e684c902518c7e9d6c20, type: 3}
-      propertyPath: m_UseGravity
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6956327290227046462, guid: 7e672d805d81e684c902518c7e9d6c20, type: 3}
       propertyPath: m_LocalPosition.x
       value: -8.537651
@@ -570,18 +558,6 @@ PrefabInstance:
     - target: {fileID: 6956327290227046462, guid: 7e672d805d81e684c902518c7e9d6c20, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7607561692398291584, guid: 7e672d805d81e684c902518c7e9d6c20, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8469396097742593616, guid: 7e672d805d81e684c902518c7e9d6c20, type: 3}
-      propertyPath: clickEffect
-      value: 
-      objectReference: {fileID: 4371610448593177475, guid: eba3601c153a3c545b2a56fd1214c21c, type: 3}
-    - target: {fileID: 8469396097742593616, guid: 7e672d805d81e684c902518c7e9d6c20, type: 3}
-      propertyPath: clickableLayers.m_Bits
-      value: 4294967295
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
