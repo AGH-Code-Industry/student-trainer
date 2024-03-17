@@ -155,14 +155,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6291425875466012436, guid: 24e09f716025b854680732d134757e60, type: 3}
   m_PrefabInstance: {fileID: 827056969438723449}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &551729220 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8776273015187707049, guid: 362471ed183263d409e685791811401f, type: 3}
-  m_PrefabInstance: {fileID: 2026767912}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &892727211 stripped
+--- !u!1 &939581331 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2518760021061200606, guid: 362471ed183263d409e685791811401f, type: 3}
+  m_PrefabInstance: {fileID: 2026767912}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1119125569 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8776273015187707049, guid: 362471ed183263d409e685791811401f, type: 3}
   m_PrefabInstance: {fileID: 2026767912}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2026767912
@@ -217,10 +217,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6544922011986312463, guid: 362471ed183263d409e685791811401f, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7738661594487284904, guid: 362471ed183263d409e685791811401f, type: 3}
       propertyPath: target
       value: 
       objectReference: {fileID: 180689390}
+    - target: {fileID: 7847215708505428365, guid: 362471ed183263d409e685791811401f, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8776273015187707049, guid: 362471ed183263d409e685791811401f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -657,11 +669,15 @@ PrefabInstance:
     - target: {fileID: 2637394834231672067, guid: 9db856b2dce2ba94d977e71a1115841b, type: 3}
       propertyPath: mainCam
       value: 
-      objectReference: {fileID: 892727211}
+      objectReference: {fileID: 939581331}
     - target: {fileID: 2637394834231672067, guid: 9db856b2dce2ba94d977e71a1115841b, type: 3}
       propertyPath: menuCam
       value: 
-      objectReference: {fileID: 551729220}
+      objectReference: {fileID: 1119125569}
+    - target: {fileID: 2708855430727549992, guid: 9db856b2dce2ba94d977e71a1115841b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7358446656676699768, guid: 9db856b2dce2ba94d977e71a1115841b, type: 3}
       propertyPath: m_Name
       value: Canvases
