@@ -37,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+
     void Update()
     {
         if (destination != agent.destination)
@@ -46,6 +47,8 @@ public class PlayerMovement : MonoBehaviour
         }
         SetAnimations();
     }
+
+
 
     void FaceTarget()
     {
@@ -58,7 +61,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (agent.velocity == Vector3.zero)
             animator.Play(PlayerAnimation.Idle.ToString());
-        else
+        else if (animator.GetBool("isRidingScooter") == false)
             animator.Play(PlayerAnimation.Run.ToString());
     }
 
