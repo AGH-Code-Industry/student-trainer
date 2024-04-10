@@ -19,7 +19,7 @@ public class TrafficDirector : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(waiter());
+        StartCoroutine(spawnCounter());
     }
 
     //private void Update()
@@ -32,36 +32,38 @@ public class TrafficDirector : MonoBehaviour
     //    }
     //}
 
-    IEnumerator waiter()
+    IEnumerator spawnCounter()
     {
         while (true)
-        {
+            {
             float randomInterval = Random.Range(minSpawnInterval, maxSpawnInterval);
-            yield return new WaitForSeconds(randomInterval);
-            TrySpawnCar();
+                yield return new WaitForSeconds(randomInterval);
+                TrySpawnCar();
         }
         
     }
 
     private void TrySpawnCar()
     {
-        randomSpawnIndex = Random.Range(0, spawnMarkers.Count);
-        Marker spawnMarker = spawnMarkers[randomSpawnIndex];
-        randomEndIndex = Random.Range(0, endMarkers.Count);
-        Marker endMarker = endMarkers[randomEndIndex];
-
-        Vector3 facingDirection = spawnMarker.adjacentMarkers[0].Position - spawnMarker.Position;
-        facingDirection.y = 0;
-        Quaternion rotation = Quaternion.LookRotation(facingDirection);
-
-
-        GameObject car = Instantiate(carPrefab, spawnMarker.Position, rotation);
-        CarAI carAI = car.GetComponent<CarAI>();
-        if (carAI != null)
+        for (int i=0; i<spawnMarkers.Count; i++)
         {
-            carAI.startMarker = spawnMarker;
-            carAI.endMarker = endMarker;
+            Marker spawnMarker = spawnMarkers[i];
+            Marker endMarker = endMarkers[i];
+
+            Vector3 facingDirection = spawnMarker.adjacentMarkers[0].Position - spawnMarker.Position;
+            facingDirection.y = 0;
+            Quaternion rotation = Quaternion.LookRotation(facingDirection);
+
+
+            GameObject car = Instantiate(carPrefab, spawnMarker.Position, rotation);
+            CarAI carAI = car.GetComponent<CarAI>();
+            if (carAI != null)
+            {
+                carAI.startMarker = spawnMarker;
+                carAI.endMarker = endMarker;
+            }
         }
+        
     }
 
     private void OnDestroy()

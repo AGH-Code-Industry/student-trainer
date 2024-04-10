@@ -77,12 +77,20 @@ public class CarAI : MonoBehaviour
         {
             Vector3 relativePoint = transform.InverseTransformPoint(currentTargetPosition);
             float angle = Mathf.Atan2(relativePoint.x, relativePoint.z) * Mathf.Rad2Deg;
-            var rotateCar = 0;
-            if (angle > turningAngleOffet)
+            float rotateCar = 0;
+            if (angle > 1.2 * turningAngleOffet)
+            {
+                rotateCar = 1.2f;
+            }
+            else if (angle > turningAngleOffet)
             {
                 rotateCar = 1;
             }
-            else if(angle<-turningAngleOffet)
+            else if (angle < -1.2 *turningAngleOffet)
+            {
+                rotateCar = -1.2f;
+            }
+            else if(angle< -turningAngleOffet)
             {
                 rotateCar = -1;
             }
