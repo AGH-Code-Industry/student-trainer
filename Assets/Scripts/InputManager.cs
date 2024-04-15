@@ -5,7 +5,13 @@ public class InputManager : Singleton<InputManager>
 {
     CustomActions input;
     InventoryManager inventoryManager;
-    public CustomActions GetInput() => input ??= CreateInput();
+    public CustomActions GetInput() => input;
+    public InventoryManager GetInventoryManager() => inventoryManager;
+
+    private void Awake()
+    {
+        CreateInput();
+    }
 
     private CustomActions CreateInput()
     {

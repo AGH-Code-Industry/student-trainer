@@ -14,13 +14,14 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] LayerMask clickableLayers;
 
     float lookRotationSpeed = 8f;
-    
-    void Awake() 
+
+    void Awake()
     {
-        InputManager.Instance.GetInput().Main.Move.performed += input => ClickToMove();
     }
 
-    private void Start() {
+    private void Start()
+    {
+        InputManager.Instance.GetInput().Main.Move.performed += input => ClickToMove();
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
     }
@@ -28,15 +29,15 @@ public class PlayerMovement : MonoBehaviour
     void ClickToMove()
     {
         RaycastHit hit;
-        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, clickableLayers)) 
+        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, clickableLayers))
         {
             agent.destination = hit.point;
-            if(clickEffect != null)
-                Instantiate(clickEffect, hit.point + new Vector3(0, 0.1f, 0), clickEffect.transform.rotation); 
+            if (clickEffect != null)
+                Instantiate(clickEffect, hit.point + new Vector3(0, 0.1f, 0), clickEffect.transform.rotation);
         }
     }
 
-    void Update() 
+    void Update()
     {
         if (destination != agent.destination)
         {
@@ -47,15 +48,15 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void FaceTarget()
-	{
+    {
         Vector3 direction = (agent.destination - transform.position).normalized;
         Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
         transform.rotation = lookRotation;
-	}
+    }
 
     void SetAnimations()
     {
-        if(agent.velocity == Vector3.zero)
+        if (agent.velocity == Vector3.zero)
             animator.Play(PlayerAnimation.Idle.ToString());
         else
             animator.Play(PlayerAnimation.Run.ToString());
