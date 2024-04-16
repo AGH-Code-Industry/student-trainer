@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] LayerMask clickableLayers;
 
     float lookRotationSpeed = 8f;
+    private HighlightManager hmScript;
     
     void Awake() 
     {
@@ -23,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start() {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+        hmScript = GetComponent<HighlightManager>();
     }
 
     void ClickToMove()
