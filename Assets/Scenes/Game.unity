@@ -123,9 +123,14 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &15871512 stripped
+--- !u!1 &68574042 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2518760021061200606, guid: 362471ed183263d409e685791811401f, type: 3}
+  m_PrefabInstance: {fileID: 2026767912}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &68574043 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3708950716438155429, guid: 362471ed183263d409e685791811401f, type: 3}
   m_PrefabInstance: {fileID: 2026767912}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &180689390 stripped
@@ -133,12 +138,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6291425875466012436, guid: 24e09f716025b854680732d134757e60, type: 3}
   m_PrefabInstance: {fileID: 827056969438723449}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &879996109 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3708950716438155429, guid: 362471ed183263d409e685791811401f, type: 3}
-  m_PrefabInstance: {fileID: 2026767912}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1308966401 stripped
+--- !u!1 &1119125569 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8776273015187707049, guid: 362471ed183263d409e685791811401f, type: 3}
   m_PrefabInstance: {fileID: 2026767912}
@@ -212,14 +212,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3366572258558848894, guid: 24e09f716025b854680732d134757e60, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4582531384158544825, guid: 24e09f716025b854680732d134757e60, type: 3}
       propertyPath: cam
       value: 
-      objectReference: {fileID: 879996109}
+      objectReference: {fileID: 68574043}
     - target: {fileID: 5130417769292580461, guid: 24e09f716025b854680732d134757e60, type: 3}
       propertyPath: m_LocalPosition.x
       value: -15.75235
@@ -498,11 +494,11 @@ PrefabInstance:
     - target: {fileID: 2637394834231672067, guid: 9db856b2dce2ba94d977e71a1115841b, type: 3}
       propertyPath: mainCam
       value: 
-      objectReference: {fileID: 15871512}
+      objectReference: {fileID: 68574042}
     - target: {fileID: 2637394834231672067, guid: 9db856b2dce2ba94d977e71a1115841b, type: 3}
       propertyPath: menuCam
       value: 
-      objectReference: {fileID: 1308966401}
+      objectReference: {fileID: 1119125569}
     - target: {fileID: 2940283879759258390, guid: 9db856b2dce2ba94d977e71a1115841b, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
