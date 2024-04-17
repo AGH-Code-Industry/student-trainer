@@ -598,6 +598,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6324139682931230547, guid: 7e672d805d81e684c902518c7e9d6c20, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7719862812883455325}
+    - targetCorrespondingSourceObject: {fileID: 6324139682931230547, guid: 7e672d805d81e684c902518c7e9d6c20, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8176852457896237548}
   m_SourcePrefab: {fileID: 100100000, guid: 7e672d805d81e684c902518c7e9d6c20, type: 3}
 --- !u!4 &6291425875466012436 stripped
 Transform:
@@ -646,6 +649,20 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &8176852457896237548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6919129747081246841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ef5154e8fed47ec9e513817677e2fd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scooterPrefab: {fileID: 4700524887866416556, guid: 9f5a4449b60ef444892d8ddd9b2e2ee5, type: 3}
+  spawnPoint: {fileID: 6291425875466012436}
 --- !u!1001 &8871133246021539932
 PrefabInstance:
   m_ObjectHideFlags: 0
