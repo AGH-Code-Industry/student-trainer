@@ -12,5 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 574dc941620e9ce47a7b644c1d7da87c, type: 3}
   m_Name: Student Debil
   m_EditorClassIdentifier: 
-  name: 
-  inkAsset: {fileID: 0}
+  name: Student Debil
+  dialogue: {fileID: 4900000, guid: 57c3d0d68fd406a44987c1c1a06e9741, type: 3}
+  routine:
+  - taskName: 
+    time:
+      Days: 0
+      Hours: 0
+      Minutes: 0
+    destination: {x: 0, y: 0}
+    isCompleted: 0
