@@ -14,16 +14,14 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] LayerMask clickableLayers;
 
     float lookRotationSpeed = 8f;
-
-    void Awake()
-    {
-    }
+    
 
     private void Start()
     {
         InputManager.Instance.GetInput().Main.Move.performed += input => ClickToMove();
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+
     }
 
     void ClickToMove()
@@ -34,7 +32,9 @@ public class PlayerMovement : MonoBehaviour
             agent.destination = hit.point;
             if (clickEffect != null)
                 Instantiate(clickEffect, hit.point + new Vector3(0, 0.1f, 0), clickEffect.transform.rotation);
+             
         }
+        
     }
 
 
