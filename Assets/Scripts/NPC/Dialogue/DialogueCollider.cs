@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Ink.Parsed;
 using UnityEngine;
 
-public class NPC : MonoBehaviour
+public class DialogueCollider : MonoBehaviour
 {
 
     private DialogueTrigger dialogue;

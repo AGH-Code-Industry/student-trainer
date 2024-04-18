@@ -393,6 +393,7 @@ MonoBehaviour:
     m_Y: 0
     m_Width: 19
     m_Height: 81
+<<<<<<< Updated upstream
   - m_X: 61
     m_Y: 164
     m_Width: 450
@@ -417,6 +418,8 @@ MonoBehaviour:
     m_Y: 0
     m_Width: 346
     m_Height: 511
+=======
+>>>>>>> Stashed changes
   - m_X: 61
     m_Y: 164
     m_Width: 450
@@ -433,6 +436,14 @@ MonoBehaviour:
     m_Y: 247
     m_Width: 454
     m_Height: 83
+  - m_X: 114
+    m_Y: 82
+    m_Width: 397
+    m_Height: 429
+  - m_X: 165
+    m_Y: 0
+    m_Width: 346
+    m_Height: 511
   m_fontInfo:
     Name: Liberation Sans
     PointSize: 86
