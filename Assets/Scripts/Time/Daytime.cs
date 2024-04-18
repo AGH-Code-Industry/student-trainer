@@ -1,14 +1,16 @@
 using UnityEngine;
 using System;
 
-public class CurrentTime
+[System.Serializable]
+public class Daytime
 {
-    public int Days { get; private set; }
-    public int Hours { get; private set; }
-    public int Minutes { get; private set; }
+    [HideInInspector]
+    public int Days;
+    public int Hours;
+    public int Minutes;
 
     // Constructor
-    public CurrentTime(int days, int hours, int minutes)
+    public Daytime(int days, int hours, int minutes)
     {
         Hours = hours;
         Minutes = minutes;
@@ -48,7 +50,7 @@ public class CurrentTime
     }
 
     // Implicit conversion operator
-    public static implicit operator string(CurrentTime time)
+    public static implicit operator string(Daytime time)
     {
         return FormatTime(time.Days, time.Hours, time.Minutes);
     }

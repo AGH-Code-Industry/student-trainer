@@ -1,8 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-public class Task : MonoBehaviour
+[System.Serializable]
+public class Task
 {
-
+    public string taskName;
+    public Daytime time;
+    public Vector2 destination;
+    public bool isCompleted;
 }
