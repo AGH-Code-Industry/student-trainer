@@ -13,18 +13,15 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] ParticleSystem clickEffect;
     [SerializeField] LayerMask clickableLayers;
 
-    private bool _isRunning = false;
+    float lookRotationSpeed = 8f;
 
-
-    void Awake()
-    {
-    }
 
     private void Start()
     {
         InputManager.Instance.GetInput().Main.Move.performed += input => ClickToMove();
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+
     }
 
     void ClickToMove()
@@ -39,7 +36,9 @@ public class PlayerMovement : MonoBehaviour
 
             if (clickEffect != null)
                 Instantiate(clickEffect, hit.point + new Vector3(0, 0.1f, 0), clickEffect.transform.rotation);
+
         }
+
     }
 
 
