@@ -42,8 +42,9 @@ public class MainMenu : MonoBehaviour
         mainCam.SetActive(true);
         menuCam.SetActive(false);
         this.gameObject.SetActive(false);
+        InputManager.Instance.GetInput().Enable();
     }
-    
+
     public void Settings()
     {
         Debug.Log("Settings btn clicked!");
@@ -54,7 +55,7 @@ public class MainMenu : MonoBehaviour
         SettingsBtn.SetActive(false);
         QuitBtn.SetActive(false);*/
     }
-    
+
     public void Quit()
     {
         Debug.Log("Quit btn clicked!");

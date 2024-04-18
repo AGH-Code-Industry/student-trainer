@@ -6,7 +6,7 @@ public class SmoothAdjustFreeLookCameraWithScroll : MonoBehaviour
     public CinemachineFreeLook freeLookCamera;
     public float scrollSensitivity = 0.1f;
     public float smoothTime = 0.2f; // Time taken to smooth the movement
-    private float targetYAxisValue;
+    [SerializeField] private float targetYAxisValue;
     private float yAxisVelocity = 0.0f; // Current velocity, this value is modified by SmoothDamp
 
     void Start()
@@ -15,7 +15,7 @@ public class SmoothAdjustFreeLookCameraWithScroll : MonoBehaviour
         if (freeLookCamera != null)
         {
             // Initialize target Y Axis value
-            targetYAxisValue = freeLookCamera.m_YAxis.Value;
+            targetYAxisValue = Mathf.Clamp(targetYAxisValue, 0f, 1f);
         }
     }
 
