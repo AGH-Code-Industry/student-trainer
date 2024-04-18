@@ -22,7 +22,7 @@ public class InputManager : Singleton<InputManager>
     private CustomActions CreateInput()
     {
         input = new CustomActions();
-        input.Enable();
+        input.Disable();
         return input;
     }
 

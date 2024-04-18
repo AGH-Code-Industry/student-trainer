@@ -1,12 +1,7 @@
 fileFormatVersion: 2
 guid: 11b59225efb9e3e45bf800b0ae2a4e8c
-labels:
-- lowpoly
-- vehicle
-- truck
-timeCreated: 1513013841
-licenseType: Store
-NativeFormatImporter:
+PrefabImporter:
+  externalObjects: {}
   userData: 
   assetBundleName: 
   assetBundleVariant: 
