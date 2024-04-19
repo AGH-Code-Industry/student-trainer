@@ -1,9 +1,12 @@
 using UnityEngine;
 using UnityEngine.AI;
+using Object = System.Object;
 
 public class PlayerMovement : MonoBehaviour
 {
     enum PlayerAnimation { Idle, Run }
+    private GameObject attackRange;
+    private bool isAttacking = false;
 
     NavMeshAgent agent;
     Animator animator;
@@ -21,7 +24,7 @@ public class PlayerMovement : MonoBehaviour
         InputManager.Instance.GetInput().Main.Move.performed += input => ClickToMove();
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
-
+        attackRange = GameObject.FindGameObjectWithTag("AttackRange");
     }
 
     void ClickToMove()
@@ -29,17 +32,31 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, clickableLayers))
         {
-            _isRunning = true;
-            agent.destination = hit.point;
+            // Check if the hit object's tag is not "Player"
+            if (hit.transform.tag != "Player")
+            {
+                agent.destination = hit.point;
 
-            FaceTarget();
-
-            if (clickEffect != null)
-                Instantiate(clickEffect, hit.point + new Vector3(0, 0.1f, 0), clickEffect.transform.rotation);
-
+                // Instantiate the click effect if it's not null
+                if (clickEffect != null)
+                    Instantiate(clickEffect, hit.point + new Vector3(0, 0.1f, 0), clickEffect.transform.rotation);
+            }
+            else if (attackRange != null)
+            {
+                if (isAttacking == false)
+                {
+                    isAttacking = !isAttacking;
+                    attackRange.SetActive(true);
+                }
+                else
+                {
+                    isAttacking = !isAttacking;
+                    attackRange.SetActive(false);
+                }
+            }
         }
-
     }
+
 
 
     void Update()

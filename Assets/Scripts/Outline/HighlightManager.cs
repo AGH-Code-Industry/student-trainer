@@ -12,11 +12,34 @@ public class HighlightManager : MonoBehaviour
     private Outline highlightOutline;
     private RaycastHit hit;
     
+    public float detectionRange = 3.0f;  // Ustaw zasięg wykrywania
+    private List<Transform> enemies;     // Lista do przechowywania transformacji wrogów
+
+    void Start()
+    {
+        // Wyszukaj wszystkie obiekty z tagiem "Enemy" i dodaj je do listy
+        enemies = new List<Transform>();
+        GameObject[] enemyObjects = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (GameObject enemy in enemyObjects)
+        {
+            enemies.Add(enemy.transform);
+        }
+    }
+    
+    
+    
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        HoverHighlight();
+        foreach (Transform enemy in enemies)
+        {
+            float distanceToEnemy = Vector3.Distance(transform.position, enemy.position);
+            if (distanceToEnemy <= detectionRange)
+            {
+                HoverHighlight();
+            }
+        }
     }
 
     private void HoverHighlight()
