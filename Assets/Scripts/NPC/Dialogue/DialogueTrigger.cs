@@ -3,17 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using Ink.Runtime;
 
-public class DialogueTrigger : MonoBehaviour {
+public class DialogueTrigger : MonoBehaviour
+{
 
 	private TextAsset inkAsset;
 	private NPC npc;
-	void Start(){
+	void Start()
+	{
 		npc = GetComponent<NPC>();
 		inkAsset = npc.data.dialogue;
 	}
 	[ContextMenu("TriggerDialogue")]
-	public void TriggerDialogue ()
+	public void TriggerDialogue()
 	{
-		DialogueManager.Instance.StartDialogue(inkAsset);
+		//DialogueManager.Instance.StartDialogue(inkAsset);
 	}
 }

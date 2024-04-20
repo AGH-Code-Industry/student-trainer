@@ -5,7 +5,7 @@ using System;
 public class Task
 {
     public string taskName;
-    public Daytime time;
-    public Vector2 destination;
-    public bool isCompleted;
+    public Daytime startTime;
+    public Daytime randomTimeDelay;
+    public Vector3 destination;
 }

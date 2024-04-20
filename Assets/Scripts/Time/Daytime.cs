@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 
+
 [System.Serializable]
 public class Daytime
 {
@@ -28,6 +29,17 @@ public class Daytime
         Hours %= 24;
     }
 
+    public void AddDaytime(Daytime time)
+    {
+        AddHours(time.Hours);
+        AddMinutes(time.Minutes);
+    }
+
+    public void AddRandomDelay(Daytime offset)
+    {
+        AddMinutes(UnityEngine.Random.Range(0, offset.Hours * 60 + offset.Minutes + 1));
+    }
+
     public void AddMinutes(int minutes)
     {
         Minutes += minutes;
@@ -38,11 +50,24 @@ public class Daytime
             AddDays(1);
     }
 
+
+    public int CompareTo(Daytime other)
+    {
+        // Calculate total elapsed time in minutes
+        int totalMinutesThis = Days * 24 * 60 + Hours * 60 + Minutes;
+        int totalMinutesOther = other.Days * 24 * 60 + other.Hours * 60 + other.Minutes;
+
+        // Compare the total elapsed time
+        return totalMinutesThis.CompareTo(totalMinutesOther);
+    }
     public string GetFormattedTime()
     {
         return FormatTime(Days, Hours, Minutes);
     }
-
+    public bool Equals(Daytime other)
+    {
+        return other.GetFormattedTime() == GetFormattedTime();
+    }
     // Private method for formatting time
     private static string FormatTime(int days, int hours, int minutes)
     {
