@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 using Object = System.Object;
@@ -41,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
                 if (clickEffect != null)
                     Instantiate(clickEffect, hit.point + new Vector3(0, 0.1f, 0), clickEffect.transform.rotation);
             }
-            else if (attackRange != null)
+            /*else if (attackRange != null)
             {
                 if (isAttacking == false)
                 {
@@ -53,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
                     isAttacking = !isAttacking;
                     attackRange.SetActive(false);
                 }
-            }
+            }*/
         }
     }
 
@@ -62,7 +63,39 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         SetAnimations();
+
     }
+
+    private void FixedUpdate()
+    {
+        if (Input.GetMouseButtonDown(1))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit))
+            {
+                if (hit.collider.gameObject.CompareTag("Player"))
+                {
+
+                    if (attackRange != null)
+                    {
+                        if (isAttacking == false)
+                        {
+                            isAttacking = !isAttacking;
+                            attackRange.SetActive(true);
+                        }
+                        else
+                        {
+                            isAttacking = !isAttacking;
+                            attackRange.SetActive(false);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
 
     void FaceTarget()
     {
