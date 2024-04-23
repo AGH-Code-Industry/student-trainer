@@ -762,6 +762,8 @@ GameObject:
   - component: {fileID: 8687440295048938417}
   - component: {fileID: -7271062198891526396}
   - component: {fileID: -4932631421795352924}
+  - component: {fileID: 3915183263552141170}
+  - component: {fileID: 4965519600903520810}
   m_Layer: 0
   m_Name: Student Debil
   m_TagString: Untagged
@@ -919,6 +921,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 17ef76709c0de1d4e90761814f49f88b, type: 2}
+  routine: []
 --- !u!114 &-4932631421795352924
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -932,6 +935,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isMoving: 0
+--- !u!114 &3915183263552141170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3052433340132194834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f6b43fe5ab2cfd4b9a746e92f400d6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 0}
+--- !u!95 &4965519600903520810
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3052433340132194834}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 19983364378d0ca4a8abc3e39706c363, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &3088524433323189196
 GameObject:
   m_ObjectHideFlags: 0

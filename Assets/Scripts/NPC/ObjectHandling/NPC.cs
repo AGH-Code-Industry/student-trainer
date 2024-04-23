@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
+using System.Linq;
 
 public class NPC : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class NPC : MonoBehaviour
     public List<Task> routine;
     void Start()
     {
-        routines = FindObjectOfType<RoutineManager>().routines;
+        routines = FindObjectOfType<RoutineManager>().routines.ToList();
         timeManager = FindObjectOfType<TimeManager>();
         routine = GenerateRoutine();
         npcMovement = GetComponent<npcMovement>();
@@ -34,7 +35,7 @@ public class NPC : MonoBehaviour
     {
         List<Task> newRoutine = new List<Task>();
         List<Task> tempRoutines = new List<Task>(routines);
-        int amountOfTasks = Random.Range(1, tempRoutines.Count + 1);
+        int amountOfTasks = Random.Range(0, tempRoutines.Count + 1);
         for (int i = 0; i < amountOfTasks; i++)
         {
             int index = Random.Range(0, tempRoutines.Count);
@@ -46,13 +47,12 @@ public class NPC : MonoBehaviour
     }
     Task GenerateTask(Task templateTask)
     {
-        Task newTask = new Task
-        {
-            taskName = templateTask.taskName,
-            startTime = templateTask.startTime,
-            destination = templateTask.destination
-        };
-        newTask.startTime.AddRandomDelay(templateTask.randomTimeDelay);
+        Task newTask = new Task();
+        Daytime taskDayTime = new Daytime(templateTask.startTime.Days, templateTask.startTime.Hours, templateTask.startTime.Minutes);
+        taskDayTime.AddRandomDelay(templateTask.randomTimeDelay);
+        newTask.startTime = taskDayTime;
+        newTask.destination = templateTask.destination;
+        newTask.taskName = templateTask.taskName;
         return newTask;
     }
 }
