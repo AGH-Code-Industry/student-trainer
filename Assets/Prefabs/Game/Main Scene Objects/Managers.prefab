@@ -194,7 +194,7 @@ Transform:
   m_GameObject: {fileID: 881875737427661903}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -225,7 +225,7 @@ Transform:
   m_GameObject: {fileID: 1323528437661995153}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 79, y: 0, z: 32.5}
+  m_LocalPosition: {x: 79, y: 0, z: 32}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -304,37 +304,6 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -137.5, y: 0, z: 72.5}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8179846721746278424}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2588075601628155086
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4044157675360730924}
-  m_Layer: 0
-  m_Name: Point (21)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4044157675360730924
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2588075601628155086}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -180, y: 0, z: -27.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -476,7 +445,7 @@ Transform:
   m_GameObject: {fileID: 4336773504369139808}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -25, y: 0, z: 32.5}
+  m_LocalPosition: {x: -25, y: 0, z: 32}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -631,7 +600,7 @@ Transform:
   m_GameObject: {fileID: 5957661017043828435}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -220, y: 0, z: 72.5}
+  m_LocalPosition: {x: -250, y: 0, z: 72.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -689,9 +658,6 @@ Transform:
   - {fileID: 5795742353644931387}
   - {fileID: 3416362417041254339}
   - {fileID: 7898602802743924777}
-  - {fileID: 4044157675360730924}
-  - {fileID: 3785992306078920851}
-  - {fileID: 1118091522632146331}
   m_Father: {fileID: 2985567774701113214}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6472371132790245106
@@ -706,7 +672,95 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dc01e84d4ca60849a27dec690870473, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vertices: []
+  vertices:
+  - point: {fileID: 1556484940472774717}
+    neighbours:
+    - {fileID: 4584656246392056134}
+    - {fileID: 6719431506110895249}
+    - {fileID: 4255280465741285458}
+    - {fileID: 4965659393885235647}
+    - {fileID: 8023464824097988474}
+  - point: {fileID: 4584656246392056134}
+    neighbours:
+    - {fileID: 1556484940472774717}
+    - {fileID: 7190246602273424726}
+    - {fileID: 8023464824097988474}
+  - point: {fileID: 7190246602273424726}
+    neighbours:
+    - {fileID: 4584656246392056134}
+    - {fileID: 6719431506110895249}
+    - {fileID: 2352656945755231601}
+  - point: {fileID: 6719431506110895249}
+    neighbours:
+    - {fileID: 7190246602273424726}
+    - {fileID: 3931691784383667399}
+    - {fileID: 1556484940472774717}
+    - {fileID: 6456714551310431671}
+  - point: {fileID: 3931691784383667399}
+    neighbours:
+    - {fileID: 6719431506110895249}
+    - {fileID: 2352656945755231601}
+    - {fileID: 4792790907001252900}
+  - point: {fileID: 2352656945755231601}
+    neighbours:
+    - {fileID: 3931691784383667399}
+    - {fileID: 7190246602273424726}
+    - {fileID: 553100627574517699}
+  - point: {fileID: 553100627574517699}
+    neighbours:
+    - {fileID: 2352656945755231601}
+    - {fileID: 677836988931181145}
+    - {fileID: 3045825176450495136}
+  - point: {fileID: 677836988931181145}
+    neighbours:
+    - {fileID: 553100627574517699}
+  - point: {fileID: 4792790907001252900}
+    neighbours:
+    - {fileID: 3931691784383667399}
+  - point: {fileID: 6456714551310431671}
+    neighbours:
+    - {fileID: 6719431506110895249}
+  - point: {fileID: 4255280465741285458}
+    neighbours:
+    - {fileID: 1556484940472774717}
+  - point: {fileID: 4965659393885235647}
+    neighbours:
+    - {fileID: 1556484940472774717}
+  - point: {fileID: 8023464824097988474}
+    neighbours:
+    - {fileID: 1556484940472774717}
+    - {fileID: 4584656246392056134}
+    - {fileID: 3428285894288827740}
+  - point: {fileID: 3428285894288827740}
+    neighbours:
+    - {fileID: 8023464824097988474}
+    - {fileID: 8787145819748243318}
+    - {fileID: 5795742353644931387}
+  - point: {fileID: 8787145819748243318}
+    neighbours:
+    - {fileID: 3428285894288827740}
+    - {fileID: 3482723693055353700}
+  - point: {fileID: 3482723693055353700}
+    neighbours:
+    - {fileID: 2184170056925595190}
+    - {fileID: 8787145819748243318}
+  - point: {fileID: 2184170056925595190}
+    neighbours:
+    - {fileID: 3482723693055353700}
+  - point: {fileID: 5795742353644931387}
+    neighbours:
+    - {fileID: 3428285894288827740}
+    - {fileID: 3416362417041254339}
+  - point: {fileID: 3416362417041254339}
+    neighbours:
+    - {fileID: 7898602802743924777}
+    - {fileID: 5795742353644931387}
+  - point: {fileID: 7898602802743924777}
+    neighbours:
+    - {fileID: 3416362417041254339}
+  - point: {fileID: 3045825176450495136}
+    neighbours:
+    - {fileID: 553100627574517699}
   edges:
   - point1: {fileID: 1556484940472774717}
     point2: {fileID: 4584656246392056134}
@@ -750,18 +804,10 @@ MonoBehaviour:
     point2: {fileID: 5795742353644931387}
   - point1: {fileID: 3416362417041254339}
     point2: {fileID: 7898602802743924777}
-  - point1: {fileID: 4965659393885235647}
-    point2: {fileID: 7898602802743924777}
-  - point1: {fileID: 4792790907001252900}
-    point2: {fileID: 4044157675360730924}
-  - point1: {fileID: 3785992306078920851}
-    point2: {fileID: 4044157675360730924}
-  - point1: {fileID: 3785992306078920851}
-    point2: {fileID: 1118091522632146331}
-  - point1: {fileID: 3045825176450495136}
-    point2: {fileID: 1118091522632146331}
   - point1: {fileID: 553100627574517699}
-    point2: {fileID: 1118091522632146331}
+    point2: {fileID: 3045825176450495136}
+  - point1: {fileID: 5795742353644931387}
+    point2: {fileID: 3416362417041254339}
 --- !u!114 &3154237599828094638
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -775,6 +821,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visualiseGraph: 1
+  thickness: 10
+  radius: 4
 --- !u!1 &6357213370936919635
 GameObject:
   m_ObjectHideFlags: 0
@@ -801,68 +849,6 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -81, y: 0, z: -27.5}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8179846721746278424}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &6998345333211082321
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3785992306078920851}
-  m_Layer: 0
-  m_Name: Point (22)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3785992306078920851
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6998345333211082321}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -180, y: 0, z: 25}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8179846721746278424}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &7441299309862160724
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1118091522632146331}
-  m_Layer: 0
-  m_Name: Point (23)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1118091522632146331
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7441299309862160724}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -180, y: 0, z: 72.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1152,44 +1138,54 @@ MonoBehaviour:
   - taskName: "Wyj\u015Bcie do studio"
     startTime:
       Days: 0
-      Hours: 12
+      Hours: 18
       Minutes: 0
     randomTimeDelay:
       Days: 0
-      Hours: 1
+      Hours: 6
       Minutes: 0
     destination: {x: -81, y: 0, z: 47.5}
   - taskName: "Powr\xF3t do akademika"
     startTime:
       Days: 0
-      Hours: 12
+      Hours: 16
       Minutes: 0
     randomTimeDelay:
       Days: 0
-      Hours: 1
+      Hours: 8
       Minutes: 0
     destination: {x: -10, y: 0, z: 0}
   - taskName: "Wyj\u015Bcie za akademik"
     startTime:
       Days: 0
-      Hours: 12
+      Hours: 13
       Minutes: 0
     randomTimeDelay:
       Days: 0
-      Hours: 1
+      Hours: 9
       Minutes: 0
     destination: {x: 30, y: 0, z: 0}
-  - taskName: Spacer daleko na prawo
+  - taskName: "W\u0119dr\xF3wka daleko na prawo drog\u0105"
     startTime:
       Days: 0
-      Hours: 12
+      Hours: 13
       Minutes: 0
     randomTimeDelay:
       Days: 0
-      Hours: 1
+      Hours: 5
       Minutes: 0
     destination: {x: 102.5, y: 0, z: 250}
-  - taskName: Spacer daleko na lewo
+  - taskName: "Obch\xF3d wok\xF3\u0142 parkingu"
+    startTime:
+      Days: 0
+      Hours: 13
+      Minutes: 0
+    randomTimeDelay:
+      Days: 0
+      Hours: 5
+      Minutes: 0
+    destination: {x: 79, y: 0, z: -50}
+  - taskName: "Przej\u015Bcie przez pasy"
     startTime:
       Days: 0
       Hours: 12
@@ -1198,8 +1194,8 @@ MonoBehaviour:
       Days: 0
       Hours: 1
       Minutes: 0
-    destination: {x: -220, y: 0, z: 72.5}
-  - taskName: Las
+    destination: {x: -250, y: 0, z: 72.5}
+  - taskName: Przechadzka obok lasu
     startTime:
       Days: 0
       Hours: 12
@@ -1208,4 +1204,4 @@ MonoBehaviour:
       Days: 0
       Hours: 1
       Minutes: 0
-    destination: {x: -180, y: 0, z: 25}
+    destination: {x: -137.5, y: 0, z: -27.5}

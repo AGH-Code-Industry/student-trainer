@@ -6,14 +6,16 @@ using UnityEngine;
 public class npcMovement : MonoBehaviour
 {
     private MapGraph mapGraph;
-    private float moveSpeed = 2f;
-    private float stoppingDistance = 0.1f;
+    public float moveSpeed = 3f;
+    public float moveRandomness = 1f;
     private List<Vertex> vertices = new List<Vertex>();
     [HideInInspector]
     public bool isMoving = false;
     void Start()
     {
+        moveSpeed += Random.Range(-moveRandomness, moveRandomness);
         mapGraph = FindObjectOfType<MapGraph>();
+        vertices = mapGraph.vertices;
     }
 
     public void Move(Task task)
@@ -27,14 +29,34 @@ public class npcMovement : MonoBehaviour
         List<Transform> path = FindPath(destination);
         foreach (Transform point in path)
         {
-            while (Vector3.Distance(transform.position, point.position) > stoppingDistance)
+            float startX = transform.position.x;
+            float startZ = transform.position.z;
+            float endX = point.position.x;
+            float endZ = point.position.z;
+            float timeElapsed = 0;
+            float duration = Vector3.Distance(transform.position, point.position) / moveSpeed;
+            while (timeElapsed < duration)
             {
-                transform.position = Vector3.MoveTowards(transform.position, point.position, moveSpeed * Time.deltaTime);
-                yield return 0.1;
+                float t = timeElapsed / duration;
+                //t = t * t * (3f - 2f * t); Smoothing equation
+                transform.position = new Vector3(
+                    Mathf.Lerp(startX, endX, t),
+                    0,
+                    Mathf.Lerp(startZ, endZ, t) // Movement
+                );
+                Vector3 direction = (point.position - transform.position).normalized;
+                Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+
+                timeElapsed += Time.deltaTime;
+                yield return null;
             }
+
+            transform.position = point.position;
         }
         isMoving = false;
     }
+
     public List<Transform> FindPath(Vector3 destination)
     {
         Vector3 startingPoint = GetClosestPoint(transform.position);
@@ -47,7 +69,8 @@ public class npcMovement : MonoBehaviour
         Dictionary<Vertex, float> distances = new Dictionary<Vertex, float>();
         Dictionary<Vertex, Vertex> previous = new Dictionary<Vertex, Vertex>();
         List<Vertex> unvisited = new List<Vertex>();
-        foreach (Vertex vertex in mapGraph.vertices)
+        Vertex startingVertex = vertices.Find(vertex => vertex.point.position == startingPoint);
+        foreach (Vertex vertex in vertices)
         {
             if (vertex.point.position == startingPoint)
             {
@@ -65,7 +88,7 @@ public class npcMovement : MonoBehaviour
             unvisited.Remove(currentVertex);
             foreach (Transform n in currentVertex.neighbours)
             {
-                Vertex neighbour = mapGraph.vertices.Find(vertex => vertex.point.position == n.position);
+                Vertex neighbour = vertices.Find(vertex => vertex.point.position == n.position);
                 float distance = distances[currentVertex] + Vector3.Distance(currentVertex.point.position, neighbour.point.position);
                 if (distance < distances[neighbour])
                 {
@@ -74,13 +97,15 @@ public class npcMovement : MonoBehaviour
                 }
             }
         }
-        Vertex target = mapGraph.vertices.Find(vertex => vertex.point.position == destination);
-        while (previous.ContainsKey(target))
-        {
-            path.Add(target.point);
-            target = previous[target];
-        }
+        Vertex target = vertices.Find(vertex => vertex.point.position == destination);
+        if (target != null)
+            while (previous.ContainsKey(target))
+            {
+                path.Add(target.point);
+                target = previous[target];
+            }
         path.Reverse();
+        path.Insert(0, startingVertex.point);
         return path;
     }
 
@@ -89,7 +114,7 @@ public class npcMovement : MonoBehaviour
     {
         Vector3 closestPoint = Vector3.zero;
         float minDistance = Mathf.Infinity;
-        foreach (Vertex vertex in mapGraph.vertices)
+        foreach (Vertex vertex in vertices)
         {
             float distance = Vector3.Distance(position, vertex.point.position);
             if (distance < minDistance)
