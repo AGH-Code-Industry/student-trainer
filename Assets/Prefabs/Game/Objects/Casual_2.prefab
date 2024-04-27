@@ -1931,7 +1931,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 978d254d02e7f654a8dfe30a812021a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1000
+  clickEffect: {fileID: 0}
+  clickableLayers:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!54 &6373882374882301647
 Rigidbody:
   m_ObjectHideFlags: 0
