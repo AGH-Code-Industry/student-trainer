@@ -20,5 +20,7 @@ public class SkillInSlot : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         Debug.Log(skillInPanel.skillname);
+        Abilities.PerformSkill(skillInPanel.name);
     }
+
 }
