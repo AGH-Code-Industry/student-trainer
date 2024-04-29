@@ -5,24 +5,24 @@ using UnityEngine.UI;
 
 public class SkillsPanelMenager : MonoBehaviour
 {
-    public SkillInSlot[] skills_slots;
+    public SkillInSlot[] skillsSlots;
 
     public void Start()
     {
-        skills_slots = GetComponentsInChildren<SkillInSlot>();
+        skillsSlots = GetComponentsInChildren<SkillInSlot>();
     }
 
     public void AddSkill(Skill skill)
     {
-        for (int i = 0; i < skills_slots.Length; i++)
+        for (int i = 0; i < skillsSlots.Length; i++)
         {
-            if (skills_slots[i].skillInPanel == null)
+            if (skillsSlots[i].skillInPanel == null)
             {
-                skills_slots[i].AddSkillToSlot(skill);
+                skillsSlots[i].AddSkillToSlot(skill);
                 break;
             }
 
-            if (i == skills_slots.Length - 1)
+            if (i == skillsSlots.Length - 1)
             {
                 Debug.LogError("No free slots");
             }
