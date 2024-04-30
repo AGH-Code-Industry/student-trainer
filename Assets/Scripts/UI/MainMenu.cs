@@ -12,12 +12,14 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject menuCam;
     [SerializeField] private GameObject settingsPanel;
     [SerializeField] private GameObject menuPanel;
+    [SerializeField] private GameObject currency;
     private void Awake()
     {
         UIEvents.ClickPlay += PlayGame;
         UIEvents.ClickSettings += Settings;
         UIEvents.ClickQuit += Quit;
         UIEvents.ClickBack += Back;
+        currency.SetActive(false);
         settingsPanel.SetActive(false);
     }
 
@@ -41,6 +43,7 @@ public class MainMenu : MonoBehaviour
         Debug.Log("PlayGame btn clicked!");
         mainCam.SetActive(true);
         menuCam.SetActive(false);
+        currency.SetActive(true);
         this.gameObject.SetActive(false);
         InputManager.Instance.GetInput().Enable();
     }

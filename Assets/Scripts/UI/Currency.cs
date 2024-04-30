@@ -7,23 +7,41 @@ using System;
 
 public class Currency : MonoBehaviour
 {
-    public int amount = 0;
-
+    public static Currency instance;
     public TMP_Text currencyDisplay;
+    public Canvas currencyCanvas;
 
-    public void Update()
+    private string coinSprite = "<sprite name=\"Coin\"> ";
+    private int currentAmount = 0;
+
+
+    private void Awake()
     {
-        currencyDisplay.text = amount.ToString();
+        instance = this;
+        currencyDisplay.text = coinSprite + currentAmount.ToString();
     }
+
+    private void Start()
+    {
+        currencyDisplay.text = coinSprite + currentAmount.ToString();
+    }
+
 
     public bool TryBuy(int price)
     {
-        if (price > amount)
+        if (price > currentAmount)
         {
             Debug.Log("Too expencive");
             return false;
         }
-        amount -= price;
+        currentAmount -= price;
+        currencyDisplay.text = coinSprite + currentAmount.ToString();
         return true;
+    }
+
+    public void AddMoney(int moneyToAdd)
+    {
+        currentAmount += moneyToAdd;
+        currencyDisplay.text = coinSprite + currentAmount.ToString();
     }
 }
