@@ -3,7 +3,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "NewSkill", menuName = "Panel/NewSkill")]
 public class Skill : ScriptableObject
 {
-    public int id;
     public string name = "NewSkill";
     public Sprite icon = null;
     public Skillname skillname;

@@ -5,18 +5,25 @@ using UnityEngine;
 
 public class Abilities : MonoBehaviour
 {
-    public static Animator animator;
+    public static Abilities Instance;
 
-    private void Update()
+    public Animator animator;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+    public void Update()
     {
         if (Input.GetKeyDown(KeyCode.C))
         {
             animator.Play("Punch_Left");
         }
     }
-    public static void PerformSkill(string skillName)
+    public void PerformSkill(string skillName)
     {
         switch (skillName)
+
         {
             case "Death":
                 Death();
@@ -93,122 +100,123 @@ public class Abilities : MonoBehaviour
         }
     }
 
-    static void Death()
+    void Death()
     {
         animator.Play(Skill.Skillname.Death.ToString());
     }
 
-    static void Gun_Shoot()
+    void Gun_Shoot()
     {
         animator.Play(Skill.Skillname.Gun_Shoot.ToString());
     }
 
-    static void HitRecive()
+    void HitRecive()
     {
         animator.Play(Skill.Skillname.HitRecive.ToString());
     }
 
-    static void HitRecieve_2()
+    void HitRecieve_2()
     {
         animator.Play(Skill.Skillname.HitRecieve_2.ToString());
     }
 
-    static void Idle_0()
+    void Idle_0()
     {
         animator.Play(Skill.Skillname.Idle_0.ToString());
     }
 
-    static void Idle_Gun()
+    void Idle_Gun()
     {
         animator.Play(Skill.Skillname.Idle_Gun.ToString());
     }
 
-    static void Idle_Gun_Pointing()
+    void Idle_Gun_Pointing()
     {
         animator.Play(Skill.Skillname.Idle_Gun_Pointing.ToString());
     }
 
-    static void Idle_Gun_Shoot()
+    void Idle_Gun_Shoot()
     {
         animator.Play(Skill.Skillname.Idle_Gun_Shoot.ToString());
     }
 
-    static void Idle_Neutral()
+    void Idle_Neutral()
     {
         animator.Play(Skill.Skillname.Idle_Neutral.ToString());
     }
 
-    static void Idle_Sword()
+    void Idle_Sword()
     {
         animator.Play(Skill.Skillname.Idle_Sword.ToString());
     }
 
-    static void Interact()
+    void Interact()
     {
         animator.Play(Skill.Skillname.Interact.ToString());
     }
 
-    static void Kick_Left()
+    void Kick_Left()
     {
         animator.Play(Skill.Skillname.Kick_Left.ToString());
     }
 
-    static void Kick_Right()
+    void Kick_Right()
     {
         animator.Play(Skill.Skillname.Kick_Right.ToString());
     }
 
-    static void Punch_Left()
+    void Punch_Left()
     {
         animator.Play(Skill.Skillname.Punch_Left.ToString());
+        Debug.Log(Skill.Skillname.Punch_Left.ToString());
     }
 
-    static void Punch_Right()
+    void Punch_Right()
     {
         animator.Play(Skill.Skillname.Punch_Right.ToString());
     }
 
-    static void Roll()
+    void Roll()
     {
         animator.Play(Skill.Skillname.Roll.ToString());
     }
 
-    static void Run_0()
+    void Run_0()
     {
         animator.Play(Skill.Skillname.Run_0.ToString());
     }
 
-    static void Run_Back()
+    void Run_Back()
     {
         animator.Play(Skill.Skillname.Run_Back.ToString());
     }
 
-    static void Run_Left()
+    void Run_Left()
     {
         animator.Play(Skill.Skillname.Run_Left.ToString());
     }
 
-    static void Run_Right()
+    void Run_Right()
     {
         animator.Play(Skill.Skillname.Run_Right.ToString());
     }
 
-    static void Run_Shoot()
+    void Run_Shoot()
     {
         animator.Play(Skill.Skillname.Run_Shoot.ToString());
     }
 
-    static void Sword_Slash()
+    void Sword_Slash()
     {
         animator.Play(Skill.Skillname.Sword_Slash.ToString());
     }
 
-    static void Walk()
+    void Walk()
     {
         animator.Play(Skill.Skillname.Walk.ToString());
     }
 
-    static void Wave()
+    void Wave()
     {
         animator.Play(Skill.Skillname.Wave.ToString());
     }

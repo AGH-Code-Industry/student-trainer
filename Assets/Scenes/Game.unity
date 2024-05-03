@@ -3071,7 +3071,12 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6919129747081246841, guid: 24e09f716025b854680732d134757e60, type: 3}
   m_PrefabInstance: {fileID: 827056969438723449}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1241472606
+--- !u!95 &1241472602 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1179647251376752817, guid: 24e09f716025b854680732d134757e60, type: 3}
+  m_PrefabInstance: {fileID: 827056969438723449}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1241472607
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3083,6 +3088,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77297ade24578244992e1b68ce75f07f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 1241472602}
 --- !u!1 &1263832295 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3946503968426842402, guid: b288e93c74bcb1e47a85b91d88900e97, type: 3}
@@ -3244,7 +3250,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 30, y: 21.3422}
+  m_AnchoredPosition: {x: 0, y: 21.342194}
   m_SizeDelta: {x: 853.5524, y: 42.6844}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1634115989
@@ -4370,7 +4376,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6919129747081246841, guid: 24e09f716025b854680732d134757e60, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1241472606}
+      addedObject: {fileID: 1241472607}
   m_SourcePrefab: {fileID: 100100000, guid: 24e09f716025b854680732d134757e60, type: 3}
 --- !u!1001 &5977177325347827489
 PrefabInstance:
