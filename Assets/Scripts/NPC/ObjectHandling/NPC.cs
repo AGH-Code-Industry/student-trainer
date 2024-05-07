@@ -11,15 +11,21 @@ public class NPC : MonoBehaviour
     private npcMovement npcMovement;
     [HideInInspector]
     public List<Task> routine;
+    [HideInInspector]
+    public bool canMove = true;
+    public bool stationary = false;
     void Start()
     {
         routines = FindObjectOfType<RoutineManager>().routines.ToList();
         timeManager = FindObjectOfType<TimeManager>();
-        routine = GenerateRoutine();
+        if (!stationary)
+            routine = GenerateRoutine();
         npcMovement = GetComponent<npcMovement>();
     }
     void Update()
     {
+        if (stationary)
+            return;
         if (routine.Count == 0)
         {
             routine = GenerateRoutine();

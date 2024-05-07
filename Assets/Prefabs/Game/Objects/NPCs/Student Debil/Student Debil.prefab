@@ -764,6 +764,7 @@ GameObject:
   - component: {fileID: -4932631421795352924}
   - component: {fileID: 3915183263552141170}
   - component: {fileID: 4965519600903520810}
+  - component: {fileID: 2308919866320649105}
   m_Layer: 0
   m_Name: Student Debil
   m_TagString: Untagged
@@ -922,6 +923,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 17ef76709c0de1d4e90761814f49f88b, type: 2}
   routine: []
+  canMove: 1
+  stationary: 0
 --- !u!114 &-4932631421795352924
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -934,6 +937,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d370aeae572d524a9e938dd7350087b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpeed: 3
+  moveRandomness: 1
   isMoving: 0
 --- !u!114 &3915183263552141170
 MonoBehaviour:
@@ -969,6 +974,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &2308919866320649105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3052433340132194834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd748cf74525fb64abed3c0182966cc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultColor: {r: 1, g: 1, b: 1, a: 0}
+  insideInteraction: 0
 --- !u!1 &3088524433323189196
 GameObject:
   m_ObjectHideFlags: 0

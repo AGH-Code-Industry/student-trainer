@@ -11,8 +11,10 @@ public class npcMovement : MonoBehaviour
     private List<Vertex> vertices = new List<Vertex>();
     [HideInInspector]
     public bool isMoving = false;
+    private NPC npc;
     void Start()
     {
+        npc = GetComponent<NPC>();
         moveSpeed += Random.Range(-moveRandomness, moveRandomness);
         mapGraph = FindObjectOfType<MapGraph>();
         vertices = mapGraph.vertices;
@@ -37,18 +39,21 @@ public class npcMovement : MonoBehaviour
             float duration = Vector3.Distance(transform.position, point.position) / moveSpeed;
             while (timeElapsed < duration)
             {
-                float t = timeElapsed / duration;
-                //t = t * t * (3f - 2f * t); Smoothing equation
-                transform.position = new Vector3(
-                    Mathf.Lerp(startX, endX, t),
-                    0,
-                    Mathf.Lerp(startZ, endZ, t) // Movement
-                );
+                isMoving = npc.canMove;
+                if (npc.canMove)
+                {
+                    float t = timeElapsed / duration;
+                    transform.position = new Vector3(
+                        Mathf.Lerp(startX, endX, t),
+                        0,
+                        Mathf.Lerp(startZ, endZ, t) // Movement
+                    );
+                    timeElapsed += Time.deltaTime;
+                }
                 Vector3 direction = (point.position - transform.position).normalized;
                 Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
                 transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
 
-                timeElapsed += Time.deltaTime;
                 yield return null;
             }
 
