@@ -8,9 +8,8 @@ public class InputManager : Singleton<InputManager>
 {
     private Animator animator;
     CustomActions input;
-    InventoryManager inventoryManager;
     public CustomActions GetInput() => input;
-    public InventoryManager GetInventoryManager() => inventoryManager;
+    public InventoryManager GetInventoryManager() => InventoryManager.Instance;
 
     private void Awake()
     {
@@ -32,8 +31,6 @@ public class InputManager : Singleton<InputManager>
     }
     private void Start()
     {
-        inventoryManager = new InventoryManager();
-        inventoryManager.OnStart();
         animator = GameObject.FindWithTag("Player").GetComponent<Animator>();
     }
 
@@ -41,7 +38,7 @@ public class InputManager : Singleton<InputManager>
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            inventoryManager.ChangeState();
+            InventoryManager.Instance.ChangeState();
         }
 
         if (Input.GetKeyDown(KeyCode.H))

@@ -1,6 +1,7 @@
 using UnityEngine;
+using Chapter.Singleton;
 
-public class InventoryManager : MonoBehaviour
+public class InventoryManager : Singleton<InventoryManager>
 {
     GameObject inventory;
     public bool isOpen;
