@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] ParticleSystem clickEffect;
     [SerializeField] LayerMask clickableLayers;
 
+    private bool _isRunning = false;
 
 
     void Awake()
@@ -31,7 +32,11 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, clickableLayers))
         {
+            _isRunning = true;
             agent.destination = hit.point;
+
+            FaceTarget();
+
             if (clickEffect != null)
                 Instantiate(clickEffect, hit.point + new Vector3(0, 0.1f, 0), clickEffect.transform.rotation);
         }
@@ -40,15 +45,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        if (destination != agent.destination)
-        {
-            destination = agent.destination;
-            FaceTarget();
-        }
         SetAnimations();
     }
-
-
 
     void FaceTarget()
     {
@@ -59,10 +57,18 @@ public class PlayerMovement : MonoBehaviour
 
     void SetAnimations()
     {
-        if (agent.velocity == Vector3.zero)
-            animator.Play(PlayerAnimation.Idle.ToString());
-        else if (animator.GetBool("isRidingScooter") == false)
-            animator.Play(PlayerAnimation.Run.ToString());
+        if (_isRunning)
+        {
+            if (animator.GetBool("isRidingScooter") == false)
+            {
+                animator.Play(PlayerAnimation.Run.ToString());
+            }
+            if (agent.pathStatus == NavMeshPathStatus.PathComplete && agent.remainingDistance == 0)
+            {
+                animator.Play(PlayerAnimation.Idle.ToString());
+                _isRunning = false;
+            }
+        }
     }
 
     // private void OnDestroy() 
