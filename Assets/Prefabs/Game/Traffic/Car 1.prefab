@@ -97,16 +97,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   carPrefabs:
-  - {fileID: 160038, guid: cb78ef989c8d06642a33f15a66b168fe, type: 3}
-  - {fileID: 160038, guid: da8e040c87a034448bbfd4442078c26c, type: 3}
-  - {fileID: 160038, guid: f0ac10171a8026b4db32f658459f9720, type: 3}
-  - {fileID: 160038, guid: 3da99abe71770bb46b0eab93e174001a, type: 3}
-  - {fileID: 160038, guid: 621ff1fe06432234b81d3183450d3828, type: 3}
-  - {fileID: 160038, guid: 862f9a71b33f43a41b3125861ca225e1, type: 3}
-  - {fileID: 129146, guid: b4889aa8f7ea7954f8a8a634a365abdc, type: 3}
-  - {fileID: 129146, guid: a20a62461a4758845bcc98c527da2c9a, type: 3}
-  - {fileID: 129146, guid: e397d2c57ee01204e9d7c7d225d6f5ff, type: 3}
-  - {fileID: 129146, guid: 34c2b5bd67b8f514ca5b8ae8f9fb00c2, type: 3}
+  - {fileID: 160038, guid: 4d4a5328e032911409d8d973eee79df4, type: 3}
+  - {fileID: 129146, guid: 8f0fb4627eb4aed4f9ac1c0ec62fb2ff, type: 3}
+  - {fileID: 140570, guid: 36d4f55f4428f5e44a642bf379f22c58, type: 3}
+  - {fileID: 193646, guid: 19c00265a4f7b43489bdceefa77c2092, type: 3}
+  - {fileID: 116448, guid: 3bbfd36332111ca4583206b5397b1018, type: 3}
+  - {fileID: 193646, guid: 89aba3f23076d03448c61b5cebf2ac8e, type: 3}
+  - {fileID: 134962, guid: 1bc3a967e1e743b41b30f111c58ba985, type: 3}
+  - {fileID: 160038, guid: 6346f9198ebfb674baa1a61f29dc6060, type: 3}
+  - {fileID: 140570, guid: 6adbac25fbbce1941addef907602c539, type: 3}
+  - {fileID: 116448, guid: 7ee69ef87f85ae447998d4abab175cf9, type: 3}
 --- !u!114 &1130050099418203370
 MonoBehaviour:
   m_ObjectHideFlags: 0
