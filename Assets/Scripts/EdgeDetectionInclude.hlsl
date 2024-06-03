@@ -36,7 +36,6 @@ void SobelEdgeDetection_float(float2 UV, float Thickness, float DistanceThresh, 
     }
     // output the final sobel value
     float steepThresh = 0.00003;
-    float transitionSpeed = 0.001;
     Out = step(steepThresh, length(sobel));
 }
 
