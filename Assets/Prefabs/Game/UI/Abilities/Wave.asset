@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Wave
   m_EditorClassIdentifier: 
   name: Wave
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: d9f898589f9347548a9090920b6a2105, type: 3}
   skillname: 23

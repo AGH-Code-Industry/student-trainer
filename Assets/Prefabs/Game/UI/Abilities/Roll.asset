@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Roll
   m_EditorClassIdentifier: 
   name: Roll
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 4a53537251be4ee43a1d4a18abf03602, type: 3}
   skillname: 15

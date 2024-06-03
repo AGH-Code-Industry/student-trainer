@@ -8,6 +8,7 @@ public class AddSkill : MonoBehaviour
     public Skill skillToAdd;
     public SkillsPanelMenager skillsPanel;
 
+
     public void addSkill()
     {
         skillsPanel.AddSkill(skillToAdd);
