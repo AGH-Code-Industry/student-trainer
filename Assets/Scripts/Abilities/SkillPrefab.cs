@@ -58,7 +58,7 @@ public class SkillInSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHan
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (background != null)
+        if (background != null && skillInPanel!= null)
         {
             background.color = hoverBackgroundColor;
         }
