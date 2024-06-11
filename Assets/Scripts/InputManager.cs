@@ -6,14 +6,19 @@ using UnityEngine.Events;
 
 public class InputManager : Singleton<InputManager>
 {
+    private Main2 rightclick;
+
     private Animator animator;
     CustomActions input;
     public CustomActions GetInput() => input;
+    public Main2 GetInputMain2() => rightclick;
+
     public InventoryManager GetInventoryManager() => InventoryManager.Instance;
 
     private void Awake()
     {
         CreateInput();
+        CreateMain2Input();
     }
 
     public UnityEvent onScooterSpawnRequested = new UnityEvent();
@@ -25,13 +30,24 @@ public class InputManager : Singleton<InputManager>
         return input;
     }
 
+    private Main2 CreateMain2Input()
+    {
+        rightclick = new Main2();
+        rightclick.Enable();
+        return rightclick;
+    }
+
     private void OnDestroy()
     {
         input?.Dispose();
+        rightclick?.Dispose();
     }
+
+
     private void Start()
     {
         animator = GameObject.FindWithTag("Player").GetComponent<Animator>();
+
     }
 
     private void Update()

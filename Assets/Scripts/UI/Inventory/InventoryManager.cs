@@ -23,4 +23,6 @@ public class InventoryManager : Singleton<InventoryManager>
         if (isOpen) InputManager.Instance.GetInput().Disable();
         else InputManager.Instance.GetInput().Enable();
     }
+    
+    
 }

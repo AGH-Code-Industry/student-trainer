@@ -1,0 +1,34 @@
+{
+    "name": "Main2",
+    "maps": [
+        {
+            "name": "RightClick",
+            "id": "f2162cb5-6fd6-4e25-9379-3408fbe21182",
+            "actions": [
+                {
+                    "name": "RightClick",
+                    "type": "Button",
+                    "id": "80f685f7-bb50-43a5-9001-7e9d685e54d5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "1e0ba971-8001-4e27-9ef8-6ce135409250",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightClick",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
