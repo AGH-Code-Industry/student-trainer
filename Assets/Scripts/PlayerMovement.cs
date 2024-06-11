@@ -11,6 +11,8 @@ public class PlayerMovement : MonoBehaviour
     Animator animator;
     Vector3 destination;
 
+    private bool _isRunning = false;
+
     [Header("Movement")]
     [SerializeField] ParticleSystem clickEffect;
     [SerializeField] LayerMask clickableLayers;
@@ -33,28 +35,13 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, clickableLayers))
         {
-            // Check if the hit object's tag is not "Player"
-            if (hit.transform.tag != "Player")
-            {
-                agent.destination = hit.point;
+            _isRunning = true;
+            agent.destination = hit.point;
 
-                // Instantiate the click effect if it's not null
-                if (clickEffect != null)
-                    Instantiate(clickEffect, hit.point + new Vector3(0, 0.1f, 0), clickEffect.transform.rotation);
-            }
-            /*else if (attackRange != null)
-            {
-                if (isAttacking == false)
-                {
-                    isAttacking = !isAttacking;
-                    attackRange.SetActive(true);
-                }
-                else
-                {
-                    isAttacking = !isAttacking;
-                    attackRange.SetActive(false);
-                }
-            }*/
+            FaceTarget();
+
+            if (clickEffect != null)
+                Instantiate(clickEffect, hit.point + new Vector3(0, 0.1f, 0), clickEffect.transform.rotation);
         }
     }
 
@@ -85,6 +72,7 @@ public class PlayerMovement : MonoBehaviour
         SetAnimations();
 
     }
+
     void FaceTarget()
     {
         Vector3 direction = (agent.destination - transform.position).normalized;

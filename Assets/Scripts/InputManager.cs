@@ -13,7 +13,7 @@ public class InputManager : Singleton<InputManager>
     public CustomActions GetInput() => input;
     public Main2 GetInputMain2() => rightclick;
 
-    public InventoryManager GetInventoryManager() => inventoryManager;
+    public InventoryManager GetInventoryManager() => InventoryManager.Instance;
 
     private void Awake()
     {
