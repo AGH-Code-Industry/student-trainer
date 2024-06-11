@@ -17,9 +17,6 @@ public class CameraRotator : MonoBehaviour
 
     void Update()
     {
-        
-        
-        
         if(Input.GetMouseButton(1))
         {
             Cursor.visible = false; // Make cursor invisible

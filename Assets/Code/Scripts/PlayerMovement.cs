@@ -7,9 +7,8 @@ public class PlayerMovement : MonoBehaviour
     private GameObject attackRange;
     private bool isAttacking = false;
 
-    NavMeshAgent agent;
-    Animator animator;
-    Vector3 destination;
+    private NavMeshAgent agent;
+    private Animator animator;
 
     private bool _isRunning = false;
 
@@ -30,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
         InputManager.Instance.GetInputMain2().RightClick.RightClick.performed += ctx => OnRightClick();
     }
 
-    void ClickToMove()
+    void OnMove()
     {
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, clickableLayers))

@@ -1,15 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Ink.Runtime;
+using Zenject;
 
-public class DialogueTrigger : MonoBehaviour {
+public class DialogueTrigger : MonoBehaviour
+{
 
 	public TextAsset inkAsset;
 
+	[Inject]
+	private DialogueService _dialogueService;
+
 	[ContextMenu("TriggerDialogue")]
-	public void TriggerDialogue ()
+	public void TriggerDialogue()
 	{
-		DialogueManager.Instance.StartDialogue(inkAsset);
+		_dialogueService.StartDialogue(inkAsset);
 	}
 }

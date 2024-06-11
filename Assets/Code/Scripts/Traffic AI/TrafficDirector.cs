@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using UnityEngine.SceneManagement;
 
 public class TrafficDirector : MonoBehaviour
 {
@@ -14,8 +15,8 @@ public class TrafficDirector : MonoBehaviour
 
     private int randomSpawnIndex;
     private int randomEndIndex;
-   
 
+    private Scene carScene;
 
     private void Start()
     {
@@ -35,17 +36,17 @@ public class TrafficDirector : MonoBehaviour
     IEnumerator spawnCounter()
     {
         while (true)
-            {
+        {
             float randomInterval = Random.Range(minSpawnInterval, maxSpawnInterval);
-                yield return new WaitForSeconds(randomInterval);
-                TrySpawnCar();
+            yield return new WaitForSeconds(randomInterval);
+            TrySpawnCar();
         }
-        
+
     }
 
     private void TrySpawnCar()
     {
-        for (int i=0; i<spawnMarkers.Count; i++)
+        for (int i = 0; i < spawnMarkers.Count; i++)
         {
             Marker spawnMarker = spawnMarkers[i];
             Marker endMarker = endMarkers[i];
@@ -62,8 +63,29 @@ public class TrafficDirector : MonoBehaviour
                 carAI.startMarker = spawnMarker;
                 carAI.endMarker = endMarker;
             }
+            MoveToCarScene(car);
         }
-        
+
+    }
+
+    private void MoveToCarScene(GameObject o)
+    {
+        if (!carScene.isLoaded)
+        {
+            if (Application.isEditor)
+            {
+                carScene = SceneManager.GetSceneByName(name);
+                if (!carScene.isLoaded)
+                {
+                    carScene = SceneManager.CreateScene(name);
+                }
+            }
+            else
+            {
+                carScene = SceneManager.CreateScene(name);
+            }
+        }
+        SceneManager.MoveGameObjectToScene(o, carScene);
     }
 
     private void OnDestroy()
