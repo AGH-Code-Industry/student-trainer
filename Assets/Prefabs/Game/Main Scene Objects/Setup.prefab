@@ -3278,13 +3278,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3979551561933664672}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.38152835, y: 0.38981858, z: -0.18177538, w: 0.8181902}
-  m_LocalPosition: {x: -40.7, y: 72.3, z: -7.4}
+  m_LocalRotation: {x: 0.044481523, y: -0.8582661, z: 0.47226074, w: 0.19588403}
+  m_LocalPosition: {x: -62.9, y: 43.1, z: 12.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1389682285515961962}
-  m_LocalEulerAnglesHint: {x: 50, y: 50.95, z: 0}
+  m_LocalEulerAnglesHint: {x: 55.902, y: -148.343, z: 11.176}
 --- !u!108 &5861392678556342061
 Light:
   m_ObjectHideFlags: 0
@@ -3296,8 +3296,8 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 0.55
+  m_Color: {r: 0.8392157, g: 0.9271228, b: 1, a: 1}
+  m_Intensity: 0.56
   m_Range: 120
   m_SpotAngle: 82.4
   m_InnerSpotAngle: 10.5
@@ -3336,7 +3336,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 2
+  m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 5
@@ -4024,7 +4024,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4058147585558010838}
   - component: {fileID: 1329861764162572790}
-  - component: {fileID: 3951717744801163965}
   - component: {fileID: 4127795514350260632}
   m_Layer: 0
   m_Name: Camera
@@ -4099,14 +4098,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &3951717744801163965
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5041382869102544484}
-  m_Enabled: 1
 --- !u!114 &4127795514350260632
 MonoBehaviour:
   m_ObjectHideFlags: 0
