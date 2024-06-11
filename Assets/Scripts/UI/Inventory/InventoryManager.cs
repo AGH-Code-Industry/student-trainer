@@ -7,7 +7,7 @@ public class InventoryManager : Singleton<InventoryManager>
     public bool isOpen;
 
     // Start - initialize and hide inventory
-    public void OnStart()
+    public void Start()
     {
         inventory = GameObject.Find("Inventory");
         isOpen = false;
@@ -23,6 +23,6 @@ public class InventoryManager : Singleton<InventoryManager>
         if (isOpen) InputManager.Instance.GetInput().Disable();
         else InputManager.Instance.GetInput().Enable();
     }
-    
-    
+
+
 }
