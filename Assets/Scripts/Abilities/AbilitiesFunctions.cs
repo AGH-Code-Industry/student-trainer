@@ -23,7 +23,6 @@ public class Abilities : MonoBehaviour
     public void PerformSkill(string skillName)
     {
         switch (skillName)
-
         {
             case "Death":
                 Death();
