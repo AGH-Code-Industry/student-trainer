@@ -1,0 +1,770 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6593012095860388734
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4700481598873392098}
+  m_Layer: 0
+  m_Name: Spacerowicze
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4700481598873392098
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6593012095860388734}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2279258264088866099}
+  - {fileID: 3549164107545972584}
+  - {fileID: 2048082651430482787}
+  - {fileID: 8447815112375595314}
+  - {fileID: 2778409219515973585}
+  - {fileID: 4923985205083494984}
+  - {fileID: 4521466576361256615}
+  - {fileID: 2372684785940310681}
+  - {fileID: 6390134940019556627}
+  - {fileID: 5365018213003647009}
+  - {fileID: 2719617817852926448}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &142641164768578097
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4700481598873392098}
+    m_Modifications:
+    - target: {fileID: -4932631421795352924, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: moveSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3052433340132194834, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_Name
+      value: Student Debil (7)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+--- !u!4 &2372684785940310681 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+  m_PrefabInstance: {fileID: 142641164768578097}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &336009245183015256
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4700481598873392098}
+    m_Modifications:
+    - target: {fileID: -4932631421795352924, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: moveSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3052433340132194834, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_Name
+      value: Student Debil (10)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+--- !u!4 &2719617817852926448 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+  m_PrefabInstance: {fileID: 336009245183015256}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &547573460347936633
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4700481598873392098}
+    m_Modifications:
+    - target: {fileID: -4932631421795352924, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: moveSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3052433340132194834, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_Name
+      value: Student Debil (4)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+--- !u!4 &2778409219515973585 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+  m_PrefabInstance: {fileID: 547573460347936633}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1177289621215326144
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4700481598873392098}
+    m_Modifications:
+    - target: {fileID: -4932631421795352924, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: moveSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3052433340132194834, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_Name
+      value: Student Debil (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+--- !u!4 &3549164107545972584 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+  m_PrefabInstance: {fileID: 1177289621215326144}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2281287319313143311
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4700481598873392098}
+    m_Modifications:
+    - target: {fileID: -4932631421795352924, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: moveSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3052433340132194834, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_Name
+      value: Student Debil (6)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+--- !u!4 &4521466576361256615 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+  m_PrefabInstance: {fileID: 2281287319313143311}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4430410696747144139
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4700481598873392098}
+    m_Modifications:
+    - target: {fileID: -4932631421795352924, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: moveSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3052433340132194834, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_Name
+      value: Student Debil (2)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+--- !u!4 &2048082651430482787 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+  m_PrefabInstance: {fileID: 4430410696747144139}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4518858716311768475
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4700481598873392098}
+    m_Modifications:
+    - target: {fileID: -4932631421795352924, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: moveSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3052433340132194834, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_Name
+      value: Student Debil
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+--- !u!4 &2279258264088866099 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+  m_PrefabInstance: {fileID: 4518858716311768475}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6064959232204198298
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4700481598873392098}
+    m_Modifications:
+    - target: {fileID: -4932631421795352924, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: moveSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3052433340132194834, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_Name
+      value: Student Debil (3)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+--- !u!4 &8447815112375595314 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+  m_PrefabInstance: {fileID: 6064959232204198298}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &7296457205116893920
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4700481598873392098}
+    m_Modifications:
+    - target: {fileID: -4932631421795352924, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: moveSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3052433340132194834, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_Name
+      value: Student Debil (5)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+--- !u!4 &4923985205083494984 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+  m_PrefabInstance: {fileID: 7296457205116893920}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &7738280357581453449
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4700481598873392098}
+    m_Modifications:
+    - target: {fileID: -4932631421795352924, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: moveSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3052433340132194834, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_Name
+      value: Student Debil (9)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+--- !u!4 &5365018213003647009 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+  m_PrefabInstance: {fileID: 7738280357581453449}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8771299588234453435
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4700481598873392098}
+    m_Modifications:
+    - target: {fileID: -4932631421795352924, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: moveSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3052433340132194834, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+      propertyPath: m_Name
+      value: Student Debil (8)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+--- !u!4 &6390134940019556627 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2384580547928334504, guid: cc87dc8742e740244894c01b32f1c966, type: 3}
+  m_PrefabInstance: {fileID: 8771299588234453435}
+  m_PrefabAsset: {fileID: 0}
