@@ -10,8 +10,8 @@ public class Skill : ScriptableObject
     {
         Death,
         Gun_Shoot,
-        HitRecive,
-        HitRecieve_2,
+        HitReceive,
+        HitReceive_2,
         Idle_0,
         Idle_Gun,
         Idle_Gun_Pointing,

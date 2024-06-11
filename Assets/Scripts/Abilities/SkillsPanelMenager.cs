@@ -6,10 +6,19 @@ using UnityEngine.UI;
 public class SkillsPanelMenager : MonoBehaviour
 {
     public SkillInSlot[] skillsSlots;
+    public List<Skill> skills = new List<Skill>();
+
+    public void Awake()
+    {
+        skillsSlots = GetComponentsInChildren<SkillInSlot>();
+    }
 
     public void Start()
     {
-        skillsSlots = GetComponentsInChildren<SkillInSlot>();
+        foreach (Skill skill in skills)
+        {
+            AddSkill(skill);
+        }
     }
 
     public void AddSkill(Skill skill)

@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Kick_Right
   m_EditorClassIdentifier: 
   name: Kick_Right
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: f010db7bfaa1718449a094492f7c4876, type: 3}
   skillname: 12

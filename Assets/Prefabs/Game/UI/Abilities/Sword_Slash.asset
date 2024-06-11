@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Sword_Slash
   m_EditorClassIdentifier: 
   name: Sword_Slash
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: e5fc7c0c4a909d14cad314a45415c91a, type: 3}
   skillname: 21

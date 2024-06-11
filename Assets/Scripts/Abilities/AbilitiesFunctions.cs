@@ -17,13 +17,12 @@ public class Abilities : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.C))
         {
-            animator.Play("Punch_Left");
+            animator.Play("Idle_Gun");
         }
     }
     public void PerformSkill(string skillName)
     {
         switch (skillName)
-
         {
             case "Death":
                 Death();
@@ -31,11 +30,11 @@ public class Abilities : MonoBehaviour
             case "Gun_Shoot":
                 Gun_Shoot();
                 break;
-            case "HitRecive":
-                HitRecive();
+            case "HitReceive":
+                HitReceive();
                 break;
-            case "HitRecieve_2":
-                HitRecieve_2();
+            case "HitReceive_2":
+                HitReceive_2();
                 break;
             case "Idle_0":
                 Idle_0();
@@ -110,14 +109,14 @@ public class Abilities : MonoBehaviour
         animator.Play(Skill.Skillname.Gun_Shoot.ToString());
     }
 
-    void HitRecive()
+    void HitReceive()
     {
-        animator.Play(Skill.Skillname.HitRecive.ToString());
+        animator.Play(Skill.Skillname.HitReceive.ToString());
     }
 
-    void HitRecieve_2()
+    void HitReceive_2()
     {
-        animator.Play(Skill.Skillname.HitRecieve_2.ToString());
+        animator.Play(Skill.Skillname.HitReceive_2.ToString());
     }
 
     void Idle_0()
