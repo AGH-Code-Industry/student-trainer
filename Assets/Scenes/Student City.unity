@@ -3560,7 +3560,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 1
+  m_Intensity: 2
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -3618,13 +3618,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1372817079}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.16636571, y: 0.73994213, z: -0.19826692, w: 0.6208852}
+  m_LocalRotation: {x: 0.285593, y: 0.43857887, z: -0.14930442, w: 0.838924}
   m_LocalPosition: {x: -100, y: 50, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 30, y: 100, z: 0}
+  m_LocalEulerAnglesHint: {x: 37.6, y: 55.2, z: 0}
 --- !u!114 &1372817082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11872,7 +11872,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a40540ab12347546a9325363ab73381, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inkAsset: {fileID: 4900000, guid: 57c3d0d68fd406a44987c1c1a06e9741, type: 3}
 --- !u!64 &1314592237884488128
 MeshCollider:
   m_ObjectHideFlags: 0

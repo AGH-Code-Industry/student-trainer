@@ -25,8 +25,6 @@ public class PlayerMovement : MonoBehaviour
         attackRange = GameObject.FindGameObjectWithTag("AttackRange");
 
         // Subscribe to input actions
-        InputManager.Instance.GetInput().Main.Move.performed += input => ClickToMove();
-        InputManager.Instance.GetInputMain2().RightClick.RightClick.performed += ctx => OnRightClick();
     }
 
     void OnMove()

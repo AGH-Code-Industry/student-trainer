@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class npcInteraction : MonoBehaviour
 {
@@ -11,6 +10,10 @@ public class npcInteraction : MonoBehaviour
     public enum typeOfInteraction { Talk, Trade, Quest }
     public typeOfInteraction interactionType;
     private shopManager shopManager;
+
+    [Inject]
+    private DialogueService dialogueService;
+
     void Start()
     {
         npc = GetComponent<NPC>();
@@ -25,7 +28,7 @@ public class npcInteraction : MonoBehaviour
         switch (interactionType)
         {
             case typeOfInteraction.Talk:
-                DialogueManager.Instance.StartDialogue(inkAsset);
+                dialogueService.StartDialogue(inkAsset);
                 break;
             case typeOfInteraction.Trade:
                 shopManager.ChangeState(this);

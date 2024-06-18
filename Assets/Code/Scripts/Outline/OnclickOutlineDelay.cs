@@ -21,7 +21,7 @@ public class OnclickOutlineDelay : MonoBehaviour
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-            
+
             if (Physics.Raycast(ray, out hit))
             {
                 if (hit.collider.gameObject == gameObject)
@@ -32,7 +32,7 @@ public class OnclickOutlineDelay : MonoBehaviour
             }
         }
     }
-    
+
     IEnumerator CallDeselect()
     {
         yield return new WaitForSeconds(5f);

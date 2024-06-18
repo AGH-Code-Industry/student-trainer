@@ -118,6 +118,54 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Camera"",
+            ""id"": ""4312b093-68e3-402a-817f-661ef0e726ab"",
+            ""actions"": [
+                {
+                    ""name"": ""Z-axis"",
+                    ""type"": ""Button"",
+                    ""id"": ""b472e4f8-cad0-4da0-af2a-03d5f0e377be"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""XY-axis"",
+                    ""type"": ""Button"",
+                    ""id"": ""a32b77e4-9e21-490b-ac95-10caea017765"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""89cfe509-6b80-4438-81c8-c966bd398ff7"",
+                    ""path"": ""<Keyboard>/t"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Z-axis"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b6ed19a3-24c8-4ac8-9c27-237631853593"",
+                    ""path"": ""<Keyboard>/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""XY-axis"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -130,6 +178,10 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
         // Inventory
         m_Inventory = asset.FindActionMap("Inventory", throwIfNotFound: true);
         m_Inventory_OpenClose = m_Inventory.FindAction("Open/Close", throwIfNotFound: true);
+        // Camera
+        m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
+        m_Camera_Zaxis = m_Camera.FindAction("Z-axis", throwIfNotFound: true);
+        m_Camera_XYaxis = m_Camera.FindAction("XY-axis", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -295,6 +347,60 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
         }
     }
     public InventoryActions @Inventory => new InventoryActions(this);
+
+    // Camera
+    private readonly InputActionMap m_Camera;
+    private List<ICameraActions> m_CameraActionsCallbackInterfaces = new List<ICameraActions>();
+    private readonly InputAction m_Camera_Zaxis;
+    private readonly InputAction m_Camera_XYaxis;
+    public struct CameraActions
+    {
+        private @GameControls m_Wrapper;
+        public CameraActions(@GameControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Zaxis => m_Wrapper.m_Camera_Zaxis;
+        public InputAction @XYaxis => m_Wrapper.m_Camera_XYaxis;
+        public InputActionMap Get() { return m_Wrapper.m_Camera; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(CameraActions set) { return set.Get(); }
+        public void AddCallbacks(ICameraActions instance)
+        {
+            if (instance == null || m_Wrapper.m_CameraActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_CameraActionsCallbackInterfaces.Add(instance);
+            @Zaxis.started += instance.OnZaxis;
+            @Zaxis.performed += instance.OnZaxis;
+            @Zaxis.canceled += instance.OnZaxis;
+            @XYaxis.started += instance.OnXYaxis;
+            @XYaxis.performed += instance.OnXYaxis;
+            @XYaxis.canceled += instance.OnXYaxis;
+        }
+
+        private void UnregisterCallbacks(ICameraActions instance)
+        {
+            @Zaxis.started -= instance.OnZaxis;
+            @Zaxis.performed -= instance.OnZaxis;
+            @Zaxis.canceled -= instance.OnZaxis;
+            @XYaxis.started -= instance.OnXYaxis;
+            @XYaxis.performed -= instance.OnXYaxis;
+            @XYaxis.canceled -= instance.OnXYaxis;
+        }
+
+        public void RemoveCallbacks(ICameraActions instance)
+        {
+            if (m_Wrapper.m_CameraActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(ICameraActions instance)
+        {
+            foreach (var item in m_Wrapper.m_CameraActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_CameraActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public CameraActions @Camera => new CameraActions(this);
     public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
@@ -304,5 +410,10 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
     public interface IInventoryActions
     {
         void OnOpenClose(InputAction.CallbackContext context);
+    }
+    public interface ICameraActions
+    {
+        void OnZaxis(InputAction.CallbackContext context);
+        void OnXYaxis(InputAction.CallbackContext context);
     }
 }

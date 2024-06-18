@@ -96,6 +96,54 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Camera",
+            "id": "4312b093-68e3-402a-817f-661ef0e726ab",
+            "actions": [
+                {
+                    "name": "Z-axis",
+                    "type": "Button",
+                    "id": "b472e4f8-cad0-4da0-af2a-03d5f0e377be",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "XY-axis",
+                    "type": "Button",
+                    "id": "a32b77e4-9e21-490b-ac95-10caea017765",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "89cfe509-6b80-4438-81c8-c966bd398ff7",
+                    "path": "<Keyboard>/t",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Z-axis",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b6ed19a3-24c8-4ac8-9c27-237631853593",
+                    "path": "<Keyboard>/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "XY-axis",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

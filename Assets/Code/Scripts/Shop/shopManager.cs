@@ -1,10 +1,15 @@
 using UnityEngine;
+using Zenject;
 
 public class shopManager : MonoBehaviour
 {
     GameObject shopObj;
     public bool isOpen;
     private npcInteraction npcInteraction;
+
+    [Inject]
+    private InputService input;
+
     public void Start()
     {
         shopObj = GameObject.Find("Shop");
@@ -17,7 +22,6 @@ public class shopManager : MonoBehaviour
         shopObj.SetActive(!shopObj.activeInHierarchy);
         isOpen = !isOpen;
         npcInteraction.insideInteraction = isOpen;
-        if (isOpen) InputManager.Instance.GetInput().Disable();
-        else InputManager.Instance.GetInput().Enable();
+        input.SetActive(!isOpen);
     }
 }

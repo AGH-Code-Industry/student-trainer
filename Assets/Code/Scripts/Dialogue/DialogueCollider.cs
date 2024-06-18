@@ -9,7 +9,8 @@ public class DialogueCollider : MonoBehaviour
 
     private DialogueTrigger dialogue;
 
-    private void Start() {
+    private void Start()
+    {
         dialogue = GetComponent<DialogueTrigger>();
 
     }
