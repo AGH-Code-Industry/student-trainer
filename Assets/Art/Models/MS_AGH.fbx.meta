@@ -7,11 +7,6 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Road_alpha
-    second: {fileID: -876546973899608171, guid: 84c45531d8bd4584fa0503e0e8002692, type: 3}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
       name: Vertex
     second: {fileID: 2100000, guid: e712d4c0af203f348894295f07109ed4, type: 2}
   - first:
@@ -29,16 +24,6 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: Vertex_metal
     second: {fileID: 2100000, guid: 413c22d270939fd4c902ff3782c372d2, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: WindowLights
-    second: {fileID: 2100000, guid: 34b61942c18d7f54aa3761f004db6d62, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: WindowLights_alwaysOn
-    second: {fileID: 2100000, guid: 5e1bc1013df1b3e44ae4c5010aafe326, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
