@@ -16,9 +16,9 @@
 	- #### Jej Rola
    	  Sprzedaje materiały dla studenta
 - ### Tech Guru z Klubu Studio
-  	  Uczy cię umiejętności
+	Uczy cię umiejętności
 - ### Żuliś
-	  Lokalny alkoholik
+	Lokalny alkoholik
 
 ---
 
