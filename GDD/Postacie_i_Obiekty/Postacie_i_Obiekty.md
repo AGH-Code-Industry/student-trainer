@@ -6,25 +6,28 @@
 
 ## Postacie występujące w Grze
 
-- ### Maciek
+- ### Student
 	- #### Jego Rola
 	  Główny bohater rozgrywki
-- ### Adam
+- ### Dziekan
 	- #### Jego Rola
-	  Sprzedaje wywary lecznicze 
-- ### Czarnuch
-	- #### Jego Rola
-	  Główny antagonista historii (Nie jestem rasistą).
+	  Główny antagonista historii.
+- ### Kasjerka ze Studenciaka
+	- #### Jej Rola
+   	  Sprzedaje materiały dla studenta
+- ### Tech Guru z Klubu Studio
+  	  Uczy cię umiejętności
+- ### Żuliś
+	  Lokalny alkoholik
 
 ---
 
 ## Przedmioty 
 
 **Przykład:**
-- ### Romper Extreme
-  Zwiększa siłę ataku kosztem jego celności
-- ### Kebab na Ostrym
-  Leczy do pełni zdrowia
-- ### Krzyż św. Benedykta
-  Zwiększa morale dzięki czemu twoja postać może zrobić podwójny ruche 
+- ### Paralizator
+- ### komputer
+- ### Dron
+- ### Kask
+- ...
 
