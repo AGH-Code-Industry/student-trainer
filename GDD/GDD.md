@@ -1,4 +1,4 @@
-# GDD - "Nazwa Gry"
+# GDD - Strudent Trainer
 
 ### [<-- ReadMe](/README.md)
 
