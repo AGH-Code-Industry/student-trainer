@@ -55,7 +55,10 @@ Trzecioroczny student Adam, który musi wykonać zlecone mu zadanie by nie zosta
 
 ### Styl Gry
 
-![city](GDD/Grafika/kapitol.png)
+![image](https://github.com/user-attachments/assets/73c7d640-0511-4856-a7a3-8636f4e0a5e5)
+
+![StudentTrainer_menu](https://github.com/user-attachments/assets/dc670d7a-b227-48bd-ae75-cba75b6efacb)
+
 
 ### Obszar AGH na którym odbywa się gra
 
