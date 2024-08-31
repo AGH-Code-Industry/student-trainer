@@ -7,6 +7,8 @@ public class ProjectInstaller : MonoInstaller
         Container.BindInterfacesAndSelfTo<DialogueService>().AsSingle();
         Container.BindInterfacesAndSelfTo<InputService>().AsSingle();
         Container.BindInterfacesAndSelfTo<SceneService>().AsSingle();
+        Container.BindInterfacesAndSelfTo<DayNightCycleService>().AsSingle();
+        Container.BindInterfacesAndSelfTo<ResourceReader>().AsSingle();
     }
 
 }
