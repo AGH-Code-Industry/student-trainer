@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: DayNightCycle
   m_EditorClassIdentifier: 
   lightIntensity: 5
-  startHour: 10
-  startMinute: 0
+  startTime:
+    hour: 8
+    minute: 0
   timeIncrementInMinutes: 1
   timeSpeed: 50

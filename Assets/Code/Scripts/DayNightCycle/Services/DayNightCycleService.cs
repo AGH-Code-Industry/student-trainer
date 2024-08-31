@@ -8,8 +8,11 @@ public class DayNightCycleService : IInitializable, IDisposable
     public readonly uint MINUTES_IN_CYCLE = 1440;
 
     public event Action<uint> Time;
+    public event Action<PartOfDay> TimeOfDay;
+
     private uint _actualTime = 0;
     private DayNightCycleSettings _settings;
+    private PartOfDaySettings _partOfDaySettings;
     private CancellationTokenSource _cancellationToken;
 
     [Inject]
@@ -18,7 +21,8 @@ public class DayNightCycleService : IInitializable, IDisposable
     public void Initialize()
     {
         _settings = _resourceReader.ReadSettings<DayNightCycleSettings>();
-        SetTime(_settings.startHour, _settings.startMinute);
+        _partOfDaySettings = _resourceReader.ReadSettings<PartOfDaySettings>();
+        SetTime(_settings.startTime);
     }
 
     public void Start()
@@ -38,7 +42,7 @@ public class DayNightCycleService : IInitializable, IDisposable
         _cancellationToken = null;
     }
 
-    private void SetTime(byte hour, byte minute) => SetTime((uint)(hour * 24 + minute));
+    private void SetTime(GameTimeData time) => SetTime((uint)(time.hour * 24 + time.minute));
 
     private void SetTime(uint minutes)
     {
@@ -46,6 +50,20 @@ public class DayNightCycleService : IInitializable, IDisposable
         if (_actualTime >= MINUTES_IN_CYCLE)
             _actualTime %= MINUTES_IN_CYCLE;
         Time?.Invoke(_actualTime);
+
+        CheckTimeOfDay(minutes);
+    }
+
+    private void CheckTimeOfDay(uint minutes)
+    {
+        foreach (var partOfDay in _partOfDaySettings.data)
+        {
+            if (partOfDay.time.ToMinutes() == minutes)
+            {
+                TimeOfDay?.Invoke(partOfDay.partOfDay);
+                break;
+            }
+        }
     }
 
     private async void StartCountingTimeAsync(CancellationToken token)

@@ -34,11 +34,6 @@ public class DayNightCycleController : MonoBehaviour
         _light.intensity = intensity < 0 ? 0 : intensity;
     }
 
-    private void SetPosition(uint time)
-    {
-        
-    }
-
     private void OnDestroy()
     {
         _dayNightCycleService.Time -= OnCountingTime;
