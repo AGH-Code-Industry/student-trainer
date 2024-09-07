@@ -96,7 +96,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 112000000, guid: e3fdfb83e4b2ceb429f96a0d686ca918, type: 2}
+  m_LightingDataAsset: {fileID: 112000004, guid: e3fdfb83e4b2ceb429f96a0d686ca918, type: 2}
   m_LightingSettings: {fileID: 4890085278179872738, guid: aff14ec61a0a24e4d9be558babb3e6fa, type: 2}
 --- !u!196 &4
 NavMeshSettings:
@@ -1391,9 +1391,17 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: -1695386897620489773, guid: 37e1c906f73a1d741bddc691657d7668, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 37e1c906f73a1d741bddc691657d7668, type: 3}
       propertyPath: m_Name
       value: MS_AGH
+      objectReference: {fileID: 0}
+    - target: {fileID: 2821032169411225096, guid: 37e1c906f73a1d741bddc691657d7668, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1879,13 +1887,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1372817079}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.20858327, y: -0.5298382, z: 0.5345569, w: 0.6245106}
+  m_LocalRotation: {x: 0.6836818, y: -0.51290137, z: 0.5064399, w: 0.114148706}
   m_LocalPosition: {x: -100, y: 50, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 55.79, y: -51.3, z: 52.6}
+  m_LocalEulerAnglesHint: {x: 137.5, y: -51.3, z: 52.6}
 --- !u!114 &1372817082
 MonoBehaviour:
   m_ObjectHideFlags: 0
