@@ -1,9 +1,13 @@
+using System.Linq;
 using UnityEngine;
 using Zenject;
 
 public class DayNightCycleController : MonoBehaviour
 {
     [SerializeField] private Light _light;
+    [SerializeField] private Animator _animator;
+
+    private AnimationClip _animationClip;
 
     [Inject]
     private DayNightCycleService _dayNightCycleService;
@@ -12,6 +16,7 @@ public class DayNightCycleController : MonoBehaviour
     private void Awake()
     {
         _dayNightCycleService.Time += OnCountingTime;
+        _animationClip = _animator.runtimeAnimatorController.animationClips.First();
     }
 
     private void Start()
@@ -21,17 +26,14 @@ public class DayNightCycleController : MonoBehaviour
 
     private void OnCountingTime(uint time)
     {
-        SetRotation(time);
-        SetLightIntensity(time);
+        float normalizedTime = time * 1.0f / _dayNightCycleService.MINUTES_IN_CYCLE;
+        SetAnimationAtTime(normalizedTime);
     }
 
-    private void SetRotation(uint time) => transform.localRotation = Quaternion.Euler(0.25f * time - 90, 0, 0);
-
-    private void SetLightIntensity(uint time)
+    private void SetAnimationAtTime(float normalizedTime)
     {
-        float x = time * 1.0f / _dayNightCycleService.MINUTES_IN_CYCLE;
-        var intensity = Mathf.Sin((2 * Mathf.PI * x) - (Mathf.PI / 2));
-        _light.intensity = intensity < 0 ? 0 : intensity;
+        _animator.Play(_animationClip.name, 0, normalizedTime);
+        _animator.speed = 0;
     }
 
     private void OnDestroy()

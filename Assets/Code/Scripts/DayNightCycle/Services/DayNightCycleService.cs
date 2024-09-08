@@ -8,7 +8,7 @@ public class DayNightCycleService : IInitializable, IDisposable
     public readonly uint MINUTES_IN_CYCLE = 1440;
 
     public event Action<uint> Time;
-    public event Action<PartOfDay> TimeOfDay;
+    public event Action<PartOfDay> PartOfDay;
 
     private uint _actualTime = 0;
     private DayNightCycleSettings _settings;
@@ -60,7 +60,7 @@ public class DayNightCycleService : IInitializable, IDisposable
         {
             if (partOfDay.time.ToMinutes() == minutes)
             {
-                TimeOfDay?.Invoke(partOfDay.partOfDay);
+                PartOfDay?.Invoke(partOfDay.partOfDay);
                 break;
             }
         }
