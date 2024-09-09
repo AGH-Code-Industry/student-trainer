@@ -1,6 +1,7 @@
 using System;
 using Zenject;
 using System.Threading;
+using System.Diagnostics;
 
 
 public class DayNightCycleService : IInitializable, IDisposable
@@ -49,8 +50,9 @@ public class DayNightCycleService : IInitializable, IDisposable
         _actualTime = minutes;
         if (_actualTime >= MINUTES_IN_CYCLE)
             _actualTime %= MINUTES_IN_CYCLE;
-        Time?.Invoke(_actualTime);
 
+        Time?.Invoke(_actualTime);
+        UnityEngine.Debug.Log($"{_actualTime}");
         CheckTimeOfDay(minutes);
     }
 
@@ -78,7 +80,7 @@ public class DayNightCycleService : IInitializable, IDisposable
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Exception in StartCountingTimeAsync: {ex.Message}");
+            UnityEngine.Debug.LogError($"Exception in StartCountingTimeAsync: {ex.Message}");
         }
     }
 

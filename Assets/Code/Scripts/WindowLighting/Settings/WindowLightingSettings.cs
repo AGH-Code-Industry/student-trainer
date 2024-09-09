@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Windows", menuName = "Settings/Windows")]
-public class WindowSettings : ScriptableObject
+[CreateAssetMenu(fileName = "WindowLighting", menuName = "Settings/WindowLighting")]
+public class WindowLightingSettings : ScriptableObject
 {
     public PartOfDay turnLightOn;
     public GameTimeData maxTurningOnDelay;

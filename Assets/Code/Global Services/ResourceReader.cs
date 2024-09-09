@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class ResourceReader
@@ -8,10 +9,15 @@ public class ResourceReader
     {
         { typeof(DayNightCycleSettings), "DayNightCycle" },
         { typeof(PartOfDaySettings), "PartOfDay" },
-        { typeof(WindowSettings), "Windows" },
+        { typeof(WindowLightingSettings), "WindowLighting" },
     };
 
     public T ReadSettings<T>() where T : ScriptableObject
-        => Resources.Load<T>(path[typeof(T)]);
+    {
+        var settings = Resources.Load<T>(path[typeof(T)]);
+        if (settings == null)
+            throw new FileLoadException($"The {typeof(T)} setting named {path[typeof(T)]} could not be found in the Resource folder.");
+        return settings;
+    }
 
 }

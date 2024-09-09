@@ -3,11 +3,11 @@ using UnityEngine;
 using Zenject;
 using Random = UnityEngine.Random;
 
-public class WindowController : MonoBehaviour
+public class WindowLightingController : MonoBehaviour
 {
-    private Renderer objectRenderer;
-    private MaterialPropertyBlock propertyBlock;
-    private WindowSettings _windowSettings;
+    private Renderer _objectRenderer;
+    private MaterialPropertyBlock _propertyBlock;
+    private WindowLightingSettings _windowSettings;
     private DayNightCycleSettings _dayNightCycleSettings;
 
 
@@ -19,56 +19,60 @@ public class WindowController : MonoBehaviour
     private void Awake()
     {
         _dayNightCycleService.PartOfDay += OnTimeOfDay;
-        _windowSettings = _resourceReader.ReadSettings<WindowSettings>();
+        _windowSettings = _resourceReader.ReadSettings<WindowLightingSettings>();
         _dayNightCycleSettings = _resourceReader.ReadSettings<DayNightCycleSettings>();
     }
 
     void Start()
     {
-        objectRenderer = GetComponent<Renderer>();
-        propertyBlock = new MaterialPropertyBlock();
+        _objectRenderer = GetComponent<Renderer>();
+        _propertyBlock = new MaterialPropertyBlock();
     }
 
     private void OnTimeOfDay(PartOfDay partOfDay)
     {
         if (_windowSettings.turnLightOff == partOfDay)
         {
+            StopAllCoroutines();
             StartCoroutine(TurnOffLight());
         }
 
         if (_windowSettings.turnLightOn == partOfDay)
         {
             if (Random.Range(0, 2) == 1)
+            {
+                StopAllCoroutines();
                 StartCoroutine(TurnOnLight());
+            }
         }
     }
 
     IEnumerator TurnOffLight()
     {
-        objectRenderer.GetPropertyBlock(propertyBlock);
+        _objectRenderer.GetPropertyBlock(_propertyBlock);
 
         var milliseconds = _windowSettings.maxTurningOffDelay.ToMinutes() * _dayNightCycleSettings.timeSpeed;
 
         yield return new WaitForSeconds(Random.Range(0, milliseconds) / 1000.0f);
 
-        propertyBlock.SetInteger("_IsLightOn", 0);
+        _propertyBlock.SetInteger("_IsLightOn", 0);
 
-        objectRenderer.SetPropertyBlock(propertyBlock);
+        _objectRenderer.SetPropertyBlock(_propertyBlock);
 
         yield return null;
     }
 
     IEnumerator TurnOnLight()
     {
-        objectRenderer.GetPropertyBlock(propertyBlock);
+        _objectRenderer.GetPropertyBlock(_propertyBlock);
 
         var milliseconds = _windowSettings.maxTurningOnDelay.ToMinutes() * _dayNightCycleSettings.timeSpeed;
 
         yield return new WaitForSeconds(Random.Range(0, milliseconds) / 1000.0f);
 
-        propertyBlock.SetInteger("_IsLightOn", 1);
+        _propertyBlock.SetInteger("_IsLightOn", 1);
 
-        objectRenderer.SetPropertyBlock(propertyBlock);
+        _objectRenderer.SetPropertyBlock(_propertyBlock);
 
         yield return null;
     }
