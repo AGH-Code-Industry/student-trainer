@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f293581c9dfccf40baa74225ad29524, type: 3}
   m_Name: WindowLighting
   m_EditorClassIdentifier: 
-  turnLightOn: 3
+  turnLightOn: 2
   maxTurningOnDelay:
     hour: 3
     minute: 0
