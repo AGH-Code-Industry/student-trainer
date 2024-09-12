@@ -10,6 +10,7 @@ public class ResourceReader
         { typeof(DayNightCycleSettings), "DayNightCycle" },
         { typeof(PartOfDaySettings), "PartOfDay" },
         { typeof(WindowLightingSettings), "WindowLighting" },
+        { typeof(StreetLampLightingSettings), "StreetLampLighting" },
     };
 
     public T ReadSettings<T>() where T : ScriptableObject

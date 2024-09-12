@@ -17,4 +17,4 @@ MonoBehaviour:
     hour: 8
     minute: 0
   timeIncrementInMinutes: 1
-  timeSpeed: 50
+  timeSpeed: 10
