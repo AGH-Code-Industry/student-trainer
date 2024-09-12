@@ -5,11 +5,12 @@ using Random = UnityEngine.Random;
 
 public class WindowLightingController : MonoBehaviour
 {
+    [SerializeField] private bool _isFixed;
+
     private Renderer _objectRenderer;
     private MaterialPropertyBlock _propertyBlock;
     private WindowLightingSettings _windowSettings;
     private DayNightCycleSettings _dayNightCycleSettings;
-
 
     [Inject]
     private DayNightCycleService _dayNightCycleService;
@@ -39,7 +40,7 @@ public class WindowLightingController : MonoBehaviour
 
         if (_windowSettings.turnLightOn == partOfDay)
         {
-            if (Random.Range(0, 2) == 1)
+            if (_isFixed || Random.Range(0, 2) == 1)
             {
                 StopAllCoroutines();
                 StartCoroutine(TurnOnLight());

@@ -24,15 +24,15 @@ public class DayNightCycleController : MonoBehaviour
         _dayNightCycleService.Start();
     }
 
-    private void OnCountingTime(uint time)
+    private void OnCountingTime(GameTimeData time)
     {
-        float normalizedTime = time * 1.0f / _dayNightCycleService.MINUTES_IN_CYCLE;
-        SetAnimationAtTime(normalizedTime);
+        float normalizedAnimationAtTime = time.ToMinutes() * 1.0f / _dayNightCycleService.MINUTES_IN_CYCLE;
+        SetAnimationAtTime(normalizedAnimationAtTime);
     }
 
-    private void SetAnimationAtTime(float normalizedTime)
+    private void SetAnimationAtTime(float normalizedAnimationAtTime)
     {
-        _animator.Play(_animationClip.name, 0, normalizedTime);
+        _animator.Play(_animationClip.name, 0, normalizedAnimationAtTime);
         _animator.speed = 0;
     }
 
