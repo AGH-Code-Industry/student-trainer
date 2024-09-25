@@ -16,8 +16,7 @@ public class DayNightCycleService : IInitializable, IDisposable
     private PartOfDaySettings _partOfDaySettings;
     private CancellationTokenSource _cancellationToken;
 
-    [Inject]
-    private ResourceReader _resourceReader;
+    [Inject] private ResourceReader _resourceReader;
 
     public void Initialize()
     {
@@ -47,10 +46,10 @@ public class DayNightCycleService : IInitializable, IDisposable
 
     private void SetTime(uint minutes)
     {
-        _actualTime.SetTime(minutes);
         if (minutes >= MINUTES_IN_CYCLE)
             minutes %= MINUTES_IN_CYCLE;
 
+        _actualTime.SetTime(minutes);
         Time?.Invoke(_actualTime);
         CheckTimeOfDay(minutes);
     }

@@ -102,18 +102,45 @@
             "id": "4312b093-68e3-402a-817f-661ef0e726ab",
             "actions": [
                 {
-                    "name": "Z-axis",
+                    "name": "Start Rotation",
                     "type": "Button",
-                    "id": "b472e4f8-cad0-4da0-af2a-03d5f0e377be",
+                    "id": "80da0d26-d4a6-42ac-98d2-26c796d5dc9c",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "XY-axis",
+                    "name": "Stop Rotation",
                     "type": "Button",
-                    "id": "a32b77e4-9e21-490b-ac95-10caea017765",
+                    "id": "4c221e7d-65b7-473d-ac0c-e5b11740572b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Zoom",
+                    "type": "PassThrough",
+                    "id": "5afd0fdc-20ce-4301-a179-820580ab0be1",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Move",
+                    "type": "Value",
+                    "id": "8825493d-cb62-496c-b0c2-cd441d20a0d8",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "BackToPlayer",
+                    "type": "Button",
+                    "id": "701dce51-b50c-4a69-ba3c-30c5c705dc5d",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -123,23 +150,100 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "89cfe509-6b80-4438-81c8-c966bd398ff7",
-                    "path": "<Keyboard>/t",
-                    "interactions": "",
+                    "id": "0a7b6fbd-9a14-4266-b369-4f1112d724a6",
+                    "path": "<Mouse>/middleButton",
+                    "interactions": "Press",
                     "processors": "",
                     "groups": "",
-                    "action": "Z-axis",
+                    "action": "Start Rotation",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "b6ed19a3-24c8-4ac8-9c27-237631853593",
-                    "path": "<Keyboard>/y",
+                    "id": "2dfb34c1-f57a-49c6-986b-7c9e00629df4",
+                    "path": "<Mouse>/scroll/y",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "XY-axis",
+                    "action": "Zoom",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "92b83c16-9d46-4b7b-b41f-4aba3c74be5a",
+                    "path": "<Mouse>/middleButton",
+                    "interactions": "Press(behavior=1)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Stop Rotation",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "2D Vector",
+                    "id": "de8964bc-40f1-471e-b77a-8651a73ac6f6",
+                    "path": "2DVector(mode=2)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "cfa667a2-84f5-4627-ab60-c14fd720f227",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "4dfca1c6-08bf-4bab-8c0b-4a11a7ffabb5",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "01442cde-12db-4c08-a07f-30a927ceaa1e",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "725cfead-c89c-47d6-a029-180ea5ed8d39",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "c6be3627-ec3a-418e-81d5-4433bbe6dcb2",
+                    "path": "<Keyboard>/p",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "BackToPlayer",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
