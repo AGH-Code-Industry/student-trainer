@@ -1,73 +1,81 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.EventSystems;
+using Zenject;
 
+[RequireComponent(typeof(CharacterDataHandler))]
 public class PlayerMovement : MonoBehaviour
 {
     enum PlayerAnimation { Idle, Run }
-    private GameObject attackRange;
-    private bool isAttacking = false;
-
     private NavMeshAgent agent;
     private Animator animator;
-
-    private bool _isRunning = false;
 
     [Header("Movement")]
     [SerializeField] ParticleSystem clickEffect;
     [SerializeField] LayerMask clickableLayers;
 
-    float lookRotationSpeed = 8f;
+    [Inject] private BattleService _battleService;
+
+    private CharacterData data;
+
+    private void Awake()
+    {
+        _battleService.StartBattle += OnStartBattle;
+    }
 
     private void Start()
     {
+        if (clickEffect == null)
+            Debug.LogError($"clickEffect is not set in {transform.name} Object");
+
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
-        attackRange = GameObject.FindGameObjectWithTag("AttackRange");
+        data = GetComponent<CharacterDataHandler>().Data;
 
-        // Subscribe to input actions
+    }
+
+    private void OnStartBattle(Vector3 position)
+    {
+        agent.ResetPath();
     }
 
     void OnMove()
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
+
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out hit, 100, clickableLayers))
         {
-            _isRunning = true;
-            agent.destination = hit.point;
-
-            FaceTarget();
-
-            if (clickEffect != null)
-                Instantiate(clickEffect, hit.point + new Vector3(0, 0.1f, 0), clickEffect.transform.rotation);
-        }
-    }
-
-    void OnRightClick()
-    {
-        RaycastHit hit;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out hit, 100f, clickableLayers))
-        {
-            if (hit.collider.CompareTag("Player"))
+            if (_battleService.IsBattleState)
             {
-                ToggleAttack();
+                var distance = Vector3.Distance(hit.point, transform.position);
+                if (data.id == _battleService.actualBattleTurn.id && _battleService.TryUpdateMovePoints(distance))
+                {
+                    GoToPosition(hit.point);
+                }
             }
+            else
+            {
+                GoToPosition(hit.point);
+            }
+
         }
     }
 
-    void ToggleAttack()
+    private void GoToPosition(Vector3 position)
     {
-        if (attackRange != null)
-        {
-            isAttacking = !isAttacking;
-            attackRange.SetActive(isAttacking);
-        }
+        agent.destination = position;
+
+        FaceTarget();
+
+        Instantiate(clickEffect, position + new Vector3(0, 0.1f, 0), clickEffect.transform.rotation);
+        animator.Play(PlayerAnimation.Run.ToString());
     }
 
     void Update()
     {
         SetAnimations();
-
     }
 
     void FaceTarget()
@@ -79,25 +87,14 @@ public class PlayerMovement : MonoBehaviour
 
     void SetAnimations()
     {
-        if (_isRunning)
+        if (agent.pathStatus == NavMeshPathStatus.PathComplete && agent.remainingDistance == 0)
         {
-            if (animator.GetBool("isRidingScooter") == false)
-            {
-                animator.Play(PlayerAnimation.Run.ToString());
-            }
-            if (agent.pathStatus == NavMeshPathStatus.PathComplete && agent.remainingDistance == 0)
-            {
-                animator.Play(PlayerAnimation.Idle.ToString());
-                _isRunning = false;
-            }
+            animator.Play(PlayerAnimation.Idle.ToString());
         }
     }
 
     private void OnDestroy()
     {
-        // Unsubscribe from input actions to avoid memory leaks
-        /*InputManager.Instance.GetInput().Main.Move.performed -= input => ClickToMove();*/
-        /*InputManager.Instance.GetInputMain2().RightClick.RightClick.performed -= ctx => OnRightClick();*/
-        //Generuje błąd: Some objects were not cleaned up when closing the scene.
+        _battleService.StartBattle += OnStartBattle;
     }
 }
