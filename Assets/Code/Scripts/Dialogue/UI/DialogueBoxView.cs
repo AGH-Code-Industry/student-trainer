@@ -77,7 +77,7 @@ public class DialogueBoxView : MonoBehaviour
             t.text += letter;
             yield return new WaitForFixedUpdate();
         }
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
         NextDialogue?.Invoke();
     }
 
