@@ -22,8 +22,18 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: StudenciakLogo
+    second: {fileID: 2100000, guid: 70921838a649b5c46a2b58a296e5a63f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Vertex
     second: {fileID: 2100000, guid: e712d4c0af203f348894295f07109ed4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: VertexEmission
+    second: {fileID: 2100000, guid: ebdf272b2d85931459c6ec2d17c0af19, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
