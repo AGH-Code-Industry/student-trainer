@@ -43,4 +43,15 @@ public class CameraService : Zenject.IInitializable
         ActiveCamera.Invoke(type);
         ActiveCameraType = type;
     }
+
+    public void SetDialogueCamera(DialogueType type)
+    {
+        if (type == DialogueType.Hero_Dialogue || type == DialogueType.Hero_Choices)
+            ActiveCamera.Invoke(VirtualCameraType.PlayerDialogue);
+        else if (type == DialogueType.Npc)
+            ActiveCamera.Invoke(VirtualCameraType.NpcDialogue);
+        else
+            ActiveCamera.Invoke(VirtualCameraType.Player);
+
+    }
 }

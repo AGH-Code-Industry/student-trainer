@@ -1,9 +1,5 @@
-using System.Collections;
 using Cinemachine;
-using Ink.Parsed;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using Zenject;
 
 [RequireComponent(typeof(CinemachineVirtualCamera))]

@@ -1,4 +1,4 @@
 public enum VirtualCameraType
 {
-    Player, World
+    Player, World, PlayerDialogue, NpcDialogue
 }

@@ -22,4 +22,13 @@ public class ResourceReader
         return settings;
     }
 
+    public CharacterSettings ReadCharacterSettings(CharacterType type)
+    {
+        var path = "Characters/" + type.ToString();
+        var settings = Resources.Load<CharacterSettings>(path);
+        if (settings == null)
+            throw new FileLoadException($"The {typeof(CharacterSettings)} setting named {path} could not be found in the Resource folder.");
+        return settings;
+    }
+
 }

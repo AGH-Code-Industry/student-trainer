@@ -28,7 +28,7 @@ public class npcInteraction : MonoBehaviour
         switch (interactionType)
         {
             case typeOfInteraction.Talk:
-                dialogueService.StartDialogue(inkAsset);
+                dialogueService.Start(inkAsset);
                 break;
             case typeOfInteraction.Trade:
                 shopManager.ChangeState(this);
