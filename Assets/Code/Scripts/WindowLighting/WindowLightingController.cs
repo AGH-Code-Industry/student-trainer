@@ -51,13 +51,11 @@ public class WindowLightingController : MonoBehaviour
     IEnumerator TurnOffLight()
     {
         _objectRenderer.GetPropertyBlock(_propertyBlock);
-
         var milliseconds = _windowSettings.maxTurningOffDelay.ToMinutes() * _dayNightCycleSettings.timeSpeed;
 
         yield return new WaitForSeconds(Random.Range(0, milliseconds) / 1000.0f);
 
         _propertyBlock.SetInteger("_IsLightOn", 0);
-
         _objectRenderer.SetPropertyBlock(_propertyBlock);
 
         yield return null;
@@ -66,13 +64,11 @@ public class WindowLightingController : MonoBehaviour
     IEnumerator TurnOnLight()
     {
         _objectRenderer.GetPropertyBlock(_propertyBlock);
-
         var milliseconds = _windowSettings.maxTurningOnDelay.ToMinutes() * _dayNightCycleSettings.timeSpeed;
 
         yield return new WaitForSeconds(Random.Range(0, milliseconds) / 1000.0f);
 
         _propertyBlock.SetInteger("_IsLightOn", 1);
-
         _objectRenderer.SetPropertyBlock(_propertyBlock);
 
         yield return null;
