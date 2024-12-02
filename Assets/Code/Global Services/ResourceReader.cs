@@ -12,6 +12,7 @@ public class ResourceReader
         { typeof(WindowLightingSettings), "WindowLighting" },
         { typeof(StreetLampLightingSettings), "StreetLampLighting" },
         { typeof(CinemachineCameraSettings), "CinemachineCamera" },
+        { typeof(PlayerMovementSetting), "PlayerMovement" },
     };
 
     public T ReadSettings<T>() where T : ScriptableObject
