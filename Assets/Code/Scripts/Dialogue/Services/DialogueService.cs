@@ -27,7 +27,7 @@ public class DialogueService
         _dialogueBoxes = new Queue<DialogueBoxData>();
 
         IsOpenDialog = true;
-        _input.Disable();
+        //_input.Disable();
         StartDialogue.Invoke(dialogue);
     }
 
@@ -36,7 +36,7 @@ public class DialogueService
         _dialogueBoxes.Clear();
 
         IsOpenDialog = false;
-        _input.Enable();
+        //_input.Enable();
         CloseDialogue.Invoke();
 
         _cameraService.SetActiveCamera(VirtualCameraType.Player);

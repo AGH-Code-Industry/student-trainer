@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: PlayerMovement
   m_EditorClassIdentifier: 
   movementSpeed: 4
-  rotationSpeed: 360
+  rotationSpeed: 450

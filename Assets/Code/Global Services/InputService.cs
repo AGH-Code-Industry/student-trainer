@@ -3,24 +3,16 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
 
-public class InputService : IInitializable, IDisposable
+public class InputService : IInitializable
 {
-    private InputActionAsset input;
+    public Vector3 globalLookTarget { get; private set; }
+    public Vector2 movementVector { get; private set; }
 
     public void Initialize()
     {
-        input = Resources.Load<GameControlsReference>("input").input;
+        return;
     }
 
-    public void Enable() => input.Enable();
-    public void Disable() => input.Disable();
-    public void SetActive(bool isActive)
-    {
-        if (isActive) Enable();
-        else Disable();
-    }
-
-    public void Dispose()
-    {
-    }
+    public void SetLookTarget(Vector3 _pos) => globalLookTarget = _pos;
+    public void SetMovementVector(Vector2 _vec) => movementVector = _vec;
 }
