@@ -8,9 +8,12 @@ public class InputMediator : MonoBehaviour
 
     Vector3 pos;
 
+    // The height of the plane determines how accurately the player character faces the cursor
+    // ... maybe this isn't the besst solution
     readonly Plane groundPlane = new Plane(Vector3.up, -1);
 
     [Inject] readonly InputService _service;
+    [Inject] readonly PlayerCombatService _combat;
 
     void Start()
     {
@@ -40,9 +43,14 @@ public class InputMediator : MonoBehaviour
         _service.SetMovementVector(input);
     }
 
+    void OnAttack()
+    {
+        _combat.Attack();
+    }
+
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
+        Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(pos, 0.5f);
     }
 }

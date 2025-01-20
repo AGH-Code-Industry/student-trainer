@@ -62,4 +62,9 @@ public class PlayerAnimationController : MonoBehaviour
         _visibleModel.rotation = Quaternion.RotateTowards(_visibleModel.rotation, _currentModelRotation, _movement.GetRotationSpeed() * Time.deltaTime);
         //_visibleModel.eulerAngles = euler;
     }
+
+    public void PlayAnimation(string animName)
+    {
+        _animator.CrossFade(animName, 0.2f);
+    }
 }

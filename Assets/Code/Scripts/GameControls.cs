@@ -53,6 +53,15 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Attack"",
+                    ""type"": ""Button"",
+                    ""id"": ""7750f95d-b067-448b-9d31-5ebfb10f5576"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -187,6 +196,17 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""39b0de7f-dcf9-48a8-8bd3-d952635a000e"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -228,6 +248,11 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
                     ""devicePath"": ""<Keyboard>"",
                     ""isOptional"": false,
                     ""isOR"": false
+                },
+                {
+                    ""devicePath"": ""<Mouse>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
                 }
             ]
         }
@@ -238,6 +263,7 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Scooter = m_Player.FindAction("Scooter", throwIfNotFound: true);
         m_Player_TakeDamage = m_Player.FindAction("TakeDamage", throwIfNotFound: true);
+        m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         // Inventory
         m_Inventory = asset.FindActionMap("Inventory", throwIfNotFound: true);
         m_Inventory_OpenClose = m_Inventory.FindAction("Open/Close", throwIfNotFound: true);
@@ -305,6 +331,7 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Scooter;
     private readonly InputAction m_Player_TakeDamage;
+    private readonly InputAction m_Player_Attack;
     public struct PlayerActions
     {
         private @GameControls m_Wrapper;
@@ -312,6 +339,7 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Scooter => m_Wrapper.m_Player_Scooter;
         public InputAction @TakeDamage => m_Wrapper.m_Player_TakeDamage;
+        public InputAction @Attack => m_Wrapper.m_Player_Attack;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -330,6 +358,9 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
             @TakeDamage.started += instance.OnTakeDamage;
             @TakeDamage.performed += instance.OnTakeDamage;
             @TakeDamage.canceled += instance.OnTakeDamage;
+            @Attack.started += instance.OnAttack;
+            @Attack.performed += instance.OnAttack;
+            @Attack.canceled += instance.OnAttack;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -343,6 +374,9 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
             @TakeDamage.started -= instance.OnTakeDamage;
             @TakeDamage.performed -= instance.OnTakeDamage;
             @TakeDamage.canceled -= instance.OnTakeDamage;
+            @Attack.started -= instance.OnAttack;
+            @Attack.performed -= instance.OnAttack;
+            @Attack.canceled -= instance.OnAttack;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -420,6 +454,7 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnScooter(InputAction.CallbackContext context);
         void OnTakeDamage(InputAction.CallbackContext context);
+        void OnAttack(InputAction.CallbackContext context);
     }
     public interface IInventoryActions
     {

@@ -13,6 +13,7 @@ public class ProjectInstaller : MonoInstaller
         Container.BindInterfacesAndSelfTo<CameraService>().AsSingle();
         Container.BindInterfacesAndSelfTo<BattleService>().AsSingle();
         Container.BindInterfacesAndSelfTo<PlayerMovementService>().AsSingle();
+        Container.BindInterfacesAndSelfTo<PlayerCombatService>().AsSingle();
     }
 
 }
