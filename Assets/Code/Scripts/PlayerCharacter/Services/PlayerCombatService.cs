@@ -7,6 +7,7 @@ public class PlayerCombatService : IInitializable
 {
     int currentStep = 0;
     bool attackInProgress = false;
+    bool bufferAttack = false;
     float lastTime = 0f;
 
     Combo currentCombo;
@@ -23,6 +24,7 @@ public class PlayerCombatService : IInitializable
     {
         currentStep = 0;
         attackInProgress = false;
+        bufferAttack = false;
         lastTime = 0f;
         _settings = _reader.ReadSettings<PlayerCombatSettings>();
 
@@ -47,6 +49,7 @@ public class PlayerCombatService : IInitializable
                 currentCombo = c;
                 currentStep = 0;
                 attackInProgress = false;
+                bufferAttack = false;
                 lastTime = 0f;
             }
         }
@@ -55,7 +58,10 @@ public class PlayerCombatService : IInitializable
     public void Attack()
     {
         if (attackInProgress)
+        {
+            bufferAttack = true;
             return;
+        }
 
         if (_combatInstance == null)
             _combatInstance = Object.FindObjectOfType<PlayerCombatInstance>();
@@ -107,6 +113,13 @@ public class PlayerCombatService : IInitializable
         yield return new WaitForSeconds(toEnd);
 
         attackInProgress = false;
+        // Perform a buffered attack if exists
+        if (bufferAttack)
+        {
+            Attack();
+            bufferAttack = false;
+            yield break;
+        }
 
         yield return new WaitForSeconds(_settings.recovery);
 
