@@ -17,34 +17,18 @@ BlendTree:
     m_DirectBlendParameter: Move_X
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 1395189703230314720, guid: a5290c5d66dbda446becffc25af4881f, type: 3}
-    m_Threshold: 0.25
-    m_Position: {x: 0, y: 1}
-    m_TimeScale: 1
-    m_CycleOffset: 0
-    m_DirectBlendParameter: Move_X
-    m_Mirror: 0
-  - serializedVersion: 2
-    m_Motion: {fileID: 4505450311895319909, guid: a5290c5d66dbda446becffc25af4881f, type: 3}
+    m_Motion: {fileID: -5599002979973759676, guid: a5290c5d66dbda446becffc25af4881f, type: 3}
     m_Threshold: 0.5
-    m_Position: {x: 0, y: -1}
-    m_TimeScale: 0.8
+    m_Position: {x: 0, y: 0}
+    m_TimeScale: 1.25
     m_CycleOffset: 0
     m_DirectBlendParameter: Move_X
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 701305088695040914, guid: a5290c5d66dbda446becffc25af4881f, type: 3}
-    m_Threshold: 0.75
-    m_Position: {x: -1, y: 0}
-    m_TimeScale: 1
-    m_CycleOffset: 0
-    m_DirectBlendParameter: Move_X
-    m_Mirror: 0
-  - serializedVersion: 2
-    m_Motion: {fileID: 6051821925488956567, guid: a5290c5d66dbda446becffc25af4881f, type: 3}
+    m_Motion: {fileID: 1395189703230314720, guid: a5290c5d66dbda446becffc25af4881f, type: 3}
     m_Threshold: 1
-    m_Position: {x: 1, y: 0}
-    m_TimeScale: 1
+    m_Position: {x: 0, y: 1}
+    m_TimeScale: 1.5
     m_CycleOffset: 0
     m_DirectBlendParameter: Move_X
     m_Mirror: 0
@@ -54,7 +38,7 @@ BlendTree:
   m_MaxThreshold: 1
   m_UseAutomaticThresholds: 1
   m_NormalizedBlendValues: 0
-  m_BlendType: 1
+  m_BlendType: 0
 --- !u!1101 &-9072895641038940528
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -584,7 +568,7 @@ AnimatorStateMachine:
     m_Position: {x: 1100, y: 420, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1483408469347178083}
-    m_Position: {x: 290, y: 80, z: 0}
+    m_Position: {x: 300, y: 80, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -1099,7 +1083,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Roll
-  m_Speed: 1
+  m_Speed: 1.5
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 4322191973629059902}

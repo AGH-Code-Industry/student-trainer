@@ -5,14 +5,27 @@ using Zenject;
 
 public class InputService : IInitializable
 {
-    public Vector3 globalLookTarget { get; private set; }
-    public Vector2 movementVector { get; private set; }
+
+    #region Player Input
+    public event Action<Vector3> GlobalLookTargetChange;
+    private Vector3 _globalLookTarget;
+    public Vector3 GlobalLookTarget
+    {
+        get => _globalLookTarget;
+        set
+        {
+            _globalLookTarget = value;
+            GlobalLookTargetChange?.Invoke(value);
+        }
+    }
+
+    public Vector2 movementVector { get; set; }
+    public Vector3 MouseDownPosition { get; set; }
+
+    #endregion
 
     public void Initialize()
     {
         return;
     }
-
-    public void SetLookTarget(Vector3 _pos) => globalLookTarget = _pos;
-    public void SetMovementVector(Vector2 _vec) => movementVector = _vec;
 }

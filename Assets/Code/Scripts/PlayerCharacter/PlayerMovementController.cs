@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
-        
+
     }
 
     private void Start()
@@ -24,12 +24,13 @@ public class PlayerMovement : MonoBehaviour
         _currentVector = _service.GetMovementVector();
         if (_currentVector != Vector3.zero)
         {
+            transform.rotation = Quaternion.LookRotation(_currentVector);
             _controller.Move(_currentVector * Time.deltaTime);
         }
     }
 
     private void OnDestroy()
     {
-        
+
     }
 }

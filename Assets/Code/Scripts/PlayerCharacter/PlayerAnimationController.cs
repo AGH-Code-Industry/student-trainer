@@ -14,10 +14,13 @@ public class PlayerAnimationController : MonoBehaviour
     [SerializeField] float _interpolationSpeed = 5f;
 
     [Inject] readonly PlayerMovementService _movement;
+    [Inject] readonly EventBus _eventBus;
+    [Inject] readonly InputService _inputService;
 
     void Start()
     {
-        
+        _eventBus.Subscribe<PlayerAttack>(OnAttack);
+        _eventBus.Subscribe<PlayerDodge>(OnDodge);
     }
 
     void Update()
@@ -47,24 +50,55 @@ public class PlayerAnimationController : MonoBehaviour
         float angle = _currentModelRotation.eulerAngles.y;
         Vector2 animVector = GetAnimationVector(_currentMovementVector, angle);
 
-        _animator.SetFloat("Move_X", animVector.x);
-        _animator.SetFloat("Move_Y", animVector.y);
+        var runOrWalk = _movement.IsRunning ? 1 : 0.5f;
+        _animator.SetFloat("Move_X", animVector.magnitude > 0 ? runOrWalk : 0);
+        //_animator.SetFloat("Move_Y", animVector.y);
+    }
+
+    private void OnDodge(PlayerDodge playerDodge)
+    {
+        if (playerDodge.ctx.started)
+        {
+            _animator.Play("Roll");
+        }
+    }
+
+    private void OnAttack(PlayerAttack playerAttack)
+    {
+        if (playerAttack.ctx.started)
+        {
+            FaceMouse();
+        }
     }
 
     void FaceMouse()
     {
-        Vector3 direction = _movement.GetLookVector() - transform.position;
-        Quaternion lookRot = Quaternion.LookRotation(direction, _visibleModel.up);
-        Vector3 euler = lookRot.eulerAngles;
-        euler.x = 0; euler.z = 0;
-        _currentModelRotation = Quaternion.Euler(euler);
+        var lookVector = _inputService.MouseDownPosition;
 
-        _visibleModel.rotation = Quaternion.RotateTowards(_visibleModel.rotation, _currentModelRotation, _movement.GetRotationSpeed() * Time.deltaTime);
+        var direction = (lookVector - transform.position).normalized;
+        direction.y = 0;
+
+        transform.rotation = Quaternion.LookRotation(direction);
+
+        // Vector3 direction = lookVector - transform.position;
+        // Quaternion lookRot = Quaternion.LookRotation(direction, _visibleModel.up);
+        // Vector3 euler = lookRot.eulerAngles;
+        // euler.x = 0; euler.z = 0;
+        // _currentModelRotation = Quaternion.Euler(euler);
+
+        // _visibleModel.rotation = _currentModelRotation;
         //_visibleModel.eulerAngles = euler;
     }
 
     public void PlayAnimation(string animName)
     {
         _animator.CrossFade(animName, 0.2f);
+    }
+
+    void OnDestroy()
+    {
+        _eventBus.Unsubscribe<PlayerAttack>(OnAttack);
+        _eventBus.Unsubscribe<PlayerDodge>(OnDodge);
+
     }
 }

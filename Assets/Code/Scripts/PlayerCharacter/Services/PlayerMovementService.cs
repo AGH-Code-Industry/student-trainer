@@ -1,22 +1,29 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-public class PlayerMovementService : IInitializable
+public class PlayerMovementService : IInitializable, IDisposable
 {
     public bool frozen { get; private set; }
+    public bool IsRunning { get; private set; }
 
     Vector3 _lastLookTarget = Vector3.zero;
 
-    [Inject] ResourceReader _reader;
-    PlayerMovementSettings _settings;
-
+    [Inject] readonly ResourceReader _reader;
+    [Inject] readonly EventBus _eventBus;
     [Inject] readonly InputService _input;
+
+    private PlayerMovementSettings _settings;
+    private Vector2 _movementVector;
 
     public void Initialize()
     {
         _settings = _reader.ReadSettings<PlayerMovementSettings>();
+
+        _eventBus.Subscribe<PlayerMove>(OnMove);
+        _eventBus.Subscribe<PlayerRun>(OnRun);
     }
 
     public Vector3 GetMovementVector()
@@ -24,9 +31,9 @@ public class PlayerMovementService : IInitializable
         if (frozen)
             return Vector3.zero;
 
-        Vector2 vec = _input.movementVector;
+        Vector2 vec = _movementVector;
         Vector3 movement = new Vector3(vec.x, 0, vec.y);
-        movement *= _settings.movementSpeed;
+        movement *= IsRunning ? _settings.runSpeed : _settings.walkSpeed;
 
         // Leaves room for modifying the vector
         // For example: wearing armor may reduce speed, being drunk may add variation to the vector, etc.
@@ -37,7 +44,7 @@ public class PlayerMovementService : IInitializable
     public Vector3 GetLookVector()
     {
         if (!frozen)
-            _lastLookTarget = _input.globalLookTarget;
+            _lastLookTarget = _input.GlobalLookTarget;
 
         return _lastLookTarget;
     }
@@ -47,4 +54,21 @@ public class PlayerMovementService : IInitializable
     public bool SetFreeze(bool _state) => frozen = _state;
     public bool Freeze() => SetFreeze(true);
     public bool Unfreeze() => SetFreeze(false);
+
+    private void OnMove(PlayerMove playerMove)
+    {
+        _movementVector = playerMove.move;
+    }
+
+    private void OnRun(PlayerRun playerRun)
+    {
+        if (playerRun.ctx.started || playerRun.ctx.performed) IsRunning = true;
+        if (playerRun.ctx.canceled) IsRunning = false;
+    }
+
+    public void Dispose()
+    {
+        _eventBus.Unsubscribe<PlayerMove>(OnMove);
+        _eventBus.Unsubscribe<PlayerRun>(OnRun);
+    }
 }

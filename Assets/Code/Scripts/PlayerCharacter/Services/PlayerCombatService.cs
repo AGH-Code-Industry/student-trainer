@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
+using Object = UnityEngine.Object;
 
-public class PlayerCombatService : IInitializable
+public class PlayerCombatService : IInitializable, IDisposable
 {
     int currentStep = 0;
     bool attackInProgress = false;
@@ -18,6 +20,7 @@ public class PlayerCombatService : IInitializable
 
     [Inject] readonly PlayerMovementService _movement;
     [Inject] readonly ResourceReader _reader;
+    [Inject] readonly EventBus _eventBus;
     PlayerCombatSettings _settings;
 
     public void Initialize()
@@ -27,6 +30,8 @@ public class PlayerCombatService : IInitializable
         bufferAttack = false;
         lastTime = 0f;
         _settings = _reader.ReadSettings<PlayerCombatSettings>();
+
+        _eventBus.Subscribe<PlayerAttack>(OnAttack);
 
         /*ComboPart u1 = new ComboPart("CharacterArmature|Punch_Right", 25f);
         ComboPart u1 = new ComboPart("Punch_Right", 0.8f, 0.43f, 10, 1f);
@@ -41,9 +46,9 @@ public class PlayerCombatService : IInitializable
 
     public void ChangeCombo(string newComboName)
     {
-        foreach(Combo c in availableCombos)
+        foreach (Combo c in availableCombos)
         {
-            if(c.name == newComboName)
+            if (c.name == newComboName)
             {
                 // Change combo and reset all timing parameters
                 currentCombo = c;
@@ -53,6 +58,11 @@ public class PlayerCombatService : IInitializable
                 lastTime = 0f;
             }
         }
+    }
+
+    private void OnAttack(PlayerAttack playerAttack)
+    {
+        if (playerAttack.ctx.performed) Attack();
     }
 
     public void Attack()
@@ -65,19 +75,19 @@ public class PlayerCombatService : IInitializable
 
         if (_combatInstance == null)
             _combatInstance = Object.FindObjectOfType<PlayerCombatInstance>();
-        if(_animationController == null)
+        if (_animationController == null)
             _animationController = Object.FindObjectOfType<PlayerAnimationController>();
 
         // How much time has passed since the last attack was initiated
         float diff = Time.time - lastTime;
         float lastAttackDuration = currentCombo.parts[currentStep].duration;
 
-        if(diff <= lastAttackDuration + _settings.comboTime)
+        if (diff <= lastAttackDuration + _settings.comboTime)
         {
             // Valid timing, continue combo
             currentStep++;
             // If the combo reaches the end, start anew
-            if(currentStep == currentCombo.parts.Length)
+            if (currentStep == currentCombo.parts.Length)
             {
                 currentStep = 0;
             }
@@ -124,6 +134,11 @@ public class PlayerCombatService : IInitializable
         yield return new WaitForSeconds(_settings.recovery);
 
         _movement.Unfreeze();
+    }
+
+    public void Dispose()
+    {
+        _eventBus.Unsubscribe<PlayerAttack>(OnAttack);
     }
 }
 

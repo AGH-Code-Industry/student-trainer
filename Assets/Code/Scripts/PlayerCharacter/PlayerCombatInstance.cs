@@ -12,12 +12,12 @@ public class PlayerCombatInstance : MonoBehaviour
 
     void Start()
     {
-        
+
     }
 
     void Update()
     {
-        
+
     }
 
     public void Attack(float amount, float range)
