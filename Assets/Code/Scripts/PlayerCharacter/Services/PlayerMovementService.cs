@@ -8,6 +8,7 @@ public class PlayerMovementService : IInitializable, IDisposable
 {
     public bool frozen { get; private set; }
     public bool IsRunning { get; private set; }
+    public Vector3 PlayerPosition { get; set; }
 
     Vector3 _lastLookTarget = Vector3.zero;
 

@@ -27,8 +27,8 @@ public class PlayerAnimationController : MonoBehaviour
     {
         Animate();
 
-        if (!_movement.frozen)
-            FaceMouse();
+        // if (!_movement.frozen)
+        //     FaceMouse();
     }
 
     Vector2 GetAnimationVector(Vector3 movement, float rotation)

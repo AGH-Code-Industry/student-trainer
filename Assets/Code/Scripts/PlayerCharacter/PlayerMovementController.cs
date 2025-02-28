@@ -21,6 +21,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        _service.PlayerPosition = transform.position;
+
         _currentVector = _service.GetMovementVector();
         if (_currentVector != Vector3.zero)
         {

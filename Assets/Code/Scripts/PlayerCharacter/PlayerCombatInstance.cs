@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // An in-scene "representative" used by the Combat Service to perform attacks and coroutines
-public class PlayerCombatInstance : MonoBehaviour
+public class PlayerCombatInstance : MonoBehaviour, IDamageable
 {
     [SerializeField]
     private Transform attackOrigin;
@@ -36,5 +36,10 @@ public class PlayerCombatInstance : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawLine(attackOrigin.position, hit.point);
+    }
+
+    public void TakeDamage(float amount)
+    {
+        Debug.Log("Dostałem");
     }
 }
