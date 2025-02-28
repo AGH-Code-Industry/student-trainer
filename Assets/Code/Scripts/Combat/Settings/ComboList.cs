@@ -2,12 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "PlayerCombat", menuName = "Settings/Player Combat Settings")]
-public class PlayerCombatSettings : ScriptableObject
+[CreateAssetMenu(fileName = "ComboList", menuName = "Settings/Combo List")]
+public class ComboList : ScriptableObject
 {
-    // Todo: Add a list of combos with editable variables for the designers
-
-    public Combo[] combos;
+    public ComboSystem.Combo[] combos;
 
     [Tooltip("How quickly the player needs to press the LMB after the current attack ends to continue the combo.")]
     public float comboTime = 0.5f;
