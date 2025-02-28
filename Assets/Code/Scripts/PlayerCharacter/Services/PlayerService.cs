@@ -1,11 +1,22 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-public class PlayerMovementService : IInitializable, IDisposable
+public class PlayerService : IInitializable, IDisposable
 {
+    public readonly float MaxHealth = 100;
+    public event Action<float> HealthChange;
+    private float _health = 100;
+    public float Health
+    {
+        get { return _health; }
+        set
+        {
+            _health = Math.Clamp(value, 0, MaxHealth);
+            HealthChange?.Invoke(value);
+        }
+    }
+
     public bool frozen { get; private set; }
     public bool IsRunning { get; private set; }
     public Vector3 PlayerPosition { get; set; }

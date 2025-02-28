@@ -13,7 +13,7 @@ public class PlayerAnimationController : MonoBehaviour
     float _currentX = 0, _currentY = 0;
     [SerializeField] float _interpolationSpeed = 5f;
 
-    [Inject] readonly PlayerMovementService _movement;
+    [Inject] readonly PlayerService _movement;
     [Inject] readonly EventBus _eventBus;
     [Inject] readonly InputService _inputService;
 

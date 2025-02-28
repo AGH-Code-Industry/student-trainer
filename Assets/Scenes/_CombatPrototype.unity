@@ -962,6 +962,11 @@ RectTransform:
   m_AnchoredPosition: {x: 960, y: 540}
   m_SizeDelta: {x: 1920, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!137 &103192073 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 4065491158224280353, guid: 6975b6cb568931f4eae0faa6c32b3ff8, type: 3}
+  m_PrefabInstance: {fileID: 644501685}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &113810596
 GameObject:
   m_ObjectHideFlags: 0
@@ -2910,6 +2915,7 @@ GameObject:
   - component: {fileID: 363149363}
   - component: {fileID: 363149362}
   - component: {fileID: 363149361}
+  - component: {fileID: 363149364}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -2995,6 +3001,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 363149359}
   m_CullTransparentMesh: 1
+--- !u!114 &363149364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 363149359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 23487df5b8b126a40a754b4f70cb6c12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _material: {fileID: 2100000, guid: 3e4982423cd3c3e4ea629acccaa375a6, type: 2}
 --- !u!1 &380869904
 GameObject:
   m_ObjectHideFlags: 0
@@ -3185,6 +3204,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 386951286}
   m_CullTransparentMesh: 1
+--- !u!137 &390045675 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -2209175801964270032, guid: 6975b6cb568931f4eae0faa6c32b3ff8, type: 3}
+  m_PrefabInstance: {fileID: 644501685}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &402879874
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5135,6 +5159,18 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -2209175801964270032, guid: 6975b6cb568931f4eae0faa6c32b3ff8, type: 3}
+      propertyPath: m_UpdateWhenOffscreen
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -2209175801964270032, guid: 6975b6cb568931f4eae0faa6c32b3ff8, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -2209175801964270032, guid: 6975b6cb568931f4eae0faa6c32b3ff8, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: a23180c084675674fb7faca788512215, type: 2}
     - target: {fileID: 919132149155446097, guid: 6975b6cb568931f4eae0faa6c32b3ff8, type: 3}
       propertyPath: m_Name
       value: Beach
@@ -8266,6 +8302,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackOrigin: {fileID: 470203479}
+  renderers:
+  - {fileID: 1232138681}
+  - {fileID: 970037846}
+  - {fileID: 1228169319}
+  - {fileID: 1013867312}
 --- !u!114 &1118514600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12397,9 +12438,11 @@ MonoBehaviour:
   agent: {fileID: 0}
   animator: {fileID: 0}
   health: 100
-  renderers: []
-  normalMat: {fileID: 0}
-  damageMat: {fileID: 0}
+  renderers:
+  - {fileID: 390045675}
+  - {fileID: 2139390411}
+  - {fileID: 103192073}
+  - {fileID: 1837701348}
 --- !u!136 &1657072728
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -13807,6 +13850,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1832043945}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!137 &1837701348 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -4235584731777377238, guid: 6975b6cb568931f4eae0faa6c32b3ff8, type: 3}
+  m_PrefabInstance: {fileID: 644501685}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1838802460
 GameObject:
   m_ObjectHideFlags: 0
@@ -15834,6 +15882,11 @@ Transform:
   - {fileID: 1893527770}
   m_Father: {fileID: 672446726}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!137 &2139390411 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 4376784602014467152, guid: 6975b6cb568931f4eae0faa6c32b3ff8, type: 3}
+  m_PrefabInstance: {fileID: 644501685}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

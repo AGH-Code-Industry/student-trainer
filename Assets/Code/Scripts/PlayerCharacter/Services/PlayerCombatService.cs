@@ -18,7 +18,7 @@ public class PlayerCombatService : IInitializable, IDisposable
     PlayerAnimationController _animationController;
     PlayerCombatInstance _combatInstance;
 
-    [Inject] readonly PlayerMovementService _movement;
+    [Inject] readonly PlayerService _movement;
     [Inject] readonly ResourceReader _reader;
     [Inject] readonly EventBus _eventBus;
     PlayerCombatSettings _settings;

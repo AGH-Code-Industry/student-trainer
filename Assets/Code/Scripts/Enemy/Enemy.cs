@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using Zenject;
@@ -7,15 +8,14 @@ public class Enemy : MonoBehaviour, IDamageable
 {
     public const int PLAYER_IN_RANGE_DISTANCE = 10;
 
-    public NavMeshAgent agent;
-    public Animator animator;
+    [HideInInspector] public NavMeshAgent agent;
+    [HideInInspector] public Animator animator;
     public float health = 100;
 
     public Renderer[] renderers;
-    public Material normalMat, damageMat;
 
     private EnemyState currentState;
-    [Inject] public readonly PlayerMovementService playerMovementService;
+    [Inject] public readonly PlayerService playerMovementService;
 
     private void Start()
     {
@@ -47,6 +47,13 @@ public class Enemy : MonoBehaviour, IDamageable
         return Vector3.Distance(transform.position, playerMovementService.PlayerPosition) < 2f;
     }
 
+    public IEnumerator PerformAttack()
+    {
+        animator.Play("Punch");
+        yield return new WaitForSeconds(0.43f);
+        Attack();
+    }
+
     public void Attack()
     {
         Debug.Log("Enemy Punch!");
@@ -55,11 +62,12 @@ public class Enemy : MonoBehaviour, IDamageable
         if (!inRange) return;
 
         IDamageable damageComponent = hit.transform.root.GetComponent<IDamageable>();
-        damageComponent?.TakeDamage(1);
+        damageComponent?.TakeDamage(10);
     }
 
     public void TakeDamage(float amount)
     {
+        StartCoroutine(FlashDamage());
         health -= amount;
         if (health <= 0)
         {
@@ -69,16 +77,24 @@ public class Enemy : MonoBehaviour, IDamageable
 
     IEnumerator FlashDamage()
     {
+        Dictionary<Material, Color> materialColors = new();
         foreach (Renderer r in renderers)
         {
-            r.material = damageMat;
+            foreach (Material material in r.materials)
+            {
+                materialColors.Add(material, material.color);
+                material.color = Color.red;
+            }
         }
 
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.1f);
 
         foreach (Renderer r in renderers)
         {
-            r.material = normalMat;
+            foreach (Material material in r.materials)
+            {
+                material.color = materialColors[material];
+            }
         }
     }
 

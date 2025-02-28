@@ -7,7 +7,7 @@ public class PlayerMovement : MonoBehaviour
     CharacterController _controller;
     Vector3 _currentVector = Vector3.zero;
 
-    [Inject] readonly PlayerMovementService _service;
+    [Inject] readonly PlayerService _service;
 
     private void Awake()
     {

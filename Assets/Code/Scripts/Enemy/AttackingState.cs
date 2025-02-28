@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class AttackingState : EnemyState
@@ -22,11 +23,15 @@ public class AttackingState : EnemyState
                 return;
             }
 
-            enemy.Attack();
-            enemy.animator.Play("Punch");
+            enemy.StartCoroutine(enemy.PerformAttack());
+          
             lastAttackTime = Time.time;
         }
     }
 
     public override void Exit() { }
+
+
+
+
 }
