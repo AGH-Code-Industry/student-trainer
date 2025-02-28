@@ -1,0 +1,5 @@
+From the "_CombatPrototype" scene:
+- Player (obviously)
+- PlayerSetup
+- _PlayerInput
+- Main Camera (methinks at least)
