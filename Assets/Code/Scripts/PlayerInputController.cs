@@ -29,4 +29,10 @@ public class PlayerInputController : MonoBehaviour
                 _eventBus.Publish(new PlayerDodge(context)); break;
         }
     }
+
+    void OnDisable()
+    {
+        _input.onActionTriggered -= OnAction;
+
+    }
 }

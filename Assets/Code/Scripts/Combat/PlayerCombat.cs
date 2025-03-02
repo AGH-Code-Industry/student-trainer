@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Zenject;
 
@@ -38,18 +39,12 @@ public class PlayerCombat : MonoBehaviour, IDamageable
         eventBus.Subscribe<PlayerAttack>(OnAttack);
 
         // Save renderer materials
-        foreach (Renderer r in renderers)
-        {
-            foreach (Material material in r.materials)
-            {
-                _materialColors.Add(material, material.color);
-            }
-        }
+        renderers.SelectMany(r => r.materials).ToList().ForEach(m => _materialColors.Add(m, m.color));
     }
 
     void Update()
     {
-        
+
     }
 
     private void OnAttack(PlayerAttack playerAttack)
@@ -93,23 +88,9 @@ public class PlayerCombat : MonoBehaviour, IDamageable
 
     IEnumerator FlashDamage()
     {
-        foreach (Renderer r in renderers)
-        {
-            foreach (Material material in r.materials)
-            {
-                material.color = Color.red;
-            }
-        }
-
+        renderers.SelectMany(r => r.materials).ToList().ForEach(m => m.color = Color.red);
         yield return new WaitForSeconds(0.1f);
-
-        foreach (Renderer r in renderers)
-        {
-            foreach (Material material in r.materials)
-            {
-                material.color = _materialColors[material];
-            }
-        }
+        renderers.SelectMany(r => r.materials).ToList().ForEach(m => m.color = _materialColors[m]);
     }
 
     public void TakeDamage(float amount)

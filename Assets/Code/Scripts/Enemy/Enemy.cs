@@ -57,6 +57,8 @@ public class Enemy : MonoBehaviour, IDamageable
     public void Attack()
     {
         Debug.Log("Enemy Punch!");
+        var direction = (playerMovementService.PlayerPosition - transform.position).normalized;
+        transform.rotation = Quaternion.LookRotation(direction);
         Ray ray = new Ray(transform.position, transform.forward);
         bool inRange = Physics.Raycast(ray, out var hit, 1);
         if (!inRange) return;
