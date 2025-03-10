@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47b9b0f8f5647df429a3d86460df4d5b, type: 3}
+  m_Name: StudentDebilSettings
+  m_EditorClassIdentifier: 
+  health: 100
+  moveSpeed: 5
+  attacks: {fileID: 11400000, guid: 9db3dedd4c3253d45b7ced11415418f2, type: 2}
+  detectionRange: 10
+  detectionFov: 80

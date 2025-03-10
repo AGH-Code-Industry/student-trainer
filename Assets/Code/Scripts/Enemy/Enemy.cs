@@ -6,11 +6,18 @@ using Zenject;
 
 public class Enemy : MonoBehaviour, IDamageable
 {
-    public const int PLAYER_IN_RANGE_DISTANCE = 10;
+    const float ANIMATION_MIX_SPEED = 0.2f;
+
+    public GenericEnemySettings settings;
+    public AnimationSet animSet;
+
+    // Hold the transform of the actual body mesh, that can be influenced by animations
+    public Transform bodyTransform;
+    public Transform attackOrigin;
 
     [HideInInspector] public NavMeshAgent agent;
     [HideInInspector] public Animator animator;
-    public float health = 100;
+    private float health;
 
     public Renderer[] renderers;
 
@@ -21,6 +28,9 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+
+        agent.speed = settings.moveSpeed;
+        health = settings.health;
 
         ChangeState(new IdleState(this));
     }
@@ -37,43 +47,35 @@ public class Enemy : MonoBehaviour, IDamageable
         currentState.Enter();
     }
 
-    public bool PlayerInRange()
+    public void Attack(float damage, float range)
     {
-        return Vector3.Distance(transform.position, playerMovementService.PlayerPosition) < 10f;
-    }
-
-    public bool InAttackRange()
-    {
-        return Vector3.Distance(transform.position, playerMovementService.PlayerPosition) < 2f;
-    }
-
-    public IEnumerator PerformAttack()
-    {
-        animator.Play("Punch");
-        yield return new WaitForSeconds(0.43f);
-        Attack();
-    }
-
-    public void Attack()
-    {
-        Debug.Log("Enemy Punch!");
         var direction = (playerMovementService.PlayerPosition - transform.position).normalized;
         transform.rotation = Quaternion.LookRotation(direction);
         Ray ray = new Ray(transform.position, transform.forward);
-        bool inRange = Physics.Raycast(ray, out var hit, 1);
+        bool inRange = Physics.Raycast(ray, out RaycastHit hit, range);
         if (!inRange) return;
 
         IDamageable damageComponent = hit.transform.root.GetComponent<IDamageable>();
-        damageComponent?.TakeDamage(10);
+        damageComponent?.TakeDamage(damage);
     }
 
     public void TakeDamage(float amount)
     {
+        if (currentState.GetType() == typeof(DeadState))
+            return;
+
         StartCoroutine(FlashDamage());
         health -= amount;
         if (health <= 0)
         {
             ChangeState(new DeadState(this));
+        }
+        else
+        {
+            if(currentState.GetType() == typeof(IdleState))
+            {
+                ChangeState(new ChasingState(this));
+            }
         }
     }
 
@@ -100,11 +102,8 @@ public class Enemy : MonoBehaviour, IDamageable
         }
     }
 
-    public void Die()
+    public void PlayAnimation(string name)
     {
-        Debug.Log("Enemy is Dead!");
-        agent.isStopped = true;
-        animator.Play("Death");
-        Destroy(gameObject, 2f);
+        animator.CrossFade(name, ANIMATION_MIX_SPEED);
     }
 }

@@ -15,6 +15,7 @@ public class ComboSystem
 
     ComboList comboList;
 
+    // Mediator script
     MonoBehaviour mediator;
     Coroutine lastCoroutine = null;
 
@@ -22,7 +23,10 @@ public class ComboSystem
     public Action<string> onAttackStart;
     // Invoked when the attack's damaging action should take place, passes damage and range as arguments
     public Action<float, float> onAttackPerformed;
-    public Action onAttackEnd;
+    // Invoked after attack animation ends. Passes true as an argument if this attack was the end of a combo
+    public Action<bool> onAttackEnd;
+    // Invoked when recovery time is up
+    public Action onRecoveryEnd;
 
     public ComboSystem(ComboList newList, string defaultCombo, MonoBehaviour mediatorClass)
     {
@@ -52,6 +56,17 @@ public class ComboSystem
                 lastTime = 0f;
             }
         }
+    }
+
+    public bool HasCombo(string comboName)
+    {
+        foreach(Combo c in availableCombos)
+        {
+            if (c.name == comboName)
+                return true;
+        }
+
+        return false;
     }
 
     public void Attack()
@@ -105,6 +120,8 @@ public class ComboSystem
         yield return new WaitForSeconds(toEnd);
 
         attackInProgress = false;
+        bool comboEnd = currentStep == currentCombo.parts.Length - 1;
+        onAttackEnd?.Invoke(comboEnd);
         // Perform a buffered attack if exists
         if (bufferAttack)
         {
@@ -115,7 +132,7 @@ public class ComboSystem
 
         yield return new WaitForSeconds(comboList.recovery);
 
-        onAttackEnd?.Invoke();
+        onRecoveryEnd?.Invoke();
     }
 
     [System.Serializable]

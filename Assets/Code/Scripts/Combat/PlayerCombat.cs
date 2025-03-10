@@ -32,7 +32,7 @@ public class PlayerCombat : MonoBehaviour, IDamageable
         // Subscribe to ComboSystem's events
         comboSystem.onAttackStart += AttackStarted;
         comboSystem.onAttackPerformed += AttackPerformed;
-        comboSystem.onAttackEnd += AttackEnded;
+        comboSystem.onRecoveryEnd += RecoveryEnded;
 
         animationController = GetComponent<PlayerAnimationController>();
 
@@ -77,7 +77,7 @@ public class PlayerCombat : MonoBehaviour, IDamageable
             damageComponent.TakeDamage(damage);
     }
 
-    void AttackEnded()
+    void RecoveryEnded()
     {
         playerService.Unfreeze();
     }

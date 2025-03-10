@@ -7,8 +7,18 @@ public class ComboList : ScriptableObject
 {
     public ComboSystem.Combo[] combos;
 
-    [Tooltip("How quickly the player needs to press the LMB after the current attack ends to continue the combo.")]
+    [Tooltip("How quickly another attack needs to be started to maintain the combo.")]
     public float comboTime = 0.5f;
-    [Tooltip("Additional time after an attack ends until the player can move again.")]
+    [Tooltip("Additional time after an attack animation ends, that dictates when the actual attack ends.")]
     public float recovery = 0.3f;
+
+    [Tooltip("Dictates the chances a combo has for being picked (applicable only to enemies)")]
+    public ComboWeight[] weights;
+}
+
+[System.Serializable]
+public struct ComboWeight
+{
+    public string comboName;
+    public float weight;
 }
