@@ -16,6 +16,14 @@ public class ResourceReader
         { typeof(ComboList), "PlayerComboList"}
     };
 
+    public IEnumerable<T> ReadAllSettings<T>() where T : ScriptableObject
+    {
+        var settings = Resources.LoadAll<T>(path[typeof(T)]);
+        if (settings == null)
+            throw new FileLoadException($"The {typeof(T)} setting named {path[typeof(T)]} could not be found in the Resource folder.");
+        return settings;
+    }
+
     public T ReadSettings<T>() where T : ScriptableObject
     {
         var settings = Resources.Load<T>(path[typeof(T)]);
