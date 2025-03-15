@@ -13,7 +13,7 @@ public class ComboSystem
     Combo currentCombo;
     Combo[] availableCombos;
 
-    ComboList comboList;
+    public ComboList comboList { get; private set; }
 
     // Mediator script
     MonoBehaviour mediator;
@@ -40,6 +40,21 @@ public class ComboSystem
         ChangeCombo(defaultCombo);
 
         mediator = mediatorClass;
+    }
+
+    public float GetMinAttackRange()
+    {
+        float minRange = availableCombos[0].parts[0].range;
+
+        foreach(Combo combo in availableCombos)
+        {
+            foreach(ComboPart part in combo.parts)
+            {
+                minRange = Math.Min(minRange, part.range);
+            }
+        }
+
+        return minRange;
     }
 
     public void ChangeCombo(string newComboName)

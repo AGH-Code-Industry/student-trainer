@@ -7,6 +7,9 @@ using Zenject;
 public class Enemy : MonoBehaviour, IDamageable
 {
     const float ANIMATION_MIX_SPEED = 0.2f;
+    // NavMeshAgent's stoppingDistance seems to work really weird. Setting it to 1 causes the AI to stop directly
+    // at the player's position,so it needs to be offset a bit, so it doesn't ram straight into the player.
+    const float STOPPING_DISTANCE_OFFSET = 0.5f;
 
     public GenericEnemySettings settings;
     public AnimationSet animSet;
@@ -17,6 +20,8 @@ public class Enemy : MonoBehaviour, IDamageable
 
     [HideInInspector] public NavMeshAgent agent;
     [HideInInspector] public Animator animator;
+    [HideInInspector] public ComboSystem comboSystem = null;
+    [HideInInspector] public float attackRange;
     private float health;
 
     public Renderer[] renderers;
@@ -30,9 +35,27 @@ public class Enemy : MonoBehaviour, IDamageable
         animator = GetComponent<Animator>();
 
         agent.speed = settings.moveSpeed;
+        agent.acceleration = Mathf.Floor(Mathf.Pow(settings.moveSpeed, 1.85f));
+
+        ComboList comboList = settings.attacks;
+        // Select the first combo, doesn't really matter
+        string defaultCombo = comboList.combos[0].name;
+        MonoBehaviour mediator = this;
+        comboSystem = new ComboSystem(comboList, defaultCombo, mediator);
+
+        float minAttackRange = comboSystem.GetMinAttackRange();
+        SetAttackRange(minAttackRange);
+
         health = settings.health;
 
         ChangeState(new IdleState(this));
+    }
+
+    public void SetAttackRange(float newRange)
+    {
+        agent.stoppingDistance = newRange + STOPPING_DISTANCE_OFFSET;
+
+        attackRange = newRange + STOPPING_DISTANCE_OFFSET;
     }
 
     private void Update()
@@ -51,11 +74,30 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         var direction = (playerMovementService.PlayerPosition - transform.position).normalized;
         transform.rotation = Quaternion.LookRotation(direction);
-        Ray ray = new Ray(transform.position, transform.forward);
+
+        IDamageable damageComponent;
+
+        // If the attackOrigin object is inside an enemy, this will ensure that it still deals damage
+        Collider[] overlappingColliders = Physics.OverlapSphere(attackOrigin.position, 0.25f);
+        foreach(Collider col in overlappingColliders)
+        {
+            // Avoid dealing damage to self
+            if (col.transform.root == transform.root)
+                continue;
+
+            damageComponent = col.transform.root.GetComponent<IDamageable>();
+            if(damageComponent != null)
+            {
+                damageComponent.TakeDamage(damage);
+                return;
+            }
+        }
+
+        Ray ray = new Ray(attackOrigin.position, attackOrigin.forward);
         bool inRange = Physics.Raycast(ray, out RaycastHit hit, range);
         if (!inRange) return;
 
-        IDamageable damageComponent = hit.transform.root.GetComponent<IDamageable>();
+        damageComponent = hit.transform.root.GetComponent<IDamageable>();
         damageComponent?.TakeDamage(damage);
     }
 

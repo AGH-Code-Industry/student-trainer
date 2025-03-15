@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class ChasingState : EnemyState
 {
-    const float ATTACK_RANGE = 1.7f;
-
     public ChasingState(Enemy enemy) : base(enemy) { }
 
     public override void Enter()
@@ -35,6 +33,6 @@ public class ChasingState : EnemyState
         Vector3 myPos = enemy.transform.position;
         Vector3 playerPos = enemy.playerMovementService.PlayerPosition;
 
-        return Vector3.Distance(myPos, playerPos) < ATTACK_RANGE;
+        return Vector3.Distance(myPos, playerPos) <= enemy.attackRange;
     }
 }

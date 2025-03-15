@@ -67,14 +67,31 @@ public class PlayerCombat : MonoBehaviour, IDamageable
 
     void AttackPerformed(float damage, float range)
     {
+        IDamageable damageComponent;
+
+        // If the attackOrigin object is inside an enemy, this will ensure that it still deals damage
+        Collider[] overlappingColliders = Physics.OverlapSphere(attackOrigin.position, 0.25f);
+        foreach (Collider col in overlappingColliders)
+        {
+            // Avoid dealing damage to self
+            if (col.transform.root == transform.root)
+                continue;
+
+            damageComponent = col.transform.root.GetComponent<IDamageable>();
+            if (damageComponent != null)
+            {
+                damageComponent.TakeDamage(damage);
+                return;
+            }
+        }
+
         Ray ray = new Ray(attackOrigin.position, attackOrigin.forward);
         bool inRange = Physics.Raycast(ray, out hit, range);
         if (!inRange)
             return;
 
-        IDamageable damageComponent = hit.transform.root.GetComponent<IDamageable>();
-        if (damageComponent != null)
-            damageComponent.TakeDamage(damage);
+        damageComponent = hit.transform.root.GetComponent<IDamageable>();
+        damageComponent?.TakeDamage(damage);
     }
 
     void RecoveryEnded()

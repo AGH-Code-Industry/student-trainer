@@ -12,7 +12,7 @@ public class DeadState : EnemyState
         enemy.agent.isStopped = true;
         string toPlay = enemy.animSet.death;
         enemy.PlayAnimation(toPlay);
-        MonoBehaviour.Destroy(enemy.gameObject, 2f);
+        Object.Destroy(enemy.gameObject, 2f);
     }
 
     public override void Update() { }

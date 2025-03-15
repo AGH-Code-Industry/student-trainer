@@ -3,10 +3,6 @@ using UnityEngine;
 
 public class AttackingState : EnemyState
 {
-    const float ATTACK_RANGE = 1.7f;
-
-    private ComboSystem comboSystem;
-
     public AttackingState(Enemy enemy) : base(enemy) { }
 
     bool attackInProgress = false;
@@ -16,16 +12,10 @@ public class AttackingState : EnemyState
     {
         enemy.PlayAnimation(enemy.animSet.idle);
 
-        ComboList comboList = enemy.settings.attacks;
-        // Select the first combo, doesn't really matter
-        string defaultCombo = comboList.combos[0].name;
-        MonoBehaviour mediator = enemy;
-
-        comboSystem = new ComboSystem(comboList, defaultCombo, mediator);
-        comboSystem.onAttackStart += AttackStarted;
-        comboSystem.onAttackPerformed += AttackPerformed;
-        comboSystem.onAttackEnd += AttackEnded;
-        comboSystem.onRecoveryEnd += RecoveryEnded;
+        enemy.comboSystem.onAttackStart += AttackStarted;
+        enemy.comboSystem.onAttackPerformed += AttackPerformed;
+        enemy.comboSystem.onAttackEnd += AttackEnded;
+        enemy.comboSystem.onRecoveryEnd += RecoveryEnded;
 
         SwitchCombo();
     }
@@ -43,7 +33,13 @@ public class AttackingState : EnemyState
         }
     }
 
-    public override void Exit() { }
+    public override void Exit()
+    {
+        enemy.comboSystem.onAttackStart -= AttackStarted;
+        enemy.comboSystem.onAttackPerformed -= AttackPerformed;
+        enemy.comboSystem.onAttackEnd -= AttackEnded;
+        enemy.comboSystem.onRecoveryEnd -= RecoveryEnded;
+    }
 
     bool InAttackRange()
     {
@@ -53,14 +49,14 @@ public class AttackingState : EnemyState
         Vector3 myPos = enemy.transform.position;
         Vector3 playerPos = enemy.playerMovementService.PlayerPosition;
 
-        return Vector3.Distance(myPos, playerPos) < ATTACK_RANGE;
+        return Vector3.Distance(myPos, playerPos) <= enemy.attackRange;
     }
 
     string SelectRandomCombo()
     {
         // I fonund this code for weighted randomness in a random yt video, so I'm not sure if it actually works as intended
 
-        ComboList combos = enemy.settings.attacks;
+        ComboList combos = enemy.comboSystem.comboList;
 
         float totalWeight = 0f;
         foreach(ComboWeight w in combos.weights)
@@ -83,7 +79,7 @@ public class AttackingState : EnemyState
         }
 
         // Failsafe in case of a typo
-        if (!comboSystem.HasCombo(selectedCombo))
+        if (!enemy.comboSystem.HasCombo(selectedCombo))
             selectedCombo = combos.combos[0].name;
 
         return selectedCombo;
@@ -92,8 +88,8 @@ public class AttackingState : EnemyState
     void SwitchCombo()
     {
         string combo = SelectRandomCombo();
-        comboSystem.ChangeCombo(combo);
-        comboSystem.Attack();
+        enemy.comboSystem.ChangeCombo(combo);
+        enemy.comboSystem.Attack();
     }
 
     #region combo_system_callbacks
@@ -114,7 +110,7 @@ public class AttackingState : EnemyState
         if(!isComboEnd)
         {
             if (InAttackRange())
-                comboSystem.Attack();
+                enemy.comboSystem.Attack();
             else
                 comboSwitchRequired = true;
         }
