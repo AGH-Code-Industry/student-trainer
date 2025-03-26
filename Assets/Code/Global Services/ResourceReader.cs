@@ -13,7 +13,9 @@ public class ResourceReader
         { typeof(StreetLampLightingSettings), "StreetLampLighting" },
         { typeof(CinemachineCameraSettings), "CinemachineCamera" },
         { typeof(PlayerMovementSettings), "PlayerMovement" },
-        { typeof(ComboList), "PlayerComboList"}
+        { typeof(ComboList), "PlayerComboList"},
+        { typeof(ItemPreset), "Items"},
+        { typeof(InventorySettings), "InventorySettings"},
     };
 
     public IEnumerable<T> ReadAllSettings<T>() where T : ScriptableObject
