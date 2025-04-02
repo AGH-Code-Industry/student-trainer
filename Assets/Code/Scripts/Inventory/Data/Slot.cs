@@ -84,7 +84,7 @@ public class Slot
 
         int newCount = count - amount;
 
-        if(newCount >= 0)
+        if(newCount > 0)
         {
             count = newCount;
             return count;

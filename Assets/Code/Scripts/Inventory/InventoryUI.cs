@@ -45,10 +45,10 @@ public class InventoryUI : MonoBehaviour
         {
             SlotUI slotUI = Instantiate(slotPrefab, slotsContainer).GetComponent<SlotUI>();
             int currentHotkey = i + 1 <= hotkeys ? i + 1 : -1;
-            if (currentHotkey == 10)
-                currentHotkey = 0;
+            //if (currentHotkey == 10)
+                //currentHotkey = 0;
 
-            slotUI.InitSlot(currentHotkey);
+            slotUI.InitSlot(i, this, currentHotkey);
             slotUIs[i] = slotUI;
         }
     }
@@ -93,5 +93,12 @@ public class InventoryUI : MonoBehaviour
             amount = int.Parse(amountInput.text);
 
         service.AddItemByID(id, amount);
+    }
+
+    // SlotUI mediator functions
+
+    public void UseItemFromSlot(int index)
+    {
+        service.UseItemAtSlot(index);
     }
 }

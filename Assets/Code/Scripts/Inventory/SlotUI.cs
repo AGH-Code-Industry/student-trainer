@@ -2,13 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using TMPro;
 
-public class SlotUI : MonoBehaviour
+public class SlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler
 {
     [SerializeField] Image iconImage;
     [SerializeField] TextMeshProUGUI amountText;
     [SerializeField] TextMeshProUGUI hotkeyText;
+
+    public int index { get; private set; } = -1;
+    InventoryUI invUI;
 
     // Start is called before the first frame update
     void Start()
@@ -22,8 +26,11 @@ public class SlotUI : MonoBehaviour
         
     }
 
-    public void InitSlot(int hotkey = -1)
+    public void InitSlot(int index, InventoryUI invUI, int hotkey = -1)
     {
+        this.index = index;
+        this.invUI = invUI;
+
         ClearUI();
 
         if(hotkey >= 0)
@@ -58,4 +65,27 @@ public class SlotUI : MonoBehaviour
         iconImage.gameObject.SetActive(false);
         amountText.gameObject.SetActive(false);
     }
+
+    #region Pointer_Events
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        //throw new System.NotImplementedException();
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        // RMB to use item
+        if (eventData.button == PointerEventData.InputButton.Right)
+        {
+            invUI.UseItemFromSlot(index);
+        }
+    }
+
+    #endregion
 }

@@ -27,6 +27,8 @@ public class PlayerInputController : MonoBehaviour
                 _eventBus.Publish(new PlayerMove(context)); break;
             case "Dodge":
                 _eventBus.Publish(new PlayerDodge(context)); break;
+            case "Interact":
+                _eventBus.Publish(new PlayerInteractEvent(context)); break;
         }
     }
 

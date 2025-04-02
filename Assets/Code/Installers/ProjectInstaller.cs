@@ -16,6 +16,7 @@ public class ProjectInstaller : MonoInstaller
         Container.BindInterfacesAndSelfTo<PlayerService>().AsSingle();
 
         Container.BindInterfacesAndSelfTo<InventoryService>().AsSingle();
+        Container.BindInterfacesAndSelfTo<ItemUsingService>().AsSingle();
     }
 
 }
