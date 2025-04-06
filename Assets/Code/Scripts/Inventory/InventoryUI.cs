@@ -10,32 +10,48 @@ public class InventoryUI : MonoBehaviour
     [SerializeField] Transform slotsContainer;
     [SerializeField] GameObject slotPrefab;
 
-    [Space]
-
-    [SerializeField] TMP_InputField itemidInput;
-    [SerializeField] TMP_InputField amountInput;
+    [SerializeField] TooltipUI tooltip;
+    RectTransform tooltipTransform;
+    bool tooltipShown = false;
+    int tooltipIndex = -1;
+    [SerializeField] float tpOffset;
 
     SlotUI[] slotUIs;
 
     [Inject] readonly InventoryService service;
 
-    // Start is called before the first frame update
     void Start()
     {
         SpawnSlots();
 
-        //service.onSlotContentsChanged += UpdateSlot;
         service.onContentsChanged += UpdateAllSlots;
+        service.onContentsChanged += UpdateTooltip;
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        if(tooltipShown)
+        {
+            tooltipTransform.anchoredPosition = GetTooltipNewAnchorPos();
+        }
+    }
+
+    Vector2 GetTooltipNewAnchorPos()
+    {
+        // Could be changed to use the new input system, but I don't know if it's neccessary
+        Vector2 newPos = Input.mousePosition;
+
+        newPos.x += tpOffset;
+        newPos.y += tpOffset;
+
+        return newPos;
     }
 
     void SpawnSlots()
     {
+        tooltipTransform = tooltip.GetComponent<RectTransform>();
+        HideTooltip();
+
         int amount = service.settings.inventorySize;
         int hotkeys = service.settings.hotkeyAmount;
 
@@ -45,8 +61,6 @@ public class InventoryUI : MonoBehaviour
         {
             SlotUI slotUI = Instantiate(slotPrefab, slotsContainer).GetComponent<SlotUI>();
             int currentHotkey = i + 1 <= hotkeys ? i + 1 : -1;
-            //if (currentHotkey == 10)
-                //currentHotkey = 0;
 
             slotUI.InitSlot(i, this, currentHotkey);
             slotUIs[i] = slotUI;
@@ -75,24 +89,41 @@ public class InventoryUI : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
+    void UpdateTooltip()
     {
-        //service.onSlotContentsChanged -= UpdateSlot;
-        service.onContentsChanged -= UpdateAllSlots;
-    }
-
-    public void TestAddItem()
-    {
-        if (string.IsNullOrEmpty(itemidInput.text))
+        if (tooltipIndex < 0)
             return;
 
-        string id = itemidInput.text;
+        ShowTooltip(tooltipIndex);
+    }
 
-        int amount = 1;
-        if(!string.IsNullOrEmpty(amountInput.text))
-            amount = int.Parse(amountInput.text);
+    public void ShowTooltip(int slotIndex)
+    {
+        ItemPreset item = service.slots[slotIndex].item;
+        int count = service.slots[slotIndex].count;
 
-        service.AddItemByID(id, amount);
+        if (item != null && count > 0)
+        {
+            tooltip.UpdateText(item, count);
+
+            tooltip.gameObject.SetActive(true);
+            tooltipShown = true;
+            tooltipIndex = slotIndex;
+
+            LayoutRebuilder.ForceRebuildLayoutImmediate(tooltipTransform);
+            tooltipTransform.anchoredPosition = GetTooltipNewAnchorPos();
+        }
+        else
+        {
+            HideTooltip();
+        }
+    }
+
+    public void HideTooltip()
+    {
+        tooltip.gameObject.SetActive(false);
+        tooltipShown = false;
+        tooltipIndex = -1;
     }
 
     // SlotUI mediator functions
@@ -100,5 +131,13 @@ public class InventoryUI : MonoBehaviour
     public void UseItemFromSlot(int index)
     {
         service.UseItemAtSlot(index);
+    }
+
+
+
+    private void OnDestroy()
+    {
+        service.onContentsChanged -= UpdateAllSlots;
+        service.onContentsChanged -= UpdateTooltip;
     }
 }

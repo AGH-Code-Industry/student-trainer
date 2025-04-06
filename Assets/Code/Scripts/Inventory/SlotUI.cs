@@ -70,12 +70,12 @@ public class SlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, 
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        
+        invUI.ShowTooltip(index);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        //throw new System.NotImplementedException();
+        invUI.HideTooltip();
     }
 
     public void OnPointerDown(PointerEventData eventData)

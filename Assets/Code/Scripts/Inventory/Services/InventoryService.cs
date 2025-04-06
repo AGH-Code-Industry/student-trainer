@@ -1,11 +1,9 @@
 /*
 
     FEATURES TO ADD:
-    - UI toolbar when cursor is over slot, showing item's name (and maybe description)
     - Moving items by dragging them between slots (need to communicate with combat system, so the player won't attack when clicking in the inv)
     - Dropping items on the ground
     - Splitting item stacks in half by pressing the scroll wheel?
-    - Hotkeys (using items by pressing numbers 1-9)
 
 */
 
@@ -24,6 +22,7 @@ public class InventoryService : IInitializable
 
     [Inject] readonly ResourceReader reader;
     [Inject] readonly ItemUsingService itemService;
+    [Inject] readonly EventBus eventBus;
 
     // Pass slot's index as argument
     //public Action<int> onSlotContentsChanged;
@@ -43,6 +42,8 @@ public class InventoryService : IInitializable
         {
             slots[i] = new Slot();
         }
+
+        eventBus.Subscribe<PlayerHotkey>(UseHotkey);
     }
 
     public ItemPreset GetItemByID(string id)
@@ -186,12 +187,15 @@ public class InventoryService : IInitializable
         RemoveFromSlot(slotIndex, 1);
     }
 
-    public void UseHotkey(int key)
+    public void UseHotkey(PlayerHotkey hotkey)
     {
-        if (key < 1 || key > settings.hotkeyAmount)
+        if (!hotkey.ctx.performed)
             return;
 
-        UseItemAtSlot(key - 1);
+        if (hotkey.number < 1 || hotkey.number > settings.hotkeyAmount)
+            return;
+
+        UseItemAtSlot(hotkey.number - 1);
     }
 
     #endregion

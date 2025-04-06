@@ -89,6 +89,15 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""InventoryHotkey"",
+                    ""type"": ""Button"",
+                    ""id"": ""9f1dfaee-fc3f-452c-88ea-458ee5ed4a8e"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -267,6 +276,116 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""06095a94-3f90-42b3-a66d-45e3444c9aa5"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard"",
+                    ""action"": ""InventoryHotkey"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""687ce454-bb71-4668-84b6-1fe7b4557c31"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard"",
+                    ""action"": ""InventoryHotkey"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4316e344-cebf-4bc7-ac54-0f838b8e7110"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard"",
+                    ""action"": ""InventoryHotkey"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1e9b7dc5-41b0-486a-b339-256f9639b0d2"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard"",
+                    ""action"": ""InventoryHotkey"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8db9e0bf-0b95-4147-9762-4ea4e46e2552"",
+                    ""path"": ""<Keyboard>/5"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard"",
+                    ""action"": ""InventoryHotkey"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0d3d1e42-0bff-4e8d-85e7-69e064242160"",
+                    ""path"": ""<Keyboard>/6"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard"",
+                    ""action"": ""InventoryHotkey"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""75657577-7090-40b5-8538-74011b9a497f"",
+                    ""path"": ""<Keyboard>/7"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard"",
+                    ""action"": ""InventoryHotkey"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""175ab23e-880a-4b47-8403-8c6ed0e1ee32"",
+                    ""path"": ""<Keyboard>/8"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard"",
+                    ""action"": ""InventoryHotkey"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5fa31d53-d66b-4aed-b4c3-ad04876abf92"",
+                    ""path"": ""<Keyboard>/9"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard"",
+                    ""action"": ""InventoryHotkey"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""080396bf-403e-4bb3-a2bb-4423ce6a6a48"",
+                    ""path"": ""<Keyboard>/0"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard"",
+                    ""action"": ""InventoryHotkey"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -327,6 +446,7 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
         m_Player_Run = m_Player.FindAction("Run", throwIfNotFound: true);
         m_Player_Dodge = m_Player.FindAction("Dodge", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
+        m_Player_InventoryHotkey = m_Player.FindAction("InventoryHotkey", throwIfNotFound: true);
         // Inventory
         m_Inventory = asset.FindActionMap("Inventory", throwIfNotFound: true);
         m_Inventory_OpenClose = m_Inventory.FindAction("Open/Close", throwIfNotFound: true);
@@ -404,6 +524,7 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Run;
     private readonly InputAction m_Player_Dodge;
     private readonly InputAction m_Player_Interact;
+    private readonly InputAction m_Player_InventoryHotkey;
     public struct PlayerActions
     {
         private @GameControls m_Wrapper;
@@ -415,6 +536,7 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
         public InputAction @Run => m_Wrapper.m_Player_Run;
         public InputAction @Dodge => m_Wrapper.m_Player_Dodge;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
+        public InputAction @InventoryHotkey => m_Wrapper.m_Player_InventoryHotkey;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -445,6 +567,9 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
+            @InventoryHotkey.started += instance.OnInventoryHotkey;
+            @InventoryHotkey.performed += instance.OnInventoryHotkey;
+            @InventoryHotkey.canceled += instance.OnInventoryHotkey;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -470,6 +595,9 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
+            @InventoryHotkey.started -= instance.OnInventoryHotkey;
+            @InventoryHotkey.performed -= instance.OnInventoryHotkey;
+            @InventoryHotkey.canceled -= instance.OnInventoryHotkey;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -551,6 +679,7 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
         void OnRun(InputAction.CallbackContext context);
         void OnDodge(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnInventoryHotkey(InputAction.CallbackContext context);
     }
     public interface IInventoryActions
     {

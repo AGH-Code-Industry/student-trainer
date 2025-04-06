@@ -29,6 +29,8 @@ public class PlayerInputController : MonoBehaviour
                 _eventBus.Publish(new PlayerDodge(context)); break;
             case "Interact":
                 _eventBus.Publish(new PlayerInteractEvent(context)); break;
+            case "InventoryHotkey":
+                _eventBus.Publish(new PlayerHotkey(context)); break;
         }
     }
 
