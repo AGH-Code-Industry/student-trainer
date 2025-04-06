@@ -1,0 +1,5 @@
+ściany w pokojach: #D8A162
+podłogi w pokojach: #829654
+
+ściany na korytarzu: #CBAE8D
+pasek na ścianie: #BA9468
