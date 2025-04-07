@@ -30,6 +30,11 @@ public class PlayerService : IInitializable, IDisposable
     private PlayerMovementSettings _settings;
     private Vector2 _movementVector;
 
+    private readonly float gravity = Physics.gravity.y;
+    float gravIntegral = 0f;
+    bool isPlayerGrounded = true;
+    LayerMask groundMask = LayerMask.GetMask("Ground");
+
     public void Initialize()
     {
         _settings = _reader.ReadSettings<PlayerMovementSettings>();
@@ -38,14 +43,29 @@ public class PlayerService : IInitializable, IDisposable
         _eventBus.Subscribe<PlayerRun>(OnRun);
     }
 
+    public void CheckIfGrounded()
+    {
+        isPlayerGrounded = Physics.CheckSphere(PlayerPosition, 0.1f, groundMask);
+    }
+
     public Vector3 GetMovementVector()
     {
         if (frozen)
             return Vector3.zero;
 
+        if(isPlayerGrounded)
+        {
+            gravIntegral = 0f;
+        }
+        else
+        {
+            gravIntegral += gravity * Time.deltaTime;
+        }
+
         Vector2 vec = _movementVector;
         Vector3 movement = new Vector3(vec.x, 0, vec.y);
         movement *= IsRunning ? _settings.runSpeed : _settings.walkSpeed;
+        movement.y = gravIntegral;
 
         // Leaves room for modifying the vector
         // For example: wearing armor may reduce speed, being drunk may add variation to the vector, etc.
