@@ -140,7 +140,20 @@ public class InventoryService : IInitializable
 
     public void RemoveItem(ItemPreset item, int count)
     {
+        bool stackable = item.maxStackSize > 1;
+        int amountLeft = count;
 
+        for (int i = 0; i < slots.Length; i++)
+        {
+            if (slots[i].item == item)
+            {
+                amountLeft = slots[i].DecreaseCount(amountLeft);
+                if (amountLeft == 0)
+                    break;
+            }
+        }
+
+        onContentsChanged?.Invoke();
     }
 
     public void RemoveFromSlot(int slotIndex, int count)

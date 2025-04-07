@@ -31,7 +31,7 @@ public class Pickup : MonoBehaviour, IInteractable
     {
         string result = item.name;
         if (item.maxStackSize > 1)
-            result += $"(x{count})";
+            result += $"(x {count})";
 
         return result;
     }
@@ -44,5 +44,10 @@ public class Pickup : MonoBehaviour, IInteractable
     public Transform GetTransform()
     {
         return transform;
+    }
+
+    public bool InteractionAllowed()
+    {
+        return true;
     }
 }

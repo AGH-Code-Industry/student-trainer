@@ -21,6 +21,8 @@ public class InteractionUI : MonoBehaviour
 
     Camera mainCamera;
 
+    IInteractable currentInteractable;
+
     void Start()
     {
         module = FindObjectOfType<PlayerInteractions>();
@@ -32,7 +34,7 @@ public class InteractionUI : MonoBehaviour
 
         HidePrompt();
 
-        module.onInteractionPossible += ShowPrompt;
+        module.onInteractionPossible += UpdateInteractable;
         module.onInteractionLost += HidePrompt;
     }
 
@@ -40,7 +42,7 @@ public class InteractionUI : MonoBehaviour
     {
         if(promptShown)
         {
-            PositionPrompt();
+            ShowPrompt();
         }
     }
 
@@ -55,23 +57,42 @@ public class InteractionUI : MonoBehaviour
         promptTransform.anchoredPosition = screenPos;
     }
 
-    public void ShowPrompt(IInteractable interactable)
+    public void UpdateInteractable(IInteractable interactable)
+    {
+        currentInteractable = interactable;
+
+        if (currentInteractable == null)
+            HidePrompt();
+        else
+            ShowPrompt();
+    }
+
+    public void ShowPrompt()
     {
         promptObject.SetActive(true);
 
-        string objName = interactable.GetObjectName();
-        string actionName = interactable.GetActionName();
+        string objName = currentInteractable.GetObjectName();
+        string actionName = currentInteractable.GetActionName();
+        bool allowed = currentInteractable.InteractionAllowed();
 
-        promptText.text = objName + ": [" + interactionKey + "] " + actionName;
+        string toShow = objName + ": ";
+
+        if (allowed)
+            toShow += "[" + interactionKey + "] ";
+
+        toShow += actionName;
+
+        promptText.text = toShow;
         promptShown = true;
 
-        currentInterTransform = interactable.GetTransform();
+        currentInterTransform = currentInteractable.GetTransform();
         PositionPrompt();
     }
 
     public void HidePrompt()
     {
         promptObject.SetActive(false);
+        currentInteractable = null;
         currentInterTransform = null;
         promptShown = false;
     }
@@ -80,7 +101,7 @@ public class InteractionUI : MonoBehaviour
 
     private void OnDestroy()
     {
-        module.onInteractionPossible -= ShowPrompt;
+        module.onInteractionPossible -= UpdateInteractable;
         module.onInteractionLost -= HidePrompt;
     }
 }

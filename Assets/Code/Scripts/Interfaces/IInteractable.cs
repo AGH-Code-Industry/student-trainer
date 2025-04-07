@@ -6,7 +6,10 @@ public interface IInteractable
 {
     public void Interact();
     public string GetObjectName();
-    // Co się robi z obiektem, np: [E] aby podnieść, aby otworzyć
+    // Co się robi z obiektem, np: [E] podnieś, [E] otwórz
     public string GetActionName();
     public Transform GetTransform();
+
+    public bool InteractionAllowed();
+    //public string NoInteractionText();
 }
