@@ -35,12 +35,14 @@ public class PlayerInteractions : MonoBehaviour
     {
         if(interactable == null && currentInteractable != null)
         {
+            currentInteractable.FocusInteraction(false);
             currentInteractable = null;
             onInteractionLost?.Invoke();
         }
         else if(currentInteractable != interactable)
         {
             currentInteractable = interactable;
+            currentInteractable.FocusInteraction(true);
             onInteractionPossible?.Invoke(interactable);
         }
     }

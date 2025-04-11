@@ -10,6 +10,8 @@ public class Pickup : MonoBehaviour, IInteractable
 
     [Inject] readonly InventoryService service;
 
+    public event System.Action onObjectChanged;
+
     void Start()
     {
         
@@ -50,4 +52,6 @@ public class Pickup : MonoBehaviour, IInteractable
     {
         return true;
     }
+
+    public void FocusInteraction(bool isFocused) { }
 }

@@ -15,6 +15,11 @@ public class Door : MonoBehaviour, IInteractable
     [Inject] readonly InventoryService invService;
 
     bool isUnlocked = true;
+    bool playerHasReqItem = false;
+
+    bool interactionFocused = false;
+
+    public event System.Action onObjectChanged;
 
     enum DoorState
     {
@@ -35,8 +40,18 @@ public class Door : MonoBehaviour, IInteractable
     // Update is called once per frame
     void Update()
     {
-        
+        if(interactionFocused)
+        {
+            bool hasItem = invService.HasItem(itemRequiredToOpen);
+            if(hasItem != playerHasReqItem)
+            {
+                playerHasReqItem = hasItem;
+                onObjectChanged?.Invoke();
+            }
+        }
     }
+
+    public void FocusInteraction(bool isFocused) { interactionFocused = isFocused; }
 
     public string GetActionName()
     {
@@ -49,8 +64,7 @@ public class Door : MonoBehaviour, IInteractable
         }
         else
         {
-            // These calls to the inventory service can probably be reduced to only one, but we can think about it later
-            if (invService.HasItem(itemRequiredToOpen))
+            if (playerHasReqItem)
                 return "odblokuj";
             else
                 return "wymagane \"" + itemRequiredToOpen.name + "\"";
@@ -74,7 +88,7 @@ public class Door : MonoBehaviour, IInteractable
     {
         if(!isUnlocked)
         {
-            if(invService.HasItem(itemRequiredToOpen))
+            if(playerHasReqItem)
             {
                 if (!dontRemoveAfterUse)
                     invService.RemoveItem(itemRequiredToOpen, 1);
@@ -95,7 +109,7 @@ public class Door : MonoBehaviour, IInteractable
 
     public bool InteractionAllowed()
     {
-        return isUnlocked || invService.HasItem(itemRequiredToOpen);
+        return isUnlocked || playerHasReqItem;
     }
 
     IEnumerator OpenCoroutine()
@@ -106,6 +120,7 @@ public class Door : MonoBehaviour, IInteractable
         yield return new WaitForSeconds(1f);
 
         state = DoorState.Open;
+        onObjectChanged?.Invoke();
     }
 
     IEnumerator CloseCoroutine()
@@ -116,5 +131,6 @@ public class Door : MonoBehaviour, IInteractable
         yield return new WaitForSeconds(1f);
 
         state = DoorState.Closed;
+        onObjectChanged?.Invoke();
     }
 }

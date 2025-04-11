@@ -12,4 +12,9 @@ public interface IInteractable
 
     public bool InteractionAllowed();
     //public string NoInteractionText();
+
+    // Tells the interactable object if it currently is the "possible" interaction
+    public void FocusInteraction(bool isFocused);
+    // Called when the inner state of the interactable object is changed, so that InteractionUI knows when to redraw
+    public event System.Action onObjectChanged;
 }
