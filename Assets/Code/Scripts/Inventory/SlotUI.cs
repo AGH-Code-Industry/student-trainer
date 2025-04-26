@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
 
-public class SlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler
+public class SlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] Image iconImage;
     [SerializeField] TextMeshProUGUI amountText;
@@ -70,21 +70,16 @@ public class SlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, 
 
     public void OnPointerEnter(PointerEventData eventData)
     {
+        invUI.AssignHoverIndex(index);
+
         invUI.ShowTooltip(index);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        invUI.HideTooltip();
-    }
+        invUI.AssignHoverIndex(null);
 
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        // RMB to use item
-        if (eventData.button == PointerEventData.InputButton.Right)
-        {
-            invUI.UseItemFromSlot(index);
-        }
+        invUI.HideTooltip();
     }
 
     #endregion

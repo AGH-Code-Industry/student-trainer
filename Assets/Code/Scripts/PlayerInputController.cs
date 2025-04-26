@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
+using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(PlayerInput))]
 public class PlayerInputController : MonoBehaviour
@@ -19,8 +20,12 @@ public class PlayerInputController : MonoBehaviour
     {
         switch (context.action.name)
         {
-            case "Attack":
-                _eventBus.Publish(new PlayerAttack(context)); break;
+            case "MouseClick":
+                if (!EventSystem.current.IsPointerOverGameObject())
+                    _eventBus.Publish(new MouseClickUncaught(context));
+                else
+                    _eventBus.Publish(new MouseClickEvent(context));
+                break;
             case "Run":
                 _eventBus.Publish(new PlayerRun(context)); break;
             case "Move":

@@ -36,7 +36,7 @@ public class PlayerCombat : MonoBehaviour, IDamageable
 
         animationController = GetComponent<PlayerAnimationController>();
 
-        eventBus.Subscribe<PlayerAttack>(OnAttack);
+        eventBus.Subscribe<MouseClickUncaught>(OnAttack);
 
         // Save renderer materials
         renderers.SelectMany(r => r.materials).ToList().ForEach(m => _materialColors.Add(m, m.color));
@@ -47,14 +47,15 @@ public class PlayerCombat : MonoBehaviour, IDamageable
 
     }
 
-    private void OnAttack(PlayerAttack playerAttack)
+    private void OnAttack(MouseClickUncaught click)
     {
-        if (playerAttack.ctx.performed) comboSystem.Attack();
+        bool isValid = click.ctx.performed && click.button == MouseClickEvent.MouseButton.Left;
+        if (isValid) comboSystem.Attack();
     }
 
     private void OnDestroy()
     {
-        eventBus.Unsubscribe<PlayerAttack>(OnAttack);
+        eventBus.Unsubscribe<MouseClickUncaught>(OnAttack);
     }
 
     #region Player_Attacks

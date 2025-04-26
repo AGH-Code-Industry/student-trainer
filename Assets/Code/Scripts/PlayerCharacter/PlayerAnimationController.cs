@@ -19,7 +19,7 @@ public class PlayerAnimationController : MonoBehaviour
 
     void Start()
     {
-        _eventBus.Subscribe<PlayerAttack>(OnAttack);
+        _eventBus.Subscribe<MouseClickUncaught>(OnAttack);
         _eventBus.Subscribe<PlayerDodge>(OnDodge);
     }
 
@@ -63,12 +63,12 @@ public class PlayerAnimationController : MonoBehaviour
         }
     }
 
-    private void OnAttack(PlayerAttack playerAttack)
+    private void OnAttack(MouseClickEvent click)
     {
-        if (playerAttack.ctx.started)
-        {
+        bool isClickValid = click.ctx.started && click.button == MouseClickEvent.MouseButton.Left;
+
+        if (isClickValid)
             FaceMouse();
-        }
     }
 
     void FaceMouse()
@@ -100,7 +100,7 @@ public class PlayerAnimationController : MonoBehaviour
 
     void OnDestroy()
     {
-        _eventBus.Unsubscribe<PlayerAttack>(OnAttack);
+        _eventBus.Unsubscribe<MouseClickUncaught>(OnAttack);
         _eventBus.Unsubscribe<PlayerDodge>(OnDodge);
 
     }

@@ -14,7 +14,7 @@ public class InputMediator : MonoBehaviour
     void Start()
     {
         pos = _service.MouseDownPosition;
-        _eventBus.Subscribe<PlayerAttack>(OnAttack);
+        _eventBus.Subscribe<MouseClickUncaught>(OnAttack);
     }
 
     void Update()
@@ -32,9 +32,11 @@ public class InputMediator : MonoBehaviour
         }
     }
 
-    void OnAttack(PlayerAttack playerAttack)
+    void OnAttack(MouseClickUncaught click)
     {
-        _service.GlobalLookTarget = pos;
+        bool isClickValid = click.ctx.performed && click.button == MouseClickEvent.MouseButton.Left;
+        if (isClickValid)
+            _service.GlobalLookTarget = pos;
     }
 
     private void OnDrawGizmos()
@@ -45,6 +47,6 @@ public class InputMediator : MonoBehaviour
 
     void OnDestroy()
     {
-        _eventBus.Unsubscribe<PlayerAttack>(OnAttack);
+        _eventBus.Unsubscribe<MouseClickUncaught>(OnAttack);
     }
 }

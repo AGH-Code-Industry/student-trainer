@@ -16,6 +16,14 @@ public class InventoryUI : MonoBehaviour
     int tooltipIndex = -1;
     [SerializeField] float tpOffset;
 
+    [SerializeField] GameObject dragSlotObj;
+    [SerializeField] Image dragSlotImage;
+    [SerializeField] TextMeshProUGUI dragSlotText;
+    RectTransform dragSlotRect;
+    bool dragSlotShown = false;
+
+    GridLayoutGroup grid;
+
     SlotUI[] slotUIs;
 
     [Inject] readonly InventoryService service;
@@ -26,6 +34,9 @@ public class InventoryUI : MonoBehaviour
 
         service.onContentsChanged += UpdateAllSlots;
         service.onContentsChanged += UpdateTooltip;
+
+        service.onDragStart += ShowDragSlot;
+        service.onDragEnd += HideDragSlot;
     }
 
     void FixedUpdate()
@@ -33,6 +44,10 @@ public class InventoryUI : MonoBehaviour
         if(tooltipShown)
         {
             tooltipTransform.anchoredPosition = GetTooltipNewAnchorPos();
+        }
+        if(dragSlotShown)
+        {
+            dragSlotRect.anchoredPosition = Input.mousePosition;
         }
     }
 
@@ -65,6 +80,12 @@ public class InventoryUI : MonoBehaviour
             slotUI.InitSlot(i, this, currentHotkey);
             slotUIs[i] = slotUI;
         }
+
+        grid = GetComponent<GridLayoutGroup>();
+        dragSlotRect = dragSlotObj.GetComponent<RectTransform>();
+        dragSlotRect.sizeDelta = grid.cellSize;
+
+        HideDragSlot();
     }
 
     void UpdateSlot(int index)
@@ -99,6 +120,9 @@ public class InventoryUI : MonoBehaviour
 
     public void ShowTooltip(int slotIndex)
     {
+        if (dragSlotShown)
+            return;
+
         ItemPreset item = service.slots[slotIndex].item;
         int count = service.slots[slotIndex].count;
 
@@ -126,14 +150,56 @@ public class InventoryUI : MonoBehaviour
         tooltipIndex = -1;
     }
 
-    // SlotUI mediator functions
+    public void ShowDragSlot()
+    {
+        dragSlotObj.SetActive(true);
 
+        if(service.draggedItem.Stackable())
+        {
+            dragSlotText.gameObject.SetActive(true);
+            dragSlotText.text = service.draggedItem.count.ToString();
+        }
+        else
+        {
+            dragSlotText.gameObject.SetActive(false);
+        }
+
+        dragSlotImage.sprite = service.draggedItem.item.icon;
+        dragSlotShown = true;
+
+        dragSlotRect.anchoredPosition = Input.mousePosition;
+    }
+
+    public void HideDragSlot()
+    {
+        dragSlotObj.SetActive(false);
+        dragSlotShown = false;
+    }
+
+    #region SlotUI_Mediators
+
+    public void AssignHoverIndex(int? index)
+    {
+        service.slotHoverIndex = index;
+    }
+    /*
     public void UseItemFromSlot(int index)
     {
         service.UseItemAtSlot(index);
     }
 
+    public void TryMoveItem(int index)
+    {
+        service.DragItemFromSlot(index);
+    }
 
+    public void DropIntoSlot(int index)
+    {
+        service.DropItemIntoSlot(index);
+    }
+    */
+
+    #endregion
 
     private void OnDestroy()
     {
