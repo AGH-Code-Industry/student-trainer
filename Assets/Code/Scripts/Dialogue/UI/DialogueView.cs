@@ -29,11 +29,13 @@ public class DialogueView : MonoBehaviour
 	public void OnDisplayDialogue(TextAsset dialogueText)
 	{
 		_dialogueService.LoadStoryChunk();
+
 		if (_dialogueService.GetDialogueBoxCount() == 0)
 			return;
 
 		StoryChunkCount = 0;
 		CreateDialogueBox(_dialogueService.GetDialogueBox());
+
 
 		scrollViewAnimator.SetBool("IsOpen", true);
 	}
@@ -41,6 +43,7 @@ public class DialogueView : MonoBehaviour
 	void CreateDialogueBox(DialogueBoxData data)
 	{
 		var box = Instantiate(dialogueBox, viewContent.pivot, quaternion.identity, viewContent.transform);
+
 		box.GetComponent<DialogueBoxView>().SetDialogue(data);
 		box.GetComponent<RectTransform>().anchoredPosition = new Vector2(0, -DialogueBoxView.HEIGHT * StoryChunkCount);
 

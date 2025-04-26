@@ -28,7 +28,7 @@ public class DialogueService
 
         IsOpenDialog = true;
         //_input.Disable();
-        StartDialogue.Invoke(dialogue);
+        StartDialogue?.Invoke(dialogue);
     }
 
     public void Close()
