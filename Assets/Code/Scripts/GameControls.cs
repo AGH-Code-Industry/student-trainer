@@ -15,7 +15,7 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-public partial class @GameControls: IInputActionCollection2, IDisposable
+public partial class @GameControls : IInputActionCollection2, IDisposable
 {
     public InputActionAsset asset { get; }
     public @GameControls()
@@ -458,12 +458,12 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
         UnityEngine.Debug.Assert(!m_Inventory.enabled, "This will cause a leak and performance issues, GameControls.Inventory.Disable() has not been called.");
     }
 
-    ~@GameControls()
-    {
-        UnityEngine.Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, GameControls.Player.Disable() has not been called.");
-        UnityEngine.Debug.Assert(!m_Inventory.enabled, "This will cause a leak and performance issues, GameControls.Inventory.Disable() has not been called.");
-        UnityEngine.Debug.Assert(!m_Camera.enabled, "This will cause a leak and performance issues, GameControls.Camera.Disable() has not been called.");
-    }
+    // ~@GameControls()
+    // {
+    //     UnityEngine.Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, GameControls.Player.Disable() has not been called.");
+    //     UnityEngine.Debug.Assert(!m_Inventory.enabled, "This will cause a leak and performance issues, GameControls.Inventory.Disable() has not been called.");
+    //     UnityEngine.Debug.Assert(!m_Camera.enabled, "This will cause a leak and performance issues, GameControls.Camera.Disable() has not been called.");
+    // }
 
     public void Dispose()
     {

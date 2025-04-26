@@ -40,7 +40,7 @@ public class CameraService : Zenject.IInitializable
 
     public void SetActiveCamera(VirtualCameraType type)
     {
-        ActiveCamera.Invoke(type);
+        ActiveCamera?.Invoke(type);
         ActiveCameraType = type;
     }
 
