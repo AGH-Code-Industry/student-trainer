@@ -78,7 +78,10 @@ public class PlayerAnimationController : MonoBehaviour
         var direction = (lookVector - transform.position).normalized;
         direction.y = 0;
 
-        transform.rotation = Quaternion.LookRotation(direction);
+        if (direction != Vector3.zero)
+            transform.rotation = Quaternion.LookRotation(direction);
+        else
+            transform.rotation = Quaternion.Euler(Vector3.zero);
 
         // Vector3 direction = lookVector - transform.position;
         // Quaternion lookRot = Quaternion.LookRotation(direction, _visibleModel.up);

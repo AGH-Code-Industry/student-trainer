@@ -12,6 +12,8 @@ public class Door : MonoBehaviour, IInteractable
     [SerializeField] ItemPreset itemRequiredToOpen = null;
     [SerializeField] bool dontRemoveAfterUse = false;
 
+    [SerializeField] RoomRevealer roomFogController;
+
     [Inject] readonly InventoryService invService;
 
     bool isUnlocked = true;
@@ -114,6 +116,9 @@ public class Door : MonoBehaviour, IInteractable
 
     IEnumerator OpenCoroutine()
     {
+        if (roomFogController)
+            roomFogController.Reveal();
+
         state = DoorState.Moving;
         anim.SetTrigger("open");
 
@@ -125,6 +130,9 @@ public class Door : MonoBehaviour, IInteractable
 
     IEnumerator CloseCoroutine()
     {
+        if (roomFogController)
+            roomFogController.Hide();
+
         state = DoorState.Moving;
         anim.SetTrigger("close");
 
