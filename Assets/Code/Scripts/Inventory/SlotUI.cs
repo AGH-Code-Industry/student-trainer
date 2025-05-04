@@ -70,14 +70,14 @@ public class SlotUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        invUI.AssignHoverIndex(index);
+        invUI.AssignHover(this);
 
-        invUI.ShowTooltip(index);
+        invUI.ShowTooltip(this);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        invUI.AssignHoverIndex(null);
+        invUI.AssignHover(null);
 
         invUI.HideTooltip();
     }

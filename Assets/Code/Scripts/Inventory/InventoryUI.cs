@@ -7,13 +7,14 @@ using TMPro;
 
 public class InventoryUI : MonoBehaviour
 {
-    [SerializeField] Transform slotsContainer;
+    [SerializeField] Transform slotsContainer, chestContainer;
+    [SerializeField] GameObject chestUiObj;
     [SerializeField] GameObject slotPrefab;
 
     [SerializeField] TooltipUI tooltip;
     RectTransform tooltipTransform;
     bool tooltipShown = false;
-    int tooltipIndex = -1;
+    SlotUI tooltipSlot = null;
     [SerializeField] float tpOffset;
 
     [SerializeField] GameObject dragSlotObj;
@@ -24,12 +25,18 @@ public class InventoryUI : MonoBehaviour
 
     GridLayoutGroup grid;
 
-    SlotUI[] slotUIs;
+    SlotUI[] slotUIs = null;
+    SlotUI[] chestUIs = null;
 
     [Inject] readonly InventoryService service;
 
     void Start()
     {
+        tooltipTransform = tooltip.GetComponent<RectTransform>();
+        HideTooltip();
+
+        chestUiObj.SetActive(false);
+
         SpawnSlots();
 
         service.onContentsChanged += UpdateAllSlots;
@@ -37,6 +44,9 @@ public class InventoryUI : MonoBehaviour
 
         service.onDragStart += ShowDragSlot;
         service.onDragEnd += HideDragSlot;
+
+        service.onNewContainer += ShowChest;
+        service.onContainerLost += HideChest;
     }
 
     void FixedUpdate()
@@ -64,9 +74,6 @@ public class InventoryUI : MonoBehaviour
 
     void SpawnSlots()
     {
-        tooltipTransform = tooltip.GetComponent<RectTransform>();
-        HideTooltip();
-
         int amount = service.settings.inventorySize;
         int hotkeys = service.settings.hotkeyAmount;
 
@@ -88,17 +95,75 @@ public class InventoryUI : MonoBehaviour
         HideDragSlot();
     }
 
-    void UpdateSlot(int index)
+    void SpawnChestSlots()
     {
-        Slot toUpdate = service.slots[index];
+        int amount = service.currentCont.slots.Length;
 
-        if (toUpdate.item != null)
+        chestUIs = new SlotUI[amount];
+
+        for(int i = 0; i < amount; i++)
         {
-            slotUIs[index].ShowItem(toUpdate.item, toUpdate.count);
+            SlotUI slotUI = Instantiate(slotPrefab, chestContainer).GetComponent<SlotUI>();
+            slotUI.InitSlot(i, this, -1);
+            chestUIs[i] = slotUI;
+        }
+
+        LayoutRebuilder.ForceRebuildLayoutImmediate(chestContainer.GetComponent<RectTransform>());
+    }
+
+    void DestroyChestSlots()
+    {
+        if (chestUIs == null || chestUIs.Length == 0)
+            return;
+
+        // Go backwards to avoid indexing issues if array ever gets exchanged for a list
+        for(int i = chestUIs.Length - 1; i >= 0; i--)
+        {
+            Destroy(chestUIs[i].gameObject);
+        }
+
+        chestUIs = null;
+    }
+
+    void ShowChest()
+    {
+        chestUiObj.SetActive(true);
+        SpawnChestSlots();
+        UpdateAllSlots();
+    }
+
+    void HideChest()
+    {
+        DestroyChestSlots();
+        chestUiObj.SetActive(false);
+    }
+
+    bool IsChestSlot(SlotUI slot)
+    {
+        if (chestUIs == null)
+            return false;
+
+        foreach(SlotUI ui in chestUIs)
+        {
+            if (slot == ui)
+                return true;
+        }
+
+        return false;
+    }
+
+    void UpdateSlot(int index, bool isChest)
+    {
+        Slot targetSlot = isChest ? service.currentCont.slots[index] : service.inventory.slots[index];
+        SlotUI toUpdate = isChest ? chestUIs[index] : slotUIs[index];
+
+        if (targetSlot.item != null)
+        {
+            toUpdate.ShowItem(targetSlot.item, targetSlot.count);
         }
         else
         {
-            slotUIs[index].ClearUI();
+            toUpdate.ClearUI();
         }
     }
 
@@ -106,25 +171,35 @@ public class InventoryUI : MonoBehaviour
     {
         for(int i = 0; i < slotUIs.Length; i++)
         {
-            UpdateSlot(i);
+            UpdateSlot(i, false);
+        }
+
+        if (chestUIs != null)
+        {
+            for (int i = 0; i < chestUIs.Length; i++)
+            {
+                UpdateSlot(i, true);
+            }
         }
     }
 
     void UpdateTooltip()
     {
-        if (tooltipIndex < 0)
+        if (tooltipSlot == null)
             return;
 
-        ShowTooltip(tooltipIndex);
+        ShowTooltip(tooltipSlot);
     }
 
-    public void ShowTooltip(int slotIndex)
+    public void ShowTooltip(SlotUI caller)
     {
         if (dragSlotShown)
             return;
 
-        ItemPreset item = service.slots[slotIndex].item;
-        int count = service.slots[slotIndex].count;
+        Slot slot = IsChestSlot(caller) ? service.currentCont.slots[caller.index] : service.inventory.slots[caller.index];
+
+        ItemPreset item = slot.item;
+        int count = slot.count;
 
         if (item != null && count > 0)
         {
@@ -132,7 +207,7 @@ public class InventoryUI : MonoBehaviour
 
             tooltip.gameObject.SetActive(true);
             tooltipShown = true;
-            tooltipIndex = slotIndex;
+            tooltipSlot = caller;
 
             LayoutRebuilder.ForceRebuildLayoutImmediate(tooltipTransform);
             tooltipTransform.anchoredPosition = GetTooltipNewAnchorPos();
@@ -147,7 +222,7 @@ public class InventoryUI : MonoBehaviour
     {
         tooltip.gameObject.SetActive(false);
         tooltipShown = false;
-        tooltipIndex = -1;
+        tooltipSlot = null;
     }
 
     public void ShowDragSlot()
@@ -178,26 +253,11 @@ public class InventoryUI : MonoBehaviour
 
     #region SlotUI_Mediators
 
-    public void AssignHoverIndex(int? index)
+    public void AssignHover(SlotUI caller)
     {
-        service.slotHoverIndex = index;
+        service.slotHoverIndex = !caller ? null : caller.index;
+        service.slotHoverChest = !caller ? false : IsChestSlot(caller);
     }
-    /*
-    public void UseItemFromSlot(int index)
-    {
-        service.UseItemAtSlot(index);
-    }
-
-    public void TryMoveItem(int index)
-    {
-        service.DragItemFromSlot(index);
-    }
-
-    public void DropIntoSlot(int index)
-    {
-        service.DropItemIntoSlot(index);
-    }
-    */
 
     #endregion
 
@@ -205,5 +265,11 @@ public class InventoryUI : MonoBehaviour
     {
         service.onContentsChanged -= UpdateAllSlots;
         service.onContentsChanged -= UpdateTooltip;
+
+        service.onDragStart -= ShowDragSlot;
+        service.onDragEnd -= HideDragSlot;
+
+        service.onNewContainer -= ShowChest;
+        service.onContainerLost -= HideChest;
     }
 }
