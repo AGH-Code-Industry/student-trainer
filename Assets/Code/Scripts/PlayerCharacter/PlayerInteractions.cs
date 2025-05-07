@@ -18,9 +18,16 @@ public class PlayerInteractions : MonoBehaviour
     // Called when there are no possible interactions
     public Action onInteractionLost;
 
+    PlayerAnimationController animController;
+    bool duringBlockingInter = false;
+
+    [Inject] readonly PlayerService playerService;
+
     // Start is called before the first frame update
     void Start()
     {
+        animController = GetComponent<PlayerAnimationController>();
+
         eventBus.Subscribe<PlayerInteractEvent>(OnInteract);
     }
 
@@ -110,7 +117,34 @@ public class PlayerInteractions : MonoBehaviour
         if (currentInteractable == null)
             return;
 
-        currentInteractable.Interact();
+        Vector3 interPosition = currentInteractable.GetTransform().position;
+
+        if(currentInteractable.IsBlocking())
+        {
+            if(!duringBlockingInter)
+            {
+                currentInteractable.Interact();
+                playerService.Freeze("interaction");
+                duringBlockingInter = true;
+
+                if (currentInteractable.ShouldPlayAnimation())
+                    animController.PlayInteractionAnim(interPosition);
+            }
+            else
+            {
+                currentInteractable.EndInteraction();
+                playerService.Unfreeze("interaction");
+                duringBlockingInter = false;
+            }
+        }
+        else
+        {
+            currentInteractable.Interact();
+
+            if (currentInteractable.ShouldPlayAnimation())
+                animController.PlayInteractionAnim(interPosition);
+        }
+
         onInteract?.Invoke();
     }
 

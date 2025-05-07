@@ -109,6 +109,11 @@ public class Door : MonoBehaviour, IInteractable
             StartCoroutine(CloseCoroutine());
     }
 
+    public void EndInteraction()
+    {
+        return;
+    }
+
     public bool InteractionAllowed()
     {
         return isUnlocked || playerHasReqItem;
@@ -140,5 +145,15 @@ public class Door : MonoBehaviour, IInteractable
 
         state = DoorState.Closed;
         onObjectChanged?.Invoke();
+    }
+
+    public bool IsBlocking()
+    {
+        return false;
+    }
+
+    public bool ShouldPlayAnimation()
+    {
+        return true;
     }
 }

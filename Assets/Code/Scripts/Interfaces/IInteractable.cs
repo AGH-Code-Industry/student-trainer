@@ -5,6 +5,7 @@
 public interface IInteractable
 {
     public void Interact();
+    public void EndInteraction();
     public string GetObjectName();
     // Co się robi z obiektem, np: [E] podnieś, [E] otwórz
     public string GetActionName();
@@ -17,4 +18,7 @@ public interface IInteractable
     public void FocusInteraction(bool isFocused);
     // Called when the inner state of the interactable object is changed, so that InteractionUI knows when to redraw
     public event System.Action onObjectChanged;
+
+    public bool IsBlocking();
+    public bool ShouldPlayAnimation();
 }

@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using Zenject;
+using System.Collections.Generic;
 
 public class PlayerService : IInitializable, IDisposable
 {
@@ -17,7 +18,21 @@ public class PlayerService : IInitializable, IDisposable
         }
     }
 
-    public bool frozen { get; private set; }
+    private List<string> freezes = new List<string>();
+
+    public bool Frozen
+    {
+        get
+        {
+            return freezes.Count > 0;
+        }
+
+        private set
+        {
+            return;
+        }
+    }
+
     public bool IsRunning { get; private set; }
     public Vector3 PlayerPosition { get; set; }
 
@@ -50,7 +65,7 @@ public class PlayerService : IInitializable, IDisposable
 
     public Vector3 GetMovementVector()
     {
-        if (frozen)
+        if (Frozen)
             return Vector3.zero;
 
         if(isPlayerGrounded)
@@ -75,7 +90,7 @@ public class PlayerService : IInitializable, IDisposable
 
     public Vector3 GetLookVector()
     {
-        if (!frozen)
+        if (!Frozen)
             _lastLookTarget = _input.GlobalLookTarget;
 
         return _lastLookTarget;
@@ -83,9 +98,17 @@ public class PlayerService : IInitializable, IDisposable
 
     public float GetRotationSpeed() { return _settings.rotationSpeed; }
 
-    public bool SetFreeze(bool _state) => frozen = _state;
-    public bool Freeze() => SetFreeze(true);
-    public bool Unfreeze() => SetFreeze(false);
+    public void Freeze(string freezeID)
+    {
+        if (!freezes.Contains(freezeID))
+            freezes.Add(freezeID);
+    }
+
+    public void Unfreeze(string freezeID)
+    {
+        if (freezes.Contains(freezeID))
+            freezes.Remove(freezeID);
+    }
 
     private void OnMove(PlayerMove playerMove)
     {

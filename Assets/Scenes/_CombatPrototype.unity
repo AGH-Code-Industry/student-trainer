@@ -4660,12 +4660,12 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1836451892}
   - {fileID: 1324084354}
   - {fileID: 656620047}
-  - {fileID: 420875408}
-  - {fileID: 1836451892}
-  - {fileID: 964796914203848926}
   - {fileID: 1902542506}
+  - {fileID: 420875408}
+  - {fileID: 964796914203848926}
   m_Father: {fileID: 1427663489}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -4768,6 +4768,7 @@ MonoBehaviour:
   _animator: {fileID: 113810598}
   _visibleModel: {fileID: 113810597}
   _interpolationSpeed: 15
+  interactionAnimDuration: 0.93
 --- !u!114 &1118514600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9077,8 +9078,8 @@ MonoBehaviour:
   m_StartAxis: 0
   m_CellSize: {x: 80, y: 80}
   m_Spacing: {x: 15, y: 15}
-  m_Constraint: 1
-  m_ConstraintCount: 10
+  m_Constraint: 2
+  m_ConstraintCount: 2
 --- !u!114 &1902542510
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9129,8 +9130,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HorizontalFit: 1
-  m_VerticalFit: 1
+  m_HorizontalFit: 2
+  m_VerticalFit: 2
 --- !u!1 &1918959826
 GameObject:
   m_ObjectHideFlags: 0

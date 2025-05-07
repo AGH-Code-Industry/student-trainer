@@ -39,6 +39,11 @@ public class InventoryUI : MonoBehaviour
 
         SpawnSlots();
 
+        SubEvents();
+    }
+
+    void SubEvents()
+    {
         service.onContentsChanged += UpdateAllSlots;
         service.onContentsChanged += UpdateTooltip;
 
@@ -47,6 +52,18 @@ public class InventoryUI : MonoBehaviour
 
         service.onNewContainer += ShowChest;
         service.onContainerLost += HideChest;
+    }
+
+    void UnsubEvents()
+    {
+        service.onContentsChanged -= UpdateAllSlots;
+        service.onContentsChanged -= UpdateTooltip;
+
+        service.onDragStart -= ShowDragSlot;
+        service.onDragEnd -= HideDragSlot;
+
+        service.onNewContainer -= ShowChest;
+        service.onContainerLost -= HideChest;
     }
 
     void FixedUpdate()
@@ -263,13 +280,6 @@ public class InventoryUI : MonoBehaviour
 
     private void OnDestroy()
     {
-        service.onContentsChanged -= UpdateAllSlots;
-        service.onContentsChanged -= UpdateTooltip;
-
-        service.onDragStart -= ShowDragSlot;
-        service.onDragEnd -= HideDragSlot;
-
-        service.onNewContainer -= ShowChest;
-        service.onContainerLost -= HideChest;
+        UnsubEvents();
     }
 }

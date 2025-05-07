@@ -62,7 +62,7 @@ public class PlayerCombat : MonoBehaviour, IDamageable
 
     void AttackStarted(string animationName)
     {
-        playerService.Freeze();
+        playerService.Freeze("combat");
         animationController.PlayAnimation(animationName);
     }
 
@@ -97,7 +97,7 @@ public class PlayerCombat : MonoBehaviour, IDamageable
 
     void RecoveryEnded()
     {
-        playerService.Unfreeze();
+        playerService.Unfreeze("combat");
     }
 
     #endregion

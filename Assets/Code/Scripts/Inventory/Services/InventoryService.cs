@@ -441,8 +441,13 @@ public class InventoryService : IInitializable, IDisposable
             return;
         }
 
-        ItemPreset item = cont.slots[slotIndex].item;
-        int count = cont.slots[slotIndex].count;
+        Slot sourceSlot = cont.slots[slotIndex];
+
+        if (sourceSlot.IsEmpty())
+            return;
+
+        ItemPreset item = sourceSlot.item;
+        int count = sourceSlot.count;
 
         int leftover = AddItemNoOverflow(item, count, destination);
 
@@ -497,13 +502,12 @@ public class InventoryService : IInitializable, IDisposable
         if (cont == null)
             cont = inventory;
 
-        onDragEnd?.Invoke();
-
         bool targetEmpty = cont.slots[slotIndex].item == null;
         if(targetEmpty)
         {
             cont.slots[slotIndex].AssignItem(draggedItem.item, draggedItem.count);
             draggedItem.ClearSlot();
+            onDragEnd?.Invoke();
             onContentsChanged?.Invoke();
             return;
         }
@@ -516,6 +520,7 @@ public class InventoryService : IInitializable, IDisposable
             if (!draggedItem.Stackable())
             {
                 draggedItem.ClearSlot();
+                onDragEnd?.Invoke();
                 onContentsChanged?.Invoke();
                 return;
             }
@@ -535,6 +540,7 @@ public class InventoryService : IInitializable, IDisposable
         }
 
         draggedItem.ClearSlot();
+        onDragEnd?.Invoke();
         onContentsChanged?.Invoke();
     }
 

@@ -19,15 +19,10 @@ public class Chest : MonoBehaviour, IInteractable
         container = new Container(containerSize, containerName);
     }
 
-    void Update()
-    {
-        if (Keyboard.current.rKey.wasPressedThisFrame)
-            service.ClearContainer();
-    }
-
     public void FocusInteraction(bool isFocused)
     {
-        // nothing...
+        if (!isFocused)
+            service.ClearContainer();
     }
 
     public string GetActionName()
@@ -37,7 +32,7 @@ public class Chest : MonoBehaviour, IInteractable
 
     public string GetObjectName()
     {
-        return "Skrzynia";
+        return containerName;
     }
 
     public Transform GetTransform()
@@ -50,7 +45,22 @@ public class Chest : MonoBehaviour, IInteractable
         service.SetContainer(container);
     }
 
+    public void EndInteraction()
+    {
+        service.ClearContainer();
+    }
+
     public bool InteractionAllowed()
+    {
+        return true;
+    }
+
+    public bool IsBlocking()
+    {
+        return true;
+    }
+
+    public bool ShouldPlayAnimation()
     {
         return true;
     }

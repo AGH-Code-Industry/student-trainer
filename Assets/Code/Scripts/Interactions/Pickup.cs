@@ -29,6 +29,11 @@ public class Pickup : MonoBehaviour, IInteractable
         Destroy(gameObject);
     }
 
+    public void EndInteraction()
+    {
+        return;
+    }
+
     public string GetObjectName()
     {
         string result = item.name;
@@ -54,4 +59,14 @@ public class Pickup : MonoBehaviour, IInteractable
     }
 
     public void FocusInteraction(bool isFocused) { }
+
+    public bool IsBlocking()
+    {
+        return false;
+    }
+
+    public bool ShouldPlayAnimation()
+    {
+        return false;
+    }
 }
