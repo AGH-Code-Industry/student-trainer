@@ -10,7 +10,7 @@ public class Pickup : MonoBehaviour, IInteractable
 
     [Inject] readonly InventoryService service;
 
-    public event System.Action onObjectChanged;
+    public event System.Action onObjectChanged, onInteractionDestroyed;
 
     void Start()
     {
@@ -21,6 +21,8 @@ public class Pickup : MonoBehaviour, IInteractable
     {
         
     }
+
+    public bool IsEnabled() => this.enabled;
 
     public void Interact()
     {

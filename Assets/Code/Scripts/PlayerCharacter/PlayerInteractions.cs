@@ -82,7 +82,8 @@ public class PlayerInteractions : MonoBehaviour
             GameObject rootGO = col.transform.root.gameObject;
             IInteractable interactionComponent = rootGO.GetComponent<IInteractable>();
             if (interactionComponent != null)
-                possibleInteractions.Add(rootGO);
+                if(interactionComponent.IsEnabled())
+                    possibleInteractions.Add(rootGO);
         }
 
         if(possibleInteractions.Count == 0)
@@ -127,14 +128,14 @@ public class PlayerInteractions : MonoBehaviour
                 playerService.Freeze("interaction");
                 duringBlockingInter = true;
 
+                currentInteractable.onInteractionDestroyed += EndBlockingInteraction;
+
                 if (currentInteractable.ShouldPlayAnimation())
                     animController.PlayInteractionAnim(interPosition);
             }
             else
             {
-                currentInteractable.EndInteraction();
-                playerService.Unfreeze("interaction");
-                duringBlockingInter = false;
+                EndBlockingInteraction();
             }
         }
         else
@@ -146,6 +147,15 @@ public class PlayerInteractions : MonoBehaviour
         }
 
         onInteract?.Invoke();
+    }
+
+    void EndBlockingInteraction()
+    {
+        currentInteractable.EndInteraction();
+        playerService.Unfreeze("interaction");
+        duringBlockingInter = false;
+
+        currentInteractable.onInteractionDestroyed -= EndBlockingInteraction;
     }
 
     private void OnDestroy()

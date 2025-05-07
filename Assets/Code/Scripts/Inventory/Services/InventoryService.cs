@@ -19,7 +19,7 @@ public class InventoryService : IInitializable, IDisposable
     public ItemPreset[] availableItems { get; private set; }
     public Container inventory { get; private set; }
     public Container currentCont { get; private set; } = null;
-
+    
     public Slot draggedItem { get; private set; }
     public int dragOriginIndex;
     public int? slotHoverIndex = null;
@@ -362,7 +362,7 @@ public class InventoryService : IInitializable, IDisposable
         Container target = slotHoverChest ? currentCont : inventory;
         if(target == null)
         {
-            Debug.LogError("InventoryService error at function SlotClick: slotHoverChest variable is true but current container is null!");
+            //Debug.LogError("InventoryService error at function SlotClick: slotHoverChest variable is true but current container is null!");
             return;
         }
 

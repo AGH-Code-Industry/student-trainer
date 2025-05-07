@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47b9b0f8f5647df429a3d86460df4d5b, type: 3}
   m_Name: SD_Settings
   m_EditorClassIdentifier: 
-  health: 100
+  health: 40
   moveSpeed: 4.5
   attacks: {fileID: 11400000, guid: 9db3dedd4c3253d45b7ced11415418f2, type: 2}
   detectionRange: 10

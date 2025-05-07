@@ -21,7 +21,7 @@ public class Door : MonoBehaviour, IInteractable
 
     bool interactionFocused = false;
 
-    public event System.Action onObjectChanged;
+    public event System.Action onObjectChanged, onInteractionDestroyed;
 
     enum DoorState
     {
@@ -52,6 +52,8 @@ public class Door : MonoBehaviour, IInteractable
             }
         }
     }
+
+    public bool IsEnabled() => this.enabled;
 
     public void FocusInteraction(bool isFocused) { interactionFocused = isFocused; }
 

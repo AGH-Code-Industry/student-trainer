@@ -9,15 +9,23 @@ public class Chest : MonoBehaviour, IInteractable
     [SerializeField] string containerName;
     [SerializeField] int containerSize;
 
-    Container container;
+    public Container container { get; private set; } = null;
     [Inject] readonly InventoryService service;
 
-    public event System.Action onObjectChanged;
+    public event System.Action onObjectChanged, onInteractionDestroyed;
 
-    void Start()
+    void Awake()
     {
-        container = new Container(containerSize, containerName);
+        CreateContainer(containerSize, containerName);
+        //Debug.Log($"{gameObject.name}: creating container (\"{containerName}\", size {containerSize})...");
     }
+
+    public void CreateContainer(int size, string name)
+    {
+        container = new Container(size, name);
+    }
+
+    public bool IsEnabled() => this.enabled;
 
     public void FocusInteraction(bool isFocused)
     {
@@ -63,5 +71,15 @@ public class Chest : MonoBehaviour, IInteractable
     public bool ShouldPlayAnimation()
     {
         return true;
+    }
+
+    void OnDisable()
+    {
+        onInteractionDestroyed?.Invoke();
+    }
+
+    void OnDestroy()
+    {
+        onInteractionDestroyed?.Invoke();
     }
 }

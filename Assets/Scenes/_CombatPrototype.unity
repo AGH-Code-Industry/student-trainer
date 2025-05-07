@@ -1885,6 +1885,7 @@ MonoBehaviour:
   - {fileID: 977421898}
   - {fileID: 1570127850}
   - {fileID: 134097582}
+  drops: []
 --- !u!195 &395918809
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1980,6 +1981,7 @@ MonoBehaviour:
   - {fileID: 1008324478}
   - {fileID: 2079030350}
   - {fileID: 247086087}
+  drops: []
 --- !u!195 &396131505
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -3429,6 +3431,7 @@ MonoBehaviour:
   - {fileID: 1790623837}
   - {fileID: 570740776}
   - {fileID: 575431937}
+  drops: []
 --- !u!195 &748428899
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -5834,6 +5837,7 @@ MonoBehaviour:
   - {fileID: 1461859142}
   - {fileID: 1226535031}
   - {fileID: 644499391}
+  drops: []
 --- !u!195 &1323754824
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -7578,6 +7582,10 @@ MonoBehaviour:
   - {fileID: 4376784602511086821}
   - {fileID: 4065491157715078036}
   - {fileID: 4987787304438140063}
+  drops:
+  - item: {fileID: 11400000, guid: 1c28e3099a5db2249b0ddc78d80894aa, type: 2}
+    amount: 1
+    dropChance: 100
 --- !u!136 &1657072728
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -10137,6 +10145,7 @@ GameObject:
   - component: {fileID: 1657072725}
   - component: {fileID: 1657072726}
   - component: {fileID: 1657072728}
+  - component: {fileID: 919132148590931429}
   m_Layer: 0
   m_Name: Student_Debil
   m_TagString: Untagged
@@ -10144,6 +10153,20 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &919132148590931429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 919132148590931428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13cb8338c83aa0b4ea6bafb6504cadbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  containerName: Student (K.O.)
+  containerSize: 4
 --- !u!4 &952076725628669834
 Transform:
   m_ObjectHideFlags: 0
