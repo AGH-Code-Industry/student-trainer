@@ -15,6 +15,7 @@ public class SceneService
     {
         LoadScene("Player");
         LoadAdditiveScene("Player UI");
-        LoadAdditiveScene("Student City");
+        //LoadAdditiveScene("Student City");
+        LoadAdditiveScene("LVL_1");
     }
 }

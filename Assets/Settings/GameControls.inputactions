@@ -33,15 +33,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Attack",
-                    "type": "Button",
-                    "id": "7750f95d-b067-448b-9d31-5ebfb10f5576",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
                     "name": "Run",
                     "type": "Button",
                     "id": "3cca49f4-dd10-4a43-882a-bafa363d72f5",
@@ -72,6 +63,24 @@
                     "name": "InventoryHotkey",
                     "type": "Button",
                     "id": "9f1dfaee-fc3f-452c-88ea-458ee5ed4a8e",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "MouseClick",
+                    "type": "Button",
+                    "id": "d14e8aa5-bb41-4a32-857f-d6a818c099a5",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Escape",
+                    "type": "Button",
+                    "id": "4748a678-b49a-4e8a-9ffa-d7ee65dc61d3",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -213,17 +222,6 @@
                 },
                 {
                     "name": "",
-                    "id": "39b0de7f-dcf9-48a8-8bd3-d952635a000e",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Attack",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "060044b6-864a-4b09-b34c-ff377c827fe0",
                     "path": "<Keyboard>/leftShift",
                     "interactions": "",
@@ -362,6 +360,50 @@
                     "processors": "",
                     "groups": ";Keyboard",
                     "action": "InventoryHotkey",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1ac87350-4414-4f04-97a0-359b480b2527",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard",
+                    "action": "MouseClick",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d1cdab5b-3a1b-4c03-a2d1-eef6bee9c07f",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard",
+                    "action": "MouseClick",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "359487d6-8ecb-4f59-a7f2-5cba3b216008",
+                    "path": "<Mouse>/middleButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard",
+                    "action": "MouseClick",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "987c367a-0988-4bc8-9060-5875a51639d0",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Escape",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

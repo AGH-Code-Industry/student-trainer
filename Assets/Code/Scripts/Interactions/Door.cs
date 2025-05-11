@@ -12,6 +12,8 @@ public class Door : MonoBehaviour, IInteractable
     [SerializeField] ItemPreset itemRequiredToOpen = null;
     [SerializeField] bool dontRemoveAfterUse = false;
 
+    [SerializeField] RoomRevealer roomFogController;
+
     [Inject] readonly InventoryService invService;
 
     bool isUnlocked = true;
@@ -19,7 +21,7 @@ public class Door : MonoBehaviour, IInteractable
 
     bool interactionFocused = false;
 
-    public event System.Action onObjectChanged;
+    public event System.Action onObjectChanged, onInteractionDestroyed;
 
     enum DoorState
     {
@@ -50,6 +52,8 @@ public class Door : MonoBehaviour, IInteractable
             }
         }
     }
+
+    public bool IsEnabled() => this.enabled;
 
     public void FocusInteraction(bool isFocused) { interactionFocused = isFocused; }
 
@@ -107,6 +111,11 @@ public class Door : MonoBehaviour, IInteractable
             StartCoroutine(CloseCoroutine());
     }
 
+    public void EndInteraction()
+    {
+        return;
+    }
+
     public bool InteractionAllowed()
     {
         return isUnlocked || playerHasReqItem;
@@ -114,6 +123,9 @@ public class Door : MonoBehaviour, IInteractable
 
     IEnumerator OpenCoroutine()
     {
+        if (roomFogController)
+            roomFogController.Reveal();
+
         state = DoorState.Moving;
         anim.SetTrigger("open");
 
@@ -125,6 +137,9 @@ public class Door : MonoBehaviour, IInteractable
 
     IEnumerator CloseCoroutine()
     {
+        if (roomFogController)
+            roomFogController.Hide();
+
         state = DoorState.Moving;
         anim.SetTrigger("close");
 
@@ -132,5 +147,15 @@ public class Door : MonoBehaviour, IInteractable
 
         state = DoorState.Closed;
         onObjectChanged?.Invoke();
+    }
+
+    public bool IsBlocking()
+    {
+        return false;
+    }
+
+    public bool ShouldPlayAnimation()
+    {
+        return true;
     }
 }

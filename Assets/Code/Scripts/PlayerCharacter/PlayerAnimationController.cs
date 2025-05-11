@@ -1,5 +1,6 @@
 using UnityEngine;
 using Zenject;
+using System.Collections;
 
 public class PlayerAnimationController : MonoBehaviour
 {
@@ -13,13 +14,16 @@ public class PlayerAnimationController : MonoBehaviour
     float _currentX = 0, _currentY = 0;
     [SerializeField] float _interpolationSpeed = 5f;
 
+    private bool interactionPlaying = false;
+    [SerializeField] private float interactionAnimDuration = 0.633f;
+
     [Inject] readonly PlayerService _movement;
     [Inject] readonly EventBus _eventBus;
     [Inject] readonly InputService _inputService;
 
     void Start()
     {
-        _eventBus.Subscribe<PlayerAttack>(OnAttack);
+        _eventBus.Subscribe<MouseClickUncaught>(OnAttack);
         _eventBus.Subscribe<PlayerDodge>(OnDodge);
     }
 
@@ -59,35 +63,34 @@ public class PlayerAnimationController : MonoBehaviour
     {
         if (playerDodge.ctx.started)
         {
-            _animator.Play("Roll");
+            PlayAnimation("Roll");
         }
     }
 
-    private void OnAttack(PlayerAttack playerAttack)
+    private void OnAttack(MouseClickEvent click)
     {
-        if (playerAttack.ctx.started)
-        {
+        bool isClickValid = click.ctx.started && click.button == MouseClickEvent.MouseButton.Left;
+
+        if (isClickValid)
             FaceMouse();
-        }
+    }
+
+    void FacePosition(Vector3 pos)
+    {
+        Vector3 direction = (pos - transform.position).normalized;
+        direction.y = 0;
+
+        if (direction != Vector3.zero)
+            transform.rotation = Quaternion.LookRotation(direction);
+        else
+            transform.rotation = Quaternion.Euler(Vector3.zero);
     }
 
     void FaceMouse()
     {
         var lookVector = _inputService.MouseDownPosition;
 
-        var direction = (lookVector - transform.position).normalized;
-        direction.y = 0;
-
-        transform.rotation = Quaternion.LookRotation(direction);
-
-        // Vector3 direction = lookVector - transform.position;
-        // Quaternion lookRot = Quaternion.LookRotation(direction, _visibleModel.up);
-        // Vector3 euler = lookRot.eulerAngles;
-        // euler.x = 0; euler.z = 0;
-        // _currentModelRotation = Quaternion.Euler(euler);
-
-        // _visibleModel.rotation = _currentModelRotation;
-        //_visibleModel.eulerAngles = euler;
+        FacePosition(lookVector);
     }
 
     public void PlayAnimation(string animName)
@@ -95,9 +98,30 @@ public class PlayerAnimationController : MonoBehaviour
         _animator.CrossFade(animName, 0.2f);
     }
 
+    public void PlayInteractionAnim(Vector3 sourcePosition)
+    {
+        if (!interactionPlaying)
+        {
+            FacePosition(sourcePosition);
+            StartCoroutine(InteractionAnim());
+        }
+    }
+
+    private IEnumerator InteractionAnim()
+    {
+        interactionPlaying = true;
+        _movement.Freeze("interactionAnim");
+        PlayAnimation("Interact");
+
+        yield return new WaitForSeconds(interactionAnimDuration);
+
+        _movement.Unfreeze("interactionAnim");
+        interactionPlaying = false;
+    }
+
     void OnDestroy()
     {
-        _eventBus.Unsubscribe<PlayerAttack>(OnAttack);
+        _eventBus.Unsubscribe<MouseClickUncaught>(OnAttack);
         _eventBus.Unsubscribe<PlayerDodge>(OnDodge);
 
     }

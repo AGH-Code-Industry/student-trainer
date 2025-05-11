@@ -1,9 +1,19 @@
 fileFormatVersion: 2
-guid: c41fab7d99b4abe4585af9932781d45d
+guid: 02bd2b37596b356418298dfd683ac34b
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Vertex
+    second: {fileID: -876546973899608171, guid: 4de0f8aa0bde056458a944d830c01a81, type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Vertex_metal
+    second: {fileID: -876546973899608171, guid: 255a7f3242192d142ba78f1aeea3ee82, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -35,7 +45,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 115
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -90,7 +100,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 1
+    globalScale: 1.15
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0

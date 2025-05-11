@@ -18,9 +18,16 @@ public class PlayerInteractions : MonoBehaviour
     // Called when there are no possible interactions
     public Action onInteractionLost;
 
+    PlayerAnimationController animController;
+    bool duringBlockingInter = false;
+
+    [Inject] readonly PlayerService playerService;
+
     // Start is called before the first frame update
     void Start()
     {
+        animController = GetComponent<PlayerAnimationController>();
+
         eventBus.Subscribe<PlayerInteractEvent>(OnInteract);
     }
 
@@ -75,7 +82,8 @@ public class PlayerInteractions : MonoBehaviour
             GameObject rootGO = col.transform.root.gameObject;
             IInteractable interactionComponent = rootGO.GetComponent<IInteractable>();
             if (interactionComponent != null)
-                possibleInteractions.Add(rootGO);
+                if(interactionComponent.IsEnabled())
+                    possibleInteractions.Add(rootGO);
         }
 
         if(possibleInteractions.Count == 0)
@@ -110,8 +118,44 @@ public class PlayerInteractions : MonoBehaviour
         if (currentInteractable == null)
             return;
 
-        currentInteractable.Interact();
+        Vector3 interPosition = currentInteractable.GetTransform().position;
+
+        if(currentInteractable.IsBlocking())
+        {
+            if(!duringBlockingInter)
+            {
+                currentInteractable.Interact();
+                playerService.Freeze("interaction");
+                duringBlockingInter = true;
+
+                currentInteractable.onInteractionDestroyed += EndBlockingInteraction;
+
+                if (currentInteractable.ShouldPlayAnimation())
+                    animController.PlayInteractionAnim(interPosition);
+            }
+            else
+            {
+                EndBlockingInteraction();
+            }
+        }
+        else
+        {
+            currentInteractable.Interact();
+
+            if (currentInteractable.ShouldPlayAnimation())
+                animController.PlayInteractionAnim(interPosition);
+        }
+
         onInteract?.Invoke();
+    }
+
+    void EndBlockingInteraction()
+    {
+        currentInteractable.EndInteraction();
+        playerService.Unfreeze("interaction");
+        duringBlockingInter = false;
+
+        currentInteractable.onInteractionDestroyed -= EndBlockingInteraction;
     }
 
     private void OnDestroy()

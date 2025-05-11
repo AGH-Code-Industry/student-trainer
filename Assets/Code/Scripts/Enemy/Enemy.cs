@@ -28,6 +28,9 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private EnemyState currentState;
     [Inject] public readonly PlayerService playerMovementService;
+    [Inject] public readonly InventoryService invService;
+
+    public EnemyItemDrop[] drops;
 
     private void Start()
     {
@@ -47,6 +50,10 @@ public class Enemy : MonoBehaviour, IDamageable
         SetAttackRange(minAttackRange);
 
         health = settings.health;
+
+        Chest dropChest;
+        if (TryGetComponent<Chest>(out dropChest))
+            dropChest.enabled = false;
 
         ChangeState(new IdleState(this));
     }
@@ -148,4 +155,14 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         animator.CrossFade(name, ANIMATION_MIX_SPEED);
     }
+}
+
+[System.Serializable]
+public struct EnemyItemDrop
+{
+    public ItemPreset item;
+    public int amount;
+
+    [Range(0, 100)]
+    public float dropChance;
 }

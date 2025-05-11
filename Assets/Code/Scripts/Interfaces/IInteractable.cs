@@ -4,7 +4,10 @@
 // Scripts implementing this interface should always be present at the ROOT of the interactable object
 public interface IInteractable
 {
+    public bool IsEnabled();
+
     public void Interact();
+    public void EndInteraction();
     public string GetObjectName();
     // Co się robi z obiektem, np: [E] podnieś, [E] otwórz
     public string GetActionName();
@@ -16,5 +19,8 @@ public interface IInteractable
     // Tells the interactable object if it currently is the "possible" interaction
     public void FocusInteraction(bool isFocused);
     // Called when the inner state of the interactable object is changed, so that InteractionUI knows when to redraw
-    public event System.Action onObjectChanged;
+    public event System.Action onObjectChanged, onInteractionDestroyed;
+
+    public bool IsBlocking();
+    public bool ShouldPlayAnimation();
 }

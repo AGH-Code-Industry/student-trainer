@@ -100,4 +100,5 @@ public class Slot
     // Shortcut functions
     public int MaxStack() { return item.maxStackSize; }
     public bool Stackable() { return item.maxStackSize > 1; }
+    public bool IsEmpty() { return item == null || count <= 0; }
 }
