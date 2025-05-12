@@ -65,7 +65,7 @@ ModelImporter:
       name: kapitol_alpha
     second: {fileID: 2100000, guid: b486b0f4fc13bf043b0fb72cf7675bc9, type: 2}
   materials:
-    materialImportMode: 2
+    materialImportMode: 0
     materialName: 0
     materialSearch: 1
     materialLocation: 1
