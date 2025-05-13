@@ -56,6 +56,9 @@ public class PlayerService : IInitializable, IDisposable
 
         _eventBus.Subscribe<PlayerMove>(OnMove);
         _eventBus.Subscribe<PlayerRun>(OnRun);
+
+        _eventBus.Subscribe<LevelChangeBegin>(FreezeLevelChange);
+        _eventBus.Subscribe<LevelChangeFinish>(UnfreezeLevelChange);
     }
 
     public void CheckIfGrounded()
@@ -98,6 +101,9 @@ public class PlayerService : IInitializable, IDisposable
 
     public float GetRotationSpeed() { return _settings.rotationSpeed; }
 
+    public void FreezeLevelChange(LevelChangeBegin beingEvent) => Freeze("levelChange");
+    public void UnfreezeLevelChange(LevelChangeFinish finishEvent) => Unfreeze("levelChange");
+
     public void Freeze(string freezeID)
     {
         if (!freezes.Contains(freezeID))
@@ -125,5 +131,8 @@ public class PlayerService : IInitializable, IDisposable
     {
         _eventBus.Unsubscribe<PlayerMove>(OnMove);
         _eventBus.Unsubscribe<PlayerRun>(OnRun);
+
+        _eventBus.Unsubscribe<LevelChangeBegin>(FreezeLevelChange);
+        _eventBus.Unsubscribe<LevelChangeFinish>(UnfreezeLevelChange);
     }
 }

@@ -115,7 +115,7 @@ public class PlayerInteractions : MonoBehaviour
         if (!ev.ctx.performed)
             return;
 
-        if (currentInteractable == null)
+        if (currentInteractable == null || !currentInteractable.InteractionAllowed())
             return;
 
         Vector3 interPosition = currentInteractable.GetTransform().position;

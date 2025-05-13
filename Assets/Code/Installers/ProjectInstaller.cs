@@ -8,7 +8,9 @@ public class ProjectInstaller : MonoInstaller
         Container.BindInterfacesAndSelfTo<InputService>().AsSingle();
         Container.BindInterfacesAndSelfTo<EventBus>().AsSingle();
         Container.BindInterfacesAndSelfTo<SceneService>().AsSingle();
+        Container.BindInterfacesAndSelfTo<LevelService>().AsSingle();
         Container.BindInterfacesAndSelfTo<ResourceReader>().AsSingle();
+        Container.BindInterfacesAndSelfTo<GameService>().AsSingle();
 
         Container.BindInterfacesAndSelfTo<DayNightCycleService>().AsSingle();
         Container.BindInterfacesAndSelfTo<CameraService>().AsSingle();

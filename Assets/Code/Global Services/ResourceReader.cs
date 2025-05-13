@@ -16,6 +16,7 @@ public class ResourceReader
         { typeof(ComboList), "PlayerComboList"},
         { typeof(ItemPreset), "Items"},
         { typeof(InventorySettings), "InventorySettings"},
+        { typeof(GameLevels), "GameLevels"},
     };
 
     public IEnumerable<T> ReadAllSettings<T>() where T : ScriptableObject

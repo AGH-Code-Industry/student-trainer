@@ -9,11 +9,6 @@ public class PlayerMovement : MonoBehaviour
 
     [Inject] readonly PlayerService _service;
 
-    private void Awake()
-    {
-
-    }
-
     private void Start()
     {
         _controller = GetComponent<CharacterController>();

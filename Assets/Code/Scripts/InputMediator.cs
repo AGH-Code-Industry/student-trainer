@@ -24,6 +24,9 @@ public class InputMediator : MonoBehaviour
 
     void MousePos()
     {
+        if (Camera.main == null)
+            return;
+
         Ray cameraRay = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (groundPlane.Raycast(cameraRay, out float enter))
         {

@@ -6,17 +6,20 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Loader.unity
+    guid: a0ec6e245579959499bf3264fa5b9be9
+  - enabled: 1
     path: Assets/Scenes/Menu.unity
     guid: 7e4cfd991d8d13c4d92b4acd28401654
-  - enabled: 1
-    path: Assets/Scenes/Student City.unity
-    guid: 71b3bdd4435bac0459bfcdde351f4315
   - enabled: 1
     path: Assets/Scenes/Player.unity
     guid: 234b0520a013b01458aca8ec234d5967
   - enabled: 1
     path: Assets/Scenes/Player UI.unity
     guid: b4866ccd08c632e4eb2065f69d92810d
+  - enabled: 1
+    path: Assets/Scenes/Student City.unity
+    guid: 71b3bdd4435bac0459bfcdde351f4315
   - enabled: 1
     path: Assets/Scenes/LVL_1.unity
     guid: c15292410eac7704cb1ebdb76c29f3ab

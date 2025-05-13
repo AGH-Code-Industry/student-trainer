@@ -149,7 +149,7 @@ Transform:
   m_GameObject: {fileID: 196698246}
   serializedVersion: 2
   m_LocalRotation: {x: 0.5, y: 0, z: 0, w: 0.8660254}
-  m_LocalPosition: {x: 2.84, y: 87.70254, z: -56.84}
+  m_LocalPosition: {x: 2.84, y: 27.080761, z: -21.84}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -179,8 +179,8 @@ MonoBehaviour:
   m_Lens:
     FieldOfView: 50
     OrthographicSize: 10
-    NearClipPlane: 0.1
-    FarClipPlane: 5000
+    NearClipPlane: 0.5
+    FarClipPlane: 500
     Dutch: 0
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
@@ -209,8 +209,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Width: 13
   m_Damping: 1
-  m_MinFOV: 6
-  m_MaxFOV: 65
+  m_MinFOV: 8
+  m_MaxFOV: 80
 --- !u!1 &249133842
 GameObject:
   m_ObjectHideFlags: 0
@@ -449,7 +449,7 @@ MonoBehaviour:
   m_TargetMovementOnly: 0
   m_ScreenX: 0.5
   m_ScreenY: 0.5
-  m_CameraDistance: 100
+  m_CameraDistance: 30
   m_DeadZoneWidth: 0
   m_DeadZoneHeight: 0
   m_DeadZoneDepth: 0
@@ -568,17 +568,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 8485259558556935153, guid: e262462891fb344419df3750e40e64ff, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8485259558556935153, guid: e262462891fb344419df3750e40e64ff, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8485259558556935153, guid: e262462891fb344419df3750e40e64ff, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1
+    - target: {fileID: 7341772453502388070, guid: e262462891fb344419df3750e40e64ff, type: 3}
+      propertyPath: interactionAnimDuration
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 8485259558556935153, guid: e262462891fb344419df3750e40e64ff, type: 3}
       propertyPath: m_LocalPosition.x
@@ -873,5 +865,5 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1152752595}
-  - {fileID: 1389682287517036610}
   - {fileID: 249133843}
+  - {fileID: 1389682287517036610}
