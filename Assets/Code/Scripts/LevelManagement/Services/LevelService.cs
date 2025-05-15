@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
@@ -44,7 +44,7 @@ public class LevelService : IInitializable
 
     private IEnumerator LoadMenuCoroutine()
     {
-        bus.Publish(new LevelChangeBegin("Main menu"));
+        bus.Publish(new LevelChangeBegin("Menu główne"));
         
         AsyncOperation[] ops = sceneService.LoadSceneList(levelSettings.menuScenes).ToArray();
 
@@ -82,7 +82,7 @@ public class LevelService : IInitializable
 
             progress /= ops.Length;
 
-            bus.Publish(new LevelChangeProgress("Loading menu scenes", progress, progress));
+            bus.Publish(new LevelChangeProgress("Ładowanie sceny menu", progress, progress));
 
             yield return null;
         }
@@ -99,7 +99,7 @@ public class LevelService : IInitializable
 
     private IEnumerator LoadGameCoroutine()
     {
-        bus.Publish(new LevelChangeBegin("Game"));
+        bus.Publish(new LevelChangeBegin("Gra"));
 
         List<AsyncOperation> ops = new List<AsyncOperation>();
 
@@ -136,7 +136,7 @@ public class LevelService : IInitializable
 
             progress /= ops.Count;
 
-            bus.Publish(new LevelChangeProgress("Loading game", progress, progress));
+            bus.Publish(new LevelChangeProgress("Ładowanie gry", progress, progress));
 
             yield return null;
         }
@@ -163,7 +163,7 @@ public class LevelService : IInitializable
             AsyncOperation unloadOp = sceneService.UnloadScene(currentLevel);
             while(!unloadOp.isDone)
             {
-                bus.Publish(new LevelChangeProgress("Unloading previous level", unloadOp.progress, unloadOp.progress));
+                bus.Publish(new LevelChangeProgress("Czyszczenie poprzedniego poziomu", unloadOp.progress, unloadOp.progress));
                 yield return null;
             }
         }
@@ -174,7 +174,7 @@ public class LevelService : IInitializable
         while(!done)
         {
             done = loadOp.isDone && loadedScene.IsValid() && loadedScene.isLoaded;
-            bus.Publish(new LevelChangeProgress("Loading new level", loadOp.progress, loadOp.progress));
+            bus.Publish(new LevelChangeProgress("Ładowanie kolejnego poziomu", loadOp.progress, loadOp.progress));
             yield return null;
         }
 

@@ -570,7 +570,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7341772453502388070, guid: e262462891fb344419df3750e40e64ff, type: 3}
       propertyPath: interactionAnimDuration
-      value: 0.7
+      value: 0.8
       objectReference: {fileID: 0}
     - target: {fileID: 8485259558556935153, guid: e262462891fb344419df3750e40e64ff, type: 3}
       propertyPath: m_LocalPosition.x

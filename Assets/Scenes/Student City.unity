@@ -18217,7 +18217,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13cb8338c83aa0b4ea6bafb6504cadbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  containerName: Kosz
+  containerName: "\u015Amietnik"
   containerSize: 4
 --- !u!4 &1020274800
 Transform:
