@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 1017915164935687477}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.65, y: 1.195, z: 0}
+  m_LocalPosition: {x: -0.631, y: 1.186, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -190,8 +190,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.1, y: 1.2980677, z: 2.3901505}
-  m_Center: {x: -0.0029277608, y: 0.649034, z: 0.000000019255465}
+  m_Size: {x: 0.1, y: 1.2636688, z: 2.3268116}
+  m_Center: {x: -0.0028502082, y: 0.63183457, z: 0.000000018745194}
 --- !u!1 &3581606267137462743
 GameObject:
   m_ObjectHideFlags: 0
@@ -241,3 +241,4 @@ MonoBehaviour:
   gfxTransform: {fileID: 5761421697657686326}
   itemRequiredToOpen: {fileID: 0}
   dontRemoveAfterUse: 0
+  roomFogController: {fileID: 0}

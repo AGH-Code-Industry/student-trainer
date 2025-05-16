@@ -22,7 +22,10 @@ public class LevelService : IInitializable
         mediatorObj = Object.FindObjectOfType<LevelChanger>();
         if (mediatorObj == null)
         {
+            // This warning should only show in dev builds
+            #if !UNITY_EDITOR
             Debug.LogError("LevelService: could not find the LevelChanger object, and thus cannot call the level change coroutine!");
+            #endif
             return;
         }
 
