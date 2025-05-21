@@ -1383,6 +1383,92 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -6025348216881245907, guid: 37e1c906f73a1d741bddc691657d7668, type: 3}
+--- !u!1001 &100532199
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7087782767962077386, guid: 6d9a0bde83e2d3f49b70b04e8bae4f85, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.24915767
+      objectReference: {fileID: 0}
+    - target: {fileID: 7087782767962077386, guid: 6d9a0bde83e2d3f49b70b04e8bae4f85, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.59137154
+      objectReference: {fileID: 0}
+    - target: {fileID: 7087782767962077386, guid: 6d9a0bde83e2d3f49b70b04e8bae4f85, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 4.1482277
+      objectReference: {fileID: 0}
+    - target: {fileID: 7087782767962077386, guid: 6d9a0bde83e2d3f49b70b04e8bae4f85, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7087782767962077386, guid: 6d9a0bde83e2d3f49b70b04e8bae4f85, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7087782767962077386, guid: 6d9a0bde83e2d3f49b70b04e8bae4f85, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7087782767962077386, guid: 6d9a0bde83e2d3f49b70b04e8bae4f85, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7087782767962077386, guid: 6d9a0bde83e2d3f49b70b04e8bae4f85, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7087782767962077386, guid: 6d9a0bde83e2d3f49b70b04e8bae4f85, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7087782767962077386, guid: 6d9a0bde83e2d3f49b70b04e8bae4f85, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7572534988306113136, guid: 6d9a0bde83e2d3f49b70b04e8bae4f85, type: 3}
+      propertyPath: m_Name
+      value: Enemy
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7572534988306113136, guid: 6d9a0bde83e2d3f49b70b04e8bae4f85, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 100532201}
+  m_SourcePrefab: {fileID: 100100000, guid: 6d9a0bde83e2d3f49b70b04e8bae4f85, type: 3}
+--- !u!1 &100532200 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7572534988306113136, guid: 6d9a0bde83e2d3f49b70b04e8bae4f85, type: 3}
+  m_PrefabInstance: {fileID: 100532199}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &100532201
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100532200}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 2
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &100908282 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -3267856966951603031, guid: 37e1c906f73a1d741bddc691657d7668, type: 3}
@@ -8037,7 +8123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f87d1787c90d1248abef6088c0912a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelIndex: LVL_1
+  levelIndex: LOBBY
   visibleName: Kapitol
   spawnName: SP_FROM_CITY
 --- !u!65 &532952700
@@ -27274,7 +27360,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.16666667
+  m_VoxelSize: 0.1
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: fc512d4f25a1ca645b0c324f8e791791, type: 2}
   m_BuildHeightMesh: 0
@@ -35369,3 +35455,4 @@ SceneRoots:
   - {fileID: 884195523}
   - {fileID: 1902933136}
   - {fileID: 532952701}
+  - {fileID: 100532199}

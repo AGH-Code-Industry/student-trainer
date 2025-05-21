@@ -23,9 +23,9 @@ public class LevelService : IInitializable
         if (mediatorObj == null)
         {
             // This warning should only show in dev builds
-            #if !UNITY_EDITOR
+#if !UNITY_EDITOR
             Debug.LogError("LevelService: could not find the LevelChanger object, and thus cannot call the level change coroutine!");
-            #endif
+#endif
             return;
         }
 
@@ -48,36 +48,36 @@ public class LevelService : IInitializable
     private IEnumerator LoadMenuCoroutine()
     {
         bus.Publish(new LevelChangeBegin("Menu główne"));
-        
+
         AsyncOperation[] ops = sceneService.LoadSceneList(levelSettings.menuScenes).ToArray();
 
         List<Scene> requiredScenes = new List<Scene>();
 
-        foreach(string scene in levelSettings.menuScenes)
+        foreach (string scene in levelSettings.menuScenes)
         {
             requiredScenes.Add(SceneManager.GetSceneByName(scene));
         }
 
         bool done = false;
         float progress = 0f;
-        while(!done)
+        while (!done)
         {
             done = true;
             foreach (AsyncOperation op in ops)
             {
-                if(!op.isDone)
+                if (!op.isDone)
                 {
                     done = false;
                     break;
                 }
             }
 
-            foreach(AsyncOperation op in ops)
+            foreach (AsyncOperation op in ops)
             {
                 progress += op.progress;
             }
 
-            foreach(Scene sc in requiredScenes)
+            foreach (Scene sc in requiredScenes)
             {
                 if (!sc.IsValid() || !sc.isLoaded)
                     done = false;
@@ -119,20 +119,20 @@ public class LevelService : IInitializable
 
         bool done = false;
         float progress = 0f;
-        while(!done)
+        while (!done)
         {
             done = true;
 
-            foreach(AsyncOperation op in ops)
+            foreach (AsyncOperation op in ops)
             {
-                if(!op.isDone)
+                if (!op.isDone)
                 {
                     done = false;
                     break;
                 }
             }
 
-            foreach(AsyncOperation op in ops)
+            foreach (AsyncOperation op in ops)
             {
                 progress += op.progress;
             }
@@ -161,10 +161,10 @@ public class LevelService : IInitializable
     {
         bus.Publish(new LevelChangeBegin(levelName));
 
-        if(!string.IsNullOrEmpty(currentLevel))
+        if (!string.IsNullOrEmpty(currentLevel))
         {
             AsyncOperation unloadOp = sceneService.UnloadScene(currentLevel);
-            while(!unloadOp.isDone)
+            while (!unloadOp.isDone)
             {
                 bus.Publish(new LevelChangeProgress("Czyszczenie poprzedniego poziomu", unloadOp.progress, unloadOp.progress));
                 yield return null;
@@ -174,7 +174,7 @@ public class LevelService : IInitializable
         AsyncOperation loadOp = sceneService.LoadScene(levelName);
         Scene loadedScene = SceneManager.GetSceneByName(levelName);
         bool done = false;
-        while(!done)
+        while (!done)
         {
             done = loadOp.isDone && loadedScene.IsValid() && loadedScene.isLoaded;
             bus.Publish(new LevelChangeProgress("Ładowanie kolejnego poziomu", loadOp.progress, loadOp.progress));

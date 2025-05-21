@@ -40,13 +40,13 @@ public class PlayerInteractions : MonoBehaviour
 
     void AssignCurrent(IInteractable interactable)
     {
-        if(interactable == null && currentInteractable != null)
+        if (interactable == null && currentInteractable != null)
         {
             currentInteractable.FocusInteraction(false);
             currentInteractable = null;
             onInteractionLost?.Invoke();
         }
-        else if(currentInteractable != interactable)
+        else if (currentInteractable != interactable)
         {
             currentInteractable = interactable;
             currentInteractable.FocusInteraction(true);
@@ -71,7 +71,7 @@ public class PlayerInteractions : MonoBehaviour
 
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, interactionRadius);
 
-        if(hitColliders.Length == 0)
+        if (hitColliders.Length == 0)
         {
             return null;
         }
@@ -79,28 +79,36 @@ public class PlayerInteractions : MonoBehaviour
         List<GameObject> possibleInteractions = new List<GameObject>();
         foreach (Collider col in hitColliders)
         {
-            GameObject rootGO = col.transform.root.gameObject;
-            IInteractable interactionComponent = rootGO.GetComponent<IInteractable>();
+            IInteractable interactionComponent = col.gameObject.GetComponent<IInteractable>();
+            IInteractable parentInteractionComponent = col.gameObject.GetComponentInParent<IInteractable>();
+
             if (interactionComponent != null)
-                if(interactionComponent.IsEnabled())
-                    possibleInteractions.Add(rootGO);
+            {
+                if (interactionComponent.IsEnabled())
+                    possibleInteractions.Add(col.gameObject);
+            }
+            else if (parentInteractionComponent != null)
+            {
+                if (parentInteractionComponent.IsEnabled())
+                    possibleInteractions.Add(col.transform.parent.gameObject);
+            }
         }
 
-        if(possibleInteractions.Count == 0)
+        if (possibleInteractions.Count == 0)
         {
             return null;
         }
-        else if(possibleInteractions.Count == 1)
+        else if (possibleInteractions.Count == 1)
         {
             return possibleInteractions[0].GetComponent<IInteractable>();
         }
 
         float closestDistance = Vector3.Distance(transform.position, possibleInteractions[0].transform.position);
         GameObject closestInteractable = possibleInteractions[0];
-        for(int i = 1; i < possibleInteractions.Count; i++)
+        for (int i = 1; i < possibleInteractions.Count; i++)
         {
             float dist = Vector3.Distance(transform.position, possibleInteractions[i].transform.position);
-            if(dist < closestDistance)
+            if (dist < closestDistance)
             {
                 closestDistance = dist;
                 closestInteractable = possibleInteractions[i];
@@ -120,9 +128,9 @@ public class PlayerInteractions : MonoBehaviour
 
         Vector3 interPosition = currentInteractable.GetTransform().position;
 
-        if(currentInteractable.IsBlocking())
+        if (currentInteractable.IsBlocking())
         {
-            if(!duringBlockingInter)
+            if (!duringBlockingInter)
             {
                 currentInteractable.Interact();
                 playerService.Freeze("interaction");

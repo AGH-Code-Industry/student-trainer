@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using Zenject;
 
 public class Door : MonoBehaviour, IInteractable
@@ -13,6 +14,7 @@ public class Door : MonoBehaviour, IInteractable
     [SerializeField] bool dontRemoveAfterUse = false;
 
     [SerializeField] RoomRevealer roomFogController;
+    public UnityEvent DoorOpening, DoorClosing;
 
     [Inject] readonly InventoryService invService;
 
@@ -22,6 +24,7 @@ public class Door : MonoBehaviour, IInteractable
     bool interactionFocused = false;
 
     public event System.Action onObjectChanged, onInteractionDestroyed;
+
 
     enum DoorState
     {
@@ -42,15 +45,26 @@ public class Door : MonoBehaviour, IInteractable
     // Update is called once per frame
     void Update()
     {
-        if(interactionFocused)
+        if (interactionFocused)
         {
             bool hasItem = invService.HasItem(itemRequiredToOpen);
-            if(hasItem != playerHasReqItem)
+            if (hasItem != playerHasReqItem)
             {
                 playerHasReqItem = hasItem;
                 onObjectChanged?.Invoke();
             }
         }
+    }
+
+
+    public void OnDoorOpening()
+    {
+        DoorOpening?.Invoke();
+    }
+
+    public void OnDoorClosing()
+    {
+        DoorClosing?.Invoke();
     }
 
     public bool IsEnabled() => this.enabled;
@@ -90,9 +104,9 @@ public class Door : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        if(!isUnlocked)
+        if (!isUnlocked)
         {
-            if(playerHasReqItem)
+            if (playerHasReqItem)
             {
                 if (!dontRemoveAfterUse)
                     invService.RemoveItem(itemRequiredToOpen, 1);
@@ -148,6 +162,8 @@ public class Door : MonoBehaviour, IInteractable
         state = DoorState.Closed;
         onObjectChanged?.Invoke();
     }
+
+
 
     public bool IsBlocking()
     {

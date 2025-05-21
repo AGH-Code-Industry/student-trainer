@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Experimental.Rendering.RenderGraphModule;
 using Zenject;
 
 public class Enemy : MonoBehaviour, IDamageable
@@ -23,7 +24,6 @@ public class Enemy : MonoBehaviour, IDamageable
     [HideInInspector] public ComboSystem comboSystem = null;
     [HideInInspector] public float attackRange;
     private float health;
-
     public Renderer[] renderers;
 
     private EnemyState currentState;
@@ -31,11 +31,13 @@ public class Enemy : MonoBehaviour, IDamageable
     [Inject] public readonly InventoryService invService;
 
     public EnemyItemDrop[] drops;
+    private Rigidbody _rig;
 
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+        _rig = GetComponent<Rigidbody>();
 
         agent.speed = settings.moveSpeed;
         agent.acceleration = Mathf.Floor(Mathf.Pow(settings.moveSpeed, 1.85f));
@@ -86,14 +88,14 @@ public class Enemy : MonoBehaviour, IDamageable
 
         // If the attackOrigin object is inside an enemy, this will ensure that it still deals damage
         Collider[] overlappingColliders = Physics.OverlapSphere(attackOrigin.position, 0.25f);
-        foreach(Collider col in overlappingColliders)
+        foreach (Collider col in overlappingColliders)
         {
             // Avoid dealing damage to self
             if (col.transform.root == transform.root)
                 continue;
 
             damageComponent = col.transform.root.GetComponent<IDamageable>();
-            if(damageComponent != null)
+            if (damageComponent != null)
             {
                 damageComponent.TakeDamage(damage);
                 return;
@@ -121,7 +123,7 @@ public class Enemy : MonoBehaviour, IDamageable
         }
         else
         {
-            if(currentState.GetType() == typeof(IdleState))
+            if (currentState.GetType() == typeof(IdleState))
             {
                 ChangeState(new ChasingState(this));
             }
@@ -151,9 +153,22 @@ public class Enemy : MonoBehaviour, IDamageable
         }
     }
 
+    public void SetChasingState()
+    {
+        ChangeState(new ChasingState(this));
+    }
+
     public void PlayAnimation(string name)
     {
         animator.CrossFade(name, ANIMATION_MIX_SPEED);
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player") && currentState.GetType() != typeof(ChasingState))
+        {
+            ChangeState(new ChasingState(this));
+        }
     }
 }
 
