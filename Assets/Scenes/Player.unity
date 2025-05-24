@@ -2972,6 +2972,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad9886c4fc8b9d9408f5dea405f510eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerCameraReference: {fileID: 196698247}
 --- !u!4 &6564834869179740039
 Transform:
   m_ObjectHideFlags: 0
@@ -3492,7 +3493,7 @@ MonoBehaviour:
   _animator: {fileID: 6522902218634902222}
   _visibleModel: {fileID: 5894598035050553463}
   _interpolationSpeed: 15
-  interactionAnimDuration: 0.8
+  interactionAnimDuration: 0.9
 --- !u!1 &7430418405393515063
 GameObject:
   m_ObjectHideFlags: 0

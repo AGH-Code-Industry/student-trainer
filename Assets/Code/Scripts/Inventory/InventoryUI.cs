@@ -153,6 +153,9 @@ public class InventoryUI : MonoBehaviour
     {
         DestroyChestSlots();
         chestUiObj.SetActive(false);
+
+        if (tooltipShown)
+            HideTooltip();
     }
 
     bool IsChestSlot(SlotUI slot)

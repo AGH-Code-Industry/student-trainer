@@ -4,9 +4,8 @@ using UnityEngine;
 using Zenject;
 using UnityEngine.SceneManagement;
 
-public class LevelService : IInitializable
+public class LevelService : MonoBehaviour, IInitializable
 {
-    MonoBehaviour mediatorObj;
     string currentLevel;
 
     [Inject] readonly SceneService sceneService;
@@ -19,6 +18,7 @@ public class LevelService : IInitializable
 
     public void Initialize()
     {
+        /*
         mediatorObj = Object.FindObjectOfType<LevelChanger>();
         if (mediatorObj == null)
         {
@@ -28,21 +28,26 @@ public class LevelService : IInitializable
 #endif
             return;
         }
+        */
 
         levelSettings = reader.ReadSettings<GameLevels>();
 
+#if !UNITY_EDITOR
         LoadMenu();
-    }
+#else
+        // When in editor: only load the menu (and behave like a built game) when the Loader scene has been selected
 
-    public void AssignMediator(MonoBehaviour newMediator)
-    {
-        mediatorObj = newMediator;
-        LoadMenu();
+        Scene loaderScene = SceneManager.GetSceneByName("Loader");
+        if (loaderScene.IsValid() && loaderScene.isLoaded)
+            LoadMenu();
+        else
+            Debug.Log("WARNING: The game wasn't started at the \"Loader\" scene! Level changing may not work as expected!");
+#endif
     }
 
     public void LoadMenu()
     {
-        mediatorObj.StartCoroutine(LoadMenuCoroutine());
+        StartCoroutine(LoadMenuCoroutine());
     }
 
     private IEnumerator LoadMenuCoroutine()
@@ -97,7 +102,7 @@ public class LevelService : IInitializable
 
     public void LoadGame()
     {
-        mediatorObj.StartCoroutine(LoadGameCoroutine());
+        StartCoroutine(LoadGameCoroutine());
     }
 
     private IEnumerator LoadGameCoroutine()
@@ -154,7 +159,7 @@ public class LevelService : IInitializable
 
     public void ChangeLevel(string levelIndex, string spawnPointName)
     {
-        mediatorObj.StartCoroutine(NewLevelCoroutine(levelIndex, spawnPointName));
+        StartCoroutine(NewLevelCoroutine(levelIndex, spawnPointName));
     }
 
     private IEnumerator NewLevelCoroutine(string levelName, string spawnName)

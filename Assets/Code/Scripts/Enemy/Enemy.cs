@@ -112,6 +112,10 @@ public class Enemy : MonoBehaviour, IDamageable
 
     public void TakeDamage(float amount)
     {
+        // Quick solution for errors when the component is disabled
+        if (this.enabled == false)
+            return;
+
         if (currentState.GetType() == typeof(DeadState))
             return;
 
