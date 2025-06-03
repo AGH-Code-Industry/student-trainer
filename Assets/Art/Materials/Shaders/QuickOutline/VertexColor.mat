@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: ShoppingCart
-  m_Shader: {fileID: -6465566751694194690, guid: b6dcf65a1877f824dabc64e1485e71c3, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 4de0f8aa0bde056458a944d830c01a81, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []

@@ -1,0 +1,128 @@
+using UnityEngine;
+using Zenject;
+using System.Collections;
+
+public class PlayerAnimationController : MonoBehaviour
+{
+    [SerializeField] Animator _animator;
+
+    [SerializeField] Transform _visibleModel;
+
+    Vector3 _currentMovementVector;
+    Quaternion _currentModelRotation;
+
+    float _currentX = 0, _currentY = 0;
+    [SerializeField] float _interpolationSpeed = 5f;
+
+    private bool interactionPlaying = false;
+    [SerializeField] private float interactionAnimDuration = 0.633f;
+
+    [Inject] readonly PlayerService _movement;
+    [Inject] readonly EventBus _eventBus;
+    [Inject] readonly InputService _inputService;
+
+    void Start()
+    {
+        _eventBus.Subscribe<MouseClickUncaught>(OnAttack);
+        _eventBus.Subscribe<PlayerDodge>(OnDodge);
+    }
+
+    void Update()
+    {
+        Animate();
+
+        // if (!_movement.frozen)
+        //     FaceMouse();
+    }
+
+    Vector2 GetAnimationVector(Vector3 movement, float rotation)
+    {
+        float theta = Mathf.Deg2Rad * rotation;
+
+        float x = movement.x * Mathf.Cos(theta) - movement.z * Mathf.Sin(theta);
+        float y = movement.x * Mathf.Sin(theta) + movement.z * Mathf.Cos(theta);
+
+        _currentX = Mathf.MoveTowards(_currentX, x, _interpolationSpeed * Time.deltaTime);
+        _currentY = Mathf.MoveTowards(_currentY, y, _interpolationSpeed * Time.deltaTime);
+
+        return new Vector2(_currentX, _currentY);
+    }
+
+    void Animate()
+    {
+        _currentMovementVector = _movement.GetMovementVector();
+        float angle = _currentModelRotation.eulerAngles.y;
+        Vector2 animVector = GetAnimationVector(_currentMovementVector, angle);
+
+        var runOrWalk = _movement.IsRunning ? 1 : 0.5f;
+        _animator.SetFloat("Move_X", animVector.magnitude > 0 ? runOrWalk : 0);
+        //_animator.SetFloat("Move_Y", animVector.y);
+    }
+
+    private void OnDodge(PlayerDodge playerDodge)
+    {
+        if (playerDodge.ctx.started)
+        {
+            PlayAnimation("Roll");
+        }
+    }
+
+    private void OnAttack(MouseClickEvent click)
+    {
+        bool isClickValid = click.ctx.started && click.button == MouseClickEvent.MouseButton.Left;
+
+        if (isClickValid)
+            FaceMouse();
+    }
+
+    void FacePosition(Vector3 pos)
+    {
+        Vector3 direction = (pos - transform.position).normalized;
+        direction.y = 0;
+
+        if (direction != Vector3.zero)
+            transform.rotation = Quaternion.LookRotation(direction);
+        else
+            transform.rotation = Quaternion.Euler(Vector3.zero);
+    }
+
+    void FaceMouse()
+    {
+        var lookVector = _inputService.MouseDownPosition;
+
+        FacePosition(lookVector);
+    }
+
+    public void PlayAnimation(string animName)
+    {
+        _animator.CrossFade(animName, 0.2f);
+    }
+
+    public void PlayInteractionAnim(Vector3 sourcePosition)
+    {
+        if (!interactionPlaying)
+        {
+            FacePosition(sourcePosition);
+            StartCoroutine(InteractionAnim());
+        }
+    }
+
+    private IEnumerator InteractionAnim()
+    {
+        interactionPlaying = true;
+        _movement.Freeze("interactionAnim");
+        PlayAnimation("Interact");
+
+        yield return new WaitForSeconds(interactionAnimDuration);
+
+        _movement.Unfreeze("interactionAnim");
+        interactionPlaying = false;
+    }
+
+    void OnDestroy()
+    {
+        _eventBus.Unsubscribe<MouseClickUncaught>(OnAttack);
+        _eventBus.Unsubscribe<PlayerDodge>(OnDodge);
+
+    }
+}

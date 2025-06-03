@@ -10,12 +10,11 @@ public class MainMenu : MonoBehaviour
     [SerializeField] private GameObject settingsPanel;
     [SerializeField] private GameObject menuPanel;
 
-    [Inject] private readonly SceneService sceneService;
+    [Inject] private readonly LevelService levelService;
 
     private void Awake()
     {
         settingsPanel.SetActive(false);
-        sceneService.LoadAdditiveScene("Student City");
     }
 
     public void Back()
@@ -27,7 +26,7 @@ public class MainMenu : MonoBehaviour
 
     public void PlayGame()
     {
-        sceneService.LoadGame();
+        levelService.LoadGame();
     }
 
     public void Settings()

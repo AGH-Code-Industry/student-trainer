@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lightIntensity: 5
   startTime:
-    hour: 8
+    hour: 10
     minute: 0
   timeIncrementInMinutes: 1
-  timeSpeed: 50
+  timeSpeed: 1
