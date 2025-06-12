@@ -149,7 +149,7 @@ public class LevelService : MonoBehaviour, IInitializable
             yield return null;
         }
 
-        //sceneService.SetActiveScene(levelSettings.defaultLevel);
+        sceneService.SetActiveScene(levelSettings.defaultLevel);
         currentLevel = levelSettings.defaultLevel;
 
         MovePlayer(levelSettings.defaultSpawnPoint);
@@ -186,7 +186,7 @@ public class LevelService : MonoBehaviour, IInitializable
             yield return null;
         }
 
-        //sceneService.SetActiveScene(levelName);
+        sceneService.SetActiveScene(levelName);
         currentLevel = levelName;
 
         MovePlayer(spawnName);
