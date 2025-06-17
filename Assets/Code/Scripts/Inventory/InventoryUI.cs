@@ -50,8 +50,8 @@ public class InventoryUI : MonoBehaviour
         service.onDragStart += ShowDragSlot;
         service.onDragEnd += HideDragSlot;
 
-        service.onNewContainer += ShowChest;
-        service.onContainerLost += HideChest;
+        //service.onNewContainer += ShowChest;
+        //service.onContainerLost += HideChest;
     }
 
     void UnsubEvents()
@@ -62,8 +62,8 @@ public class InventoryUI : MonoBehaviour
         service.onDragStart -= ShowDragSlot;
         service.onDragEnd -= HideDragSlot;
 
-        service.onNewContainer -= ShowChest;
-        service.onContainerLost -= HideChest;
+        //service.onNewContainer -= ShowChest;
+        //service.onContainerLost -= HideChest;
     }
 
     void FixedUpdate()
@@ -112,7 +112,7 @@ public class InventoryUI : MonoBehaviour
         HideDragSlot();
     }
 
-    void SpawnChestSlots()
+    public void SpawnChestSlots()
     {
         int amount = service.currentCont.slots.Length;
 
@@ -128,7 +128,7 @@ public class InventoryUI : MonoBehaviour
         LayoutRebuilder.ForceRebuildLayoutImmediate(chestContainer.GetComponent<RectTransform>());
     }
 
-    void DestroyChestSlots()
+    public void DestroyChestSlots()
     {
         if (chestUIs == null || chestUIs.Length == 0)
             return;
@@ -142,17 +142,17 @@ public class InventoryUI : MonoBehaviour
         chestUIs = null;
     }
 
-    void ShowChest()
+    public void ShowChest()
     {
-        chestUiObj.SetActive(true);
+        //chestUiObj.SetActive(true);
         SpawnChestSlots();
         UpdateAllSlots();
     }
 
-    void HideChest()
+    public void HideChest()
     {
         DestroyChestSlots();
-        chestUiObj.SetActive(false);
+        //chestUiObj.SetActive(false);
 
         if (tooltipShown)
             HideTooltip();
@@ -187,7 +187,7 @@ public class InventoryUI : MonoBehaviour
         }
     }
 
-    void UpdateAllSlots()
+    public void UpdateAllSlots()
     {
         for(int i = 0; i < slotUIs.Length; i++)
         {

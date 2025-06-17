@@ -1,7 +1,8 @@
 using UnityEngine;
+using System.Collections.Generic;
 using Zenject;
 
-public class InputMediator : MonoBehaviour
+public class InputMediator : MonoBehaviour, IInputConsumer
 {
     Vector3 pos;
     // The height of the plane determines how accurately the player character faces the cursor
@@ -14,7 +15,10 @@ public class InputMediator : MonoBehaviour
     void Start()
     {
         pos = _service.MouseDownPosition;
-        _eventBus.Subscribe<MouseClickUncaught>(OnAttack);
+        //_eventBus.Subscribe<MouseClickUncaught>(OnAttack);
+        List<string> wantedActions = new List<string>();
+        wantedActions.Add("MouseClick");
+        _service.RegisterConsumer(this, wantedActions, false);
     }
 
     void Update()
@@ -35,13 +39,25 @@ public class InputMediator : MonoBehaviour
         }
     }
 
+    public int priority { get; } = 1;
+
+    public bool ConsumeInput(UnityEngine.InputSystem.InputAction.CallbackContext context)
+    {
+        InputHelper.MouseClickData click = new InputHelper.MouseClickData(context);
+        if (context.performed && click.button == InputHelper.MouseClickData.MouseButton.Left)
+            _service.GlobalLookTarget = pos;
+
+        // Never consume input
+        return false;
+    }
+    /*
     void OnAttack(MouseClickUncaught click)
     {
         bool isClickValid = click.ctx.performed && click.button == MouseClickEvent.MouseButton.Left;
         if (isClickValid)
             _service.GlobalLookTarget = pos;
     }
-
+    */
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
@@ -50,6 +66,7 @@ public class InputMediator : MonoBehaviour
 
     void OnDestroy()
     {
-        _eventBus.Unsubscribe<MouseClickUncaught>(OnAttack);
+        //_eventBus.Unsubscribe<MouseClickUncaught>(OnAttack);
+        _service.RemoveConsumer(this);
     }
 }

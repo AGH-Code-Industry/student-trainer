@@ -40,6 +40,8 @@ public class Door : MonoBehaviour, IInteractable
     {
         if (itemRequiredToOpen != null)
             isUnlocked = false;
+
+        FindAnyObjectByType<PlayerInteractions>().RegisterInteractable(this);
     }
 
     // Update is called once per frame
@@ -57,50 +59,6 @@ public class Door : MonoBehaviour, IInteractable
     }
 
 
-    public void OnDoorOpening()
-    {
-        DoorOpening?.Invoke();
-    }
-
-    public void OnDoorClosing()
-    {
-        DoorClosing?.Invoke();
-    }
-
-    public bool IsEnabled() => this.enabled;
-
-    public void FocusInteraction(bool isFocused) { interactionFocused = isFocused; }
-
-    public string GetActionName()
-    {
-        if (isUnlocked)
-        {
-            if (state == DoorState.Closed)
-                return "otwórz";
-            else
-                return "zamknij";
-        }
-        else
-        {
-            if (playerHasReqItem)
-                return "odblokuj";
-            else
-                return "wymagane \"" + itemRequiredToOpen.name + "\"";
-        }
-    }
-
-    public string GetObjectName()
-    {
-        if (isUnlocked)
-            return "Drzwi";
-        else
-            return "Zamknięte Drzwi";
-    }
-
-    public Transform GetTransform()
-    {
-        return gfxTransform;
-    }
 
     public void Interact()
     {
@@ -125,9 +83,55 @@ public class Door : MonoBehaviour, IInteractable
             StartCoroutine(CloseCoroutine());
     }
 
-    public void EndInteraction()
+    public GameObject GetGO() => gameObject;
+
+    public InteractableData GetInteractionData()
     {
-        return;
+        string objName = isUnlocked ? "Drzwi" : "Zamknięte Drzwi";
+        string actionName = "";
+
+        if(isUnlocked)
+            actionName = state == DoorState.Closed ? "otwórz" : "zamknij";
+        else
+            actionName = playerHasReqItem ? "odblokuj" : $"wymagane \"{itemRequiredToOpen.name}\"";
+
+        return new InteractableData(objName, actionName, true, isUnlocked || playerHasReqItem);
+    }
+
+    public void FocusInteraction(bool isFocused) { interactionFocused = isFocused; }
+
+
+
+    public void OnDoorOpening()
+    {
+        DoorOpening?.Invoke();
+    }
+
+    public void OnDoorClosing()
+    {
+        DoorClosing?.Invoke();
+    }
+
+    
+
+    
+
+    public string GetActionName()
+    {
+        if (isUnlocked)
+        {
+            if (state == DoorState.Closed)
+                return "otwórz";
+            else
+                return "zamknij";
+        }
+        else
+        {
+            if (playerHasReqItem)
+                return "odblokuj";
+            else
+                return "wymagane \"" + itemRequiredToOpen.name + "\"";
+        }
     }
 
     public bool InteractionAllowed()
@@ -163,15 +167,8 @@ public class Door : MonoBehaviour, IInteractable
         onObjectChanged?.Invoke();
     }
 
-
-
-    public bool IsBlocking()
+    private void OnDestroy()
     {
-        return false;
-    }
-
-    public bool ShouldPlayAnimation()
-    {
-        return true;
+        FindAnyObjectByType<PlayerInteractions>()?.RemoveInteractable(this);
     }
 }

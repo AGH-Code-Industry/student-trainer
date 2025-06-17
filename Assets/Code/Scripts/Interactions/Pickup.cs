@@ -14,7 +14,7 @@ public class Pickup : MonoBehaviour, IInteractable
 
     void Start()
     {
-        
+        FindAnyObjectByType<PlayerInteractions>().RegisterInteractable(this);
     }
 
     void Update()
@@ -22,7 +22,7 @@ public class Pickup : MonoBehaviour, IInteractable
         
     }
 
-    public bool IsEnabled() => this.enabled;
+    
 
     public void Interact()
     {
@@ -31,44 +31,20 @@ public class Pickup : MonoBehaviour, IInteractable
         Destroy(gameObject);
     }
 
-    public void EndInteraction()
-    {
-        return;
-    }
+    public GameObject GetGO() => gameObject;
 
-    public string GetObjectName()
+    public InteractableData GetInteractionData()
     {
-        string result = item.name;
-        if (item.maxStackSize > 1)
-            result += $"(x {count})";
-
-        return result;
-    }
-
-    public string GetActionName()
-    {
-        return "Podnieś";
-    }
-
-    public Transform GetTransform()
-    {
-        return transform;
-    }
-
-    public bool InteractionAllowed()
-    {
-        return true;
+        // Check if player's inventory is full, and change data accordingly
+        bool canPickUp = true;
+        string actionMessage = "podnieś";
+        return new InteractableData(item.name, actionMessage, false, canPickUp);
     }
 
     public void FocusInteraction(bool isFocused) { }
 
-    public bool IsBlocking()
+    private void OnDestroy()
     {
-        return false;
-    }
-
-    public bool ShouldPlayAnimation()
-    {
-        return false;
+        FindAnyObjectByType<PlayerInteractions>()?.RemoveInteractable(this);
     }
 }

@@ -14,10 +14,10 @@ public class Chest : MonoBehaviour, IInteractable
 
     public event System.Action onObjectChanged, onInteractionDestroyed;
 
-    void Awake()
+    void Start()
     {
         CreateContainer(containerSize, containerName);
-        //Debug.Log($"{gameObject.name}: creating container (\"{containerName}\", size {containerSize})...");
+        FindAnyObjectByType<PlayerInteractions>().RegisterInteractable(this);
     }
 
     public void CreateContainer(int size, string name)
@@ -25,52 +25,25 @@ public class Chest : MonoBehaviour, IInteractable
         container = new Container(size, name);
     }
 
-    public bool IsEnabled() => this.enabled;
+
+
+    public void Interact()
+    {
+        service.SetContainer(container);
+        FindAnyObjectByType<UiManager>().OpenWindow("ChestUI");
+    }
+
+    public GameObject GetGO() => gameObject;
+
+    public InteractableData GetInteractionData()
+    {
+        return new InteractableData(containerName, "przeglądaj", true, true);
+    }
 
     public void FocusInteraction(bool isFocused)
     {
         if (!isFocused)
             service.ClearContainer();
-    }
-
-    public string GetActionName()
-    {
-        return "Przeglądaj";
-    }
-
-    public string GetObjectName()
-    {
-        return containerName;
-    }
-
-    public Transform GetTransform()
-    {
-        return transform;
-    }
-
-    public void Interact()
-    {
-        service.SetContainer(container);
-    }
-
-    public void EndInteraction()
-    {
-        service.ClearContainer();
-    }
-
-    public bool InteractionAllowed()
-    {
-        return true;
-    }
-
-    public bool IsBlocking()
-    {
-        return true;
-    }
-
-    public bool ShouldPlayAnimation()
-    {
-        return true;
     }
 
     void OnDisable()
@@ -80,6 +53,7 @@ public class Chest : MonoBehaviour, IInteractable
 
     void OnDestroy()
     {
+        FindAnyObjectByType<PlayerInteractions>()?.RemoveInteractable(this);
         onInteractionDestroyed?.Invoke();
     }
 }
