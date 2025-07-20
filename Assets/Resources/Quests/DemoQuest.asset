@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: DemoQuest
   m_EditorClassIdentifier: 
   id: demoQuest
-  name: 
-  description: 
+  name: "Moja Druga Po\u0142\xF3wka"
+  description: "\u017Buli\u015B jest spragniony. Pom\xF3\u017C mu zdoby\u0107 butelk\u0119
+    orze\u017Awiaj\u0105cego trunku."

@@ -23,7 +23,8 @@ public class ProjectInstaller : MonoInstaller
         Container.BindInterfacesAndSelfTo<InventoryService>().AsSingle();
         Container.BindInterfacesAndSelfTo<ItemUsingService>().AsSingle();
 
-        Container.BindInterfacesAndSelfTo<QuestService>().AsSingle();
+        //Container.BindInterfacesAndSelfTo<QuestService>().AsSingle();
+        Container.BindInterfacesAndSelfTo<Quests.QuestService>().FromNewComponentOnNewGameObject().WithGameObjectName("QuestServiceInstance").AsSingle();
     }
 
 }

@@ -100,7 +100,7 @@ public class PlayerInteractions : MonoBehaviour, IInputConsumer
 
         if(toRemove == null || !toRemove.HasValue)
         {
-            Debug.LogError($"PlayerInteraction, RegisterInteractable(): object \"{toRemove.Value.gameObj.name}\" tried to unregister, even though it wasn't registered!");
+            Debug.LogError($"PlayerInteraction, RegisterInteractable(): object tried to unregister, even though it wasn't registered!");
             return;
         }
 

@@ -237,6 +237,29 @@ public class InventoryService : IInitializable, IDisposable, IInputConsumer
         return (missing <= 0);
     }
 
+    public int GetItemCount(ItemPreset item, Container cont = null)
+    {
+        if (cont == null)
+            cont = inventory;
+
+        int count = 0;
+        foreach(Slot slot in cont.slots)
+        {
+            if(slot.item == item)
+            {
+                count += slot.count;
+            }
+        }
+
+        return count;
+    }
+
+    public int GetItemCount(string id, Container cont = null)
+    {
+        ItemPreset wantedItem = GetItemByID(id);
+        return GetItemCount(wantedItem, cont);
+    }
+
     public int GetFirstFreeSlot(Container cont = null)
     {
         return GetFirstFreeAfterIndex(0, cont);
@@ -403,9 +426,20 @@ public class InventoryService : IInitializable, IDisposable, IInputConsumer
             else if (context.canceled)
             {
                 if (slotHoverIndex == null)
-                    DropItemIntoSlot(dragOriginIndex, target);
+                {
+                    if(target != null)
+                    {
+                        DropItemIntoSlot(dragOriginIndex, target);
+                    }
+                    else
+                    {
+                        DropItemIntoSlot(GetFirstFreeSlot(), inventory);
+                    }
+                }
                 else
+                {
                     DropItemIntoSlot((int)slotHoverIndex, target);
+                }
             }
         }
         else if (click.button == InputHelper.MouseClickData.MouseButton.Right)

@@ -14,15 +14,20 @@ public class Chest : MonoBehaviour, IInteractable
 
     public event System.Action onObjectChanged, onInteractionDestroyed;
 
-    void Start()
+    void Awake()
     {
         CreateContainer(containerSize, containerName);
-        FindAnyObjectByType<PlayerInteractions>().RegisterInteractable(this);
+    }
+
+    void Start()
+    {
+        //FindAnyObjectByType<PlayerInteractions>().RegisterInteractable(this);
     }
 
     public void CreateContainer(int size, string name)
     {
-        container = new Container(size, name);
+        if(container == null)
+            container = new Container(size, name);
     }
 
 
@@ -46,14 +51,24 @@ public class Chest : MonoBehaviour, IInteractable
             service.ClearContainer();
     }
 
-    void OnDisable()
+    void OnEnable()
     {
-        onInteractionDestroyed?.Invoke();
+        FindAnyObjectByType<PlayerInteractions>().RegisterInteractable(this);
     }
 
+    void OnDisable()
+    {
+        FindAnyObjectByType<PlayerInteractions>()?.RemoveInteractable(this);
+        onInteractionDestroyed?.Invoke();
+
+        FindAnyObjectByType<UiManager>()?.CloseWindow("ChestUI");
+    }
+
+    /*
     void OnDestroy()
     {
         FindAnyObjectByType<PlayerInteractions>()?.RemoveInteractable(this);
         onInteractionDestroyed?.Invoke();
     }
+    */
 }

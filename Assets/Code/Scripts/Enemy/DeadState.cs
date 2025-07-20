@@ -19,6 +19,7 @@ public class DeadState : EnemyState
         Object.Destroy(enemy.gameObject, 2f);
         */
 
+        enemy.eventBus.Publish(new EnemyKilledEvent(enemy.enemyID));
         enemy.StartCoroutine(Death());
     }
 

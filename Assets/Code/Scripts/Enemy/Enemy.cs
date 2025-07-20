@@ -14,6 +14,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     public GenericEnemySettings settings;
     public AnimationSet animSet;
+    public string enemyID;
 
     // Hold the transform of the actual body mesh, that can be influenced by animations
     public Transform bodyTransform;
@@ -29,6 +30,7 @@ public class Enemy : MonoBehaviour, IDamageable
     private EnemyState currentState;
     [Inject] public readonly PlayerService playerMovementService;
     [Inject] public readonly InventoryService invService;
+    [Inject] public readonly EventBus eventBus;
 
     public EnemyItemDrop[] drops;
     private Rigidbody _rig;
