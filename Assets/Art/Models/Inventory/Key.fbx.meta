@@ -1,29 +1,9 @@
 fileFormatVersion: 2
-guid: 5f62ea725ac15c145bade1597645729b
+guid: 25f70f884c6efb941b6a5e5b5a235474
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: CarLamps
-    second: {fileID: 2100000, guid: 98f7409cb2311754790226154951b58b, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: CarPaint
-    second: {fileID: 2100000, guid: fc6f26659e5567247a111d9247465c13, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: CarRubber
-    second: {fileID: 2100000, guid: 6d2772f3b3b6e97469d2b0a9b385ff1d, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: CarWindows
-    second: {fileID: 2100000, guid: 2e2f85c2d31ee15459da8b5872f104f5, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 1
     materialName: 0
