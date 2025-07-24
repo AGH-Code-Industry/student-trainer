@@ -35,4 +35,14 @@ namespace Quests
         }
     }
 
+    public class StepUpdated : BaseQuestEvent
+    {
+        public string stepID;
+
+        public StepUpdated(string questID, string stepID) : base(questID)
+        {
+            this.stepID = stepID;
+        }
+    }
+
 }

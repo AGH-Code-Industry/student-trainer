@@ -28,6 +28,7 @@ public class QuestListUI : MonoBehaviour
 
         eventBus.Subscribe<QuestStatusChanged>(OnQuestChanged);
         eventBus.Subscribe<StepStatusChanged>(OnStepChanged);
+        eventBus.Subscribe<StepUpdated>(OnStepUpdated);
     }
 
     // Update is called once per frame
@@ -161,9 +162,15 @@ public class QuestListUI : MonoBehaviour
         UpdateUI();
     }
 
+    void OnStepUpdated(StepUpdated ev)
+    {
+        UpdateUI();
+    }
+
     private void OnDestroy()
     {
         eventBus.Unsubscribe<QuestStatusChanged>(OnQuestChanged);
         eventBus.Unsubscribe<StepStatusChanged>(OnStepChanged);
+        eventBus.Unsubscribe<StepUpdated>(OnStepUpdated);
     }
 }

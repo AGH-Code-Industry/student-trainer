@@ -1432,6 +1432,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 7572534988306113136, guid: 6d9a0bde83e2d3f49b70b04e8bae4f85, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8747177963115639843, guid: 6d9a0bde83e2d3f49b70b04e8bae4f85, type: 3}
+      propertyPath: enemyID
+      value: student_debil
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11752,7 +11760,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _camera: {fileID: 1083960564}
-  inkAsset: {fileID: 4900000, guid: 57c3d0d68fd406a44987c1c1a06e9741, type: 3}
+  dialogue1: {fileID: 4900000, guid: 55672cb1a95842046b14a515c5927402, type: 3}
+  dialogue2: {fileID: 4900000, guid: 8c6ce8cd9edd3f2449ea54845470acb8, type: 3}
+  npcName: "\u017Buli\u015B"
 --- !u!1 &792891848 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -7953870901001601376, guid: 37e1c906f73a1d741bddc691657d7668, type: 3}
@@ -12657,6 +12667,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2821032169411225096, guid: 37e1c906f73a1d741bddc691657d7668, type: 3}
       propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2891746525080496957, guid: 37e1c906f73a1d741bddc691657d7668, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3640982878187794474, guid: 37e1c906f73a1d741bddc691657d7668, type: 3}
@@ -18281,6 +18295,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1020274800}
   - component: {fileID: 1020274799}
+  - component: {fileID: 1020274801}
   m_Layer: 0
   m_Name: Kosz
   m_TagString: Untagged
@@ -18318,6 +18333,22 @@ Transform:
   - {fileID: 1325429917}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1020274801
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1020274798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6af05b84376df8345a3f15c8a042ea45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  items:
+  - item: {fileID: 11400000, guid: 96669a3de92724e4ba92a65015cba734, type: 2}
+    amount: 4
+    dropChance: 0
 --- !u!1 &1021424151 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1246173995137059076, guid: 37e1c906f73a1d741bddc691657d7668, type: 3}

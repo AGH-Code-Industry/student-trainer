@@ -53,7 +53,7 @@ public class Chest : MonoBehaviour, IInteractable
 
     void OnEnable()
     {
-        FindAnyObjectByType<PlayerInteractions>().RegisterInteractable(this);
+        FindAnyObjectByType<PlayerInteractions>()?.RegisterInteractable(this);
     }
 
     void OnDisable()

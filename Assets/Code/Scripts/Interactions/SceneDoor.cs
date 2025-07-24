@@ -15,7 +15,7 @@ public class SceneDoor : MonoBehaviour, IInteractable
 
     void Start()
     {
-        FindAnyObjectByType<PlayerInteractions>().RegisterInteractable(this);
+        FindAnyObjectByType<PlayerInteractions>()?.RegisterInteractable(this);
     }
 
     public void Interact()

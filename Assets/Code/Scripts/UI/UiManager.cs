@@ -13,11 +13,13 @@ public class UiManager : MonoBehaviour, IInputConsumer
     [Inject] readonly EventBus eventBus;
     [Inject] readonly InputService inputService;
     PlayerInteractions playerInteractions;
+    PlayerCombat playerCombat;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         playerInteractions = FindAnyObjectByType<PlayerInteractions>();
+        playerCombat = FindAnyObjectByType<PlayerCombat>();
 
         //eventBus.Subscribe<PlayerInteractEvent>(WindowCloseInter);
         //eventBus.Subscribe<PlayerEscapeEvent>(WindowCloseEscape);
@@ -85,6 +87,7 @@ public class UiManager : MonoBehaviour, IInputConsumer
         {
             playerService.freezer.Freeze(data.id);
             playerInteractions.freezer.Freeze(data.id);
+            playerCombat.freezer.Freeze(data.id);
         }
 
         data.windowObject.SetActive(true);
@@ -111,6 +114,7 @@ public class UiManager : MonoBehaviour, IInputConsumer
         {
             playerService.freezer.Unfreeze(data.id);
             playerInteractions.freezer.Unfreeze(data.id);
+            playerCombat.freezer.Unfreeze(data.id);
         }
 
         data.windowScript.OnWindowClosed();

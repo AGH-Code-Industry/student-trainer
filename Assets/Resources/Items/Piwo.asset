@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 115b4208eb2656d45a5d1d03ea79dd95, type: 3}
-  m_Name: Key1
+  m_Name: Piwo
   m_EditorClassIdentifier: 
-  id: key1
-  name: Klucz
-  icon: {fileID: 21300000, guid: 04a8598d27234564b9508c16a1eff870, type: 3}
-  description: Klucz do jednego z pokoi w Kapitolu.
-  maxStackSize: 1
+  id: piwo
+  name: Kuflowe Mocne
+  icon: {fileID: 21300000, guid: 492b9988436bd45049a9a6bc52ac8fb0, type: 3}
+  description: 
+  maxStackSize: 6

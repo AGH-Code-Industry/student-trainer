@@ -26,6 +26,7 @@ namespace Quests
 
             // Create the demo quest manually here
 
+            /*
             HaveItemsStep itemStep = new HaveItemsStep("demo_item", "Zdobądź", null, null, StepResult.CompleteQuest, StepResult.Nothing, "key1", 1);
             Container.Inject(itemStep);
 
@@ -47,8 +48,52 @@ namespace Quests
 
             List<string> startingSteps = new List<string>();
             startingSteps.Add("demo_reach_area");
+            */
 
-            Quest demoQuest = new Quest("demo_quest", "Testowy Quest", "description", steps.ToArray(), startingSteps.ToArray(), null);
+            TalkStep finish = new TalkStep("finish", "Porozmawiaj z żulisiem", null, null, StepResult.CompleteQuest, StepResult.Nothing);
+            Container.Inject(finish);
+
+            QuestStepBase[] beer_next = { finish };
+
+            HaveItemsStep beerStep = new HaveItemsStep("step_beer", "Weź", null, beer_next, StepResult.Nothing, StepResult.Nothing, "piwo", 1);
+            Container.Inject(beerStep);
+
+            QuestStepBase[] room_next = { beerStep };
+
+            ReachAreaStep roomStep = new ReachAreaStep("room_step", "Wejdź do pokoju na pierwszym piętrze", null, room_next, StepResult.Nothing, StepResult.Nothing, "room_area");
+            Container.Inject(roomStep);
+
+            QuestStepBase[] key_next = { roomStep };
+
+            HaveItemsStep keyStep = new HaveItemsStep("step_key", "Zdobądź", null, key_next, StepResult.Nothing, StepResult.Nothing, "key1", 1);
+            Container.Inject(keyStep);
+
+            KillEnemiesStep killStep = new KillEnemiesStep("step_kill", "Pokonaj", null, null, StepResult.Nothing, StepResult.Nothing, "student_debil", 6, "studentów");
+            Container.Inject(killStep);
+
+            QuestStepBase[] area1_next = { killStep, keyStep };
+
+            ReachAreaStep area1 = new ReachAreaStep("reach_lobby", "Dostań się do akademika", null, area1_next, StepResult.Nothing, StepResult.Nothing, "lvl1_area");
+            Container.Inject(area1);
+
+            QuestStepBase[] heal_next = { area1 };
+
+            HaveItemsStep healStep = new HaveItemsStep("heal_step", "(Przedmiot leczący) Weź ze śmietnika", null, heal_next, StepResult.Nothing, StepResult.Nothing, "healing_pills", 4);
+            Container.Inject(healStep);
+
+            List<QuestStepBase> steps = new List<QuestStepBase>();
+            steps.Add(healStep);
+            steps.Add(area1);
+            steps.Add(killStep);
+            steps.Add(keyStep);
+            steps.Add(roomStep);
+            steps.Add(beerStep);
+            steps.Add(finish);
+
+            List<string> startingSteps = new List<string>();
+            startingSteps.Add("heal_step");
+
+            Quest demoQuest = new Quest("demo_quest", "Moja druga połówka", "description", steps.ToArray(), startingSteps.ToArray(), null);
             Container.Inject(demoQuest);
             _gameQuests = new Quest[1];
             _gameQuests[0] = demoQuest;
@@ -88,6 +133,32 @@ namespace Quests
             }
 
             return false;
+        }
+
+        public bool IsQuestCompleted(string id)
+        {
+            foreach(Quest quest in completedQuests)
+            {
+                if(quest.id == id)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        public QuestStepStatus? GetStepStatus(string questID, string stepID)
+        {
+            Quest quest = GetQuestByID(questID);
+
+            foreach(QuestStepBase step in quest.steps)
+            {
+                if (step.id == stepID)
+                    return step.status;
+            }
+
+            return null;
         }
 
         public void ActivateQuest(string id)

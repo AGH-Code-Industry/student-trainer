@@ -44,6 +44,8 @@ namespace Quests
                 requiredKills.currentAmount++;
                 if (requiredKills.IsComplete())
                     StepEnd();
+
+                eventBus.Publish(new StepUpdated(parentQuest.id, id));
             }
         }
 

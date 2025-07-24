@@ -18,11 +18,14 @@ public class DialogueService
 
     [Inject] private readonly InputService _input;
     [Inject] private readonly CameraService _cameraService;
+    [Inject] private readonly PlayerService _playerService;
 
     public void Start(TextAsset dialogue)
     {
         if (IsOpenDialog) return;
 
+        _playerService.freezer.Freeze("dialogue");
+        MonoBehaviour.FindAnyObjectByType<PlayerCombat>().freezer.Freeze("dialogue");
         _story = new Story(dialogue.text);
         _dialogueBoxes = new Queue<DialogueBoxData>();
 
@@ -34,6 +37,9 @@ public class DialogueService
     public void Close()
     {
         _dialogueBoxes.Clear();
+
+        _playerService.freezer.Unfreeze("dialogue");
+        MonoBehaviour.FindAnyObjectByType<PlayerCombat>().freezer.Unfreeze("dialogue");
 
         IsOpenDialog = false;
         //_input.Enable();

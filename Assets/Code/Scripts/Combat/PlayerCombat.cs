@@ -23,6 +23,8 @@ public class PlayerCombat : MonoBehaviour, IDamageable, IInputConsumer
     [SerializeField] Renderer[] renderers;
     Dictionary<Material, Color> _materialColors = new();
 
+    public SystemFreezer freezer = new SystemFreezer();
+
     void Start()
     {
         playerComboList = reader.ReadSettings<ComboList>();
@@ -64,6 +66,9 @@ public class PlayerCombat : MonoBehaviour, IDamageable, IInputConsumer
     public bool ConsumeInput(InputAction.CallbackContext context)
     {
         if (!context.performed)
+            return false;
+
+        if (freezer.Frozen)
             return false;
 
         InputHelper.MouseClickData click = new InputHelper.MouseClickData(context);
