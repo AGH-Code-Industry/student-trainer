@@ -17,7 +17,9 @@ public class ClockController : MonoBehaviour
 
     private void OnChangeTime(GameTimeData time)
     {
-        text.text = $"{time.hour}:{time.minute}";
+        string h = time.hour.ToString();
+        string m = time.minute.ToString();
+        text.text = h.PadLeft(2, '0') + ':' + m.PadLeft(2, '0');
     }
 
     private void OnDestroy()
