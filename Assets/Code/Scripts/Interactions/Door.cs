@@ -101,7 +101,7 @@ public class Door : MonoBehaviour, IInteractable
     public void FocusInteraction(bool isFocused) { interactionFocused = isFocused; }
 
 
-
+    /*
     public void OnDoorOpening()
     {
         DoorOpening?.Invoke();
@@ -111,7 +111,7 @@ public class Door : MonoBehaviour, IInteractable
     {
         DoorClosing?.Invoke();
     }
-
+    */
     
 
     
@@ -144,6 +144,8 @@ public class Door : MonoBehaviour, IInteractable
         if (roomFogController)
             roomFogController.Reveal();
 
+        DoorOpening?.Invoke();
+
         state = DoorState.Moving;
         anim.SetTrigger("open");
 
@@ -157,6 +159,8 @@ public class Door : MonoBehaviour, IInteractable
     {
         if (roomFogController)
             roomFogController.Hide();
+
+        DoorClosing?.Invoke();
 
         state = DoorState.Moving;
         anim.SetTrigger("close");

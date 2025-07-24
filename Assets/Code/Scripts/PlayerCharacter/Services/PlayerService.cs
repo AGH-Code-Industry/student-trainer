@@ -9,6 +9,9 @@ public class PlayerService : IInitializable, IDisposable, IInputConsumer
     public readonly float MaxHealth = 100;
     public event Action<float> HealthChange;
     private float _health = 100;
+
+
+    bool isDead = false;
     public float Health
     {
         get { return _health; }
@@ -16,6 +19,14 @@ public class PlayerService : IInitializable, IDisposable, IInputConsumer
         {
             _health = Math.Clamp(value, 0, MaxHealth);
             HealthChange?.Invoke(_health);
+
+            // Temporary death logic
+            if(_health <= 0 && !isDead)
+            {
+                isDead = true;
+                MonoBehaviour.FindAnyObjectByType<PlayerAnimationController>().PlayAnimation("Death");
+                MonoBehaviour.FindAnyObjectByType<UiManager>().OpenWindow("DeathScreen");
+            }
         }
     }
 
