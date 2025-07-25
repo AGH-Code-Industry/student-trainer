@@ -596,7 +596,8 @@ PrefabInstance:
       value: LOBBY
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 7295778575236913349, guid: 021dbe58fd6a95340a5579de7d16828d, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: -2579926714654458770, guid: 021dbe58fd6a95340a5579de7d16828d, type: 3}
@@ -611,9 +612,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5717588112335833044, guid: 021dbe58fd6a95340a5579de7d16828d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1146813330}
-    - targetCorrespondingSourceObject: {fileID: 7295778575236913349, guid: 021dbe58fd6a95340a5579de7d16828d, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 342587991}
     - targetCorrespondingSourceObject: {fileID: 3818086464068160934, guid: 021dbe58fd6a95340a5579de7d16828d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1440438595}
@@ -677,11 +675,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 3421554971605399148, guid: 021dbe58fd6a95340a5579de7d16828d, type: 3}
---- !u!1 &342587988 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7295778575236913349, guid: 021dbe58fd6a95340a5579de7d16828d, type: 3}
-  m_PrefabInstance: {fileID: 342587983}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &342587989 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2375451332828897067, guid: 021dbe58fd6a95340a5579de7d16828d, type: 3}
@@ -692,20 +685,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6378573828145272555, guid: 021dbe58fd6a95340a5579de7d16828d, type: 3}
   m_PrefabInstance: {fileID: 342587983}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &342587991
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 342587988}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c70b2d2fb0ba1974bb65b132093f5ed5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fogObj: {fileID: 342587988}
-  dontHideOnceRevealed: 0
 --- !u!114 &342587992
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1320,7 +1299,7 @@ Transform:
   m_GameObject: {fileID: 485959348}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.08, y: 0.85, z: -18.342}
+  m_LocalPosition: {x: -0.08, y: 0.85, z: -11.11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1544,7 +1523,7 @@ PrefabInstance:
     - target: {fileID: 4726200519662196890, guid: 471e9466c2f4aa94582bf0cf9584f6ee, type: 3}
       propertyPath: roomFogController
       value: 
-      objectReference: {fileID: 342587991}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3355,7 +3334,7 @@ Transform:
   m_GameObject: {fileID: 1661169248}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.05, y: 0.32, z: -18.06}
+  m_LocalPosition: {x: -0.05, y: 0.32, z: -11.47}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
