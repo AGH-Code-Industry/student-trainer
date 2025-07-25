@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: key1
   name: Klucz
-  icon: {fileID: 21300000, guid: 04a8598d27234564b9508c16a1eff870, type: 3}
+  icon: {fileID: 21300000, guid: 6377788f8aff6c24e81582eb2bc7b88e, type: 3}
   description: Klucz do jednego z pokoi w Kapitolu.
   maxStackSize: 1

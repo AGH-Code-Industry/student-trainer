@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Piwo
   m_EditorClassIdentifier: 
   id: piwo
-  name: Kuflowe Mocne
-  icon: {fileID: 21300000, guid: 492b9988436bd45049a9a6bc52ac8fb0, type: 3}
-  description: 
+  name: "D\u0119bowe Mocne"
+  icon: {fileID: 21300000, guid: 03fcbfe57789ec247b5e469caed2f9da, type: 3}
+  description: "D\u0119bowe mocne. Legenda g\u0142osi \u017Ce rzuca kl\u0105tw\u0119
+    na tego co go wypije."
   maxStackSize: 6
