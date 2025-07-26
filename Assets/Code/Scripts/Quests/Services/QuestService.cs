@@ -106,7 +106,7 @@ namespace Quests
             List<string> startingSteps2 = new List<string>();
             startingSteps2.Add("first");
 
-            Quest firstQuest = new Quest("firstQuest", "Porozmawiaj z Żulisiem", "description", steps2.ToArray(), startingSteps2.ToArray(), null);
+            Quest firstQuest = new Quest("firstQuest", "Pierwsze kroki", "description", steps2.ToArray(), startingSteps2.ToArray(), null);
             Container.Inject(firstQuest);
 // ------------------
 
