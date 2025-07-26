@@ -20,3 +20,4 @@ MonoBehaviour:
   - Player UI
   defaultLevel: Student City
   defaultSpawnPoint: SP_FROM_MENU
+  defaultQuest: firstQuest

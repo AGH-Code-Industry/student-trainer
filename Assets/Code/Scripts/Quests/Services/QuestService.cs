@@ -95,8 +95,24 @@ namespace Quests
 
             Quest demoQuest = new Quest("demo_quest", "Moja druga połówka", "description", steps.ToArray(), startingSteps.ToArray(), null);
             Container.Inject(demoQuest);
-            _gameQuests = new Quest[1];
-            _gameQuests[0] = demoQuest;
+
+// ------------------ na potrzeby demo
+            TalkStep first = new TalkStep("first", "Porozmawiaj z Żulisiem", null, null, StepResult.Nothing, StepResult.Nothing);
+            Container.Inject(first);
+
+            List<QuestStepBase> steps2 = new List<QuestStepBase>();
+            steps2.Add(first);
+
+            List<string> startingSteps2 = new List<string>();
+            startingSteps2.Add("talk_step");
+
+            Quest firstQuest = new Quest("firstQuest", "Porozmawiaj z Żulisiem", "description", steps2.ToArray(), startingSteps2.ToArray(), null);
+            Container.Inject(firstQuest);
+// ------------------
+
+            _gameQuests = new Quest[2];
+            _gameQuests[0] = firstQuest;
+            _gameQuests[1] = demoQuest;
         }
 
         void Update()

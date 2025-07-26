@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 using UnityEngine.SceneManagement;
+using Quests; // na potrzeby demo 2
 
 public class LevelService : MonoBehaviour, IInitializable
 {
@@ -11,6 +12,8 @@ public class LevelService : MonoBehaviour, IInitializable
     [Inject] readonly SceneService sceneService;
     [Inject] readonly ResourceReader reader;
     [Inject] readonly EventBus bus;
+
+    [Inject] readonly QuestService questService;
 
     GameLevels levelSettings;
 
@@ -153,6 +156,9 @@ public class LevelService : MonoBehaviour, IInitializable
         currentLevel = levelSettings.defaultLevel;
 
         MovePlayer(levelSettings.defaultSpawnPoint);
+
+        // tymczasowo, przynajmniej na potrzeby demo2
+        questService.ActivateQuest(levelSettings.defaultQuest);
 
         bus.Publish(new LevelChangeFinish());
     }

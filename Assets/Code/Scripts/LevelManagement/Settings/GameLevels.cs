@@ -9,4 +9,5 @@ public class GameLevels : ScriptableObject
     public string[] playerScenes;
     public string defaultLevel = "Student City";
     public string defaultSpawnPoint;
+    public string defaultQuest; // tymczasowo, przynajmniej na potrzeby demo2
 }
