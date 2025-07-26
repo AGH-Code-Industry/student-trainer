@@ -3,7 +3,7 @@
 wysyłali po alk-
 Ty: Oddawaj ten telefon i mnie nie denerwuj.
 Żuliś: Już już…
-+ *Odejdź*
+Ty: *Odejdź*
     -> DONE
 
 END

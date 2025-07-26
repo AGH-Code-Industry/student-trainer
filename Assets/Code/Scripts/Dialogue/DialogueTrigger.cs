@@ -11,7 +11,7 @@ public class DialogueTrigger : MonoBehaviour, IInteractable
 	//kk
 
 	[SerializeField] private GameObject _camera;
-	[SerializeField] TextAsset dialogue1, dialogue2;
+	[SerializeField] TextAsset dialogue1, dialogue2, dialogue3;
 	[SerializeField] string npcName;
 
 	[Inject] readonly DialogueService _dialogueService;
@@ -32,10 +32,13 @@ public class DialogueTrigger : MonoBehaviour, IInteractable
 		Debug.Log("Triggering dialogue");
 		_camera.SetActive(true);
 
-		if (questService.GetStepStatus("demo_quest", "step_beer") == QuestStepStatus.Completed)
+		if (questService.GetStepStatus("firstQuest", "first") != QuestStepStatus.Completed)
+			_dialogueService.Start(dialogue1);
+		else if (questService.GetStepStatus("demo_quest", "step_beer") == QuestStepStatus.Completed)
 			_dialogueService.Start(dialogue2);
 		else
-			_dialogueService.Start(dialogue1);
+			_dialogueService.Start(dialogue3); // gdy gracz wróci przed skończeniem misji
+					
 	}
 
 	private void OnCloseDialog()
@@ -78,7 +81,8 @@ public class DialogueTrigger : MonoBehaviour, IInteractable
 
     public InteractableData GetInteractionData()
     {
-		bool canInteract = !questService.IsQuestActive("demo_quest") || questService.GetStepStatus("demo_quest", "step_beer") == QuestStepStatus.Completed;
+		//bool canInteract = !questService.IsQuestActive("demo_quest") || questService.GetStepStatus("demo_quest", "step_beer") == QuestStepStatus.Completed;
+		bool canInteract = true;
 		string interName = canInteract ? "rozmawiaj" : "zajęty";
 		return new InteractableData(npcName, interName, false, canInteract);
     }

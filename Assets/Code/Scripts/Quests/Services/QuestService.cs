@@ -97,14 +97,14 @@ namespace Quests
             Container.Inject(demoQuest);
 
 // ------------------ na potrzeby demo
-            TalkStep first = new TalkStep("first", "Porozmawiaj z Żulisiem", null, null, StepResult.Nothing, StepResult.Nothing);
+            TalkStep first = new TalkStep("first", "Porozmawiaj z Żulisiem", null, null, StepResult.CompleteQuest, StepResult.Nothing);
             Container.Inject(first);
 
             List<QuestStepBase> steps2 = new List<QuestStepBase>();
             steps2.Add(first);
 
             List<string> startingSteps2 = new List<string>();
-            startingSteps2.Add("talk_step");
+            startingSteps2.Add("first");
 
             Quest firstQuest = new Quest("firstQuest", "Porozmawiaj z Żulisiem", "description", steps2.ToArray(), startingSteps2.ToArray(), null);
             Container.Inject(firstQuest);

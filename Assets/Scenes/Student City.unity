@@ -678,15 +678,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 72108f996aaf3a74d97a9cdda834c628, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.61
+      value: -1.54
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 72108f996aaf3a74d97a9cdda834c628, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.5
+      value: 1.48
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 72108f996aaf3a74d97a9cdda834c628, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -41.62
+      value: 5.4
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 72108f996aaf3a74d97a9cdda834c628, type: 3}
       propertyPath: m_LocalRotation.w
@@ -731,7 +731,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 72108f996aaf3a74d97a9cdda834c628, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 524933944}
   m_SourcePrefab: {fileID: 100100000, guid: 72108f996aaf3a74d97a9cdda834c628, type: 3}
 --- !u!1 &50658490 stripped
 GameObject:
@@ -5422,6 +5425,11 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 940592529319594998, guid: 37e1c906f73a1d741bddc691657d7668, type: 3}
+--- !u!1 &345147627 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 72108f996aaf3a74d97a9cdda834c628, type: 3}
+  m_PrefabInstance: {fileID: 49584774}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &345148363 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8033024396961567996, guid: 37e1c906f73a1d741bddc691657d7668, type: 3}
@@ -8200,6 +8208,27 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 72108f996aaf3a74d97a9cdda834c628, type: 3}
   m_PrefabInstance: {fileID: 49584774}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &524933944
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 345147627}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.015653014, y: 0.008104213, z: 0.016231585}
+  m_Center: {x: 0.0023045721, y: -3.1962533e-11, z: -0.002087286}
 --- !u!1 &532568556 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6670906302405479598, guid: 37e1c906f73a1d741bddc691657d7668, type: 3}
@@ -11875,15 +11904,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 790795921}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.84, y: 0.514, z: -14.12}
+  m_LocalRotation: {x: -0, y: 0.9580513, z: -0, w: 0.28659672}
+  m_LocalPosition: {x: -3.15, y: 0.514, z: 5}
   m_LocalScale: {x: 0.65, y: 0.65, z: 0.65}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 543450651759775764}
   - {fileID: 1083960565}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 146.691, z: 0}
 --- !u!114 &790795923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11899,6 +11928,7 @@ MonoBehaviour:
   _camera: {fileID: 1083960564}
   dialogue1: {fileID: 4900000, guid: 55672cb1a95842046b14a515c5927402, type: 3}
   dialogue2: {fileID: 4900000, guid: 8c6ce8cd9edd3f2449ea54845470acb8, type: 3}
+  dialogue3: {fileID: 4900000, guid: 9d7e40d8f9755884d9ab5421ca2f8445, type: 3}
   npcName: "\u017Buli\u015B"
 --- !u!1 &792891848 stripped
 GameObject:
@@ -16820,7 +16850,7 @@ Transform:
   m_GameObject: {fileID: 884195522}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.05, y: 0.671, z: -8.7}
+  m_LocalPosition: {x: -2.91, y: 0.671, z: -1.72}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
