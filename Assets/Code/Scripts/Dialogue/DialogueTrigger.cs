@@ -46,9 +46,13 @@ public class DialogueTrigger : MonoBehaviour, IInteractable
 		_camera.SetActive(false);
 
 		if (!questService.IsQuestActive("demo_quest"))
-        {
+		{
 			questService.ActivateQuest("demo_quest");
-        }
+		}
+		else if (questService.GetStepStatus("demo_quest", "step_beer") == QuestStepStatus.Completed)
+		{
+			MonoBehaviour.FindAnyObjectByType<UiManager>().OpenWindow("EndScreen");
+		}
 
 		eventBus.Publish(new DialogueEndedEvent());
 	}
