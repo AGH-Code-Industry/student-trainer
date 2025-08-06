@@ -9,4 +9,19 @@ public class QuestPreset : ScriptableObject
     public new string name;
     [TextArea]
     public string description;
+
+    public PresetStep[] steps;
+    public PresetReward[] rewards;
+
+    [System.Serializable]
+    public struct PresetStep
+    {
+
+    }
+
+    [System.Serializable]
+    public struct PresetReward
+    {
+
+    }
 }

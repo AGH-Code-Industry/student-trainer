@@ -16,7 +16,7 @@ MonoBehaviour:
   maxTurningOnDelay:
     hour: 0
     minute: 0
-  turnLightOff: 0
+  turnLightOff: 5
   maxTurningOffDelay:
     hour: 0
     minute: 0

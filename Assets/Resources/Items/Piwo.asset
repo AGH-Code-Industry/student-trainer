@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 115b4208eb2656d45a5d1d03ea79dd95, type: 3}
+  m_Name: Piwo
+  m_EditorClassIdentifier: 
+  id: piwo
+  name: "D\u0119bowe Mocne"
+  icon: {fileID: 21300000, guid: 03fcbfe57789ec247b5e469caed2f9da, type: 3}
+  description: "D\u0119bowe mocne. Legenda g\u0142osi \u017Ce rzuca kl\u0105tw\u0119
+    na tego co go wypije."
+  maxStackSize: 6

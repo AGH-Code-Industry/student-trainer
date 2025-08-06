@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Zenject;
+using UnityEngine.InputSystem;
 
-public class PlayerCombat : MonoBehaviour, IDamageable
+public class PlayerCombat : MonoBehaviour, IDamageable, IInputConsumer
 {
     [Inject] readonly PlayerService playerService;
     [Inject] readonly ResourceReader reader;
     [Inject] readonly EventBus eventBus;
+    [Inject] readonly InputService inputService;
 
     PlayerAnimationController animationController;
 
@@ -20,6 +22,8 @@ public class PlayerCombat : MonoBehaviour, IDamageable
 
     [SerializeField] Renderer[] renderers;
     Dictionary<Material, Color> _materialColors = new();
+
+    public SystemFreezer freezer = new SystemFreezer();
 
     void Start()
     {
@@ -36,7 +40,10 @@ public class PlayerCombat : MonoBehaviour, IDamageable
 
         animationController = GetComponent<PlayerAnimationController>();
 
-        eventBus.Subscribe<MouseClickUncaught>(OnAttack);
+        //eventBus.Subscribe<MouseClickUncaught>(OnAttack);
+        List<string> wantedActions = new List<string>();
+        wantedActions.Add("MouseClick");
+        inputService.RegisterConsumer(this, wantedActions);
 
         // Save renderer materials
         renderers.SelectMany(r => r.materials).ToList().ForEach(m => _materialColors.Add(m, m.color));
@@ -46,23 +53,47 @@ public class PlayerCombat : MonoBehaviour, IDamageable
     {
 
     }
-
+    /*
     private void OnAttack(MouseClickUncaught click)
     {
         bool isValid = click.ctx.performed && click.button == MouseClickEvent.MouseButton.Left;
         if (isValid) comboSystem.Attack();
     }
+    */
+
+    public int priority { get; } = 1;
+
+    public bool ConsumeInput(InputAction.CallbackContext context)
+    {
+        if (!context.performed)
+            return false;
+
+        if (freezer.Frozen)
+            return false;
+
+        InputHelper.MouseClickData click = new InputHelper.MouseClickData(context);
+        if (click.button == InputHelper.MouseClickData.MouseButton.Left)
+        {
+            comboSystem.Attack();
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 
     private void OnDestroy()
     {
-        eventBus.Unsubscribe<MouseClickUncaught>(OnAttack);
+        //eventBus.Unsubscribe<MouseClickUncaught>(OnAttack);
+        inputService.RemoveConsumer(this);
     }
 
     #region Player_Attacks
 
     void AttackStarted(string animationName)
     {
-        playerService.Freeze("combat");
+        playerService.freezer.Freeze("combat");
         animationController.PlayAnimation(animationName);
     }
 
@@ -97,7 +128,7 @@ public class PlayerCombat : MonoBehaviour, IDamageable
 
     void RecoveryEnded()
     {
-        playerService.Unfreeze("combat");
+        playerService.freezer.Unfreeze("combat");
     }
 
     #endregion

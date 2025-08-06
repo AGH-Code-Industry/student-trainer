@@ -17,15 +17,33 @@ public class Chest : MonoBehaviour, IInteractable
     void Awake()
     {
         CreateContainer(containerSize, containerName);
-        //Debug.Log($"{gameObject.name}: creating container (\"{containerName}\", size {containerSize})...");
+    }
+
+    void Start()
+    {
+        //FindAnyObjectByType<PlayerInteractions>().RegisterInteractable(this);
     }
 
     public void CreateContainer(int size, string name)
     {
-        container = new Container(size, name);
+        if(container == null)
+            container = new Container(size, name);
     }
 
-    public bool IsEnabled() => this.enabled;
+
+
+    public void Interact()
+    {
+        service.SetContainer(container);
+        FindAnyObjectByType<UiManager>().OpenWindow("ChestUI");
+    }
+
+    public GameObject GetGO() => gameObject;
+
+    public InteractableData GetInteractionData()
+    {
+        return new InteractableData(containerName, "przeglądaj", true, true);
+    }
 
     public void FocusInteraction(bool isFocused)
     {
@@ -33,53 +51,24 @@ public class Chest : MonoBehaviour, IInteractable
             service.ClearContainer();
     }
 
-    public string GetActionName()
+    void OnEnable()
     {
-        return "Przeglądaj";
-    }
-
-    public string GetObjectName()
-    {
-        return containerName;
-    }
-
-    public Transform GetTransform()
-    {
-        return transform;
-    }
-
-    public void Interact()
-    {
-        service.SetContainer(container);
-    }
-
-    public void EndInteraction()
-    {
-        service.ClearContainer();
-    }
-
-    public bool InteractionAllowed()
-    {
-        return true;
-    }
-
-    public bool IsBlocking()
-    {
-        return true;
-    }
-
-    public bool ShouldPlayAnimation()
-    {
-        return true;
+        FindAnyObjectByType<PlayerInteractions>()?.RegisterInteractable(this);
     }
 
     void OnDisable()
     {
+        FindAnyObjectByType<PlayerInteractions>()?.RemoveInteractable(this);
         onInteractionDestroyed?.Invoke();
+
+        FindAnyObjectByType<UiManager>()?.CloseWindow("ChestUI");
     }
 
+    /*
     void OnDestroy()
     {
+        FindAnyObjectByType<PlayerInteractions>()?.RemoveInteractable(this);
         onInteractionDestroyed?.Invoke();
     }
+    */
 }

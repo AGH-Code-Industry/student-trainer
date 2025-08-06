@@ -12,7 +12,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine.Assertions;
 
-public class InventoryService : IInitializable, IDisposable
+public class InventoryService : IInitializable, IDisposable, IInputConsumer
 {
     public InventorySettings settings { get; private set; }
 
@@ -28,12 +28,12 @@ public class InventoryService : IInitializable, IDisposable
     public bool IsDraggingItem
     {
         get { return draggedItem.item != null; }
-        private set { }
     }
 
     [Inject] readonly ResourceReader reader;
     [Inject] readonly ItemUsingService itemService;
     [Inject] readonly EventBus eventBus;
+    [Inject] readonly InputService inputService;
 
     // Pass slot's index as argument
     //public Action<int> onSlotContentsChanged;
@@ -55,10 +55,31 @@ public class InventoryService : IInitializable, IDisposable
 
         draggedItem = new Slot();
 
+        /*
         eventBus.Subscribe<PlayerHotkey>(UseHotkey);
-
         eventBus.Subscribe<MouseClickEvent>(SlotClick);
         eventBus.Subscribe<MouseClickUncaught>(SlotClick);
+        */
+        List<string> wantedActions = new List<string>();
+        wantedActions.Add("InventoryHotkey");
+        wantedActions.Add("MouseClick");
+        inputService.RegisterConsumer(this, wantedActions);
+    }
+
+    public int priority { get; } = 1100;
+
+    public bool ConsumeInput(UnityEngine.InputSystem.InputAction.CallbackContext context)
+    {
+        if(context.action.name == "MouseClick")
+        {
+            return SlotClick(context);
+        }
+        else if(context.action.name == "InventoryHotkey")
+        {
+            return UseHotkey(context);
+        }
+
+        return false;
     }
 
     public ItemPreset GetItemByID(string id)
@@ -216,6 +237,29 @@ public class InventoryService : IInitializable, IDisposable
         return (missing <= 0);
     }
 
+    public int GetItemCount(ItemPreset item, Container cont = null)
+    {
+        if (cont == null)
+            cont = inventory;
+
+        int count = 0;
+        foreach(Slot slot in cont.slots)
+        {
+            if(slot.item == item)
+            {
+                count += slot.count;
+            }
+        }
+
+        return count;
+    }
+
+    public int GetItemCount(string id, Container cont = null)
+    {
+        ItemPreset wantedItem = GetItemByID(id);
+        return GetItemCount(wantedItem, cont);
+    }
+
     public int GetFirstFreeSlot(Container cont = null)
     {
         return GetFirstFreeAfterIndex(0, cont);
@@ -333,21 +377,24 @@ public class InventoryService : IInitializable, IDisposable
         RemoveFromSlot(slotIndex, 1);
     }
 
-    public void UseHotkey(PlayerHotkey hotkey)
+    public bool UseHotkey(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {
-        if (!hotkey.ctx.performed)
-            return;
+        if (!context.performed)
+            return false;
 
-        if (hotkey.number < 1 || hotkey.number > settings.hotkeyAmount)
-            return;
+        int hotkeyNumber = InputHelper.ParseHotkey(context);
+        if (hotkeyNumber < 1 || hotkeyNumber > settings.hotkeyAmount)
+            return false;
 
-        UseItemAtSlot(hotkey.number - 1);
+        UseItemAtSlot(hotkeyNumber - 1);
+        return true;
     }
 
     #endregion
-
-    public void SlotClick(MouseClickEvent click)
+    
+    public bool SlotClick(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {
+        /*
         if(click.GetType() == typeof(MouseClickUncaught))
         {
             if(slotHoverIndex == null && IsDraggingItem)
@@ -355,46 +402,60 @@ public class InventoryService : IInitializable, IDisposable
 
             return;
         }
-
+        */
         if (slotHoverIndex == null && !IsDraggingItem)
-            return;
+            return false;
 
         Container target = slotHoverChest ? currentCont : inventory;
         if(target == null)
         {
             //Debug.LogError("InventoryService error at function SlotClick: slotHoverChest variable is true but current container is null!");
-            return;
+            return false;
         }
 
-        if (click.button == MouseClickEvent.MouseButton.Left)
+        InputHelper.MouseClickData click = new InputHelper.MouseClickData(context);
+        if (click.button == InputHelper.MouseClickData.MouseButton.Left)
         {
-            if (click.ctx.started)
+            if (context.started)
             {
                 if (click.shiftModifier)
                     FastTranferFromSlot((int)slotHoverIndex, target);
                 else
                     DragItemFromSlot((int)slotHoverIndex, target);
             }
-            else if (click.ctx.canceled)
+            else if (context.canceled)
             {
                 if (slotHoverIndex == null)
-                    DropItemIntoSlot(dragOriginIndex, target);
+                {
+                    if(target != null)
+                    {
+                        DropItemIntoSlot(dragOriginIndex, target);
+                    }
+                    else
+                    {
+                        DropItemIntoSlot(GetFirstFreeSlot(), inventory);
+                    }
+                }
                 else
+                {
                     DropItemIntoSlot((int)slotHoverIndex, target);
+                }
             }
         }
-        else if (click.button == MouseClickEvent.MouseButton.Right)
+        else if (click.button == InputHelper.MouseClickData.MouseButton.Right)
         {
-            if (click.ctx.performed)
+            if (context.performed)
                 UseItemAtSlot((int)slotHoverIndex, target);
         }
-        else if(click.button == MouseClickEvent.MouseButton.Middle)
+        else if(click.button == InputHelper.MouseClickData.MouseButton.Middle)
         {
-            if (click.ctx.performed)
+            if (context.performed)
                 SplitStackAtIndex((int)slotHoverIndex, target);
         }
-    }
 
+        return true;
+    }
+    
     public void SplitStackAtIndex(int slotIndex, Container cont = null)
     {
         if (cont == null)
@@ -550,8 +611,11 @@ public class InventoryService : IInitializable, IDisposable
 
     public void Dispose()
     {
+        /*
         eventBus.Unsubscribe<PlayerHotkey>(UseHotkey);
         eventBus.Unsubscribe<MouseClickEvent>(SlotClick);
         eventBus.Unsubscribe<MouseClickUncaught>(SlotClick);
+        */
+        inputService.RemoveConsumer(this);
     }
 }

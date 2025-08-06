@@ -26,7 +26,9 @@ public class EventBus
     {
         if (_subscribers.ContainsKey(typeof(T)))
         {
-            foreach (var listener in _subscribers[typeof(T)])
+            // Added .ToArray() to fix error "collection was modified, enumeration operation may not execute"
+            // That happens when you unsubscribe in a function that is called by the event bus (e.g. ReachAreaStep class)
+            foreach (var listener in _subscribers[typeof(T)].ToArray())
             {
                 ((Action<T>)listener)?.Invoke(eventData);
             }

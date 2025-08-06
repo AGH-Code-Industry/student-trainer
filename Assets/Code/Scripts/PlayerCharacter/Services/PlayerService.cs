@@ -2,36 +2,35 @@ using System;
 using UnityEngine;
 using Zenject;
 using System.Collections.Generic;
+using UnityEngine.InputSystem;
 
-public class PlayerService : IInitializable, IDisposable
+public class PlayerService : IInitializable, IDisposable, IInputConsumer
 {
     public readonly float MaxHealth = 100;
     public event Action<float> HealthChange;
     private float _health = 100;
+
+
+    bool isDead = false;
     public float Health
     {
         get { return _health; }
         set
         {
             _health = Math.Clamp(value, 0, MaxHealth);
-            HealthChange?.Invoke(value);
+            HealthChange?.Invoke(_health);
+
+            // Temporary death logic
+            if(_health <= 0 && !isDead)
+            {
+                isDead = true;
+                MonoBehaviour.FindAnyObjectByType<PlayerAnimationController>().PlayAnimation("Death");
+                MonoBehaviour.FindAnyObjectByType<UiManager>().OpenWindow("DeathScreen");
+            }
         }
     }
 
-    private List<string> freezes = new List<string>();
-
-    public bool Frozen
-    {
-        get
-        {
-            return freezes.Count > 0;
-        }
-
-        private set
-        {
-            return;
-        }
-    }
+    public readonly SystemFreezer freezer = new SystemFreezer();
 
     public bool IsRunning { get; private set; }
     public Vector3 PlayerPosition { get; set; }
@@ -54,11 +53,13 @@ public class PlayerService : IInitializable, IDisposable
     {
         _settings = _reader.ReadSettings<PlayerMovementSettings>();
 
-        _eventBus.Subscribe<PlayerMove>(OnMove);
-        _eventBus.Subscribe<PlayerRun>(OnRun);
-
         _eventBus.Subscribe<LevelChangeBegin>(FreezeLevelChange);
         _eventBus.Subscribe<LevelChangeFinish>(UnfreezeLevelChange);
+
+        List<string> wantedActions = new List<string>();
+        wantedActions.Add("Move");
+        wantedActions.Add("Run");
+        _input.RegisterConsumer(this, wantedActions, true);
     }
 
     public void CheckIfGrounded()
@@ -68,7 +69,7 @@ public class PlayerService : IInitializable, IDisposable
 
     public Vector3 GetMovementVector()
     {
-        if (Frozen)
+        if (freezer.Frozen)
             return Vector3.zero;
 
         if(isPlayerGrounded)
@@ -93,7 +94,7 @@ public class PlayerService : IInitializable, IDisposable
 
     public Vector3 GetLookVector()
     {
-        if (!Frozen)
+        if (!freezer.Frozen)
             _lastLookTarget = _input.GlobalLookTarget;
 
         return _lastLookTarget;
@@ -101,38 +102,34 @@ public class PlayerService : IInitializable, IDisposable
 
     public float GetRotationSpeed() { return _settings.rotationSpeed; }
 
-    public void FreezeLevelChange(LevelChangeBegin beingEvent) => Freeze("levelChange");
-    public void UnfreezeLevelChange(LevelChangeFinish finishEvent) => Unfreeze("levelChange");
-
-    public void Freeze(string freezeID)
-    {
-        if (!freezes.Contains(freezeID))
-            freezes.Add(freezeID);
-    }
-
-    public void Unfreeze(string freezeID)
-    {
-        if (freezes.Contains(freezeID))
-            freezes.Remove(freezeID);
-    }
-
-    private void OnMove(PlayerMove playerMove)
-    {
-        _movementVector = playerMove.move;
-    }
-
-    private void OnRun(PlayerRun playerRun)
-    {
-        if (playerRun.ctx.started || playerRun.ctx.performed) IsRunning = true;
-        if (playerRun.ctx.canceled) IsRunning = false;
-    }
+    public void FreezeLevelChange(LevelChangeBegin beingEvent) => freezer.Freeze("levelChange");
+    public void UnfreezeLevelChange(LevelChangeFinish finishEvent) => freezer.Unfreeze("levelChange");
 
     public void Dispose()
     {
-        _eventBus.Unsubscribe<PlayerMove>(OnMove);
-        _eventBus.Unsubscribe<PlayerRun>(OnRun);
-
         _eventBus.Unsubscribe<LevelChangeBegin>(FreezeLevelChange);
         _eventBus.Unsubscribe<LevelChangeFinish>(UnfreezeLevelChange);
+
+        _input.RemoveConsumer(this);
+    }
+
+    public int priority { get; } = 1;
+
+    public bool ConsumeInput(InputAction.CallbackContext context)
+    {
+        if(context.action.name == "Move")
+        {
+            _movementVector = context.ReadValue<Vector2>();
+        }
+        else if(context.action.name == "Run")
+        {
+            if (context.started || context.performed) IsRunning = true;
+            else if (context.canceled) IsRunning = false;
+        }
+
+        if (freezer.Frozen)
+            return false;
+        else
+            return true;
     }
 }

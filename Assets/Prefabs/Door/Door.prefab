@@ -36,7 +36,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &4038712859489813477
 Animator:
-  serializedVersion: 5
+  serializedVersion: 7
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -50,6 +50,7 @@ Animator:
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
@@ -97,6 +98,7 @@ GameObject:
   - component: {fileID: 4212115594078393351}
   - component: {fileID: 998580058184620962}
   - component: {fileID: 3044253080908656488}
+  - component: {fileID: 3745798154867211291}
   - component: {fileID: 726793119528195407}
   m_Layer: 0
   m_Name: DoorGraphics
@@ -113,7 +115,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3548731487763123901}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.5, y: 0.49999997, z: 0.5, w: -0.5}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -145,6 +147,9 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -171,6 +176,22 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!208 &3745798154867211291
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3548731487763123901}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.64900005, y: 1.195, z: 0.065}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.64900005, y: 0, z: 0.003}
+  m_TimeToStationary: 0.5
 --- !u!65 &726793119528195407
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -190,8 +211,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.1, y: 1.2636688, z: 2.3268116}
-  m_Center: {x: -0.0028502082, y: 0.63183457, z: 0.000000018745194}
+  m_Size: {x: 1.3407121, y: 2.41288, z: 0.12567781}
+  m_Center: {x: 0.6460917, y: 0.0022969842, z: 0.009008236}
 --- !u!1 &3581606267137462743
 GameObject:
   m_ObjectHideFlags: 0
@@ -242,3 +263,9 @@ MonoBehaviour:
   itemRequiredToOpen: {fileID: 0}
   dontRemoveAfterUse: 0
   roomFogController: {fileID: 0}
+  DoorOpening:
+    m_PersistentCalls:
+      m_Calls: []
+  DoorClosing:
+    m_PersistentCalls:
+      m_Calls: []

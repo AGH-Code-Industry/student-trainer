@@ -25,7 +25,7 @@ public class InteractionUI : MonoBehaviour
 
     void Start()
     {
-        module = FindObjectOfType<PlayerInteractions>();
+        module = FindAnyObjectByType<PlayerInteractions>();
 
         promptText = promptObject.GetComponent<TextMeshProUGUI>();
         promptTransform = promptObject.GetComponent<RectTransform>();
@@ -66,7 +66,7 @@ public class InteractionUI : MonoBehaviour
         
         promptShown = true;
 
-        currentInterTransform = currentInteractable.GetTransform();
+        currentInterTransform = currentInteractable.GetGO().transform;
         UpdatePrompt();
         PositionPrompt();
     }
@@ -76,16 +76,14 @@ public class InteractionUI : MonoBehaviour
         if (currentInteractable == null)
             return;
 
-        string objName = currentInteractable.GetObjectName();
-        string actionName = currentInteractable.GetActionName();
-        bool allowed = currentInteractable.InteractionAllowed();
+        InteractableData data = currentInteractable.GetInteractionData();
 
-        string toShow = objName + ": ";
+        string toShow = data.objectName + ": ";
 
-        if (allowed)
+        if (data.interactionAllowed)
             toShow += "[" + interactionKey + "] ";
 
-        toShow += actionName;
+        toShow += data.actionName;
 
         promptText.text = toShow;
     }

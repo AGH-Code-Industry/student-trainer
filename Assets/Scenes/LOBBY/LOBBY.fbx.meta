@@ -3,7 +3,37 @@ guid: 021dbe58fd6a95340a5579de7d16828d
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Floor
+    second: {fileID: 2100000, guid: ae0e97c4af5b89443ad5ab5db283e5c6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: FogGFX
+    second: {fileID: 2100000, guid: 3f346b3104667324d906573b375d0fc9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Vertex
+    second: {fileID: 2100000, guid: e712d4c0af203f348894295f07109ed4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Vertex_Shiny
+    second: {fileID: 2100000, guid: 3f9c852e1daa5d741a53de2dff45fc94, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Vertex_metal
+    second: {fileID: 2100000, guid: 413c22d270939fd4c902ff3782c372d2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Vertex_rough
+    second: {fileID: 2100000, guid: f7480d50351ccf8488cd24b4f37492a9, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
@@ -16,8 +46,6 @@ ModelImporter:
     optimizeGameObjects: 0
     removeConstantScaleCurves: 0
     motionNodeName: 
-    rigImportErrors: 
-    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 

@@ -1,8 +1,10 @@
 using UnityEngine;
 using Zenject;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.InputSystem;
 
-public class PlayerAnimationController : MonoBehaviour
+public class PlayerAnimationController : MonoBehaviour, IInputConsumer
 {
     [SerializeField] Animator _animator;
 
@@ -23,8 +25,12 @@ public class PlayerAnimationController : MonoBehaviour
 
     void Start()
     {
-        _eventBus.Subscribe<MouseClickUncaught>(OnAttack);
-        _eventBus.Subscribe<PlayerDodge>(OnDodge);
+        //_eventBus.Subscribe<MouseClickUncaught>(OnAttack);
+        //_eventBus.Subscribe<PlayerDodge>(OnDodge);
+        List<string> wantedActions = new List<string>();
+        wantedActions.Add("MouseClick");
+        wantedActions.Add("Dodge");
+        _inputService.RegisterConsumer(this, wantedActions);
     }
 
     void Update()
@@ -59,6 +65,32 @@ public class PlayerAnimationController : MonoBehaviour
         //_animator.SetFloat("Move_Y", animVector.y);
     }
 
+    public int priority { get; } = 1;
+
+    public bool ConsumeInput(InputAction.CallbackContext context)
+    {
+        if (!context.performed)
+            return false;
+
+        if(context.action.name == "MouseClick")
+        {
+            InputHelper.MouseClickData click = new InputHelper.MouseClickData(context);
+            if(click.button == InputHelper.MouseClickData.MouseButton.Left)
+            {
+                // Don't consume input when only facing the mouse
+                FaceMouse();
+                return false;
+            }
+        }
+        else if(context.action.name == "Dodge")
+        {
+            PlayAnimation("Roll");
+            return true;
+        }
+
+        return false;
+    }
+    /*
     private void OnDodge(PlayerDodge playerDodge)
     {
         if (playerDodge.ctx.started)
@@ -74,7 +106,7 @@ public class PlayerAnimationController : MonoBehaviour
         if (isClickValid)
             FaceMouse();
     }
-
+    */
     void FacePosition(Vector3 pos)
     {
         Vector3 direction = (pos - transform.position).normalized;
@@ -110,19 +142,19 @@ public class PlayerAnimationController : MonoBehaviour
     private IEnumerator InteractionAnim()
     {
         interactionPlaying = true;
-        _movement.Freeze("interactionAnim");
+        _movement.freezer.Freeze("interactionAnim");
         PlayAnimation("Interact");
 
         yield return new WaitForSeconds(interactionAnimDuration);
 
-        _movement.Unfreeze("interactionAnim");
+        _movement.freezer.Unfreeze("interactionAnim");
         interactionPlaying = false;
     }
 
     void OnDestroy()
     {
-        _eventBus.Unsubscribe<MouseClickUncaught>(OnAttack);
-        _eventBus.Unsubscribe<PlayerDodge>(OnDodge);
-
+        //_eventBus.Unsubscribe<MouseClickUncaught>(OnAttack);
+        //_eventBus.Unsubscribe<PlayerDodge>(OnDodge);
+        _inputService.RemoveConsumer(this);
     }
 }

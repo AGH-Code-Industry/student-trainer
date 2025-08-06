@@ -13,29 +13,9 @@ public class SceneDoor : MonoBehaviour, IInteractable
 
     [Inject] readonly LevelService levelService;
 
-    public void EndInteraction()
+    void Start()
     {
-        return;
-    }
-
-    public void FocusInteraction(bool isFocused)
-    {
-        return;
-    }
-
-    public string GetActionName()
-    {
-        return "Przejdź";
-    }
-
-    public string GetObjectName()
-    {
-        return visibleName;
-    }
-
-    public Transform GetTransform()
-    {
-        return transform;
+        FindAnyObjectByType<PlayerInteractions>()?.RegisterInteractable(this);
     }
 
     public void Interact()
@@ -43,11 +23,20 @@ public class SceneDoor : MonoBehaviour, IInteractable
         levelService.ChangeLevel(levelIndex, spawnName);
     }
 
-    public bool InteractionAllowed() => true;
+    public GameObject GetGO() => gameObject;
 
-    public bool IsBlocking() => false;
+    public InteractableData GetInteractionData()
+    {
+        return new InteractableData(visibleName, "przejdź", false, true);
+    }
 
-    public bool IsEnabled() => this.enabled;
+    public void FocusInteraction(bool isFocused)
+    {
+        return;
+    }
 
-    public bool ShouldPlayAnimation() => false;
+    private void OnDestroy()
+    {
+        FindAnyObjectByType<PlayerInteractions>()?.RemoveInteractable(this);
+    }
 }

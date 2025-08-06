@@ -1,7 +1,8 @@
 using UnityEngine;
+using System.Collections.Generic;
 using Zenject;
 
-public class InputMediator : MonoBehaviour
+public class InputMediator : MonoBehaviour, IInputConsumer
 {
     Vector3 pos;
     // The height of the plane determines how accurately the player character faces the cursor
@@ -11,10 +12,19 @@ public class InputMediator : MonoBehaviour
     [Inject] private InputService _service;
     [Inject] private EventBus _eventBus;
 
+    PlayerCombat playerCombat;
+
     void Start()
     {
+        // Need to better merge the player scripts
+
+        playerCombat = FindAnyObjectByType<PlayerCombat>();
+
         pos = _service.MouseDownPosition;
-        _eventBus.Subscribe<MouseClickUncaught>(OnAttack);
+        //_eventBus.Subscribe<MouseClickUncaught>(OnAttack);
+        List<string> wantedActions = new List<string>();
+        wantedActions.Add("MouseClick");
+        _service.RegisterConsumer(this, wantedActions, false);
     }
 
     void Update()
@@ -31,17 +41,33 @@ public class InputMediator : MonoBehaviour
         if (groundPlane.Raycast(cameraRay, out float enter))
         {
             pos = cameraRay.GetPoint(enter);
-            _service.MouseDownPosition = pos;
+            if(!playerCombat.freezer.Frozen)
+                _service.MouseDownPosition = pos;
         }
     }
 
+    public int priority { get; } = 2;
+
+    public bool ConsumeInput(UnityEngine.InputSystem.InputAction.CallbackContext context)
+    {
+        if (playerCombat.freezer.Frozen)
+            return false;
+
+        InputHelper.MouseClickData click = new InputHelper.MouseClickData(context);
+        if (context.performed && click.button == InputHelper.MouseClickData.MouseButton.Left)
+            _service.GlobalLookTarget = pos;
+
+        // Never consume input
+        return false;
+    }
+    /*
     void OnAttack(MouseClickUncaught click)
     {
         bool isClickValid = click.ctx.performed && click.button == MouseClickEvent.MouseButton.Left;
         if (isClickValid)
             _service.GlobalLookTarget = pos;
     }
-
+    */
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
@@ -50,6 +76,7 @@ public class InputMediator : MonoBehaviour
 
     void OnDestroy()
     {
-        _eventBus.Unsubscribe<MouseClickUncaught>(OnAttack);
+        //_eventBus.Unsubscribe<MouseClickUncaught>(OnAttack);
+        _service.RemoveConsumer(this);
     }
 }
