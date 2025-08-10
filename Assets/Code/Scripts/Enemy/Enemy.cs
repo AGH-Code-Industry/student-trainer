@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 //using UnityEngine.Experimental.Rendering.RenderGraphModule;
 using Zenject;
+using Combat;
 
 public class Enemy : MonoBehaviour, IDamageable
 {
@@ -83,36 +84,10 @@ public class Enemy : MonoBehaviour, IDamageable
 
     public void Attack(float damage, float range)
     {
-        var direction = (playerMovementService.PlayerPosition - transform.position).normalized;
-        transform.rotation = Quaternion.LookRotation(direction);
 
-        IDamageable damageComponent;
-
-        // If the attackOrigin object is inside an enemy, this will ensure that it still deals damage
-        Collider[] overlappingColliders = Physics.OverlapSphere(attackOrigin.position, 0.25f);
-        foreach (Collider col in overlappingColliders)
-        {
-            // Avoid dealing damage to self
-            if (col.transform.root == transform.root)
-                continue;
-
-            damageComponent = col.transform.root.GetComponent<IDamageable>();
-            if (damageComponent != null)
-            {
-                damageComponent.TakeDamage(damage);
-                return;
-            }
-        }
-
-        Ray ray = new Ray(attackOrigin.position, attackOrigin.forward);
-        bool inRange = Physics.Raycast(ray, out RaycastHit hit, range);
-        if (!inRange) return;
-
-        damageComponent = hit.transform.root.GetComponent<IDamageable>();
-        damageComponent?.TakeDamage(damage);
     }
 
-    public void TakeDamage(float amount)
+    public void TakeDamage(DamageInfo damage)
     {
         // Quick solution for errors when the component is disabled
         if (this.enabled == false)
@@ -122,7 +97,7 @@ public class Enemy : MonoBehaviour, IDamageable
             return;
 
         StartCoroutine(FlashDamage());
-        health -= amount;
+        health -= damage.amount;
         if (health <= 0)
         {
             ChangeState(new DeadState(this));

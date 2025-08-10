@@ -5,7 +5,7 @@ public class GenericEnemySettings : ScriptableObject
 {
     public float health = 100f;
     public float moveSpeed = 5f;
-    public ComboList attacks;
+    public Combat.ComboList attacks;
 
     [Header("Perception")]
     public float detectionRange = 10f;

@@ -13,7 +13,7 @@ public class ResourceReader
         { typeof(StreetLampLightingSettings), "StreetLampLighting" },
         { typeof(CinemachineCameraSettings), "CinemachineCamera" },
         { typeof(PlayerMovementSettings), "PlayerMovement" },
-        { typeof(ComboList), "PlayerComboList" },
+        { typeof(Combat.ComboList), "PlayerComboList" },
         { typeof(ItemPreset), "Items" },
         { typeof(InventorySettings), "InventorySettings" },
         { typeof(GameLevels), "GameLevels" },

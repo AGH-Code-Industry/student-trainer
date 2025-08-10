@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using Combat;
 
 public class AttackingState : EnemyState
 {

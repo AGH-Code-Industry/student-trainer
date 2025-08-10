@@ -14,21 +14,121 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   combos:
   - name: Unarmed
-    parts:
+    attacks:
     - animationName: Punch_Right
-      duration: 0.8
-      hitMoment: 0.43
-      damage: 10
+      speedMulti: 1
+      duration: 0.42
+      hitDelay: 0.235
+      damage:
+        amount: 15
+        armorPierce: 0
+        blockPierce: 0
+        stagger: 0
+        knockback: 0
       range: 1
+      mobility:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 0
+      parryStart: 0
+      parryEnd: 0
+      blockedBehavior: 0
     - animationName: Punch_Left
-      duration: 0.8
-      hitMoment: 0.43
-      damage: 10
+      speedMulti: 1
+      duration: 0.42
+      hitDelay: 0.235
+      damage:
+        amount: 15
+        armorPierce: 0
+        blockPierce: 0
+        stagger: 0
+        knockback: 0
       range: 1
+      mobility:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 0
+      parryStart: 0
+      parryEnd: 0
+      blockedBehavior: 0
     - animationName: Kick_Right
-      duration: 0.9
-      hitMoment: 0.4
-      damage: 25
-      range: 1.5
+      speedMulti: 1
+      duration: 0.47
+      hitDelay: 0.235
+      damage:
+        amount: 15
+        armorPierce: 0
+        blockPierce: 0
+        stagger: 0
+        knockback: 0
+      range: 1
+      mobility:
+        serializedVersion: 2
+        m_Curve:
+        - serializedVersion: 3
+          time: 0
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        - serializedVersion: 3
+          time: 1
+          value: 1
+          inSlope: 0
+          outSlope: 0
+          tangentMode: 34
+          weightedMode: 0
+          inWeight: 0
+          outWeight: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 0
+      parryStart: 0
+      parryEnd: 0
+      blockedBehavior: 0
   comboTime: 0.5
   recovery: 0.2
+  weights: []
