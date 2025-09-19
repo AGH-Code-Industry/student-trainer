@@ -7,7 +7,7 @@ namespace Combat
     {
         public float speedMultiplier;
         public AnimationClip mainAnimation;
-        public HitEffect[] hitEffects;
+        [SerializeReference] public HitEffect[] hitEffects;
     }
 
 }

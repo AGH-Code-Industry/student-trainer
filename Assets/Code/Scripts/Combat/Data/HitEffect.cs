@@ -3,11 +3,10 @@ using UnityEngine;
 
 namespace Combat
 {
-
+    [System.Serializable]
     public abstract class HitEffect
     {
-        // It will take an ICombatant (source) after it's added
-        public abstract void Execute(IDamagable target);
+        public abstract void Execute(ICombatant attacker, IDamagable target);
     }
 
 }
