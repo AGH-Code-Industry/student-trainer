@@ -6,7 +6,7 @@ namespace Combat
     public interface IDamageable
     {
         //void TakeDamage(float amount);
-        void TakeDamage(DamageInfo damage);
+        void TakeDamage(DamageData damage);
     }
 
 }

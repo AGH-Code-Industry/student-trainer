@@ -3,7 +3,7 @@ using Zenject;
 
 public class ChestFiller : MonoBehaviour
 {
-    [SerializeField] EnemyItemDrop[] items;
+    //[SerializeField] EnemyItemDrop[] items;
 
     [Inject] readonly InventoryService service;
 
@@ -11,11 +11,12 @@ public class ChestFiller : MonoBehaviour
     void Start()
     {
         Container chestContainer = GetComponent<Chest>().container;
-
+        /*
         foreach(EnemyItemDrop item in items)
         {
             service.AddItem(item.item, item.amount, chestContainer);
         }
+        */
     }
 
     // Update is called once per frame

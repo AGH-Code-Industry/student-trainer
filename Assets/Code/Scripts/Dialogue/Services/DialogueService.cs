@@ -25,7 +25,7 @@ public class DialogueService
         if (IsOpenDialog) return;
 
         _playerService.freezer.Freeze("dialogue");
-        MonoBehaviour.FindAnyObjectByType<PlayerCombat>().freezer.Freeze("dialogue");
+        //MonoBehaviour.FindAnyObjectByType<PlayerCombat>().freezer.Freeze("dialogue");
         _story = new Story(dialogue.text);
         _dialogueBoxes = new Queue<DialogueBoxData>();
 
@@ -39,7 +39,7 @@ public class DialogueService
         _dialogueBoxes.Clear();
 
         _playerService.freezer.Unfreeze("dialogue");
-        MonoBehaviour.FindAnyObjectByType<PlayerCombat>().freezer.Unfreeze("dialogue");
+        //MonoBehaviour.FindAnyObjectByType<PlayerCombat>().freezer.Unfreeze("dialogue");
 
         IsOpenDialog = false;
         //_input.Enable();

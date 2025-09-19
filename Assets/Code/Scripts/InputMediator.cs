@@ -12,13 +12,13 @@ public class InputMediator : MonoBehaviour, IInputConsumer
     [Inject] private InputService _service;
     [Inject] private EventBus _eventBus;
 
-    PlayerCombat playerCombat;
+    //PlayerCombat playerCombat;
 
     void Start()
     {
         // Need to better merge the player scripts
 
-        playerCombat = FindAnyObjectByType<PlayerCombat>();
+        //playerCombat = FindAnyObjectByType<PlayerCombat>();
 
         pos = _service.MouseDownPosition;
         //_eventBus.Subscribe<MouseClickUncaught>(OnAttack);
@@ -41,8 +41,8 @@ public class InputMediator : MonoBehaviour, IInputConsumer
         if (groundPlane.Raycast(cameraRay, out float enter))
         {
             pos = cameraRay.GetPoint(enter);
-            if(!playerCombat.freezer.Frozen)
-                _service.MouseDownPosition = pos;
+            //if(!playerCombat.freezer.Frozen)
+            _service.MouseDownPosition = pos;
         }
     }
 
@@ -50,8 +50,8 @@ public class InputMediator : MonoBehaviour, IInputConsumer
 
     public bool ConsumeInput(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {
-        if (playerCombat.freezer.Frozen)
-            return false;
+        //if (playerCombat.freezer.Frozen)
+            //return false;
 
         InputHelper.MouseClickData click = new InputHelper.MouseClickData(context);
         if (context.performed && click.button == InputHelper.MouseClickData.MouseButton.Left)

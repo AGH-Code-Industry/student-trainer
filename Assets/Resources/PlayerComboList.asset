@@ -17,8 +17,11 @@ MonoBehaviour:
     attacks:
     - animationName: Punch_Right
       speedMulti: 1
-      duration: 0.42
-      hitDelay: 0.235
+      timing:
+        duration: 0.833
+        startupEndTime: 0
+        mainEndTime: 0
+        hitDelay: 0.435
       damage:
         amount: 15
         armorPierce: 0
@@ -55,8 +58,11 @@ MonoBehaviour:
       blockedBehavior: 0
     - animationName: Punch_Left
       speedMulti: 1
-      duration: 0.42
-      hitDelay: 0.235
+      timing:
+        duration: 0.833
+        startupEndTime: 0
+        mainEndTime: 0
+        hitDelay: 0.435
       damage:
         amount: 15
         armorPierce: 0
@@ -93,8 +99,11 @@ MonoBehaviour:
       blockedBehavior: 0
     - animationName: Kick_Right
       speedMulti: 1
-      duration: 0.47
-      hitDelay: 0.235
+      timing:
+        duration: 0.933
+        startupEndTime: 0
+        mainEndTime: 0
+        hitDelay: 0.386
       damage:
         amount: 15
         armorPierce: 0
