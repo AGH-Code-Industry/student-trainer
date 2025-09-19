@@ -32,12 +32,12 @@ public class UiManager : MonoBehaviour, IInputConsumer
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public UiWindowData GetDataFromID(string _id)
     {
-        foreach(UiWindowData window in availableWindows)
+        foreach (UiWindowData window in availableWindows)
         {
             if (window.id == _id)
                 return window;
@@ -48,7 +48,7 @@ public class UiManager : MonoBehaviour, IInputConsumer
 
     public bool CanOpenWindow(string _idToOpen)
     {
-        if(openWindowIDs.Count == 0)
+        if (openWindowIDs.Count == 0)
         {
             return true;
         }
@@ -59,7 +59,7 @@ public class UiManager : MonoBehaviour, IInputConsumer
                 return false;
         }
 
-        foreach(string openWindow in openWindowIDs)
+        foreach (string openWindow in openWindowIDs)
         {
             UiWindowData data = GetDataFromID(openWindow);
             if (!data.allowOtherWindows)
@@ -73,7 +73,7 @@ public class UiManager : MonoBehaviour, IInputConsumer
     {
         UiWindowData data = GetDataFromID(_id);
 
-        if(data == null)
+        if (data == null)
         {
             Debug.LogError($"UiManager, OpenWindow(): window with passed id \"{_id}\" does not exist!");
             return;
@@ -83,7 +83,7 @@ public class UiManager : MonoBehaviour, IInputConsumer
         if (openWindowIDs.Contains(data.id) || !CanOpenWindow(_id))
             return;
 
-        if(data.lockPlayer)
+        if (data.lockPlayer)
         {
             playerService.freezer.Freeze(data.id);
             playerInteractions.freezer.Freeze(data.id);
@@ -125,7 +125,7 @@ public class UiManager : MonoBehaviour, IInputConsumer
 
     public void CloseAllWindows()
     {
-        foreach(string openWindow in openWindowIDs)
+        foreach (string openWindow in openWindowIDs)
         {
             CloseWindow(openWindow);
         }

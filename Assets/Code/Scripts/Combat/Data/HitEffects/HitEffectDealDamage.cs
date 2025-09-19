@@ -1,3 +1,4 @@
+using Combat.Interfaces;
 using UnityEngine;
 
 namespace Combat
@@ -7,7 +8,7 @@ namespace Combat
     {
         public DamageData damageData;
 
-        public override void Execute(IDamageable target)
+        public override void Execute(IDamagable target)
         {
             if (target == null)
                 return;

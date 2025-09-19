@@ -51,7 +51,7 @@ public class InputMediator : MonoBehaviour, IInputConsumer
     public bool ConsumeInput(UnityEngine.InputSystem.InputAction.CallbackContext context)
     {
         //if (playerCombat.freezer.Frozen)
-            //return false;
+        //return false;
 
         InputHelper.MouseClickData click = new InputHelper.MouseClickData(context);
         if (context.performed && click.button == InputHelper.MouseClickData.MouseButton.Left)
