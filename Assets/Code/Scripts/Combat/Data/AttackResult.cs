@@ -2,7 +2,7 @@ using Combat.Interfaces;
 
 namespace Combat.Data
 {
-    public class AttackResult
+    public struct AttackResult
     {
         public ICombatant attacker;
     }

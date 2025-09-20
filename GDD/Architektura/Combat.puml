@@ -1,0 +1,99 @@
+@startuml
+
+package data {
+  struct Attack
+  {
+    FrameData frameData
+  }
+
+  struct FrameData
+  {
+
+  }
+
+  struct AttackRequest
+  {
+    ICombatant attacker;
+    List<IDamagable> targets;
+    List<HitEffect> hitEffects;
+  }
+
+  struct AttackResult
+  {
+    ICombatant attacker
+  }
+
+  struct CombatMove <<ScriptableObject>>
+  {
+    float speedMultiplier;
+    AnimationClip mainAnimation;
+    List<HitEffect> hitEffects;
+  }
+
+  struct DamageData
+  {
+    float amount;
+  }
+
+  abstract HitEffect
+  {
+    void Execute(ICombatant attacker, IDamagable target);
+  }
+
+  class HitEffectDealDamage
+  {
+    DamageData damageData;
+    void Execute(ICombatant attacker, IDamagable target);
+  }
+  HitEffectDealDamage <|-- HitEffect
+  HitEffectDealDamage <-- DamageData
+  Attack <-- FrameData
+  CombatMove o-- HitEffect
+  AttackRequest o-- HitEffect
+
+
+}
+
+package Interfaces
+{
+    interface ICombatant
+    {
+        void Attack();
+    }
+
+    interface IEffect
+    {
+        void ApllyEffect();
+    }
+
+    interface IDamagable
+    {
+        void TakeDamage(DamageData damage);
+    }
+
+    ICombatant <|-- IDamagable
+    ICombatant <|-- IEffect
+}
+
+package Services
+{
+    class CombatService
+    {
+        void ResolveAttack(AttackRequest data);
+    }
+}
+
+class PlayerCombat
+{
+    CombatMove combatMove
+    CombatService combatService
+}
+
+CombatService <-- AttackRequest
+
+PlayerCombat <-- CombatMove
+PlayerCombat <-- CombatService
+PlayerCombat <|.. ICombatant
+
+
+@enduml
