@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e78965733ce62854684ded499334e3da, type: 3}
   m_Name: TestAttack
   m_EditorClassIdentifier: 
-  speedMultiplier: 0
-  mainAnimation: {fileID: 0}
+  speedMultiplier: 1
+  mainAnimation: {fileID: 286146251598197020, guid: 42599375a7593514c96766f6291fee0b, type: 3}
   hitEffects:
-  - rid: 6620150283616125087
+  - rid: 467732692676378694
   references:
     version: 2
     RefIds:
-    - rid: 6620150283616125087
+    - rid: 467732692676378694
       type: {class: HitEffectDealDamage, ns: Combat, asm: Assembly-CSharp}
       data:
         damageData:

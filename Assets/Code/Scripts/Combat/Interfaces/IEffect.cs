@@ -1,4 +1,7 @@
-public interface IEffect
+namespace Combat
 {
-    void ApllyEffect();
+    public interface IEffect
+    {
+        void ApllyEffect();
+    }
 }

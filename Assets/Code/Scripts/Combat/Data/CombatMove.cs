@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Combat
@@ -7,7 +8,7 @@ namespace Combat
     {
         public float speedMultiplier;
         public AnimationClip mainAnimation;
-        [SerializeReference] public HitEffect[] hitEffects;
+        [SerializeReference] public List<HitEffect> hitEffects;
     }
 
 }

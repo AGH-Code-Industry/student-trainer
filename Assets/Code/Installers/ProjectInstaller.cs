@@ -1,3 +1,4 @@
+using Combat.Services;
 using Zenject;
 
 public class ProjectInstaller : MonoInstaller
@@ -22,6 +23,7 @@ public class ProjectInstaller : MonoInstaller
 
         Container.BindInterfacesAndSelfTo<InventoryService>().AsSingle();
         Container.BindInterfacesAndSelfTo<ItemUsingService>().AsSingle();
+        Container.BindInterfacesAndSelfTo<CombatService>().AsSingle();
 
         //Container.BindInterfacesAndSelfTo<QuestService>().AsSingle();
         Container.BindInterfacesAndSelfTo<Quests.QuestService>().FromNewComponentOnNewGameObject().WithGameObjectName("QuestServiceInstance").AsSingle();

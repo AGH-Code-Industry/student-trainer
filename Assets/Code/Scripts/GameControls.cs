@@ -171,6 +171,24 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""StartAttack"",
+                    ""type"": ""Value"",
+                    ""id"": ""ed47264b-861b-427b-9d8d-f6d2b1bb9a9d"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""EndAttack"",
+                    ""type"": ""Value"",
+                    ""id"": ""06b785d3-5f0f-4f06-88bf-dea0d7030f0f"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -492,6 +510,28 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
                     ""action"": ""Escape"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""872b9c50-b696-4404-9351-2600f59e0941"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""StartAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fe37eaf8-7e0f-49cd-80b4-320e00dafb48"",
+                    ""path"": """",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EndAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -554,6 +594,8 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
         m_Player_InventoryHotkey = m_Player.FindAction("InventoryHotkey", throwIfNotFound: true);
         m_Player_MouseClick = m_Player.FindAction("MouseClick", throwIfNotFound: true);
         m_Player_Escape = m_Player.FindAction("Escape", throwIfNotFound: true);
+        m_Player_StartAttack = m_Player.FindAction("StartAttack", throwIfNotFound: true);
+        m_Player_EndAttack = m_Player.FindAction("EndAttack", throwIfNotFound: true);
         // Inventory
         m_Inventory = asset.FindActionMap("Inventory", throwIfNotFound: true);
         m_Inventory_OpenClose = m_Inventory.FindAction("Open/Close", throwIfNotFound: true);
@@ -647,6 +689,8 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_InventoryHotkey;
     private readonly InputAction m_Player_MouseClick;
     private readonly InputAction m_Player_Escape;
+    private readonly InputAction m_Player_StartAttack;
+    private readonly InputAction m_Player_EndAttack;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -694,6 +738,14 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/Escape".
         /// </summary>
         public InputAction @Escape => m_Wrapper.m_Player_Escape;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/StartAttack".
+        /// </summary>
+        public InputAction @StartAttack => m_Wrapper.m_Player_StartAttack;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/EndAttack".
+        /// </summary>
+        public InputAction @EndAttack => m_Wrapper.m_Player_EndAttack;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -747,6 +799,12 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
             @Escape.started += instance.OnEscape;
             @Escape.performed += instance.OnEscape;
             @Escape.canceled += instance.OnEscape;
+            @StartAttack.started += instance.OnStartAttack;
+            @StartAttack.performed += instance.OnStartAttack;
+            @StartAttack.canceled += instance.OnStartAttack;
+            @EndAttack.started += instance.OnEndAttack;
+            @EndAttack.performed += instance.OnEndAttack;
+            @EndAttack.canceled += instance.OnEndAttack;
         }
 
         /// <summary>
@@ -785,6 +843,12 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
             @Escape.started -= instance.OnEscape;
             @Escape.performed -= instance.OnEscape;
             @Escape.canceled -= instance.OnEscape;
+            @StartAttack.started -= instance.OnStartAttack;
+            @StartAttack.performed -= instance.OnStartAttack;
+            @StartAttack.canceled -= instance.OnStartAttack;
+            @EndAttack.started -= instance.OnEndAttack;
+            @EndAttack.performed -= instance.OnEndAttack;
+            @EndAttack.canceled -= instance.OnEndAttack;
         }
 
         /// <summary>
@@ -997,6 +1061,20 @@ public partial class @GameControls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnEscape(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "StartAttack" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnStartAttack(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "EndAttack" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnEndAttack(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Inventory" which allows adding and removing callbacks.
