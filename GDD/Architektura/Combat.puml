@@ -1,99 +1,128 @@
 @startuml
 
-package data {
-  struct Attack
+package Enums {
+  enum CharacterActionState
   {
-    FrameData frameData
+      Idle,
+      Moving,
+      Attacking,
+      Stagger,
+      Blocking,
+      Parrying,
+      Dodge,
+      Dead
   }
-
-  struct FrameData
-  {
-
-  }
-
-  struct AttackRequest
-  {
-    ICombatant attacker;
-    List<IDamagable> targets;
-    List<HitEffect> hitEffects;
-  }
-
-  struct AttackResult
-  {
-    ICombatant attacker
-  }
-
-  struct CombatMove <<ScriptableObject>>
-  {
-    float speedMultiplier;
-    AnimationClip mainAnimation;
-    List<HitEffect> hitEffects;
-  }
-
-  struct DamageData
-  {
-    float amount;
-  }
-
-  abstract HitEffect
-  {
-    void Execute(ICombatant attacker, IDamagable target);
-  }
-
-  class HitEffectDealDamage
-  {
-    DamageData damageData;
-    void Execute(ICombatant attacker, IDamagable target);
-  }
-  HitEffectDealDamage <|-- HitEffect
-  HitEffectDealDamage <-- DamageData
-  Attack <-- FrameData
-  CombatMove o-- HitEffect
-  AttackRequest o-- HitEffect
-
-
 }
 
-package Interfaces
+package interfaces
 {
-    interface ICombatant
-    {
-        void Attack();
-    }
-
-    interface IEffect
-    {
-        void ApllyEffect();
-    }
-
-    interface IDamagable
-    {
-        void TakeDamage(DamageData damage);
-    }
-
-    ICombatant <|-- IDamagable
-    ICombatant <|-- IEffect
+  interface IDamageable
+  {
+      void TakeDamage(float amount);
+  }
+  interface IKnockbackable
+  {
+      void ApplyKnockback(Character attacker, float force);
+  }
+  interface IUsable
+  {
+      void Use(Character user, string binding);
+      IEnumerable<string> GetBindings();
+  }
 }
 
 package Services
 {
-    class CombatService
-    {
-        void ResolveAttack(AttackRequest data);
-    }
+  class CombatService
+  {
+      void ResolveAttack(Character attacker, IDamageable target, AttackSO attack, WeaponSO weapon)
+      float CalculateDamage(Character attacker, AttackSO attack, WeaponSO weapon)
+      float CalculateKnockback(AttackSO attack, WeaponSO weapon)
+  }
 }
 
-class PlayerCombat
+package SO
 {
-    CombatMove combatMove
-    CombatService combatService
+  class AttackSetSO
+  {
+      string binding;
+      List<AttackSO> attacks;
+  }
+  class AttackSO 
+  {
+     AnimationClip clip;
+     float damage;
+     float knockback;
+     bool canBeBlocked;
+     bool canBeParried;
+     List<StatusEffectSO> appliedEffects;
+  }
+  class CharacterStatsSO
+  {
+     float baseHealth;
+     float baseStamina;
+     float baseAttackDamage;
+     float resistances;
+  }
+  class ItemSo
+  {
+    string name;
+     GameObject prefab;
+  }
+  abstract class StatusEffectSO
+  {
+     string effectName;
+     float duration;
+     abstract void ApplyEffect(Character target);
+     abstract void RemoveEffect(Character target);
+  }
+  class WeaponSO
+  {
+     flaot baseDamage;
+     float baseKnockback;
+     float staminaCost;
+     List<AttackSetSO> attacks;
+  }
+  WeaponSO <|-- ItemSo
+  WeaponSO *-- AttackSetSO
+  AttackSetSO *-- AttackSO
+  AttackSO *-- StatusEffectSO
 }
 
-CombatService <-- AttackRequest
+abstract class Character
+{
+    CharacterStatsSO Stats;
+    CharacterActionState ActionState;
+    abstract void ApplyEffects(StatusEffectSO effect);
+}
 
-PlayerCombat <-- CombatMove
-PlayerCombat <-- CombatService
-PlayerCombat <|.. ICombatant
+class Player
+{
+    IUsable itemInHand;
 
+    void ApplyEffects(StatusEffectSO effect);
+    void ApplyKnockback(Character attacker, float force);
+    void TakeDamage(float amount);
+}
+
+class Weapon
+{
+    WeaponSO weaponData;
+
+    IEnumerable<string> GetBindings();
+    Use(Character user, string binding);
+}
+
+Character <-- CharacterStatsSO
+Character <-- CharacterActionState
+
+Player <|-- Character
+Player <|.. IDamageable
+Player <|.. IKnockbackable
+Player <-- Weapon
+
+Weapon <-- CombatService
+Weapon <|.. IUsable
+Weapon <-- WeaponSO
 
 @enduml

@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f248a1b78789bb46a6ef79f10bd03f2, type: 3}
+  m_Name: Fists
+  m_EditorClassIdentifier: 
+  name: Fists
+  prefab: {fileID: 0}
+  baseDamage: 0
+  baseKnockback: 0
+  staminaCost: 2
+  attacks:
+  - {fileID: 11400000, guid: aefb2377ece066845828af5353f47711, type: 2}
