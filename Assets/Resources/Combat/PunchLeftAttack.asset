@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 087a81f4df0f58c44995033f0b20632e, type: 3}
-  m_Name: LeftPunchAttack
+  m_Name: PunchLeftAttack
   m_EditorClassIdentifier: 
-  clip: {fileID: 3043372614595615688, guid: 42599375a7593514c96766f6291fee0b, type: 3}
+  clip: {fileID: 7400000, guid: 5e83ae26033261e4887a76c5a63ecf87, type: 2}
   damage: 5
   knockback: 2
   canBeBlocked: 0

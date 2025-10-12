@@ -24,6 +24,7 @@ public class Fists : MonoBehaviour, IUsable
 
     void OnTriggerEnter(Collider other)
     {
+        Debug.Log($"Fists: {other}");
         if (other.TryGetComponent<IDamageable>(out var damagable))
         {
             combatService.ResolveAttack(user, damagable, weapon.attacks.First().attacks.First(), weapon);

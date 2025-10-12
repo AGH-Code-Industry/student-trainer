@@ -1,3 +1,4 @@
+using ModestTree;
 using UnityEngine;
 
 public class Player : Character, IDamageable, IKnockbackable
@@ -32,5 +33,15 @@ public class Player : Character, IDamageable, IKnockbackable
     public void TakeDamage(float amount)
     {
         throw new System.NotImplementedException();
+    }
+
+    public void ActivateHitbox(string bodyPart)
+    {
+        Debug.Log($"ActivateHitbox {bodyPart}");
+    }
+
+    public void DeactivateHitbox(string bodyPart)
+    {
+        Debug.Log($"DeactivateHitbox {bodyPart}");
     }
 }
